@@ -438,26 +438,37 @@ var FactsPage = function() {
         .enter()
         .append('g')
         .attr('class', 'time-period')
-        .attr('height', height)
         .attr('transform', function(d, i) {
-          return 'translate('+(width / (_s.properties.trajectory.length - 1)) * (i -.5)+',0)';
-        })
-        .on('mouseover', function() {
-          d3.select(this).select('.data-point')
-            .classed('active', true);
-          tool_tip
-            .html((i + domain_x[0])+': '+(Math.round(d*100))+'%')
-            .style('left', (d3.event.clientX + 10) +'px')
-            .style('top', (d3.event.clientY - 10)+'px')
-            .classed('active', true)
-          ;
-        })
-        .on('mouseout', function() {
-          d3.select(this).select('.data-point')
-            .classed('active', false);
-          tool_tip.classed('active', false);
+          return 'translate('+(width / (_s.properties.trajectory.length - 1)) * i +',0)';
         })
       ;
+      periods.each(function() {
+        d3.select(this).append('rect')
+          .attr('height', height)
+          .attr('width', width / (_s.properties.trajectory.length))
+          .attr('transform', function(d, i) {
+            return 'translate('+(width / (_s.properties.trajectory.length - 1)) * i +',0)';
+          })
+          .style('fill', 'transparent')
+          .on('mouseover', function(d, i) {
+            //TODO: There's gotta be a better way to do this (and below)
+            d3.select(this.parentNode.getElementsByClassName('data-point')[0])
+              .classed('active', true);
+            tool_tip
+              .html((i + domain_x[0])+': '+(Math.round(d*100))+'%')
+              .style('left', (d3.event.clientX + 10) +'px')
+//              .style('top', (d3.event.clientY - 10)+'px')
+              .style('top', (y(d * 100) - margin)+'px')
+              .classed('active', true)
+            ;
+          })
+          .on('mouseout', function() {
+            d3.select(this.parentNode.getElementsByClassName('data-point')[0])
+              .classed('active', false);
+            tool_tip.classed('active', false);
+          })
+        ;
+      });
       periods.each(function(d, i) {
         d3.select(this).append('circle')
           .classed('data-point', true)
@@ -466,28 +477,6 @@ var FactsPage = function() {
           .attr('r', 6)
         ;
       });
-//      dots = plotdots.selectAll('.data-point')
-//        .data(_s.properties.trajectory)
-//        .enter()
-//        .append('circle')
-//        .classed('data-point', true)
-//        .attr('cx', function(dd, ii) {return x(ii+x.domain()[0]);})
-//        .attr('cy', function(dd) {return y(dd*100);})
-//        .attr('r', 6)
-//        .on('mouseover', function(dd, ii) {
-//          d3.select(this).classed('active', true);
-//          tool_tip
-//            .html((ii + domain_x[0])+': '+(Math.round(dd*100))+'%')
-//            .style('left', (d3.event.clientX + 10) +'px')
-//            .style('top', (d3.event.clientY - 10)+'px')
-//            .classed('active', true);
-//          ;
-//        })
-//        .on('mouseout', function() {
-//          d3.select(this).classed('active', false);
-//          tool_tip.classed('active', false);
-//        })
-//      ;
     }
 
     function trajectory2(_s, data) {

@@ -96,7 +96,6 @@ section {}
 .trajectory.active {stroke:rgb(213, 94, 0);stroke-width:3;}
 .trajectory.hovered {stroke:rgb(86, 180, 233);stroke-width:3;}
 .data-point {stroke-width:2;stroke:transparent;fill:transparent;}
-.data-point {fill:#eeeeee;stroke:/*#DA1E4E*/rgb(213, 94, 0);}
 .data-point.active {fill:#eeeeee;stroke:/*#DA1E4E*/rgb(213, 94, 0);}
 .rps-state.active {fill:rgb(213, 94, 0);}
 .tooltip {position:fixed;visibility:hidden;padding:2px 5px;
