@@ -30,6 +30,7 @@ def state(state):
 
 @app.route('/eia_api/<state>')
 def eia_api(state):
+    #TODO: this should be run as a cron every month or so. Should not be a public URL.
     import urllib2
     import json
     from math import ceil
@@ -66,10 +67,16 @@ def eia_api(state):
             'sector': eia['series_list'][i]['sector'],
             'data': data,
         })
-
     div = 100. if m <= 1000. else 500.
     m = ceil(m / div) * div
-    return json.dumps({'data': d, 'maximum': m, 'divs': range(0, int(m + 1), int(div)),})
+    with open('static/js/gridmix/{}.json'.format(state), 'w') as f:
+        f.write(
+            json.dumps(
+                {'data': d, 'maximum': m,
+                 'divs': range(0, int(m + 1), int(div)),
+                 }
+            )
+        )
 
 
 if __name__ == '__main__':

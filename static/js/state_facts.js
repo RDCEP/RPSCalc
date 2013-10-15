@@ -335,7 +335,7 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
-    d3.json('/eia_api/'+_s.abbr, function(data) {
+    d3.json('/static/js/gridmix/'+_s.abbr+'.json', function(data) {
       var _max = data.maximum,
         _th = 0, // height of title
         _rh = 20, //row height
