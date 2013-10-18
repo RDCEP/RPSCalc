@@ -87,7 +87,7 @@ var FactsPage = function() {
       .on('mouseover', function(dd, ii) {
         d3.select(this).classed('active', true);
         tool_tip
-          .html((ii + domain_x[0])+': '+(Math.round(dd*100))+'%')
+          .html((ii + domain_x[0])+':&nbsp;'+(Math.round(dd*100))+'%')
           .style('left', (d3.event.clientX + 10) +'px')
           .style('top', (d3.event.clientY - 10)+'px')
           .classed('active', true)
