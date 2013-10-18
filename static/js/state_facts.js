@@ -12,7 +12,7 @@ var FactsPage = function() {
       .append('svg')
       .attr('width', width)
       .attr('height', height),
-    tool_tip = d3.select('body').append('div').classed('tooltip', true),
+    tool_tip = d3.select('#state-trajectory').append('div').classed('tooltip', true),
     projection = d3.geo.conicEqualArea()
       .scale(width*5)
       .translate([0, 0])
@@ -426,7 +426,6 @@ var FactsPage = function() {
         .classed('active', function(d) {
           return d == _s;
         })
-  //      .on('click', click)
       ;
       plotlines.each(function(d) {
         if (d == _s) {
@@ -442,23 +441,27 @@ var FactsPage = function() {
           return 'translate('+(width / (_s.properties.trajectory.length - 1)) * i +',0)';
         })
       ;
-      periods.each(function() {
+      periods.each(function(d,i) {
         d3.select(this).append('rect')
           .attr('height', height)
           .attr('width', width / (_s.properties.trajectory.length))
           .attr('transform', function(d, i) {
             return 'translate('+(width / (_s.properties.trajectory.length - 1)) * i +',0)';
           })
+          .attr('data-year', function() {
+             return i + domain_x[0];
+          })
           .style('fill', 'transparent')
           .on('mouseover', function(d, i) {
             //TODO: There's gotta be a better way to do this (and below)
+            var _xo = d3.select(this).attr('data-year');
             d3.select(this.parentNode.getElementsByClassName('data-point')[0])
               .classed('active', true);
             tool_tip
               .html((i + domain_x[0])+': '+(Math.round(d*100))+'%')
-              .style('left', (d3.event.clientX + 10) +'px')
-//              .style('top', (d3.event.clientY - 10)+'px')
+              .style('position', 'absolute')
               .style('top', (y(d * 100) - margin)+'px')
+              .style('left', x(_xo) + 'px')
               .classed('active', true)
             ;
           })
