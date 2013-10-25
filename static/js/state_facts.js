@@ -427,9 +427,10 @@ var FactsPage = function() {
       ;
       grid_mix.append('text')
         .text('Carbon intensity')
-        .attr('transform', 'translate('+(_wt+_wd/2)+','+(_h+_mt+_mb+_lh-3)+')')
+//        .attr('transform', 'translate('+(_wt+_wd/2)+','+(_h+_mt+_mb+_lh-3)+')')
+        .attr('transform', 'translate('+(_wt-10)+','+(_h+_mt+_mb+35)+')')
         .attr('class', 'grid-axis-text')
-        .style('text-anchor', 'middle')
+        .style('text-anchor', 'end')
       ;
     });
   }
