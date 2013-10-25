@@ -23,10 +23,6 @@ var FactsPage = function() {
       .precision(.1),
     state_path = d3.geo.path()
         .projection(projection),
-    domain_x = [2000, 2030],
-    domain_y = [0, 50],
-    x = d3.scale.linear().domain(domain_x).range([0,width]),
-    y = d3.scale.linear().domain(domain_y).range([height-2,0]),
     zoom = d3.behavior.zoom()
       .translate(projection.translate())
       .scale(projection.scale())
@@ -58,46 +54,6 @@ var FactsPage = function() {
       d3.rgb(204, 121, 167) // reddish purple
     ];
     return color_list[i];
-  }
-
-  function click(d) {
-    /*
-     Unused. Heldover from original map/graph functionality.
-     */
-    var _s = d3.select(this).attr('data-state'),
-      state = d3.select('.map-state[data-state='+_s+']'),
-      plot = d3.select('.trajectory[data-state='+_s+']')
-    ;
-    d3.selectAll('.rps-object').classed('active', false);
-    state.classed('active', function() { return (state.classed('active')) ? false : true; });
-    plot.classed('active', function() { return (plot.classed('active')) ? false : true; });
-    plot.node().parentNode.appendChild(plot.node());
-
-    d3.selectAll('.data-point').remove();
-    dots = plotdots.selectAll('.data-point')
-      .data(d.properties.trajectory)
-      .enter()
-      .append('circle')
-      .classed('data-point', true)
-    ;
-    dots
-      .attr('cx', function(dd, ii) {return x(ii+x.domain()[0]);})
-      .attr('cy', function(dd) {return y(dd*100);})
-      .attr('r', 6)
-      .on('mouseover', function(dd, ii) {
-        d3.select(this).classed('active', true);
-        tool_tip
-          .html((ii + domain_x[0])+':&nbsp;'+(Math.round(dd*100))+'%')
-          .style('left', (d3.event.clientX + 10) +'px')
-          .style('top', (d3.event.clientY - 10)+'px')
-          .classed('active', true)
-        ;
-      })
-      .on('mouseout', function() {
-        d3.select(this).classed('active', false);
-        tool_tip.classed('active', false);
-      })
-    ;
   }
 
   function hover_in(d) {
@@ -141,7 +97,9 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
-    var rpsp_height = 40,
+    var domain_x = [2000, 2030],
+      domain_y = [0, 50],
+      rpsp_height = 40,
       rpsp_margin = 15,
       rpsp = d3.select('#rps_progress')
         .append('svg')
@@ -241,9 +199,15 @@ var FactsPage = function() {
      ...
      */
     _s.carveouts.splice(0,0,{type: 'RPS', data: _s.trajectory});
-    var y_max = d3.max(_s.trajectory),
-      _h = height / 2, //y_max * 2 * height
-      carveout_y = d3.scale.linear().domain([0, y_max * 100]).range([_h - 2, 0]),
+    var
+      padding = {top:10,right:30,bottom:10,left:10},
+      _h = height * 0.75, //y_max * 2 * height
+      _w = width - padding.right - padding.left,
+      y_max = d3.max(_s.trajectory),
+      domain_x = [2000, 2030],
+//      domain_y = [0, 50],
+      x = d3.scale.linear().domain(domain_x).range([0,width]),
+      y = d3.scale.linear().domain([0, y_max * 100]).range([_h - 2, 0]),
       svg = d3.select('#carveout_graph')
         .insert('svg', 'div')
         .attr('height', _h)
@@ -256,11 +220,11 @@ var FactsPage = function() {
         .append('div'),
       area = d3.svg.area()
         .x(function(d, i) {return x(x.domain()[0] + i); })
-        .y1(function(d, i) { return carveout_y(d * 100); })
-        .y0(function(d) { return carveout_y(0);}),
+        .y1(function(d, i) { return y(d * 100); })
+        .y0(function(d) { return y(0);}),
       line = d3.svg.line()
         .x(function(d,i) { return x(i + x.domain()[0]); })
-        .y(function(d,i) { return carveout_y(d * 100); }),
+        .y(function(d,i) { return y(d * 100); }),
       areas = svg.selectAll('.carveout-area')
         .data(_s.carveouts)
         .enter()
@@ -286,7 +250,7 @@ var FactsPage = function() {
     ;
   }
 
-  function axis(_s) {
+  function axis(_s, x, y) {
     /*
      Draw axes on trajectory graph
      ...
@@ -326,7 +290,7 @@ var FactsPage = function() {
     axes.selectAll('text').attr('class', 'rps-text');
   }
 
-  function grid_mix(_s) {
+  function grid_mix_bars(_s) {
     /*
      Get grid mix information from EIA and draw chart
      ...
@@ -339,45 +303,61 @@ var FactsPage = function() {
       var _max = data.maximum,
         _th = 0, // height of title
         _rh = 20, //row height
+        _lh = 50, // legend height
+        _mt = 5, //margin top
+        _mb = 5, //margin bottom
         _h = _rh * data.data.length + _th,
         _wt = 200, // width of titles
         _wd = 500, // width of data
-        grid_mix = d3.select('#grid_mix')
+        color_co2 = d3.scale.linear()
+          .domain([0,500])
+//          .range(['#56b4e9', '#d55e00']),
+          .range(['#dddddd', '#d55e00']),
+        svg = d3.select('#grid_mix')
           .append('svg')
-          .attr('height', _h+5)
-          .attr('width', width * 2)
-          .append('g'),
+          .attr('height', _h + _th + _mt + _mb + _lh)
+          .attr('width', width * 2 + 10),
+        grid_mix = svg.append('g'),
         grid_axes = grid_mix.selectAll('.grid-axis')
           .data(data.divs)
           .enter()
           .append('line')
           .attr('class', 'grid-axis')
           .attr('y1', 0)
-          .attr('y2', _h)
-          .attr('x1', function(d) { return d / _max * _wd; })
-          .attr('x2', function(d) { return d / _max * _wd; })
-          .attr('transform', 'translate('+_wt+',0)')
-        ;
-        grid_mix.selectAll('.grid-axis-text')
-          .data(data.divs)
-          .enter()
-          .append('text')
-          .attr('class', 'grid-axis-text')
-          .text(function(d, i) { return (i == data.divs.length - 2) ? d + ' trillion BTU' : d; })
-          .attr('transform', function(d) { return 'translate('+(_wt + d / _max * _wd)+','+(_h+3)+')'; })
-        ;
-        grid_bars = grid_mix.selectAll('.grid-data')
-          .data(data.data)
-          .enter()
-          .append('g')
-          .attr('class', 'grid-data')
-          .attr('height', _rh)
-          .attr('width', width * 2)
-          .attr('transform', function(d, i) {
-            return 'translate(0,'+((i*_rh)+_th)+')';
+          .attr('y2', _h + _mt + _mb)
+          .attr('x1', function(d, i) { return (i == 0) ? d / _max * _wd + 1 : d / _max * _wd - 1;  })
+          .attr('x2', function(d, i) {
+            return (i == 0) ? d / _max * _wd + 1 : d / _max * _wd - 1;
           })
-          .attr('data-value', function(d) { return d.data; })
-          .attr('data-name',function(d) { return d.sector; })
+          .attr('transform', 'translate('+_wt+',0)')
+      ;
+      grid_mix.selectAll('.grid-axis-text')
+        .data(data.divs)
+        .enter()
+        .append('text')
+        .attr('class', 'grid-axis-text')
+        .style('text-anchor', function(d, i) {return (i == 0) ? 'start' : 'end'; })
+//          .text(function(d, i) { return (i == data.divs.length - 2) ? d + ' trillion BTU' : d; })
+        .text(function(d, i) { return d; })
+        .attr('transform', function(d) { return 'translate('+(_wt + d / _max * _wd)+','+(_h+_mt+_mb)+')'; })
+      ;
+      grid_mix.append('text')
+        .text('trillions BTU')
+        .attr('transform', 'translate('+_wt+','+(_h+_mt+_mb+15)+')')
+        .attr('class', 'grid-axis-text')
+      ;
+      grid_bars = grid_mix.selectAll('.grid-data')
+        .data(data.data)
+        .enter()
+        .append('g')
+        .attr('class', 'grid-data')
+        .attr('height', _rh)
+        .attr('width', width * 2)
+        .attr('transform', function(d, i) {
+          return 'translate(0,'+((i*_rh)+_th + _mt)+')';
+        })
+        .attr('data-value', function(d) { return d.data; })
+        .attr('data-name',function(d) { return d.sector; })
       ;
       grid_bars.append('text')
         .text(function(d, i) { return d.sector; })
@@ -390,16 +370,119 @@ var FactsPage = function() {
       grid_bars.append('rect')
         .attr('width', function(d) { return d.data / _max * _wd; })
         .attr('height', 10)
+        .style('fill', function(d) { return color_co2(d.intensity); })
         .attr('class', 'grid-data-bar')
         .attr('transform', function(d, i) {
           return 'translate('+_wt+',0)';
         })
       ;
+      var grad = svg.append('defs').append('linearGradient')
+        .attr('id', 'grad_intensity')
+        .attr('x1', '0%')
+        .attr('x2', '100%')
+        .attr('y1', '0%')
+        .attr('y2', '0%');
+      grad.append('stop')
+        .attr('offset', '0%')
+        .style('stop-color', '#dddddd')
+        .style('stop-opacity', 1);
+      grad.append('stop')
+        .attr('offset', '100%')
+        .style('stop-color', '#d55e00')
+        .style('stop-opacity', 1)
+      ;
+
+
+      grid_mix.append('rect')
+        .attr('width', 500)
+        .attr('height', 10)
+        .attr('transform', 'translate('+_wt+','+(_h+_mt+_mb+25)+')')
+        .style('fill', 'url(#grad_intensity)')
+      ;
+      grid_mix.append('text')
+        .text('0 unit')
+        .attr('transform', 'translate('+_wt+','+(_h+_mt+_mb+_lh-3)+')')
+        .attr('class', 'grid-axis-text')
+        .style('text-anchor', 'start')
+      ;
+      grid_mix.append('text')
+        .text('500 unit')
+        .attr('transform', 'translate('+(_wt+_wd)+','+(_h+_mt+_mb+_lh-3)+')')
+        .attr('class', 'grid-axis-text')
+        .style('text-anchor', 'end')
+      ;
+      grid_mix.append('text')
+        .text('Carbon intensity')
+        .attr('transform', 'translate('+(_wt+_wd/2)+','+(_h+_mt+_mb+_lh-3)+')')
+        .attr('class', 'grid-axis-text')
+        .style('text-anchor', 'middle')
+      ;
+    });
+  }
+
+  function grid_mix_pie(_s) {
+    /*
+     Get grid mix information from EIA and draw chart
+     ...
+     Args
+     ----
+     _s: Object representing active state
+     ...
+     */
+    d3.json('/static/js/gridmix/'+_s.abbr+'.json', function(data) {
+      var _max = data.maximum,
+        _rad = 200, // radius
+        _irad = 75,
+        _h = _rad * 2 + 20,
+        _wt = 200, // width of titles
+        _wd = 500, // width of data
+        pie = d3.layout.pie()
+          .sort(null)
+          .value(function(dd) { return dd.data; }),
+        arc_outer = d3.svg.arc()
+          .outerRadius(_rad)
+          .innerRadius(_irad),
+        arc_inner = d3.svg.arc()
+          .outerRadius(_irad)
+          .innerRadius(0),
+        color = d3.scale.ordinal()
+          .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]),
+        color_co2 = d3.scale.linear()
+          .domain([0,150,500])
+          .range(['green', 'yellow', 'red']),
+        grid_mix = d3.select('#grid_mix')
+          .append('svg')
+          .attr('height', _h+5)
+          .attr('width', width * 2)
+          .append('g')
+          .attr('transform', 'translate('+_rad+','+_rad+')'),
+        grid_slices = grid_mix.selectAll('.grid-data')
+          .data(pie(data.data))
+          .enter()
+          .append('g')
+          .attr('class', 'grid-data')
+          .attr('data-value', function(d) { return d.data.data; })
+          .attr('data-name',function(d) { return d.sector; })
+      ;
+      grid_slices.append('path')
+        .attr('d', arc_outer)
+        .attr('class', 'grid-data-slice')
+        .style('fill', function(d, i) { return get_color(i%7); })
+      ;
+      grid_slices.append('path')
+        .attr('d', arc_inner)
+        .attr('class', 'grid-intensity-slice')
+        .style('fill', function(d, i) { return color_co2(d.data.intensity); })
+      ;
     });
   }
 
   function trajectory(_s, data) {
-    var plot_path = d3.svg.line()
+    var domain_x = [2000, 2030],
+      domain_y = [0, 50],
+      x = d3.scale.linear().domain(domain_x).range([0,width]),
+      y = d3.scale.linear().domain(domain_y).range([height-2,0]),
+      plot_path = d3.svg.line()
         .x(function(d,i) { return x(i + x.domain()[0]); })
         .y(function(d,i) { return y(d * 100); }),
       plots = svg_plot.append('g')
@@ -480,68 +563,10 @@ var FactsPage = function() {
           .attr('r', 6)
         ;
       });
+
+      // Trajectory axes
+      axis(_s, x, y);
     }
-
-    function trajectory2(_s, data) {
-    var plot_path = d3.svg.line()
-        .x(function(d,i) { return x(i + x.domain()[0]); })
-        .y(function(d,i) { return y(d * 100); }),
-      plots = svg_plot.append('g')
-        .attr('width', width)
-        .attr('height', height-margin)
-        .attr('class', 'plot')
-        .attr('transform', 'translate(0,'+0+')'),
-      plotdots = svg_plot.append('g')
-        .attr('width', width)
-        .attr('height', height)
-        .attr('class', 'plotdots'),
-      plotlines = plots.selectAll('.trajectory')
-        .data(data.features)
-        .enter()
-        .append('path')
-        .attr('d', function(d,i) {
-          return (d.properties.trajectory) ? plot_path(d.properties.trajectory) : null;
-        })
-        .attr('data-state', function(d) { return d.properties.abbr; })
-        .attr('id', function(d,i) {
-          return 'plot_'+ d.properties.abbr;
-        })
-        .attr('class', 'trajectory rps-object')
-        .classed('active', function(d) {
-          return d == _s;
-        })
-  //      .on('click', click)
-    ;
-
-    plotlines.each(function(d) {
-      if (d == _s) {
-        this.parentNode.appendChild(this);
-      }
-    });
-
-    dots = plotdots.selectAll('.data-point')
-      .data(_s.properties.trajectory)
-      .enter()
-      .append('circle')
-      .classed('data-point', true)
-      .attr('cx', function(dd, ii) {return x(ii+x.domain()[0]);})
-      .attr('cy', function(dd) {return y(dd*100);})
-      .attr('r', 6)
-      .on('mouseover', function(dd, ii) {
-        d3.select(this).classed('active', true);
-        tool_tip
-          .html((ii + domain_x[0])+': '+(Math.round(dd*100))+'%')
-          .style('left', (d3.event.clientX + 10) +'px')
-          .style('top', (d3.event.clientY - 10)+'px')
-          .classed('active', true);
-        ;
-      })
-      .on('mouseout', function() {
-        d3.select(this).classed('active', false);
-        tool_tip.classed('active', false);
-      })
-    ;
-  }
 
   d3.json('/static/js/state_data.json', function(data) {
     /*
@@ -575,8 +600,6 @@ var FactsPage = function() {
       .on('mouseover', hover_in)
       .on('mouseout', hover_out)
     ;
-
-
 
     d3.select('h1').text(_s.properties.name);
 
@@ -645,6 +668,7 @@ var FactsPage = function() {
         return '<a href="'+ d.href+'">'+d.name+'</a>&nbsp;&mdash;&nbsp;'+ d.description;
       });
 
+    // Trajectory chart (axis() called from within).
     trajectory(_s, data);
 
     // RPS progress chart
@@ -654,10 +678,8 @@ var FactsPage = function() {
     if (_s.properties.carveouts.length > 0) { carveout_graph(_s.properties); }
 
     //Grid mix chart
-    grid_mix(_s.properties);
+    grid_mix_bars(_s.properties);
 
-    // Trajectory axes
-    axis(_s);
   });
 
   // Left menu navigation
