@@ -49,8 +49,9 @@ ul ul, li {padding-left:15px;padding-top:.25em;margin-top:.5em;margin-bottom:1em
 ul ul {margin-top:.25em;}
 li li {padding:0;margin:0;border:none}
 
+form {clear:both;margin-bottom:2em;position:relative;top:1em;}
 button {background-color:#0072b2;border:none;color:#eeeeee;width:100%;
-    padding:.5em 0;margin-top:.5em;}
+    padding:1em 0;margin-top:.5em;}
 
 
 /* STATE STYLES */
@@ -74,7 +75,7 @@ line, rect, path {stroke-linecap:round;fill:none;stroke:none;stroke-width:1;}
 #state-wrap {width:960px;margin:3.5em auto;padding-bottom:2em;}
 #state-wrap section {margin-left:230px;width:730px;padding:0;border-top:1px solid #999}
 #state-wrap section+section {width:700px;padding:2em 15px 3em;border:none;margin-top:0;}
-#state-wrap section+section+section {width:700px;padding:1em 15px;border-top:1px solid #999}
+#state-wrap section+section+section {width:700px;padding:1em 15px 3em;border-top:1px solid #999}
 
 #state-wrap header {background-color:#cccccc;padding:1em 15px;
     height:100px;position:relative;z-index:1;}
@@ -107,10 +108,11 @@ section {}
 .rps-diff {fill:rgb(213, 94, 0);}
 .rps-hash {stroke:black;stroke-width:2;}
 .rps-hash-actual {stroke:#eeeeee;stroke-width:2;}
-.rps-text, .grid-data-text, .grid-axis-text {font-size:.7em;}
+.rps-text, .grid-data-text, .grid-axis-text {font-size:.7em;fill:#333;}
 .grid-data-bar {fill:rgb(86, 180, 233);}
 .grid-data-slice {stroke:white;}
 .grid-axis {stroke:white;}
+.edge-axis {stroke:#333;}
 
 .carveout-line {stroke:#eeeeee;stroke-width:1;}
 #carveout_graph_legend > div {float:right;}
