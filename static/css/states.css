@@ -39,6 +39,7 @@ h3 {font-weight:bold;}
 b {font-weight:bold;}
 a {text-decoration:none;color:#666666;}
 a:hover {color:#ccc !important;}
+.right-align {text-align:right;}
 
 path, line, rect {stroke-cap:round;fill:none;}
 
@@ -108,6 +109,7 @@ section {}
 .rps-hash-actual {stroke:#eeeeee;stroke-width:2;}
 .rps-text, .grid-data-text, .grid-axis-text {font-size:.7em;}
 .grid-data-bar {fill:rgb(86, 180, 233);}
+.grid-data-slice {stroke:white;}
 .grid-axis {stroke:white;}
 
 .carveout-line {stroke:#eeeeee;stroke-width:1;}
