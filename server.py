@@ -1,3 +1,5 @@
+import urllib2
+import json
 from flask import render_template, request, make_response
 from flask_beaker import BeakerSession
 from uwsgi_app import app
@@ -28,28 +30,48 @@ def state(state):
         state=state,
     )
 
-@app.route('/eia_api/<state>')
+#@app.route('/eia_api/<state>/retail')
+#def eia_api_retail(state):
+@app.route('/eia_api/retail')
+def eia_api_retail():
+    api_key = "D82A092DA301308805ECAB18A123BB4A"
+    #series_id = "ELEC.PRICE.{}-ALL.Q".format(state)
+    #eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}&num=1'.format(api_key, series_id)
+    json_file = 'static/js/prices/retail_prices.json'
+    states = json.loads(open(json_file).read())
+    for s in states:
+        series_id = "ELEC.PRICE.{}-ALL.Q".format(s)
+        eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}&num=1'.format(api_key, series_id)
+        d = json.loads(urllib2.urlopen(eia_url).read())
+        print(float(d['series'][0]['data'][0][1]))
+        states[s] = float(d['series'][0]['data'][0][1]) * 10
+    with open(json_file, 'w') as f:
+        f.write(json.dumps(states))
+
+@app.route('/eia_api/<state>/gridmix')
 def eia_api(state):
     #TODO: this should be run as a cron every month or so. Should not be a public URL.
-    import urllib2
-    import json
     from math import ceil
     from numpy import linspace
     eia = {
-        "api_key": "D82A092DA301308805ECAB18A123BB4A",
-        "url": "http://api.eia.gov/series?api_key{{}}&series_id={{}}",
-        "series_id": "SEDS.{code}TCB.{state}.A",
-        "series_list": [
-            {"sector": "Coal", "code": "CLTCB"},
-            {"sector": "Motor Gasoline excl. Ethanol", "code": "MMTCB"},
-            {"sector": "Biomass", "code": "BMTCB"},
-            {"sector": "Jet Fuel", "code": "JFTCB"},
-            {"sector": "Hydroelectricity", "code": "HYTCB"},
-            {"sector": "Nuclear Electricity", "code": "NUETB"},
-            {"sector": "Wind", "code": "WYTCB"},
-            {"sector": "Residual Fuel Oil", "code": "RFTCB"},
-            {"sector": "Natural Gas", "code": "NNTCB"},
-            {"sector": "LPG", "code": "LGTCB"},
+        'api_key': 'D82A092DA301308805ECAB18A123BB4A',
+        'url': 'http://api.eia.gov/series?api_key{{}}&series_id={{}}',
+        'series_id': 'SEDS.{code}TCB.{state}.A',
+        'series_list': [
+            {'sector': 'Biomass', 'code': 'BMTCB', 'intensity': 100},
+            {'sector': 'Coal', 'code': 'CLTCB', 'intensity': 500},
+            {'sector': 'Distillate Fuel Oil', 'code': 'DFTCB', 'intensity': 400},
+            {'sector': 'Geothermal', 'code': 'GETCB', 'intensity': 150},
+            {'sector': 'Hydroelectricity', 'code': 'HYTCB', 'intensity': 250},
+            {'sector': 'Kerosene', 'code': 'KSTCB', 'intensity': 300},
+            {'sector': 'LPG', 'code': 'LGTCB', 'intensity': 350},
+            {'sector': 'Natural Gas as Lease and Plant Fuel', 'code': 'NGLPB', 'intensity': 250},
+            {'sector': 'Nuclear Electricity', 'code': 'NUETB', 'intensity': 200},
+            {'sector': 'Residual Fuel Oil', 'code': 'RFTCB', 'intensity': 480},
+            {'sector': 'Solar', 'code': 'SOTCB', 'intensity': 50},
+            {'sector': 'Supplemental Gaseous Fuels', 'code': 'SFTCB', 'intensity': 280},
+            {'sector': 'Wind', 'code': 'WYTCB', 'intensity': 70},
+            {'sector': 'Wood and Waste', 'code': 'WWTCB', 'intensity': 180},
         ]
     }
     eia_url = 'http://api.eia.gov/series/?api_key=D82A092DA301308805ECAB18A123BB4A&series_id='
@@ -63,11 +85,13 @@ def eia_api(state):
     for i in range(len(j['series'])):
         data = float(j['series'][i]['data'][0][1]) / 1000.
         m = data if data > m else m
-        d.append({
+        if data > 0: d.append({
             'sector': eia['series_list'][i]['sector'],
             'data': data,
+            'code': eia['series_list'][i]['code'],
+            'intensity': eia['series_list'][i]['intensity'],
         })
-    div = 100. if m <= 1000. else 500.
+    div = 25. if m <= 100. else 100. if m <= 1000. else 500.
     m = ceil(m / div) * div
     with open('static/js/gridmix/{}.json'.format(state), 'w') as f:
         f.write(
