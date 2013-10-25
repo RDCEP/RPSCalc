@@ -4,10 +4,6 @@ var FactsPage = function() {
     margin = 20,
     plotlines,
     states,
-    svg_plot = d3.select('#state-trajectory')
-      .append('svg')
-      .attr('width', width+margin)
-      .attr('height', height),
     svg_map = d3.select('#state-map')
       .append('svg')
       .attr('width', width)
@@ -97,14 +93,16 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
-    var domain_x = [2000, 2030],
+    //TODO: _wd is set for a wide module (_wd = width for a narrow module)
+    var _wd = width * 2 + 10,
+      domain_x = [2000, 2030],
       domain_y = [0, 50],
       rpsp_height = 40,
       rpsp_margin = 15,
       rpsp = d3.select('#rps_progress')
         .append('svg')
         .attr('height', rpsp_height + 50)
-        .attr('width', width),
+        .attr('width', _wd),
       final = _s.trajectory[_s.trajectory.length - 6],
       current = _s.trajectory[2013 - domain_x[0]],
       actual = _s.snapshot.rps_progress,
@@ -112,12 +110,12 @@ var FactsPage = function() {
     ;
     rpsp.append('rect')
       .attr('height', rpsp_height)
-      .attr('width', width)
+      .attr('width', _wd)
       .attr('transform', 'translate(0,'+rpsp_margin+')')
       .style('fill', '#ddd');
     rpsp.append('rect')
       .attr('height', rpsp_height)
-      .attr('width', actual / final * width)
+      .attr('width', actual / final * _wd)
       .style('fill', '#56b4e9')
       .attr('transform', 'translate(0,'+rpsp_margin+')')
       .attr('data-amount', actual)
@@ -125,12 +123,12 @@ var FactsPage = function() {
     rpsp.append('rect')
       .attr('height', rpsp_height)
       .attr('width', function() {
-        return (actual <= current) ? diff / final * width : 1;
+        return (actual <= current) ? diff / final * _wd : 1;
       })
       .attr('data-amount', actual - current)
       .attr('class', 'rps-diff')
       .attr('transform', function() {
-        var offset = (actual <= current) ? actual / final * width : current / final * width;
+        var offset = (actual <= current) ? actual / final * _wd : current / final * _wd;
         return 'translate(' + offset + ','+rpsp_margin+')';
       });
     var rps_hashes = rpsp.selectAll('.rps-hash')
@@ -139,15 +137,15 @@ var FactsPage = function() {
       .append('line')
       .attr('x1', function(d, i) {
         if (i == 0) {
-          return (actual != current) ? actual / final * width : null;
+          return (actual != current) ? actual / final * _wd : null;
         }
-        return d / final * width - i;
+        return d / final * _wd - i;
       })
       .attr('x2', function(d, i) {
         if (i == 0) {
-          return (actual != current) ? actual / final * width : null;
+          return (actual != current) ? actual / final * _wd : null;
         }
-        return d / final * width - i; })
+        return d / final * _wd - i; })
       .attr('y1', function(d, i) { return (i == 0) ? rpsp_margin : 0; })
       .attr('y2', function(d, i) { return (i == 0) ? rpsp_height+rpsp_margin : rpsp_height+2*rpsp_margin; })
       .attr('class', function(d, i) { return (i == 0) ? 'rps-hash-actual' : 'rps-hash'; });
@@ -160,7 +158,7 @@ var FactsPage = function() {
         .attr('text-anchor', 'end')
         .attr('transform', function() {
           var v_offset = (rpsp_height + 2 * (rpsp_margin-2));
-          var h_offset = d / final * width - i - 5;
+          var h_offset = d / final * _wd - i - 5;
           return 'translate(' + h_offset + ',' + v_offset + ')';
         })
       ;
@@ -173,7 +171,7 @@ var FactsPage = function() {
         .attr('text-anchor', function() {return (i == 0) ? 'start' : 'end'; })
         .attr('transform', function() {
           var v_offset = (i == 0) ? (rpsp_margin-2) : (rpsp_margin-4);
-          var h_offset = (i == 0) ? 0 : d / final * width - i - 5;
+          var h_offset = (i == 0) ? 0 : d / final * _wd - i - 5;
           return 'translate(' + h_offset + ','+v_offset+')';
         })
       ;
@@ -248,9 +246,13 @@ var FactsPage = function() {
       .text(function(d) { return d.type; })
       .attr('class', 'carveout-text')
     ;
+    if (_s.carveouts.length > 0) {
+      d3.select('#carve_out_wrap h3')
+        .classed('right-align', true);
+    }
   }
 
-  function axis(_s, x, y) {
+  function axis(_s, x, y, svg) {
     /*
      Draw axes on trajectory graph
      ...
@@ -259,7 +261,7 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
-    var axes = svg_plot.append('g')
+    var axes = svg.append('g')
         .attr('width', width)
         .attr('height', height)
         .attr('class', 'axes')
@@ -279,11 +281,23 @@ var FactsPage = function() {
     axes.append('line')
       .attr('x1', width).attr('x2', width)
       .attr('y1', height).attr('y2', 0)
-      .style('stroke', 'black');
-    axes.append('g')
+      .attr('class', 'edge-axis');
+    axes.append('line')
+      .attr('x1', 0).attr('x2', width)
+      .attr('y1', 1).attr('y2', 1)
+      .attr('class', 'edge-axis');
+    var xaxis = axes.append('g')
       .attr('width', 325)
-      .attr('transform', 'translate(18,20)')
-      .call(x_axis_ticks);
+      .attr('transform', 'translate(0,15)')
+    ;
+    xaxis.append('text')
+      .text(x.domain()[0])
+    ;
+    xaxis.append('text')
+      .text(x.domain()[1])
+      .style('text-anchor', 'end')
+      .attr('transform', 'translate(340, 0)')
+    ;
     axes.append('g')
       .attr('transform', 'translate(345,-4)')
       .call(y_axis_ticks);
@@ -485,12 +499,16 @@ var FactsPage = function() {
       plot_path = d3.svg.line()
         .x(function(d,i) { return x(i + x.domain()[0]); })
         .y(function(d,i) { return y(d * 100); }),
-      plots = svg_plot.append('g')
+      svg = d3.select('#state-trajectory')
+        .append('svg')
+        .attr('width', width+margin)
+        .attr('height', height),
+      plots = svg.append('g')
         .attr('width', width)
         .attr('height', height-margin)
         .attr('class', 'plot')
         .attr('transform', 'translate(0,'+0+')'),
-      plotdots = svg_plot.append('g')
+      plotdots = svg.append('g')
         .attr('width', width)
         .attr('height', height)
         .attr('class', 'plotdots'),
@@ -535,7 +553,7 @@ var FactsPage = function() {
              return i + domain_x[0];
           })
           .style('fill', 'transparent')
-          .on('mouseover', function(d, i) {
+          .on('mouseover', function(d) {
             //TODO: There's gotta be a better way to do this (and below)
             var _xo = d3.select(this).attr('data-year');
             d3.select(this.parentNode.getElementsByClassName('data-point')[0])
@@ -565,7 +583,7 @@ var FactsPage = function() {
       });
 
       // Trajectory axes
-      axis(_s, x, y);
+      axis(_s, x, y, svg);
     }
 
   d3.json('/static/js/state_data.json', function(data) {
