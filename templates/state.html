@@ -63,20 +63,21 @@
       <div class="wide module clearfix">
         <h3>Grid Mix</h3>
         <div id="grid_mix"></div>
-        <form action="/pinwheel" method="get"><button>Compare this state's RPS to the rest of the country</button></form>
       </div>
-      <div class="narrow module clearfix">
+      <form action="/pinwheel" method="get"><button>Compare this state's RPS to the rest of the country</button></form>
+      <div id="cost_cap_wrap" class="narrow module clearfix">
         <h3>Cost Cap Details</h3>
         <div id="cost_cap_details"></div>
-        <button formaction="" formmethod="get">RPS Calculator</button>
+{#        <button formaction="" formmethod="get">RPS Calculator</button>#}
       </div>
-      <div class="narrow module clearfix">
-        <h3 class="right-align">Carveouts</h3>
+      <div id="carve_out_wrap" class="narrow module clearfix">
+        <h3>Carveouts</h3>
         <div id="carveouts"></div>
         <div id="carveout_graph">
           <div id="carveout_graph_legend"></div>
         </div>
       </div>
+      <form action="" method="get"><button>RPS Calculator</button></form>
     </section>
     <section id="legislation" class="clearfix">
       <h2>Legislation</h2>
