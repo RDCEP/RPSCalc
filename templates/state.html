@@ -48,14 +48,34 @@
         <div id="state-map" class="narrow module"></div>
         <div id="state-trajectory" class="narrow module"></div>
       </div>
-      <div class="narrow module clearfix">
+      <div class="wide module clearfix">
         <h3>Overview</h3>
         <ul id="overview"></ul>
       </div>
-      <div class="narrow module clearfix">
+      <div class="wide module clearfix">
         <h3>Current RPS Progress</h3>
         <p>Compare the goal established in the RPS to what is being achieved:</p>
         <div id="rps_progress"></div>
+      </div>
+    </section>
+    <section id="energy" class="clearfix">
+      <h2>Energy Details</h2>
+      <div class="wide module clearfix">
+        <h3>Grid Mix</h3>
+        <div id="grid_mix"></div>
+        <form action="/pinwheel" method="get"><button>Compare this state's RPS to the rest of the country</button></form>
+      </div>
+      <div class="narrow module clearfix">
+        <h3>Cost Cap Details</h3>
+        <div id="cost_cap_details"></div>
+        <button formaction="" formmethod="get">RPS Calculator</button>
+      </div>
+      <div class="narrow module clearfix">
+        <h3 class="right-align">Carveouts</h3>
+        <div id="carveouts"></div>
+        <div id="carveout_graph">
+          <div id="carveout_graph_legend"></div>
+        </div>
       </div>
     </section>
     <section id="legislation" class="clearfix">
@@ -68,26 +88,9 @@
         <h3>RPS Technical Details</h3>
         <div id="tech_req"></div>
       </div>
-      <div class="narrow module clearfix">
-        <h3>Cost Cap Details</h3>
-        <div id="cost_cap_details"></div>
-        <button formaction="" formmethod="get">RPS Calculator</button>
-      </div>
-      <div class="narrow module clearfix">
-        <h3>Carveouts</h3>
-        <div id="carveouts"></div>
-        <div id="carveout_graph">
-          <div id="carveout_graph_legend"></div>
-        </div>
-      </div>
     </section>
     <section id="resources" class="clearfix">
       <h2>Resources</h2>
-      <div class="wide module clearfix">
-        <h3>Grid Mix</h3>
-        <div id="grid_mix"></div>
-        <form action="/pinwheel" method="get"><button>Compare this state's RPS to the rest of the country</button></form>
-      </div>
       <div class="narrow module">
         <h3>Tools and other links</h3>
         <div id="tools">
