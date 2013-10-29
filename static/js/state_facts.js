@@ -2,41 +2,8 @@ var FactsPage = function() {
   var width = 345,
     height = 345,
     margin = 20,
-    plotlines,
-    states,
-    svg_map = d3.select('#state-map')
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height),
-    tool_tip = d3.select('#state-trajectory').append('div').classed('tooltip', true),
-    projection = d3.geo.conicEqualArea()
-      .scale(width*5)
-      .translate([0, 0])
-      .rotate([96, 0])
-      .center([-.6, 38.7])
-      .parallels([29.5, 45.5])
-      .translate([width / 2, height / 2])
-      .precision(.1),
-    state_path = d3.geo.path()
-        .projection(projection),
-    zoom = d3.behavior.zoom()
-      .translate(projection.translate())
-      .scale(projection.scale())
-      .scaleExtent([500, 8000])
-      .on('zoom', zoom_f),
-    state_map = svg_map.append('g')
-      .append('g')
-      .attr('id', 'states_all')
-      .style('fill', '#eeeeee')
-      .call(zoom),
-
-    dots
+    projection
   ;
-
-  function zoom_f() {
-    projection.translate(d3.event.translate).scale(d3.event.scale);
-    state_map.selectAll('path').attr('d', state_path);
-  }
 
   function get_color(i) {
     var color_list = [
@@ -198,24 +165,27 @@ var FactsPage = function() {
      */
     _s.carveouts.splice(0,0,{type: 'RPS', data: _s.trajectory});
     var
-      padding = {top:10,right:30,bottom:10,left:10},
+      padding = {top:30,right:30,bottom:10,left:10},
       _h = height * 0.75, //y_max * 2 * height
       _w = width - padding.right - padding.left,
       y_max = d3.max(_s.trajectory),
       domain_x = [2000, 2030],
-//      domain_y = [0, 50],
       x = d3.scale.linear().domain(domain_x).range([0,width]),
       y = d3.scale.linear().domain([0, y_max * 100]).range([_h - 2, 0]),
       svg = d3.select('#carveout_graph')
         .insert('svg', 'div')
-        .attr('height', _h)
-        .attr('width', width)
-        .append('g'),
+        .attr('height', _h + padding.top)
+        .attr('width', width+padding.right),
+      graph = svg.append('g')
+        .attr('transform', 'translate(0,30)'),
       legend = d3.select('#carveout_graph_legend')
         .selectAll('div')
         .data(_s.carveouts)
         .enter()
-        .append('div'),
+        .append('div')
+        .style('top', padding.top+'px')
+        .style('position', 'relative')
+        .attr('class', 'clearfix'),
       area = d3.svg.area()
         .x(function(d, i) {return x(x.domain()[0] + i); })
         .y1(function(d, i) { return y(d * 100); })
@@ -223,7 +193,7 @@ var FactsPage = function() {
       line = d3.svg.line()
         .x(function(d,i) { return x(i + x.domain()[0]); })
         .y(function(d,i) { return y(d * 100); }),
-      areas = svg.selectAll('.carveout-area')
+      areas = graph.selectAll('.carveout-area')
         .data(_s.carveouts)
         .enter()
         .append('path')
@@ -231,12 +201,43 @@ var FactsPage = function() {
         .attr('d', function(d) { return area(d.data); })
         .style('fill', function(d, i) { return get_color(i); })
     ;
-    svg.selectAll('.carveout-line')
+    graph.selectAll('.carveout-line')
       .data(_s.carveouts)
       .enter()
       .append('path')
       .attr('class', 'carveout-line')
       .attr('d', function(d) { return line(d.data); })
+    ;
+    //TODO: this method for axis text sucks
+    graph.selectAll('.carveout-axis-text')
+      .data(_s.carveouts)
+      .enter()
+      .append('text')
+      .attr('class', 'carveout-axis-text')
+      .text(function(d) { return d.data[d.data.length-1] * 100; })
+      .attr('transform', function(d, i) { return 'translate('+(width+2)+','+(y(d.data[d.data.length-1]*100))+')'; })
+    ;
+    svg.selectAll('.carveout-xaxis-text')
+      .data([2000, 2030])
+      .enter()
+      .append('text')
+      .attr('class', 'carveout-axis-text carveout-xaxis-text')
+      .text(function(d) { return d; })
+      .attr('transform', function(d, i) {
+        var offset = (i == 0) ? 2 : width-2;
+        return 'translate('+(offset)+',20)';
+      })
+      .style('text-anchor', function(d, i) {return (i == 0) ? 'start' : 'end'; })
+    ;
+    graph.append('line')
+      .attr('class', 'edge-axis')
+      .attr('x1', 0).attr('x2', width)
+      .attr('y1', 0).attr('y2', 0)
+    ;
+    graph.append('line')
+      .attr('class', 'edge-axis')
+      .attr('x1', width).attr('x2', width)
+      .attr('y1', 0).attr('y2', height)
     ;
     legend.append('div')
       .style('background-color', function(d, i) { return get_color(i); })
@@ -250,58 +251,6 @@ var FactsPage = function() {
       d3.select('#carve_out_wrap h3')
         .classed('right-align', true);
     }
-  }
-
-  function axis(_s, x, y, svg) {
-    /*
-     Draw axes on trajectory graph
-     ...
-     Args
-     ----
-     _s: Object representing active state
-     ...
-     */
-    var axes = svg.append('g')
-        .attr('width', width)
-        .attr('height', height)
-        .attr('class', 'axes')
-        .attr('transform', 'translate(0,'+0+')'),
-      x_axis_ticks = d3.svg.axis()
-        .scale(x)
-        .orient('top')
-        .tickSize(1)
-        .tickPadding(5)
-        .tickFormat(d3.format('C')),
-      y_axis_ticks = d3.svg.axis()
-        .scale(y)
-        .tickSize(1)
-        .tickPadding(5)
-        .orient('right')
-    ;
-    axes.append('line')
-      .attr('x1', width).attr('x2', width)
-      .attr('y1', height).attr('y2', 0)
-      .attr('class', 'edge-axis');
-    axes.append('line')
-      .attr('x1', 0).attr('x2', width)
-      .attr('y1', 1).attr('y2', 1)
-      .attr('class', 'edge-axis');
-    var xaxis = axes.append('g')
-      .attr('width', 325)
-      .attr('transform', 'translate(0,15)')
-    ;
-    xaxis.append('text')
-      .text(x.domain()[0])
-    ;
-    xaxis.append('text')
-      .text(x.domain()[1])
-      .style('text-anchor', 'end')
-      .attr('transform', 'translate(340, 0)')
-    ;
-    axes.append('g')
-      .attr('transform', 'translate(345,-4)')
-      .call(y_axis_ticks);
-    axes.selectAll('text').attr('class', 'rps-text');
   }
 
   function grid_mix_bars(_s) {
@@ -495,24 +444,27 @@ var FactsPage = function() {
   function trajectory(_s, data) {
     var domain_x = [2000, 2030],
       domain_y = [0, 50],
+      padding = {top:20, right:20, bottom:0, left:0},
       x = d3.scale.linear().domain(domain_x).range([0,width]),
       y = d3.scale.linear().domain(domain_y).range([height-2,0]),
+      tool_tip = d3.select('#state-trajectory').append('div').classed('tooltip', true),
       plot_path = d3.svg.line()
         .x(function(d,i) { return x(i + x.domain()[0]); })
         .y(function(d,i) { return y(d * 100); }),
       svg = d3.select('#state-trajectory')
         .append('svg')
-        .attr('width', width+margin)
-        .attr('height', height),
+        .attr('width', width+padding.right)
+        .attr('height', height+padding.top),
       plots = svg.append('g')
         .attr('width', width)
-        .attr('height', height-margin)
+        .attr('height', height)
         .attr('class', 'plot')
-        .attr('transform', 'translate(0,'+0+')'),
+        .attr('transform', 'translate(0,'+padding.top+')'),
       plotdots = svg.append('g')
         .attr('width', width)
         .attr('height', height)
-        .attr('class', 'plotdots'),
+        .attr('class', 'plotdots')
+        .attr('transform', 'translate(0,'+padding.top+')'),
       plotlines = plots.selectAll('.trajectory')
         .data(data.features)
         .enter()
@@ -562,8 +514,8 @@ var FactsPage = function() {
             tool_tip
               .html((i + domain_x[0])+': '+(Math.round(d*100))+'%')
               .style('position', 'absolute')
-              .style('top', (y(d * 100) - margin)+'px')
-              .style('left', x(_xo) + 'px')
+              .style('top', (y(d * 100) - margin - 10)+'px')
+              .style('left', (x(_xo) + 10) + 'px')
               .classed('active', true)
             ;
           })
@@ -583,9 +535,101 @@ var FactsPage = function() {
         ;
       });
 
-      // Trajectory axes
-      axis(_s, x, y, svg);
+      var axes = svg.append('g')
+        .attr('width', width+padding.right)
+        .attr('height', height+padding.top)
+        .attr('class', 'axes')
+        .attr('transform', 'translate(0,0)'),
+      y_axis_ticks = d3.svg.axis()
+        .scale(y)
+        .tickSize(1)
+        .tickPadding(5)
+        .orient('right')
+      ;
+      axes.append('line')
+        .attr('x1', width).attr('x2', width)
+        .attr('y1', height+padding.top).attr('y2', padding.top)
+        .attr('class', 'edge-axis');
+      axes.append('line')
+        .attr('x1', 0).attr('x2', width)
+        .attr('y1', padding.top+1).attr('y2', padding.top+1)
+        .attr('class', 'edge-axis');
+      var xaxis = axes.append('g')
+        .attr('width', 325)
+        .attr('transform', 'translate(0,0)')
+      ;
+      axes.append('text')
+        .text(x.domain()[0])
+      .attr('transform', 'translate(0,'+(padding.top-5)+')')
+      ;
+      axes.append('text')
+        .text(x.domain()[1])
+        .style('text-anchor', 'end')
+        .attr('transform', 'translate(340,'+(padding.top-5)+')')
+      ;
+      axes.append('g')
+        .attr('transform', 'translate(345,-4)')
+        .call(y_axis_ticks);
+      axes.selectAll('text').attr('class', 'rps-text');
+
     }
+
+  function draw_map(_s, data) {
+    function zoom_f() {
+      projection.translate(d3.event.translate).scale(d3.event.scale);
+      state_map.selectAll('path').attr('d', state_path);
+    }
+    var projection = d3.geo.conicEqualArea()
+      .scale(width*5)
+      .translate([0, 0])
+      .rotate([96, 0])
+      .center([-.6, 38.7])
+      .parallels([29.5, 45.5])
+      .translate([width / 2, height / 2])
+      .precision(.1);
+
+    var
+      svg_map = d3.select('#state-map')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height+20),
+      state_path = d3.geo.path()
+        .projection(projection),
+      _c = projection.invert(state_path.centroid(_s)),
+      zoom = d3.behavior.zoom()
+        .translate(projection.translate())
+        .scale(projection.scale())
+        .scaleExtent([500, 8000])
+        .on('zoom', zoom_f),
+      state_map = svg_map.append('g')
+        .append('g')
+        .attr('id', 'states_all')
+        .style('fill', '#eeeeee')
+        .call(zoom),
+      state_links = state_map.selectAll('a')
+        .data(data.features)
+        .enter().append('a')
+        .attr('xlink:href', function(d) {
+          return d.properties.trajectory ? '/state/' + d.properties.machine_name : null;
+      }),
+      states = state_links
+        .append('path')
+        .attr('d', state_path)
+        .attr('id', function(d) { return 'state_'+ d.properties.abbr; })
+        .attr('data-state', function(d) { return d.properties.abbr; })
+        .attr('class', 'map-state rps-object')
+        .classed('rps-state', function(d) {
+          return (d.properties.trajectory) ? true : false;
+        })
+        .classed('active', function(d) {
+          return d == _s;
+        })
+        .attr('data-center', function(d) {return state_path.centroid(d);})
+        .on('mouseover', hover_in)
+        .on('mouseout', hover_out)
+    ;
+    projection.center([_c[0] + 96, _c[1]]);
+  }
 
   d3.json('/static/js/state_data.json', function(data) {
     /*
@@ -594,31 +638,6 @@ var FactsPage = function() {
     var _s = data.features.filter(function(d) {
       return (d.properties.machine_name == Options.state) ? d : null;
     })[0];
-    var _c = projection.invert(state_path.centroid(_s));
-    projection.center([_c[0] + 96, _c[1]]);
-    var statelinks = state_map.selectAll('a')
-      .data(data.features)
-      .enter().append('a')
-      .attr('xlink:href', function(d) {
-          return d.properties.trajectory ? '/state/' + d.properties.machine_name : null;
-      })
-    ;
-    states = statelinks
-      .append('path')
-      .attr('d', state_path)
-      .attr('id', function(d) { return 'state_'+ d.properties.abbr; })
-      .attr('data-state', function(d) { return d.properties.abbr; })
-      .attr('class', 'map-state rps-object')
-      .classed('rps-state', function(d) {
-        return (d.properties.trajectory) ? true : false;
-      })
-      .classed('active', function(d) {
-        return d == _s;
-      })
-      .attr('data-center', function(d) {return state_path.centroid(d);})
-      .on('mouseover', hover_in)
-      .on('mouseout', hover_out)
-    ;
 
     d3.select('h1').text(_s.properties.name);
 
@@ -686,6 +705,8 @@ var FactsPage = function() {
       .html(function(d) {
         return '<a href="'+ d.href+'">'+d.name+'</a>&nbsp;&mdash;&nbsp;'+ d.description;
       });
+
+    draw_map(_s, data);
 
     // Trajectory chart (axis() called from within).
     trajectory(_s, data);

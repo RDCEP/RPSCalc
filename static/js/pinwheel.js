@@ -270,7 +270,8 @@ function Pinwheel() {
             return _sa;
           })
           .endAngle(function(dd) {
-            _ea = (Math.PI * 2) / num_states * d3.selectAll('[data-region='+dd+']').size();
+//            _ea = (Math.PI * 2) / num_states * d3.selectAll('[data-region='+dd+']').size();
+            _ea = (Math.PI * 2) / num_states * d3.selectAll('[data-region='+dd+']')[0].length;
             return _sa;
           })
       )

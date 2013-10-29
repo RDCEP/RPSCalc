@@ -108,14 +108,16 @@ section {}
 .rps-diff {fill:rgb(213, 94, 0);}
 .rps-hash {stroke:black;stroke-width:2;}
 .rps-hash-actual {stroke:#eeeeee;stroke-width:2;}
-.rps-text, .grid-data-text, .grid-axis-text {font-size:.7em;fill:#333;}
+.rps-text, .grid-data-text, .grid-axis-text, .carveout-axis-text {font-size:.7em;fill:#333;}
 .grid-data-bar {fill:rgb(86, 180, 233);}
 .grid-data-slice {stroke:white;}
 .grid-axis {stroke:white;}
 .edge-axis {stroke:#333;}
 
+#carveout_graph {position:relative;}
+#carveout_graph_legend {position:absolute;top:20px;left:0;}
+#carveout_graph_legend > div {margin-bottom:.25em;}
 .carveout-line {stroke:#eeeeee;stroke-width:1;}
-#carveout_graph_legend > div {float:right;}
 .carveout-swatch, .carveout-text {float:left;margin-right:3px;}
 .carveout-swatch {height:1em;width:1em;}
 .carveout-text {line-height:1.2em;font-size:.8em;margin-right:5px;}
