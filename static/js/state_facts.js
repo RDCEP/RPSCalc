@@ -394,8 +394,8 @@ var FactsPage = function() {
           d3.min(data.data, function(d) { return d.date; }),
           d3.max(data.data, function(d) { return d.date; })
         ],
-        x = d3.scale.linear().domain(domain_x).range([0,width*2]),
-        y = d3.scale.linear().domain(domain_y).range([_h - 2, 0]),
+        x = d3.scale.linear().domain(domain_x).range([0, width*2]),
+        y = d3.scale.linear().domain(domain_y).range([_h+padding.top-2, padding.top]),
         svg = d3.select('#retail_price')
           .insert('svg', 'div')
           .attr('height', _h + padding.top)
@@ -419,68 +419,44 @@ var FactsPage = function() {
         .attr('class', 'grid-axis')
         .attr('y1', function(d) {return y(d); })
         .attr('y2', function(d) {return y(d); })
-        .attr('x1', 0)
-        .attr('x2', width*2)
-//        .attr('transform', 'translate('+_wt+',0)')
+        .attr('x1', x.range()[0])
+        .attr('x2', x.range()[1])
       ;
+      axis.selectAll('.axis-text')
+        .data(data.divs)
+        .enter()
+        .append('text')
+        .attr('class', 'axis-text')
+        .text(function(d, i) {
+          return (i == 0) ? Math.round(d, 2) + '$': Math.round(d, 2);
+        })
+        .attr('transform', function(d) {
+          return 'translate('+(width*2+2)+','+(y(d)+2)+')';
+        })
+      ;
+      axis.append('line')
+        .attr('x1', x.range()[1])
+        .attr('x2', x.range()[1])
+        .attr('y1', y.range()[0])
+        .attr('y2', y.range()[1])
+        .attr('class', 'edge-axis');
+      axis.append('line')
+        .attr('x1', x.range()[0])
+        .attr('x2', x.range()[1])
+        .attr('y1', y.range()[1])
+        .attr('y2', y.range()[1])
+        .attr('class', 'edge-axis');
+      axis.append('text')
+        .text(Math.round(x.domain()[0], 0))
+        .attr('class', 'axis-text')
+        .style('text-anchor', 'start')
+        .attr('transform', 'translate(2, 20)');
+      axis.append('text')
+        .text(Math.round(x.domain()[1], 0))
+        .attr('class', 'axis-text')
+        .style('text-anchor', 'end')
+        .attr('transform', 'translate('+ x.range()[1]+', 20)');
       axis.selectAll()
-    });
-  }
-
-  function grid_mix_pie(_s) {
-    /*
-     Get grid mix information from EIA and draw chart
-     ...
-     Args
-     ----
-     _s: Object representing active state
-     ...
-     */
-    d3.json('/static/js/gridmix/'+_s.abbr+'.json', function(data) {
-      var _max = data.maximum,
-        _rad = 200, // radius
-        _irad = 75,
-        _h = _rad * 2 + 20,
-        _wt = 200, // width of titles
-        _wd = 500, // width of data
-        pie = d3.layout.pie()
-          .sort(null)
-          .value(function(dd) { return dd.data; }),
-        arc_outer = d3.svg.arc()
-          .outerRadius(_rad)
-          .innerRadius(_irad),
-        arc_inner = d3.svg.arc()
-          .outerRadius(_irad)
-          .innerRadius(0),
-        color = d3.scale.ordinal()
-          .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]),
-        color_co2 = d3.scale.linear()
-          .domain([0,150,500])
-          .range(['green', 'yellow', 'red']),
-        grid_mix = d3.select('#grid_mix')
-          .append('svg')
-          .attr('height', _h+5)
-          .attr('width', width * 2)
-          .append('g')
-          .attr('transform', 'translate('+_rad+','+_rad+')'),
-        grid_slices = grid_mix.selectAll('.grid-data')
-          .data(pie(data.data))
-          .enter()
-          .append('g')
-          .attr('class', 'grid-data')
-          .attr('data-value', function(d) { return d.data.data; })
-          .attr('data-name',function(d) { return d.sector; })
-      ;
-      grid_slices.append('path')
-        .attr('d', arc_outer)
-        .attr('class', 'grid-data-slice')
-        .style('fill', function(d, i) { return get_color(i%7); })
-      ;
-      grid_slices.append('path')
-        .attr('d', arc_inner)
-        .attr('class', 'grid-intensity-slice')
-        .style('fill', function(d, i) { return color_co2(d.data.intensity); })
-      ;
     });
   }
 
@@ -622,23 +598,24 @@ var FactsPage = function() {
       projection.translate(d3.event.translate).scale(d3.event.scale);
       state_map.selectAll('path').attr('d', state_path);
     }
-    var projection = d3.geo.conicEqualArea()
-      .scale(width*5)
-      .translate([0, 0])
-      .rotate([96, 0])
-      .center([-.6, 38.7])
-      .parallels([29.5, 45.5])
-      .translate([width / 2, height / 2])
-      .precision(.1);
-
     var
+      projection = d3.geo.conicEqualArea()
+        .scale(width*5)
+        .translate([0, 0])
+        .rotate([96, 0])
+        .center([-.6, 38.7])
+        .parallels([29.5, 45.5])
+        .translate([width / 2, height / 2])
+        .precision(.1),
       svg_map = d3.select('#state-map')
         .append('svg')
         .attr('width', width)
         .attr('height', height+20),
       state_path = d3.geo.path()
         .projection(projection),
-      _c = projection.invert(state_path.centroid(_s)),
+      _c = projection.invert(state_path.centroid(_s));
+    projection.center([_c[0] + 96, _c[1]]);
+    var
       zoom = d3.behavior.zoom()
         .translate(projection.translate())
         .scale(projection.scale())
@@ -671,7 +648,6 @@ var FactsPage = function() {
         .on('mouseover', hover_in)
         .on('mouseout', hover_out)
     ;
-    projection.center([_c[0] + 96, _c[1]]);
   }
 
   d3.json('/static/js/state_data.json', function(data) {
