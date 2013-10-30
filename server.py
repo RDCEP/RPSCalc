@@ -58,7 +58,7 @@ def eia_api_state_retail(state):
     for d in _d['series'][0]['data'][::-1]:
         _date = [float(x) for x in d[0].split('Q')]
         _price = float(d[1])
-        data.append({'date': _date[0]+_date[1]/4, 'data': _price})
+        data.append({'date': '{}-{}'.format(int(_date[1]*3), int(_date[0])), 'data': _price})
         m = _price if _price > m else m
     div = 1-0-0. if m <= 10. else 5. if m <= 25. else 10.
     with open(json_file, 'w') as f:
