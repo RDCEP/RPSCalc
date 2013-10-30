@@ -42,6 +42,7 @@ a:hover {color:#ccc !important;}
 .right-align {text-align:right;}
 
 path, line, rect {stroke-cap:round;fill:none;}
+text {font-size:.7em;fill:#333;}
 
 /* borders on lists */
 ul ul, li {padding-left:15px;padding-top:.25em;margin-top:.5em;margin-bottom:1em;
@@ -108,11 +109,10 @@ section {}
 .rps-diff {fill:rgb(213, 94, 0);}
 .rps-hash {stroke:black;stroke-width:2;}
 .rps-hash-actual {stroke:#eeeeee;stroke-width:2;}
-.rps-text, .grid-data-text, .grid-axis-text, .carveout-axis-text, .axis-text {font-size:.7em;fill:#333;}
 .grid-data-bar {fill:rgb(86, 180, 233);}
 .grid-data-slice {stroke:white;}
 .grid-axis {stroke:white;}
-.edge-axis {stroke:#333;}
+path.domain, .edge-axis {stroke:#333;}
 
 #carveout_graph {position:relative;}
 #carveout_graph_legend {position:absolute;top:20px;left:0;}

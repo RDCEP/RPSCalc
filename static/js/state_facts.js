@@ -385,35 +385,47 @@ var FactsPage = function() {
   }
 
   function retail_price_history(_s) {
+    var parseDate = d3.time.format('%m-%Y').parse,
+      padding = {top:30,right:30,bottom:10,left:10},
+      _h = height * 0.75, //y_max * 2 * height
+      _w = width * 2 + padding.left + padding.right,
+      svg = d3.select('#retail_price')
+        .insert('svg', 'div')
+        .attr('height', _h + padding.top + padding.bottom)
+        .attr('width', width*2 + padding.left + padding.right),
+      axes = svg.append('g'),
+      graph = svg.append('g')
+//        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+        .attr('transform', 'translate(0,0)')
+
+    ;
     d3.json('/static/js/prices/'+_s.abbr+'.json', function(data) {
-      var padding = {top:30,right:30,bottom:10,left:10},
-        _h = height * 0.75, //y_max * 2 * height
-        _w = width * 2 - padding.right - padding.left,
-        domain_y = [0, d3.max(data.data, function(d) { return d.data; })],
-        domain_x = [
-          d3.min(data.data, function(d) { return d.date; }),
-          d3.max(data.data, function(d) { return d.date; })
-        ],
-        x = d3.scale.linear().domain(domain_x).range([0, width*2]),
+      data.data.forEach(function(d) {
+        d.date = parseDate(d.date);
+        d.data = +d.data;
+      });
+      var domain_y = [0, Math.ceil(d3.max(data.data, function(d) { return d.data; }))],
+        x = d3.time.scale()
+          .domain(d3.extent(data.data, function(d) { return d.date; }))
+          .range([0, width*2]),
         y = d3.scale.linear().domain(domain_y).range([_h+padding.top-2, padding.top]),
-        svg = d3.select('#retail_price')
-          .insert('svg', 'div')
-          .attr('height', _h + padding.top)
-          .attr('width', width*2+padding.right),
-        axis = svg.append('g'),
-        graph = svg.append('g')
-          .attr('transform', 'translate(0,30)'),
+        x_axis = d3.svg.axis()
+          .scale(x)
+          .orient('top'),
+        y_axis = d3.svg.axis()
+          .scale(y)
+          .orient('right'),
         line = d3.svg.line()
-          .x(function(d) { return x(d.date); })
-          .y(function(d) { return y(d.data); })
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.data); })
       ;
-      graph.append('path')
+      graph.append('g').append('path')
         .datum(data.data)
         .attr('class', 'price-line')
         .attr('d', line)
       ;
-      axis.selectAll('.grid-axis')
-        .data(data.divs)
+      axes.append('g').selectAll('.grid-axis')
+        .data(y.ticks())
         .enter()
         .append('line')
         .attr('class', 'grid-axis')
@@ -422,53 +434,26 @@ var FactsPage = function() {
         .attr('x1', x.range()[0])
         .attr('x2', x.range()[1])
       ;
-      axis.selectAll('.axis-text')
-        .data(data.divs)
-        .enter()
-        .append('text')
-        .attr('class', 'axis-text')
-        .text(function(d, i) {
-          return (i == 0) ? Math.round(d, 2) + '$': Math.round(d, 2);
-        })
-        .attr('transform', function(d) {
-          return 'translate('+(width*2+2)+','+(y(d)+2)+')';
-        })
-      ;
-      axis.append('line')
-        .attr('x1', x.range()[1])
-        .attr('x2', x.range()[1])
-        .attr('y1', y.range()[0])
-        .attr('y2', y.range()[1])
-        .attr('class', 'edge-axis');
-      axis.append('line')
-        .attr('x1', x.range()[0])
-        .attr('x2', x.range()[1])
-        .attr('y1', y.range()[1])
-        .attr('y2', y.range()[1])
-        .attr('class', 'edge-axis');
-      axis.append('text')
-        .text(Math.round(x.domain()[0], 0))
-        .attr('class', 'axis-text')
-        .style('text-anchor', 'start')
-        .attr('transform', 'translate(2, 20)');
-      axis.append('text')
-        .text(Math.round(x.domain()[1], 0))
-        .attr('class', 'axis-text')
-        .style('text-anchor', 'end')
-        .attr('transform', 'translate('+ x.range()[1]+', 20)');
-      axis.selectAll()
+      axes.append('g')
+        .attr('class', 'y axis')
+        .attr('transform', 'translate('+ x.range()[1]+',0)')
+        .call(y_axis);
+      axes.append('g')
+        .attr('class', 'x axis')
+        .attr('transform', 'translate(0,'+padding.top+')')
+        .call(x_axis);
     });
   }
 
   function trajectory(_s, data) {
-    var domain_x = [2000, 2030],
+    var
       domain_y = [0, 50],
       padding = {top:20, right:20, bottom:0, left:0},
-      x = d3.scale.linear().domain(domain_x).range([0,width]),
+      x = d3.time.scale().domain([new Date(2000, 0, 1), new Date(2030, 0, 1)]).range([0,width]),
       y = d3.scale.linear().domain(domain_y).range([height-2,0]),
       tool_tip = d3.select('#state-trajectory').append('div').classed('tooltip', true),
       plot_path = d3.svg.line()
-        .x(function(d,i) { return x(i + x.domain()[0]); })
+        .x(function(d,i) { return x(new Date(2000+i , 0, 1)); })
         .y(function(d,i) { return y(d * 100); }),
       svg = d3.select('#state-trajectory')
         .append('svg')
@@ -522,7 +507,7 @@ var FactsPage = function() {
             return 'translate('+(width / (_s.properties.trajectory.length - 1)) * i +',0)';
           })
           .attr('data-year', function() {
-             return i + domain_x[0];
+             return i + 2000;
           })
           .style('fill', 'transparent')
           .on('mouseover', function(d) {
@@ -531,10 +516,10 @@ var FactsPage = function() {
             d3.select(this.parentNode.getElementsByClassName('data-point')[0])
               .classed('active', true);
             tool_tip
-              .html((i + domain_x[0])+': '+(Math.round(d*100))+'%')
+              .html((i + 2000)+': '+(Math.round(d*100))+'%')
               .style('position', 'absolute')
               .style('top', (y(d * 100) - margin - 10)+'px')
-              .style('left', (x(_xo) + 10) + 'px')
+              .style('left', (x(new Date(_xo, 0, 1)) + 10) + 'px')
               .classed('active', true)
             ;
           })
@@ -548,7 +533,7 @@ var FactsPage = function() {
       periods.each(function(d, i) {
         d3.select(this).append('circle')
           .classed('data-point', true)
-          .attr('cx', function(d, i) {return x(i + x.domain()[0]);})
+          .attr('cx', function(d, i) {return x(new Date(2000+i, 0, 1));})
           .attr('cy', function(d) {return y(d * 100);})
           .attr('r', 6)
         ;
@@ -566,12 +551,12 @@ var FactsPage = function() {
         .orient('right')
       ;
       axes.append('line')
-        .attr('x1', width).attr('x2', width)
-        .attr('y1', height+padding.top).attr('y2', padding.top)
+        .attr('x1', x.range()[1]).attr('x2', x.range()[1])
+        .attr('y1', y.range()[0]).attr('y2', y.range()[1])
         .attr('class', 'edge-axis');
       axes.append('line')
-        .attr('x1', 0).attr('x2', width)
-        .attr('y1', padding.top+1).attr('y2', padding.top+1)
+        .attr('x1', x.range()[0]).attr('x2', x.range()[1])
+        .attr('y1', y.range()[1]).attr('y2', y.range()[1])
         .attr('class', 'edge-axis');
       var xaxis = axes.append('g')
         .attr('width', 325)
