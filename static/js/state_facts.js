@@ -170,7 +170,7 @@ var FactsPage = function() {
       _w = width - padding.right - padding.left,
       y_max = d3.max(_s.trajectory),
       domain_x = [2000, 2030],
-      x = d3.scale.linear().domain(domain_x).range([0,width]),
+      x = d3.time.scale().domain([new Date(2000, 0, 1), new Date(2030, 0, 1)]).range([0,width]),
       y = d3.scale.linear().domain([0, y_max * 100]).range([_h - 2, 0]),
       svg = d3.select('#carveout_graph')
         .insert('svg', 'div')
@@ -187,11 +187,11 @@ var FactsPage = function() {
         .style('position', 'relative')
         .attr('class', 'clearfix'),
       area = d3.svg.area()
-        .x(function(d, i) {return x(x.domain()[0] + i); })
+        .x(function(d, i) {return x(new Date(2000+i, 0, 1)); })
         .y1(function(d, i) { return y(d * 100); })
         .y0(function(d) { return y(0);}),
       line = d3.svg.line()
-        .x(function(d,i) { return x(i + x.domain()[0]); })
+        .x(function(d,i) { return x(new Date(2000+i, 0, 1)); })
         .y(function(d,i) { return y(d * 100); }),
       areas = graph.selectAll('.carveout-area')
         .data(_s.carveouts)
