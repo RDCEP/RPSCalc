@@ -108,7 +108,7 @@ section {}
 .rps-diff {fill:rgb(213, 94, 0);}
 .rps-hash {stroke:black;stroke-width:2;}
 .rps-hash-actual {stroke:#eeeeee;stroke-width:2;}
-.rps-text, .grid-data-text, .grid-axis-text, .carveout-axis-text {font-size:.7em;fill:#333;}
+.rps-text, .grid-data-text, .grid-axis-text, .carveout-axis-text, .axis-text {font-size:.7em;fill:#333;}
 .grid-data-bar {fill:rgb(86, 180, 233);}
 .grid-data-slice {stroke:white;}
 .grid-axis {stroke:white;}
