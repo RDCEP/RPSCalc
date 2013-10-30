@@ -122,6 +122,8 @@ section {}
 .carveout-swatch {height:1em;width:1em;}
 .carveout-text {line-height:1.2em;font-size:.8em;margin-right:5px;}
 
+.price-line {stroke:rgb(86, 180, 233);stroke-width:2;}
+
 #state-wrap li {border:none;padding:0;margin:0;
     list-style-type: disc;padding-left:-15px;margin-left:15px;}
 
