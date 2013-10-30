@@ -13,7 +13,7 @@ session_opts = {
     'session.auto': True
 }
 
-app.config['DEBUG'] = True
+#app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'REPLACE_ME'
 BeakerSession(app)
 
@@ -30,23 +30,40 @@ def state(state):
         state=state,
     )
 
-#@app.route('/eia_api/<state>/retail')
-#def eia_api_retail(state):
 @app.route('/eia_api/retail')
 def eia_api_retail():
     api_key = "D82A092DA301308805ECAB18A123BB4A"
-    #series_id = "ELEC.PRICE.{}-ALL.Q".format(state)
-    #eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}&num=1'.format(api_key, series_id)
     json_file = 'static/js/prices/retail_prices.json'
     states = json.loads(open(json_file).read())
     for s in states:
         series_id = "ELEC.PRICE.{}-ALL.Q".format(s)
-        eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}&num=1'.format(api_key, series_id)
+        #eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}&num=1'.format(api_key, series_id)
+        eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}'.format(api_key, series_id)
         d = json.loads(urllib2.urlopen(eia_url).read())
-        print(float(d['series'][0]['data'][0][1]))
+        #print(float(d['series'][0]['data'][0][1]))
+        print(float(d['series'][0]['data']))
         states[s] = float(d['series'][0]['data'][0][1]) * 10
     with open(json_file, 'w') as f:
-        f.write(json.dumps(states))
+        f.write(json.dumps(states, indent=4, separators=(',', ': ')))
+
+@app.route('/eia_api/<state>/retail')
+def eia_api_state_retail(state):
+    api_key = 'D82A092DA301308805ECAB18A123BB4A'
+    json_file = 'static/js/prices/{}.json'.format(state)
+    series_id = 'ELEC.PRICE.{}-ALL.Q'.format(state)
+    eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}'.format(api_key, series_id)
+    _d = json.loads(urllib2.urlopen(eia_url).read())
+    print(_d['series'][0]['data'][::-1])
+    data = []
+    for d in _d['series'][0]['data'][::-1]:
+        data.append(float(d[1]))
+    m = max(data)
+    div = 1-0-0. if m <= 10. else 5. if m <= 25. else 10.
+    with open(json_file, 'w') as f:
+        f.write(json.dumps(
+            {'data': data, 'divs': range(0, int(m + 1), int(div))},
+            indent=4, separators=(',', ': ')
+        ))
 
 @app.route('/eia_api/<state>/gridmix')
 def eia_api(state):

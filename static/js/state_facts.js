@@ -384,6 +384,49 @@ var FactsPage = function() {
     });
   }
 
+  function retail_price_history(_s) {
+    d3.json('/static/js/prices/'+_s.abbr+'.json', function(data) {
+      console.log(data);
+      var padding = {top:30,right:30,bottom:10,left:10},
+        _h = height * 0.75, //y_max * 2 * height
+        _w = width * 2 - padding.right - padding.left,
+        y_max = d3.max(data.data),
+        y_min = 0,
+        domain_x = [2000, 2030],
+        x = d3.scale.linear().domain(domain_x).range([0,width]),
+        y = d3.scale.linear().domain([y_min, y_max]).range([_h - 2, 0]),
+        svg = d3.select('#retail_price')
+          .insert('svg', 'div')
+          .attr('height', _h + padding.top)
+          .attr('width', _w+padding.right),
+        axis = svg.append('g'),
+        graph = svg.append('g')
+          .attr('transform', 'translate(0,30)'),
+        line = d3.svg.line()
+          .x(function(d,i) { return x(i + x.domain()[0]); })
+          .y(function(d,i) { return y(d); })
+      ;
+      graph.append('path')
+        .datum(data.data)
+        .attr('class', 'price-line')
+        .attr('d', line)
+        .style('stroke', 'red')
+      ;
+      axis.selectAll('.grid-axis')
+        .data(data.divs)
+        .enter()
+        .append('line')
+        .attr('class', 'grid-axis')
+        .attr('y1', function(d) {return y(d); })
+        .attr('y2', function(d) {return y(d); })
+        .attr('x1', 0)
+        .attr('x2', _w)
+//        .attr('transform', 'translate('+_wt+',0)')
+      ;
+      axis.selectAll()
+    });
+  }
+
   function grid_mix_pie(_s) {
     /*
      Get grid mix information from EIA and draw chart
@@ -719,6 +762,8 @@ var FactsPage = function() {
 
     //Grid mix chart
     grid_mix_bars(_s.properties);
+
+    retail_price_history(_s.properties);
 
   });
 
