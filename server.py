@@ -30,6 +30,13 @@ def state(state):
         state=state,
     )
 
+@app.route('/<state>/trajectory')
+def state(state):
+    return render_template(
+        'trajectory.html',
+        state=state,
+    )
+
 @app.route('/eia_api/retail')
 def eia_api_retail():
     api_key = "D82A092DA301308805ECAB18A123BB4A"
