@@ -70,8 +70,8 @@ var FactsPage = function() {
         .append('svg')
         .attr('height', rpsp_height + 50)
         .attr('width', _wd),
-      final = _s.trajectory[_s.trajectory.length - 6],
-      current = _s.trajectory[2013 - domain_x[0]],
+      final = _s.trajectory[_s.trajectory.length - 6].data,
+      current = _s.trajectory[2013 - domain_x[0]].data,
       actual = _s.snapshot.rps_progress,
       diff = Math.abs(actual - current)
     ;
@@ -168,7 +168,7 @@ var FactsPage = function() {
       padding = {top:30,right:30,bottom:10,left:10},
       _h = height * 0.75, //y_max * 2 * height
       _w = width - padding.right - padding.left,
-      y_max = d3.max(_s.trajectory),
+      y_max = d3.max(_s.trajectory, function(d) {return d.data;}),
       domain_x = [2000, 2030],
       x = d3.time.scale().domain([new Date(2000, 0, 1), new Date(2030, 0, 1)]).range([0,width]),
       y = d3.scale.linear().domain([0, y_max * 100]).range([_h - 2, 0]),
@@ -187,12 +187,12 @@ var FactsPage = function() {
         .style('position', 'relative')
         .attr('class', 'clearfix'),
       area = d3.svg.area()
-        .x(function(d, i) {return x(new Date(2000+i, 0, 1)); })
-        .y1(function(d, i) { return y(d * 100); })
-        .y0(function(d) { return y(0);}),
+        .x(function(d, i) {return x(d.date); })
+        .y1(function(d) { return y(d.data * 100); })
+        .y0(y(0)),
       line = d3.svg.line()
-        .x(function(d,i) { return x(new Date(2000+i, 0, 1)); })
-        .y(function(d,i) { return y(d * 100); }),
+        .x(function(d,i) { return x(d.date); })
+        .y(function(d,i) { return y(d.data * 100); }),
       areas = graph.selectAll('.carveout-area')
         .data(_s.carveouts)
         .enter()
@@ -300,7 +300,6 @@ var FactsPage = function() {
         .append('text')
         .attr('class', 'grid-axis-text')
         .style('text-anchor', function(d, i) {return (i == 0) ? 'start' : 'end'; })
-//          .text(function(d, i) { return (i == data.divs.length - 2) ? d + ' trillion BTU' : d; })
         .text(function(d, i) { return d; })
         .attr('transform', function(d) { return 'translate('+(_wt + d / _max * _wd)+','+(_h+_mt+_mb)+')'; })
       ;
@@ -355,7 +354,6 @@ var FactsPage = function() {
         .style('stop-opacity', 1)
       ;
 
-
       grid_mix.append('rect')
         .attr('width', 500)
         .attr('height', 10)
@@ -389,6 +387,7 @@ var FactsPage = function() {
       padding = {top:30,right:30,bottom:10,left:10},
       _h = height * 0.75, //y_max * 2 * height
       _w = width * 2 + padding.left + padding.right,
+      tool_tip = d3.select('#retail_price').append('div').classed('tooltip', true),
       svg = d3.select('#retail_price')
         .insert('svg', 'div')
         .attr('height', _h + padding.top + padding.bottom)
@@ -396,15 +395,18 @@ var FactsPage = function() {
       axes = svg.append('g'),
       graph = svg.append('g')
 //        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
-        .attr('transform', 'translate(0,0)')
-
+        .attr('transform', 'translate(0,0)'),
+      plotdots = svg.append('g')
     ;
     d3.json('/static/js/prices/'+_s.abbr+'.json', function(data) {
       data.data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.data = +d.data;
       });
-      var domain_y = [0, Math.ceil(d3.max(data.data, function(d) { return d.data; }))],
+      var fx = function(d) { return d.date; },
+        fy = function(d) { return d.data; },
+        px = function(d) {return d3.time.format('%Y')(d.date);},
+        domain_y = [0, Math.ceil(d3.max(data.data, function(d) { return d.data; }))],
         x = d3.time.scale()
           .domain(d3.extent(data.data, function(d) { return d.date; }))
           .range([0, width*2]),
@@ -416,14 +418,15 @@ var FactsPage = function() {
           .scale(y)
           .orient('right'),
         line = d3.svg.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.data); })
+          .x(function(d) { return x(d.date); })
+          .y(function(d) { return y(d.data); })
       ;
       graph.append('g').append('path')
         .datum(data.data)
         .attr('class', 'price-line')
         .attr('d', line)
       ;
+      add_hover_segments(data.data, x, y, fx, fy, plotdots, tool_tip, px, fy, d3.rgb(86, 180, 233));
       axes.append('g').selectAll('.grid-axis')
         .data(y.ticks())
         .enter()
@@ -445,66 +448,21 @@ var FactsPage = function() {
     });
   }
 
-  function trajectory(_s, data) {
-    var
-      domain_y = [0, 50],
-      padding = {top:20, right:20, bottom:0, left:0},
-      x = d3.time.scale().domain([new Date(2000, 0, 1), new Date(2030, 0, 1)]).range([0,width]),
-      y = d3.scale.linear().domain(domain_y).range([height-2,0]),
-      tool_tip = d3.select('#state-trajectory').append('div').classed('tooltip', true),
-      plot_path = d3.svg.line()
-        .x(function(d,i) { return x(new Date(2000+i , 0, 1)); })
-        .y(function(d,i) { return y(d * 100); }),
-      svg = d3.select('#state-trajectory')
-        .append('svg')
-        .attr('width', width+padding.right)
-        .attr('height', height+padding.top),
-      plots = svg.append('g')
-        .attr('width', width)
-        .attr('height', height)
-        .attr('class', 'plot')
-        .attr('transform', 'translate(0,'+padding.top+')'),
-      plotdots = svg.append('g')
-        .attr('width', width)
-        .attr('height', height)
-        .attr('class', 'plotdots')
-        .attr('transform', 'translate(0,'+padding.top+')'),
-      plotlines = plots.selectAll('.trajectory')
-        .data(data.features)
-        .enter()
-        .append('path')
-        .attr('d', function(d,i) {
-          return (d.properties.trajectory) ? plot_path(d.properties.trajectory) : null;
-        })
-        .attr('data-state', function(d) { return d.properties.abbr; })
-        .attr('id', function(d,i) {
-          return 'plot_'+ d.properties.abbr;
-        })
-        .attr('class', 'trajectory rps-object')
-        .classed('active', function(d) {
-          return d == _s;
-        })
-      ;
-      plotlines.each(function(d) {
-        if (d == _s) {
-          this.parentNode.appendChild(this);
-        }
-      });
-      var periods = plotdots.selectAll('.time-period')
-        .data(_s.properties.trajectory)
-        .enter()
-        .append('g')
-        .attr('class', 'time-period')
-        .attr('transform', function(d, i) {
-          return 'translate('+(width / (_s.properties.trajectory.length - 1)) * i +',0)';
-        })
-      ;
-      periods.each(function(d,i) {
+  function add_hover_segments(data, x, y, fx, fy, g, tool_tip, px, py, color) {
+    g.selectAll('.time-period')
+      .data(data)
+      .enter()
+      .append('g')
+      .attr('class', 'time-period')
+      .attr('transform', function(d, i) {
+        return 'translate('+(x.range()[1] / (data.length - 1)) * i +',0)';
+      })
+      .each(function(d, i) {
         d3.select(this).append('rect')
-          .attr('height', height)
-          .attr('width', width / (_s.properties.trajectory.length))
+          .attr('height', y.range()[0])
+          .attr('width', x.range()[1] / (data.length))
           .attr('transform', function(d, i) {
-            return 'translate('+(width / (_s.properties.trajectory.length - 1)) * i +',0)';
+            return 'translate('+(x.range()[1] / (data.length - 1)) * i +',0)';
           })
           .attr('data-year', function() {
              return i + 2000;
@@ -516,7 +474,14 @@ var FactsPage = function() {
             d3.select(this.parentNode.getElementsByClassName('data-point')[0])
               .classed('active', true);
             tool_tip
-              .html((i + 2000)+': '+(Math.round(d*100))+'%')
+//              .html((i + 2000)+': '+(Math.round(d*100))+'%')
+              .html(function() {
+                if (d.date) {
+                  return px(d)+': '+(Math.round(py(d)))+'%';
+                } else {
+                  return px(i)+': '+(Math.round(py(d)))+'%'
+                }
+              })
               .style('position', 'absolute')
               .style('top', (y(d * 100) - margin - 10)+'px')
               .style('left', (x(new Date(_xo, 0, 1)) + 10) + 'px')
@@ -529,54 +494,79 @@ var FactsPage = function() {
             tool_tip.classed('active', false);
           })
         ;
-      });
-      periods.each(function(d, i) {
         d3.select(this).append('circle')
           .classed('data-point', true)
-          .attr('cx', function(d, i) {return x(new Date(2000+i, 0, 1));})
-          .attr('cy', function(d) {return y(d * 100);})
+          .attr('cx', function(d) { return 0;})//return x(fx(d)); })
+          .attr('cy', function(d) {return y(fy(d));})
           .attr('r', 6)
         ;
       });
+  }
 
-      var axes = svg.append('g')
-        .attr('width', width+padding.right)
-        .attr('height', height+padding.top)
-        .attr('class', 'axes')
-        .attr('transform', 'translate(0,0)'),
-      y_axis_ticks = d3.svg.axis()
+  function trajectory(_s, data) {
+    var
+      px = function(d) { return d3.time.format('%Y')(d.date); },
+      fx = function(d) { return d.date; },
+      fy = function(d) { return d.data * 100;},
+      padding = {top:20, right:20, bottom:10, left:10},
+      x = d3.time.scale()
+        .domain([new Date(2000, 0, 1), new Date(2030, 0, 1)])
+        .range([0,width]),
+      y = d3.scale.linear()
+        .domain([0, 50])
+        .range([height-2, 0]),
+      tool_tip = d3.select('#state-trajectory').append('div').classed('tooltip', true),
+      plot_path = d3.svg.line()
+        .x(function(d,i) { return x(fx(d)); })
+        .y(function(d,i) { return y(fy(d)); }),
+      svg = d3.select('#state-trajectory')
+        .append('svg')
+        .attr('width', width+padding.right+padding.left)
+        .attr('height', height+padding.top+padding.bottom),
+      axes = svg.append('g')
+        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+      plots = svg.append('g')
+        .attr('class', 'plot')
+        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+      plotdots = svg.append('g')
+        .attr('class', 'plotdots')
+        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+      x_axis = d3.svg.axis()
+          .scale(x)
+          .orient('top'),
+      y_axis = d3.svg.axis()
         .scale(y)
-        .tickSize(1)
-        .tickPadding(5)
-        .orient('right')
-      ;
-      axes.append('line')
-        .attr('x1', x.range()[1]).attr('x2', x.range()[1])
-        .attr('y1', y.range()[0]).attr('y2', y.range()[1])
-        .attr('class', 'edge-axis');
-      axes.append('line')
-        .attr('x1', x.range()[0]).attr('x2', x.range()[1])
-        .attr('y1', y.range()[1]).attr('y2', y.range()[1])
-        .attr('class', 'edge-axis');
-      var xaxis = axes.append('g')
-        .attr('width', 325)
-        .attr('transform', 'translate(0,0)')
-      ;
-      axes.append('text')
-        .text(x.domain()[0])
-      .attr('transform', 'translate(0,'+(padding.top-5)+')')
-      ;
-      axes.append('text')
-        .text(x.domain()[1])
-        .style('text-anchor', 'end')
-        .attr('transform', 'translate(340,'+(padding.top-5)+')')
-      ;
-      axes.append('g')
-        .attr('transform', 'translate(345,-4)')
-        .call(y_axis_ticks);
-      axes.selectAll('text').attr('class', 'rps-text');
-
-    }
+        .orient('right');
+    plots.selectAll('.trajectory')
+      .data(data.features)
+      .enter()
+      .append('path')
+      .attr('d', function(d,i) {
+        return (d.properties.trajectory) ? plot_path(d.properties.trajectory) : null;
+      })
+      .attr('data-state', function(d) { return d.properties.abbr; })
+      .attr('id', function(d,i) {
+        return 'plot_'+ d.properties.abbr;
+      })
+      .attr('class', 'trajectory rps-object')
+      .classed('active', function(d) {
+        return d == _s;
+      })
+      .each(function(d) {
+        if (d == _s) {
+          this.parentNode.appendChild(this);
+        }
+      });
+    add_hover_segments(_s.properties.trajectory, x, y, fx, fy, plotdots, tool_tip, px, fy, d3.rgb(213, 94, 0));
+    axes.append('g')
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,0)')
+      .call(x_axis);
+    axes.append('g')
+      .attr('class', 'y axis')
+      .call(y_axis)
+      .attr('transform', 'translate('+ x.range()[1]+',0)');
+  }
 
   function draw_map(_s, data) {
     function zoom_f() {
@@ -639,6 +629,26 @@ var FactsPage = function() {
     /*
      Load state_data JSON object and draw page
      */
+    var _date_data;
+    var parse_date = d3.time.format('%Y').parse;
+    data.features.forEach(function(d, i) {
+      if (d.properties.trajectory) {
+        _date_data = [];
+        d.properties.trajectory.forEach(function(dd, ii) {
+          _date_data.push({'data': dd, 'date': parse_date(String(ii+ 2000))});
+        });
+        d.properties.trajectory = _date_data;
+      }
+      if (d.properties.carveouts) {
+        d.properties.carveouts.forEach(function(dd, ii) {
+          _date_data = [];
+          dd.data.forEach(function(ddd, iii) {
+            _date_data.push({'data': ddd, 'date': parse_date(String(iii+ 2000))});
+          });
+          dd.data = _date_data;
+        });
+      }
+    });
     var _s = data.features.filter(function(d) {
       return (d.properties.machine_name == Options.state) ? d : null;
     })[0];
