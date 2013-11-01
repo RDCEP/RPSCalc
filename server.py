@@ -31,7 +31,7 @@ def state(state):
     )
 
 @app.route('/<state>/trajectory')
-def state(state):
+def trajectory(state):
     return render_template(
         'trajectory.html',
         state=state,
