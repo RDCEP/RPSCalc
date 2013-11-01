@@ -1,26 +1,3 @@
-var RPSGraph = function() {
-  var _width = 700,
-    _height = 345,
-    _padding = {top:0, right:0, bottom:0, left:0},
-    _x,
-    _y;
-  this.x = function(val) {
-    if (val) { _x = val; return this; } else { return _x; }
-  };
-  this.y = function(val) {
-    if (val) { _y = val; return this; } else { return _y; }
-  };
-  this.padding = function(val) {
-    if (val) { _padding = val; return this; } else { return _padding; }
-  };
-  this.width = function(val) {
-    if (val) { _width = val; return this; } else { return _width; }
-  };
-  this.height = function(val) {
-    if (val) { _height = val; return this; } else { return _height; }
-  };
-};
-
 var Trajectory = function() {
   var data,
     width = 700,
@@ -43,13 +20,15 @@ var Trajectory = function() {
       .attr('transform', 'translate('+padding.left+','+padding.top+')'),
     dflt = svg.append('g'),
     mask = svg.append('g'),
+    axes = svg.append('g')
+      .attr('transform', 'translate('+padding.left+','+padding.top+')'),
     handle_layer = svg.append('g')
       .attr('transform', 'translate('+padding.left+','+padding.top+')'),
 //    x = d3.time.scale().domain(domain_x).range([padding.left, width+padding.left]),
 //    y = d3.scale.linear().domain(domain_y).range([height+padding.top, padding.top]),
     x = d3.time.scale().domain(domain_x).range([0, width]),
     y = d3.scale.linear().domain(domain_y).range([height, 0]),
-    x_axis = d3.svg.axis().scale(x),
+    x_axis = d3.svg.axis().scale(x).orient('bottom'),
     y_axis = d3.svg.axis().scale(y),
     trajectory_line = d3.svg.line()
       .x(function(d) { return x(d.date); })
@@ -73,7 +52,7 @@ var Trajectory = function() {
   }
 
   function drag_start(d, i, ii, foo) {
-    console.log('start', d, i, ii, foo);
+    console.log(d.date);
     adjust_dot = d3.select(this);
     adjust_data.start = d.data;
     adjust_data.index = i
@@ -84,9 +63,7 @@ var Trajectory = function() {
   }
 
   function drag_end(d, i, ii) {
-    adjust_dot.classed('active', false).classed('hovered', false);
     adjust_data.stop = data.filter(function(_d) { return _d == d; })[0].data;
-    redraw();
     adjust_dot = null;
   }
 
@@ -192,7 +169,21 @@ var Trajectory = function() {
     mask.append('rect').attr('class', 'mask')
       .attr('width', padding.left).attr('height', height+padding.top+padding.bottom)
       .attr('transform', 'translate('+(width+padding.left)+',0)');
-
+    axes.append('g')
+      .attr('transform', 'translate(0,'+(height)+')')
+//      .attr('transform', 'translate(0,'+(height+padding.top)+')')
+      .call(x_axis);
+    var form = d3.select('#state_trajectory').append('form')
+      .attr('id', 'state_trajectory_inputs')
+        .style('padding-left', padding.left+'px')
+    ;
+    form.selectAll('input')
+      .data(data).enter()
+      .append('input').attr('type', 'text')
+      .attr('value', function(d) {return d.data;})
+      .style('width', (time_period_width-14)+'px')
+      .style('display', function(d) {return (d.date.getFullYear() > 2013) ? 'block' : 'none'; })
+    ;
     redraw();
   }
 
