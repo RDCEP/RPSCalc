@@ -17,15 +17,24 @@ var Trajectory = function() {
       .attr('width', width+padding.left+padding.right)
       .attr('height', height+padding.top+padding.bottom),
     graph = svg.append('g')
+      .attr('id', 'graph_layer')
       .attr('transform', 'translate('+padding.left+','+padding.top+')'),
     dflt = svg.append('g'),
-    mask = svg.append('g'),
+    mask = svg.append('g')
+      .attr('id', 'mask_layer'),
     axes = svg.append('g')
+      .attr('id', 'axes_layer')
       .attr('transform', 'translate('+padding.left+','+padding.top+')'),
     handle_layer = svg.append('g')
+      .attr('id', 'handles_layer')
       .attr('transform', 'translate('+padding.left+','+padding.top+')'),
-//    x = d3.time.scale().domain(domain_x).range([padding.left, width+padding.left]),
-//    y = d3.scale.linear().domain(domain_y).range([height+padding.top, padding.top]),
+    buttons_layer = svg.append('g')
+      .attr('id', 'buttons_layer')
+      .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+    form = d3.select('#state_trajectory').append('form')
+      .attr('id', 'state_trajectory_inputs')
+      .style('padding-left', padding.left+'px')
+      .classed('hidden', true),
     x = d3.time.scale().domain(domain_x).range([0, width]),
     y = d3.scale.linear().domain(domain_y).range([height, 0]),
     x_axis = d3.svg.axis().scale(x).orient('bottom'),
@@ -39,7 +48,8 @@ var Trajectory = function() {
       .y1(function(d) { return y(d.data * 100); }),
     time_period_width = x(new Date(2013, 0, 1)) - x(new Date(2012, 0, 1)),
     trajectory,
-    handles
+    handles,
+    inputs
   ;
 
   function drag_move(d, i, ii) {
@@ -71,6 +81,9 @@ var Trajectory = function() {
     trajectory
       .attr('d', trajectory_area(data))
     ;
+    inputs.data(data).each(function(d) {
+      d3.select(this).attr('value', function(d) {return d.data * 100;})
+    });
     handles.data(data)
       .each(function(d,i) {
         d3.select(this).select('.time-period-rect')
@@ -109,7 +122,7 @@ var Trajectory = function() {
     trajectory = graph.append('path')
       .attr('d', trajectory_area(data))
       .attr('class', 'chart-line')
-      .style('fill', '#dddddd')
+      .style('fill', d3.rgb(0, 158, 115))
     ;
     handles = handle_layer.selectAll('.time-period')
       .data(data)
@@ -171,19 +184,40 @@ var Trajectory = function() {
       .attr('transform', 'translate('+(width+padding.left)+',0)');
     axes.append('g')
       .attr('transform', 'translate(0,'+(height)+')')
-//      .attr('transform', 'translate(0,'+(height+padding.top)+')')
       .call(x_axis);
-    var form = d3.select('#state_trajectory').append('form')
-      .attr('id', 'state_trajectory_inputs')
-        .style('padding-left', padding.left+'px')
-    ;
-    form.selectAll('input')
+    inputs = form.selectAll('input')
       .data(data).enter()
       .append('input').attr('type', 'text')
-      .attr('value', function(d) {return d.data;})
       .style('width', (time_period_width-14)+'px')
       .style('display', function(d) {return (d.date.getFullYear() > 2013) ? 'block' : 'none'; })
+      .on('change', function(d, i) {
+//        console.log(d, i, d3.select(this).property('value'));
+        data.filter(function(_d) { return _d == d; })[0].data = d3.select(this).property('value') / 100;
+        redraw();
+      })
     ;
+    var drag_switch = d3.select('#drag_switch'),
+      input_switch = d3.select('#input_switch');
+    drag_switch.on('click', function() {
+      d3.event.preventDefault();
+      drag_switch.classed('active', function() {
+        var state = drag_switch.classed('active');
+        handle_layer.classed('hidden', state);
+        form.classed('hidden', !state);
+        input_switch.classed('active', state);
+        return (state) ? false : true;
+      });
+    });
+    input_switch.on('click', function() {
+      d3.event.preventDefault();
+      input_switch.classed('active', function() {
+        var state = input_switch.classed('active');
+        handle_layer.classed('hidden', !state);
+        form.classed('hidden', state);
+        drag_switch.classed('active', state);
+        return (state) ? false : true;
+      });
+    });
     redraw();
   }
 

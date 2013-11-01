@@ -27,6 +27,15 @@ textarea {resize:vertical;}
 
 /* NATE */
 
+/*
+rgb(86, 180, 233), // sky blue
+rgb(230, 159, 0),  // orange
+rgb(0, 158, 115),  // bluish green
+rgb(240, 228, 66), // yellow
+rgb(0, 114, 178),  // blue
+rgb(213, 94, 0),   // vermilion
+rgb(204, 121, 167) // reddish purple
+*/
 
 html {height:100%;overflow:auto;}
 body {min-height:100%;}
@@ -61,8 +70,8 @@ line, rect, path {stroke-linecap:round;fill:none;stroke:none;stroke-width:1;}
 .chart-line {stroke-width:2}
 .chart-area {stroke-width:0}
 .data-point {stroke-width:2;stroke:transparent;fill:transparent;pointer-events:all;}
-.data-point.active {fill:#eeeeee;stroke:rgb(213, 94, 0);}
-.data-point.hovered {fill:rgb(213, 94, 0);}
+.data-point.active {fill:#eeeeee;stroke:black;}
+.data-point.hovered {fill:black;}
 
 
 /* STATE STYLES */
@@ -93,11 +102,15 @@ line, rect, path {stroke-linecap:round;fill:none;stroke:none;stroke-width:1;}
     line-height:.5em;}
 header h1+img {position:absolute;right:15px;bottom:15px;height:100px;}
 
+#drag_switch a, #input_switch a {color:white;font-weight:bold;}
+#drag_switch.active a, #input_switch.active a {color:rgb(213, 94, 0)}
+
 #state_trajectory_inputs {}
 #state_trajectory_inputs input {float:left;margin-left:2px;border:1px solid #999;
   display:block;padding:2px 5px;font-size:.7em}
 
 .module.wide {width:760px; position:relative;left:-30px;}
+.module.wide h3 {margin:0 30px;}
 
 /* END STATE STYLES */
 
