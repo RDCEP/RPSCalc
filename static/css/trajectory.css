@@ -49,7 +49,7 @@ h2 {margin:0;font-size:1.5em;color:#333;
 h3 {font-weight:400;}
 b {font-weight:bold;}
 a {text-decoration:none;color:#666666;}
-a:hover {color:#ccc !important;}
+a:hover {color:black;}
 .right-align {text-align:right;}
 
 path, line, rect {stroke-cap:round;fill:none;}
@@ -74,36 +74,39 @@ line, rect, path {stroke-linecap:round;fill:none;stroke:none;stroke-width:1;}
 .data-point.hovered {fill:black;}
 .grid-line {stroke:white;stroke-width:2}
 
+#default_trajectory {stroke:#eeeeee;stroke-width:2;stroke-dasharray:1,8}
+
 /* STATE STYLES */
-#main-nav {width:100%;background-color:black;opacity:.8;padding:.75em 0;
+#main_nav {width:100%;background-color:black;opacity:.8;padding:.75em 0;
   position:fixed;top:0;z-index:999;-webkit-transform: translateZ(0);}
-#top-nav {width:960px;margin:0 auto;line-height:1em;position:relative;}
-#top-nav > li {border:none;display:inline-block;padding:0 0 0 15px;margin:0;}
-#main-nav a {display: inline-block;}
-#menu-states {position:relative;}
-#menu-states ul {border:none;position:absolute;top:100%;left:0;
+#top_nav {width:960px;margin:0 auto;line-height:1em;position:relative;}
+#top_nav > li {border:none;display:inline-block;padding:0 0 0 15px;margin:0;}
+#top_nav a:hover {color:#ccc;}
+#main_nav a {display: inline-block;}
+#main_nav .top-level {position:relative;}
+#main_nav .top-level ul {border:none;position:absolute;top:100%;left:0;
     background-color:black;z-index:1000;padding:.75em 1em .5em;
     display:none;margin:0;}
-#menu-states li {margin-bottom:.5em;}
-#menu-states:hover ul {display:block;}
+#main_nav .top-level li {margin-bottom:.5em;}
+#main_nav .top-level:hover ul {display:block;}
 
-#left-nav {width:200px;position:absolute;top:1.75em;left:0;margin:1em auto;}
-#left-nav li {margin:5px 0;}
-#left-nav a:hover,#left-nav a.selected {color:black!important;}
+#left_nav {width:200px;position:absolute;top:1.75em;left:0;margin:1em auto;}
+#left_nav li {margin:5px 0;}
+#left_nav a:hover,#left_nav a.selected {color:black!important;}
 
-#state-wrap {width:960px;margin:3.5em auto;padding-bottom:2em;}
-#state-wrap section {margin-left:230px;width:730px;padding:0;border-top:1px solid #999}
-#state-wrap section+section {width:700px;padding:2em 15px 3em;border:none;margin-top:0;}
-#state-wrap section+section+section {width:700px;padding:1em 15px 3em;border-top:1px solid #999}
+#main_content {width:960px;margin:3.5em auto;padding-bottom:2em;}
+#main_content section {margin-left:230px;width:730px;padding:0;border-top:1px solid #999}
+#main_content section+section {width:700px;padding:2em 15px 3em;border:none;margin-top:0;}
+#main_content section+section+section {width:700px;padding:1em 15px 3em;border-top:1px solid #999}
 
-#state-wrap header {background-color:#cccccc;padding:1em 15px;
+#main_content header {background-color:#cccccc;padding:1em 15px;
     height:100px;position:relative;z-index:1;}
-#state-wrap header h1 {margin:0;padding:0;position:absolute;bottom:1em;
+#main_content header h1 {margin:0;padding:0;position:absolute;bottom:1em;
     line-height:.5em;}
 header h1+img {position:absolute;right:15px;bottom:15px;height:100px;}
 
-#drag_switch a, #input_switch a {color:white;font-weight:bold;}
-#drag_switch.active a, #input_switch.active a {color:rgb(213, 94, 0)}
+#drag_switch a, #type_switch a {color:#bbbbbb;font-weight:bold;}
+#drag_switch.active a, #type_switch.active a {color:rgb(213, 94, 0)}
 
 #state_trajectory_inputs {}
 #state_trajectory_inputs input {float:left;margin-left:2px;border:1px solid #999;

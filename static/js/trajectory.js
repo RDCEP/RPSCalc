@@ -22,7 +22,8 @@ var Trajectory = function() {
     graph = svg.append('g')
       .attr('id', 'graph_layer')
       .attr('transform', 'translate('+padding.left+','+padding.top+')'),
-    dflt = svg.append('g'),
+    dflt = svg.append('g')
+      .attr('transform', 'translate('+padding.left+','+padding.top+')'),
     mask = svg.append('g')
       .attr('id', 'mask_layer'),
     axes = svg.append('g')
@@ -213,23 +214,27 @@ var Trajectory = function() {
         redraw();
       })
     ;
+    dflt.append('path')
+      .attr('id', 'default_trajectory')
+      .attr('d', trajectory_line(data))
+    ;
     //TODO: Below is totally repetitive. Rewrite.
     var drag_switch = d3.select('#drag_switch'),
-      input_switch = d3.select('#input_switch');
+      type_switch = d3.select('#type_switch');
     drag_switch.on('click', function() {
       d3.event.preventDefault();
       drag_switch.classed('active', function() {
         var state = drag_switch.classed('active');
         handle_layer.classed('hidden', state);
         form.classed('hidden', !state);
-        input_switch.classed('active', state);
+        type_switch.classed('active', state);
         return (state) ? false : true;
       });
     });
-    input_switch.on('click', function() {
+    type_switch.on('click', function() {
       d3.event.preventDefault();
-      input_switch.classed('active', function() {
-        var state = input_switch.classed('active');
+      type_switch.classed('active', function() {
+        var state = type_switch.classed('active');
         handle_layer.classed('hidden', !state);
         form.classed('hidden', state);
         drag_switch.classed('active', state);
