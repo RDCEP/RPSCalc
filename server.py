@@ -1,6 +1,7 @@
 import urllib2
 import json
-from flask import render_template, request, make_response
+import urlparse
+from flask import render_template, request, make_response, abort
 from flask_beaker import BeakerSession
 from uwsgi_app import app
 
@@ -17,25 +18,47 @@ session_opts = {
 app.config['SECRET_KEY'] = 'REPLACE_ME'
 BeakerSession(app)
 
+def update_session(request, **kwargs):
+    s = request.environ.get('beaker.session')
+    for key, value in kwargs.iteritems():
+        s[key] = value
+    return s
+
 @app.route('/pinwheel')
 def index():
     return render_template(
         'pinwheel.html'
     )
 
-@app.route('/state/<state>')
+@app.route('/<state>')
 def state(state):
+    if state == 'favicon.ico': abort(404)
+    kwargs = {'state':state}
+    _s = update_session(request, **kwargs)
     return render_template(
         'state.html',
-        state=state,
+        state=_s['state'],
     )
 
 @app.route('/<state>/trajectory')
 def trajectory(state):
+    kwargs = {'state':state}
+    _s = update_session(request, **kwargs)
     return render_template(
         'trajectory.html',
-        state=state,
+        state=_s['state'],
+        graph_type='trajectory',
     )
+
+@app.route('/update', methods=['POST',])
+def update():
+    try:
+        kwargs = json.loads(request.data)
+        update_session(request, **kwargs)
+        return 'Session updated.'
+    except:
+        abort(500)
+
 
 @app.route('/eia_api/retail')
 def eia_api_retail():
@@ -44,10 +67,8 @@ def eia_api_retail():
     states = json.loads(open(json_file).read())
     for s in states:
         series_id = "ELEC.PRICE.{}-ALL.Q".format(s)
-        #eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}&num=1'.format(api_key, series_id)
         eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}'.format(api_key, series_id)
         d = json.loads(urllib2.urlopen(eia_url).read())
-        #print(float(d['series'][0]['data'][0][1]))
         print(float(d['series'][0]['data']))
         states[s] = float(d['series'][0]['data'][0][1]) * 10
     with open(json_file, 'w') as f:
