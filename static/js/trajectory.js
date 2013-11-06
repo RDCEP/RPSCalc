@@ -222,7 +222,7 @@ var Trajectory = function() {
       .style('width', (time_period_width-14)+'px')
       .style('display', function(d) {return (d.date.getFullYear() > 2013) ? 'block' : 'none'; })
       .on('change', function(d, i) {
-        data.filter(function(_d) { return _d == d; })[0].data = d3.select(this).property('value');
+        data.current.filter(function(_d) { return _d == d; })[0].data = d3.select(this).property('value');
         redraw();
       })
     ;
