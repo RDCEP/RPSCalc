@@ -1,5 +1,5 @@
 var Trajectory = function() {
-  var data,
+  var data={trajectory:null, wind:null, solar:null, current:null, min:null, max:null},
     width = 700,
     height = 350,
     padding = {top: 30, right:30, bottom:30, left:30},
@@ -61,7 +61,7 @@ var Trajectory = function() {
       delta = Math.round(adjusted / adjust_data.step) * adjust_data.step,
       rounded = (delta > 0) ? (delta > 50) ? 50 : delta : 0
     ;
-    data.filter(function(_d) { return _d == d; })[0].data = rounded;
+    data.current.filter(function(_d) { return _d == d; })[0].data = rounded;
     redraw();
   }
 
@@ -78,19 +78,30 @@ var Trajectory = function() {
 
   function drag_end(d, i, ii) {
     console.log('end');
-    adjust_data.stop = data.filter(function(_d) { return _d == d; })[0].data;
+    //TODO: update session
+    adjust_data.stop = data.current.filter(function(_d) { return _d == d; })[0].data;
     adjust_dot = null;
+    update_session(data);
     redraw();
+  }
+
+  function update_session(_data) {
+    console.log(JSON.stringify(_data));
+    d3.xhr('/update')
+      .mimeType('application/json')
+      .post(JSON.stringify(_data))
+      .on('load', console.log(1))
+    ;
   }
 
   function redraw() {
     trajectory
-      .attr('d', trajectory_area(data))
+      .attr('d', trajectory_area(data.trajectory))
     ;
-    inputs.data(data).each(function(d) {
+    inputs.data(data.current).each(function(d) {
       d3.select(this).attr('value', function(d) {return d.data;})
     });
-    handles.data(data)
+    handles.data(data.current)
       .each(function(d,i) {
         d3.select(this).select('.time-period-rect')
           .on('mouseover', function() {
@@ -126,14 +137,15 @@ var Trajectory = function() {
   }
 
   function trajectory_graph(_s) {
-    data = _s.properties.trajectory;
+    data.trajectory = _s.properties.trajectory;
+    data.current = data.trajectory;
     trajectory = graph.append('path')
-      .attr('d', trajectory_area(data))
+      .attr('d', trajectory_area(data.trajectory))
       .attr('class', 'chart-line')
       .style('fill', d3.rgb(0, 158, 115))
     ;
     handles = handle_layer.selectAll('.time-period')
-      .data(data)
+      .data(data.current)
       .enter()
       .append('g')
       .attr('class', 'time-period')
@@ -151,10 +163,10 @@ var Trajectory = function() {
         .style('pointer-events', function(d) {return (d.date.getFullYear() > 2013) ? 'all' : 'none'; })
       ;
       d3.select(this).append('circle')
-        .classed('data-point', true)
+        .classed('data-point', function(d) { return (d.date.getFullYear() > 2013) ? true : false; })
         .attr('cx', time_period_width/2)
         .attr('cy', function() {return y(d.data);})
-        .attr('r', 6)
+        .attr('r', function(d) { return (d.date.getFullYear() > 2013) ? 6 : 0; })
         .call(trajectory_drag, i)
       ;
       d3.select(this).append('rect')
@@ -205,7 +217,7 @@ var Trajectory = function() {
       .attr('transform', 'translate('+(0)+',0)')
       .call(y_axis);
     inputs = form.selectAll('input')
-      .data(data).enter()
+      .data(data.current).enter()
       .append('input').attr('type', 'text')
       .style('width', (time_period_width-14)+'px')
       .style('display', function(d) {return (d.date.getFullYear() > 2013) ? 'block' : 'none'; })
@@ -216,7 +228,7 @@ var Trajectory = function() {
     ;
     dflt.append('path')
       .attr('id', 'default_trajectory')
-      .attr('d', trajectory_line(data))
+      .attr('d', trajectory_line(data.trajectory))
     ;
     //TODO: Below is totally repetitive. Rewrite.
     var drag_switch = d3.select('#drag_switch'),
@@ -247,7 +259,9 @@ var Trajectory = function() {
   this.build = function() {
     d3.json('/static/js/state_data.json', function(_data) {
       var parse_date = d3.time.format('%Y').parse;
+
       _data.features.forEach(function(d, i) {
+
         if (d.properties.trajectory) {
           _date_data = [];
           d.properties.trajectory.forEach(function(dd, ii) {
@@ -255,20 +269,23 @@ var Trajectory = function() {
           });
           d.properties.trajectory = _date_data;
         }
+
         if (d.properties.carveouts) {
           d.properties.carveouts.forEach(function(dd, ii) {
             _date_data = [];
             dd.data.forEach(function(ddd, iii) {
-              _date_data.push({'data': ddd, 'date': parse_date(String(iii+ 2000))});
+              _date_data.push({'data': ddd*100, 'date': parse_date(String(iii+ 2000))});
             });
             dd.data = _date_data;
           });
         }
+
       });
+
       var _s = _data.features.filter(function(d) {
         return (d.properties.machine_name == Options.state) ? d : null;
       })[0];
-      data = _s.properties.trajectory;
+//      data = _s.properties.trajectory;
       trajectory_graph(_s);
     });
   };

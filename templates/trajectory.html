@@ -46,14 +46,17 @@
           <span id="drag_switch" class="switch active"><a href>drag</a></span> |
           <span id="type_switch" class="switch"><a href>type</a></span> ]</h3>
         <div id="state_trajectory"></div>
+
       </div>
     </section>
   </article>
   <script>
     Options = window.Options || {};
     Options.state = '{{ state }}';
+    Options.graph_type = '{{ graph_type }}';
   </script>
   <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
+  <script src="/static/js/vendor/json2.js"></script>
   <script src="/static/js/trajectory.js"></script>
 </body>
 </html>
