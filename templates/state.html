@@ -15,11 +15,11 @@
       <ul id="top-nav" class="clearfix">
         <li><a href>Home</a></li>
         <li id="menu-states"><a href>States</a><ul>
-          <li><a href="/state/arizona">Arizona</a></li>
-          <li><a href="/state/california">California</a></li>
-          <li><a href="/state/illinois">Illinois</a></li>
-          <li><a href="/state/nevada">Nevada</a></li>
-          <li><a href="/state/new_jersey">New Jersey</a></li>
+          <li><a href="/arizona">Arizona</a></li>
+          <li><a href="/california">California</a></li>
+          <li><a href="/illinois">Illinois</a></li>
+          <li><a href="/nevada">Nevada</a></li>
+          <li><a href="/new_jersey">New Jersey</a></li>
         </ul></li>
         <li><a href>Cost Calculator</a></li>
         <li><a href>Policy</a></li>
@@ -46,16 +46,19 @@
       <h2>RPS Snapshot</h2>
       <div class="wide module clearfix">
         <h3>Policy Trajectory</h3>
-        <div id="state-map" class="narrow module"></div>
-        <div id="state-trajectory" class="narrow module"></div>
+{#        <div id="state-trajectory" class="wide module"></div>#}
+        <div id="carveout_graph">
+          <div id="carveout_graph_legend"></div>
+        </div>
       </div>
       <div class="wide module clearfix">
-        <h3>Overview</h3>
-        <ul id="overview"></ul>
-      </div>
-      <div class="wide module clearfix">
-        <h3>Historic retail prices</h3>
-        <div id="retail_price"></div>
+        <div class="narrow module clearfix">
+          <h3 class="narrow">Overview</h3>
+          <ul id="overview"></ul>
+        </div>
+        <div id="carveouts" class="narrow module">
+          <h3>Carveouts</h3>
+        </div>
       </div>
       <div class="wide module clearfix">
         <h3>Current RPS Progress</h3>
@@ -70,17 +73,15 @@
         <div id="grid_mix"></div>
       </div>
       <form action="/pinwheel" method="get"><button>Compare this state's RPS to the rest of the country</button></form>
-      <div id="cost_cap_wrap" class="narrow module clearfix">
+      <div id="cost_cap_wrap" class="wide module clearfix">
         <h3>Cost Cap Details</h3>
         <div id="cost_cap_details"></div>
       </div>
-      <div id="carve_out_wrap" class="narrow module clearfix">
-        <h3>Carveouts</h3>
-        <div id="carveouts"></div>
-        <div id="carveout_graph">
-          <div id="carveout_graph_legend"></div>
-        </div>
+      <div class="wide module clearfix">
+        <h3>Historic retail prices</h3>
+        <div id="retail_price"></div>
       </div>
+
       <form action="" method="get"><button>RPS Calculator</button></form>
     </section>
     <section id="legislation" class="clearfix">
