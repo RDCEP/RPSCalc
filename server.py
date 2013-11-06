@@ -24,8 +24,17 @@ def update_session(request, **kwargs):
         s[key] = value
     return s
 
+@app.route('/update', methods=['POST',])
+def update():
+    try:
+        kwargs = json.loads(request.data)
+        update_session(request, **kwargs)
+        return 'Session updated.'
+    except:
+        abort(500)
+
 @app.route('/pinwheel')
-def index():
+def pinwheel():
     return render_template(
         'pinwheel.html'
     )
@@ -50,15 +59,15 @@ def trajectory(state):
         graph_type='trajectory',
     )
 
-@app.route('/update', methods=['POST',])
-def update():
-    try:
-        kwargs = json.loads(request.data)
-        update_session(request, **kwargs)
-        return 'Session updated.'
-    except:
-        abort(500)
-
+@app.route('/<state>/wind')
+def wind(state):
+    kwargs = {'state':state}
+    _s = update_session(request, **kwargs)
+    return render_template(
+        'wind_carveout.html',
+        state=_s['state'],
+        graph_type='wind_carveout',
+    )
 
 @app.route('/eia_api/retail')
 def eia_api_retail():
