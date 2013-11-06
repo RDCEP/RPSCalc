@@ -74,7 +74,7 @@ line, rect, path {stroke-linecap:round;fill:none;stroke:none;stroke-width:1;}
 .data-point.hovered {fill:black;}
 .grid-line {stroke:white;stroke-width:2}
 
-#default_trajectory {stroke:#eeeeee;stroke-width:2;stroke-dasharray:1,8}
+#default_trajectory {stroke:black;stroke-width:2;stroke-dasharray:1,8}
 
 /* STATE STYLES */
 #main_nav {width:100%;background-color:black;opacity:.8;padding:.75em 0;
