@@ -94,6 +94,8 @@ section {}
 .module.narrow {width:345px;float:left;}
 .module.narrow+.module.narrow {margin-left:6px;}
 
+.mask {fill:#eee;}
+
 .map-state {fill:#dddddd;stroke-width:1;stroke:#eeeeee;}
 .rps-state {fill:rgb(86, 180, 233);}
 .trajectory {stroke-width:2;stroke:#ccc;}
@@ -116,7 +118,7 @@ section {}
 path.domain, .edge-axis {stroke:#333;}
 
 #carveout_graph {position:relative;}
-#carveout_graph_legend {position:absolute;top:20px;left:0;}
+#carveout_graph_legend {position:absolute;top:20px;left:60px;}
 #carveout_graph_legend > div {margin-bottom:.25em;}
 .carveout-line {stroke:#eeeeee;stroke-width:1;}
 .carveout-swatch, .carveout-text {float:left;margin-right:3px;}

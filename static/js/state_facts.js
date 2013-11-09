@@ -179,6 +179,18 @@ var FactsPage = function() {
         .attr('d', function(d) { return trajectory_area(d.data); })
         .style('fill', function(d, i) { return get_color(i); })
     ;
+    mask_layer.append('rect').attr('class', 'mask')
+      .attr('width', _w+padding.left+padding.right).attr('height', padding.top)
+      .attr('transform', 'translate(0,0)');
+    mask_layer.append('rect').attr('class', 'mask')
+      .attr('width', _w+padding.left+padding.right).attr('height', padding.bottom)
+      .attr('transform', 'translate(0,'+(_h+padding.top)+')');
+    mask_layer.append('rect').attr('class', 'mask')
+      .attr('width', padding.left).attr('height', _h+padding.top+padding.bottom)
+      .attr('transform', 'translate(0,0)');
+    mask_layer.append('rect').attr('class', 'mask')
+      .attr('width', padding.left).attr('height', _h+padding.top+padding.bottom)
+      .attr('transform', 'translate('+(_w+padding.left)+',0)');
     graph_layer.selectAll('.carveout-line')
       .data(_s.carveouts)
       .enter()
@@ -187,7 +199,7 @@ var FactsPage = function() {
       .attr('d', function(d) { return trajectory_line(d.data); })
     ;
     axes_layer.append('g')
-      .attr('transform', 'translate(0,'+(height+10)+')')
+      .attr('transform', 'translate(0,'+(_h+10)+')')
       .call(x_axis);
     axes_layer.append('g')
       .attr('transform', 'translate('+(0)+',0)')
@@ -337,18 +349,38 @@ var FactsPage = function() {
 
   function retail_price_history(_s) {
     var parseDate = d3.time.format('%m-%Y').parse,
-      padding = {top:30,right:30,bottom:10,left:10},
+      padding = {top:30,right:30,bottom:30,left:30},
       _h = height * 0.75, //y_max * 2 * height
-      _w = width * 2 + padding.left + padding.right,
+      _w = width * 2,
       tool_tip = d3.select('#retail_price').append('div').classed('tooltip', true),
-      svg = d3.select('#retail_price')
-        .insert('svg', 'div')
-        .attr('height', _h + padding.top + padding.bottom)
-        .attr('width', width*2 + padding.left + padding.right),
-      axes = svg.append('g'),
-      graph = svg.append('g')
-//        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
-        .attr('transform', 'translate(0,0)'),
+      svg = d3.select('#retail_price').insert('svg')
+        .attr('height', _h+padding.top+padding.bottom)
+        .attr('width', _w+padding.left+padding.right),
+      grid_layer = svg.append('g')
+      .attr('id', 'prices_grid_layer')
+      .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+      graph_layer = svg.append('g')
+        .attr('id', 'prices_graph_layer')
+        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+      mask_layer = svg.append('g')
+        .attr('id', 'prices_mask_layer'),
+      axes_layer = svg.append('g')
+        .attr('id', 'prices_axes_layer')
+        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+      handle_layer = svg.append('g')
+        .attr('id', 'handles_layer')
+        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+
+
+//      svg = d3.select('#retail_price')
+//        .insert('svg', 'div')
+//        .attr('height', _h + padding.top + padding.bottom)
+//        .attr('width', width*2 + padding.left + padding.right),
+//      axes = svg.append('g'),
+//      graph = svg.append('g')
+//        .attr('transform', 'translate(0,0)'),
+
+
       plotdots = svg.append('g')
     ;
     d3.json('/static/js/prices/'+_s.abbr+'.json', function(data) {
@@ -369,21 +401,21 @@ var FactsPage = function() {
         y = d3.scale.linear().domain(domain_y).range([_h+padding.top-2, padding.top]),
         x_axis = d3.svg.axis()
           .scale(x)
-          .orient('top'),
+          .orient('bottom'),
         y_axis = d3.svg.axis()
           .scale(y)
-          .orient('right'),
+          .orient('left'),
         line = d3.svg.line()
           .x(function(d) { return x(d.date); })
           .y(function(d) { return y(d.data); })
       ;
-      graph.append('g').append('path')
+      graph_layer.append('g').append('path')
         .datum(data.data)
         .attr('class', 'price-line')
         .attr('d', line)
       ;
       add_hover_segments(data.data, x, y, fx, fy, plotdots, tool_tip, px, fy, d3.rgb(86, 180, 233));
-      axes.append('g').selectAll('.grid-axis')
+      axes_layer.append('g').selectAll('.grid-axis')
         .data(y.ticks())
         .enter()
         .append('line')
@@ -393,13 +425,13 @@ var FactsPage = function() {
         .attr('x1', x.range()[0])
         .attr('x2', x.range()[1])
       ;
-      axes.append('g')
+      axes_layer.append('g')
         .attr('class', 'y axis')
-        .attr('transform', 'translate('+ x.range()[1]+',0)')
+        .attr('transform', 'translate(0,0)')
         .call(y_axis);
-      axes.append('g')
+      axes_layer.append('g')
         .attr('class', 'x axis')
-        .attr('transform', 'translate(0,'+padding.top+')')
+        .attr('transform', 'translate(0,'+height+')')
         .call(x_axis);
     });
   }
