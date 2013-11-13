@@ -105,8 +105,8 @@ line, rect, path {stroke-linecap:round;fill:none;stroke:none;stroke-width:1;}
     line-height:.5em;}
 header h1+img {position:absolute;right:15px;bottom:15px;height:100px;}
 
-#drag_switch a, #type_switch a {color:#bbbbbb;font-weight:bold;}
-#drag_switch.active a, #type_switch.active a {color:rgb(213, 94, 0)}
+.switch a {color:#bbbbbb;font-weight:bold;}
+.switch.active a {color:rgb(213, 94, 0)}
 
 #state_trajectory_inputs {}
 #state_trajectory_inputs input {float:left;margin-left:2px;border:1px solid #999;
