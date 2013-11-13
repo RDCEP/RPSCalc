@@ -518,7 +518,86 @@
       "name": "Maryland",
       "machine_name": "maryland",
       "abbr": "MD",
-      "trajectory": [0,0,0,0,0,0,0.01,0.01,0.02,0.02,0.03,0.05,0.06,0.08,0.1,0.1,0.12,0.13,0.15,0.16,0.17,0.17,0.18,0.18,0.18,0.18,0.18,0.18,0.18,0.18,0.18]
+      "trajectory": [0,0,0,0,0,0,0.035,0.035,0.0405,0.451,0.0525,0.075,0.09,0.107,0.128,0.13,0.152,0.156,0.183,0.174,0.18,0.187,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2],
+      "carveouts": [
+        {
+          "type": "solar",
+          "data": [0,0,0,0,0,0,0,0,0.00005,0.0001,0.00025,0.0005,0.001,0.0025,0.0035,0.005,0.007,0.0095,0.014,0.0175,0.02,0.02,0.02,0.02,0.02,0.02,0.02,0.02,0.02,0.02,0.02]
+        }
+      ],
+      "snapshot": {
+        "summary": "Maryland's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Maryland.",
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Maryland's pathway is red. Click on another state to learn more about their RPS.",
+        "overview": [
+          "<strong>20%</strong> of the state's energy consumption must be from renewable sources by <strong>2022</strong>",
+          "Carve-outs for <strong>solar</strong> and <strong>off-shore wind</strong>",
+          "Cost cap at $1.50 over current average monthly bill or 1.5% over total electric bills"
+        ],
+        "rps_progress": "0"
+      },
+      "legislation": {
+        "statute": "Maryland's current RPS was originally enacted in 2004 and has since been ammended multiple times. Most recently Maryland's RPS was updated to add a carve-out for offshore wind. The implementation of this carve-out is yet to be determined. Currently, statute requires that 20% of the state's retail electric sales come from renewable sources by 2022. Each general annual requirement (until 2019) is divided into two tiers of generation. This policy is currently administered by the Maryland Public Service Commission (http://webapp.psc.state.md.us/intranet/ElectricInfo/home_new.cfm). ",
+        "rps_tech_details": [
+                {
+            "name": "Eligible Technologies",
+            "description": "Solar Water Heat, Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Geothermal Heat Pumps, Municipal Solid Waste, Anaerobic Digestion, Tidal Energy, Wave Energy, Ocean Thermal, Fuel Cells using Renewable Fuels, Geothermal Direct-Use"
+          },
+                  {
+            "name": "Geographic Eligibility",
+            "description": "RECs generated in PJM or delivered to PJM are eligible for the RPS"
+          },
+          {
+            "name": "Percent of Total Load",
+            "description": "93.4%"
+          },
+          {
+            "name": "Technology Requirements",
+            "description": "Solar - 2% by 2020, Offshore wind - yet to be finalized. The general RPS is divided into two tiers of generation with their own requirements in each year."
+          },
+          {
+            "name": "Sectors",
+            "description": "Municipal Utility, Investor-Owned Utility, Rural Electric Cooperative, Retail Supplier"
+          },
+          {
+            "name": "Non-compliance Penalty",
+            "description": "Alternative Compliance Payments: $0.02/kWh for Tier I resources, $0.015/kWh for Tier II sources, $0.45/kWh for solar in 2008, $0.40kWh for solar in 2009 decreasing by $0.05 biannually until 2023"
+          }
+        ],
+        "cost_cap_details": "The total cost of additional renewable energy under the RPS cannot exceed $1.50 on the 'average' customer's monthly bill",
+        "carveouts": "Maryland's  solar technology requirement provides a small portion of the annual requirement. A new standard for offshore wind places a maximum at 2.5% of retail, but the schedule for implementation is yet to be determined. The chart below is a breakdown for the primary RPS for IOUs. Offshore wind has been excluded due to the lack of current schedule."
+      },
+      "resources": {
+        "tools": {
+          "text": "The links below may provide more technical details to the interested user:",
+          "links": [
+            {
+              "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+              "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+              "description": "<i>Datasets available for download in .xlsx format<i>"
+            },
+            {
+              "name": "MJBeck RPS EDGE",
+              "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+              "description": "<i>Advanced search tool for comparing RPS program data<i>"
+            }
+          ]
+        },
+        "references": {
+        "text": "The resources below proved invaluable in the creation of this page:",
+        "links": [
+          {
+            "name": "Maryland RPS FAQs",
+            "href": "http://webapp.psc.state.md.us/intranet/ElectricInfo/FAQ_new.cfm",
+            "description": "<i>Maryland's PSC guide to the RPS<i>"
+          },
+          {
+            "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+            "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+            "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+          }
+        ]
+      }
+      }
     },
     "geometry": {
       "type": "MultiPolygon",
@@ -544,7 +623,86 @@
       "name": "Michigan",
       "machine_name": "michigan",
       "abbr": "MI",
-      "trajectory": [0,0,0,0,0,0,0,0,0,0,0,0,0.05,0.06,0.07,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]
+      "trajectory": [0,0,0,0,0,0,0,0,0,0,0,0,0.04664,0.0553,0.0666,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1],
+      "carveouts": [],
+      "snapshot": {
+        "summary": "Michigan's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Michigan.",
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Maryland's pathway is red. Click on another state to learn more about their RPS.",
+        "overview": [
+          "<strong>10%</strong> of the state's energy consumption must be from renewable sources by <strong>2015</strong>",
+          "No technology requirements",
+          "Cost cap for residential customers at <strong>$3.00<strong> per month"
+        ],
+        "rps_progress": "1.0"
+      },
+      "legislation": {
+        "statute": "Michigan's RPS was enacted by <a href='http://www.legislature.mi.gov/documents/2007-2008/publicact/pdf/2008-PA-0295.pdf'>Public Act 295</a> in October 2008. In total, this act will require that electric providers in Michigan produce 10% of their energy from renewable sources by 2015. The first compliance period began in 2012. The annual requirements are determined for each utility based on statutorily defined increments between 2007 baseline and the 2015 goal. In addition to these percentage requirements (which can be fulfilled through REC purchases), large utilities have additional capacity requirements.",
+        "rps_tech_details": [
+          {
+            "name": "Eligible Technologies",
+            "description": "Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Municipal Solid Waste, CHP/Cogeneration, Coal-Fired w/CCS, Gasification , Anaerobic Digestion, Tidal Energy, Wave Energy"
+          },
+          {
+            "name": "Geographic Eligibility",
+            "description": "If out of state, RECs must be generated with the 'retail electric customer service territory of any provider that is not an alternative electric supplier' (<a href='http://www.legislature.mi.gov/documents/2007-2008/publicact/pdf/2008-PA-0295.pdf'>PA 295</a> 295 &sect;29(1))"
+          },
+          {
+            "name": "Percent of Total Load",
+            "description": "100%"
+          },
+          {
+            "name": "Technology Requirements",
+            "description": "None"
+          },
+          {
+            "name": "Sectors",
+            "description": "Municipal Utility, Investor-Owned Utility, Rural Electric Cooperative, Retail Supplier"
+          },
+          {
+            "name": "Non-compliance Penalty",
+            "description": "Utilities who fail to comply with annual targets may not be allowed to recover the cost of any RECs purchased from ratepayer. The attorney general may file suit against uncooperative utilities. (&sect; 53)"
+          }
+        ],
+        "cost_cap_details": "Monthly rate impact is capped at $3.00 for residential customers, $16.58 for secondary commercial customers and $187.50 for primary commercial/industrial customers.",
+        "carveouts": "Michigan's RPS does not have any technology requirements."
+      },
+      "resources": {
+        "tools": {
+          "text": "The links below may provide more technical details to the interested user:",
+          "links": [
+            {
+              "name": "Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page",
+              "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+              "description": "<i>Datasets available for download in .xlsx format<i>"
+            },
+            {
+              "name": "MJBeck RPS EDGE",
+              "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+              "description": "<i>Advanced search tool for comparing RPS program data<i>"
+            }
+          ]
+        },
+        "references": {
+          "text": "The resources below proved invaluable in the creation of this page:",
+          "links": [
+            {
+              "name": "Michigan Public Service Commission",
+              "href": "http://www.michigan.gov/mpsc/0,4639,7-159-16393_53570---,00.html",
+              "description": "<i>RPS compliance information<i>"
+            },
+            {
+              "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+              "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+              "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+            },
+            {
+              "name": "Feasibility and Implications of the Michigan 2012 Proposal 3 for a 25% State Renewable Portfolio Standard",
+              "href": "http://closup.umich.edu/files/closup-wp-32-moyer-rps.pdf",
+              "description": "Moyer et al. 2012"
+            }
+          ]
+        }
+      }
     },
     "geometry": {
       "type": "MultiPolygon",
