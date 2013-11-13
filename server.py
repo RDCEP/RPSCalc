@@ -24,6 +24,12 @@ def update_session(request, **kwargs):
         s[key] = value
     return s
 
+@app.route('/foo')
+def foo():
+    return render_template(
+        'foo.html'
+    )
+
 @app.route('/update', methods=['POST',])
 def update():
     try:
