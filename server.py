@@ -14,7 +14,7 @@ session_opts = {
     'session.auto': True
 }
 
-#app.config['DEBUG'] = True
+app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'REPLACE_ME'
 BeakerSession(app)
 
