@@ -2,7 +2,8 @@ var FactsPage = function() {
   var width = 345,
     height = 345,
     margin = 20,
-    projection
+    projection,
+    handles
   ;
 
   function get_color(i) {
@@ -147,8 +148,8 @@ var FactsPage = function() {
         .attr('height', _h+padding.top+padding.bottom)
         .attr('width', _w+padding.left+padding.right),
       grid_layer = svg.append('g')
-      .attr('id', 'grid_layer')
-      .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+        .attr('id', 'grid_layer')
+        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
       graph_layer = svg.append('g')
         .attr('id', 'graph_layer')
         .attr('transform', 'translate('+padding.left+','+padding.top+')'),
@@ -348,7 +349,8 @@ var FactsPage = function() {
   }
 
   function retail_price_history(_s) {
-    var parseDate = d3.time.format('%m-%Y').parse,
+    var
+      parseDate = d3.time.format('%m-%Y').parse,
       padding = {top:30,right:30,bottom:30,left:30},
       _h = height * 0.75, //y_max * 2 * height
       _w = width * 2,
@@ -357,8 +359,8 @@ var FactsPage = function() {
         .attr('height', _h+padding.top+padding.bottom)
         .attr('width', _w+padding.left+padding.right),
       grid_layer = svg.append('g')
-      .attr('id', 'prices_grid_layer')
-      .attr('transform', 'translate('+padding.left+','+padding.top+')'),
+        .attr('id', 'prices_grid_layer')
+        .attr('transform', 'translate('+padding.left+','+padding.top+')'),
       graph_layer = svg.append('g')
         .attr('id', 'prices_graph_layer')
         .attr('transform', 'translate('+padding.left+','+padding.top+')'),
@@ -368,37 +370,25 @@ var FactsPage = function() {
         .attr('id', 'prices_axes_layer')
         .attr('transform', 'translate('+padding.left+','+padding.top+')'),
       handle_layer = svg.append('g')
-        .attr('id', 'handles_layer')
+        .attr('id', 'prices_handles_layer')
         .attr('transform', 'translate('+padding.left+','+padding.top+')'),
-
-
-//      svg = d3.select('#retail_price')
-//        .insert('svg', 'div')
-//        .attr('height', _h + padding.top + padding.bottom)
-//        .attr('width', width*2 + padding.left + padding.right),
-//      axes = svg.append('g'),
-//      graph = svg.append('g')
-//        .attr('transform', 'translate(0,0)'),
-
-
-      plotdots = svg.append('g')
+      foo
     ;
     d3.json('/static/js/prices/'+_s.abbr+'.json', function(data) {
       data.data.forEach(function(d) {
         d.date = parseDate(d.date);
         d.data = +d.data;
       });
-      var fx = function(d) { return d.date; },
-        fy = function(d) { return d.data; },
-        px = function(d) {return d3.time.format('%Y')(d.date);},
+      var print_date = d3.time.format('%Y'),
         domain_y = [
           Math.floor(d3.min(data.data, function(d) { return d.data; })),
           Math.ceil(d3.max(data.data, function(d) { return d.data; }))
         ],
         x = d3.time.scale()
           .domain(d3.extent(data.data, function(d) { return d.date; }))
-          .range([0, width*2]),
-        y = d3.scale.linear().domain(domain_y).range([_h+padding.top-2, padding.top]),
+          .range([0, _w]),
+        y = d3.scale.linear().domain(domain_y).range([_h-2, 0]),
+        time_period_width = x(new Date(2013, 0, 1)) - x(new Date(2012, 0, 1)),
         x_axis = d3.svg.axis()
           .scale(x)
           .orient('bottom'),
@@ -414,8 +404,19 @@ var FactsPage = function() {
         .attr('class', 'price-line')
         .attr('d', line)
       ;
-      add_hover_segments(data.data, x, y, fx, fy, plotdots, tool_tip, px, fy, d3.rgb(86, 180, 233));
-      axes_layer.append('g').selectAll('.grid-axis')
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', _w+padding.left+padding.right).attr('height', padding.top)
+        .attr('transform', 'translate(0,0)');
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', _w+padding.left+padding.right).attr('height', padding.bottom)
+        .attr('transform', 'translate(0,'+(_h+padding.top)+')');
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', padding.left).attr('height', _h+padding.top+padding.bottom)
+        .attr('transform', 'translate(0,0)');
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', padding.left).attr('height', _h+padding.top+padding.bottom)
+        .attr('transform', 'translate('+(_w+padding.left)+',0)');
+      grid_layer.append('g').selectAll('.grid-axis')
         .data(y.ticks())
         .enter()
         .append('line')
@@ -431,7 +432,7 @@ var FactsPage = function() {
         .call(y_axis);
       axes_layer.append('g')
         .attr('class', 'x axis')
-        .attr('transform', 'translate(0,'+height+')')
+        .attr('transform', 'translate(0,'+_h+')')
         .call(x_axis);
     });
   }
@@ -585,11 +586,6 @@ var FactsPage = function() {
       .html(function(d) {
         return '<a href="'+ d.href+'">'+d.name+'</a>&nbsp;&mdash;&nbsp;'+ d.description;
       });
-
-//    draw_map(_s, data);
-
-    // Trajectory chart (axis() called from within).
-//    trajectory(_s, data);
 
     // RPS progress chart
     rps_progress(_s.properties);
