@@ -350,7 +350,7 @@ var FactsPage = function() {
     var
       parseDate = d3.time.format('%m-%Y').parse,
       padding = {top:30,right:30,bottom:30,left:30},
-      _h = height * 0.75, //y_max * 2 * height
+      _h = height * 0.5, //y_max * 2 * height
       _w = width * 2,
       tool_tip = d3.select('#retail_price').append('div').classed('tooltip', true),
       svg = d3.select('#retail_price').insert('svg')
