@@ -115,7 +115,7 @@ section {}
 .grid-data-bar {fill:rgb(86, 180, 233);}
 .grid-data-slice {stroke:white;}
 .grid-axis {stroke:white;}
-path.domain, .edge-axis {stroke:#333;}
+/*path.domain, .edge-axis {stroke:#333;}*/
 
 #carveout_graph {position:relative;}
 #carveout_graph_legend {position:absolute;top:20px;left:60px;}
