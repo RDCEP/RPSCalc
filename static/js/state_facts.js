@@ -130,8 +130,6 @@ var FactsPage = function() {
       _w = width * 2,
       domain_y = [0, d3.max(_s.trajectory, function(d) {return d.data;})],
       domain_x = [new Date(2013, 0, 1), new Date(2030, 0, 1)],
-
-
       x = d3.time.scale().domain(domain_x).range([0,_w]),
       y = d3.scale.linear().domain(domain_y).range([_h, 0]),
       x_axis = d3.svg.axis().scale(x).orient('bottom'),
