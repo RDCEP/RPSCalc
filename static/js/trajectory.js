@@ -301,7 +301,9 @@ var Trajectory = function() {
           _s.properties.carveouts[i][ii] = {'data': dd*100, 'date': parse_date(String(ii+ 2000))};
         });
       });
-
+      var seal = d3.select('#main_content img');
+      seal.attr('src', '/static/images/state_seals/'+_s.properties.abbr+'.png');
+      d3.select('h1').text(_s.properties.name);
       trajectory_graph(_s);
     });
   };
