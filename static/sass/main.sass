@@ -9,15 +9,17 @@ body
   font-family: Helvetica,sans-serif
   font-size: .9em
   background-color: $light-gray
+
+//TYPE
 strong,b
   font-weight:  bold
-
 em, i
   font-style: italic
 h1,h2,h3,h4,h5,h6
   font-size: 1em
 h1
   font-size: 1.5em
+  font-weight: bold
 h2
   font-weight: normal
   margin: 0
@@ -29,16 +31,15 @@ h3
 a
   text-decoration: none
   color: #666666
-a:hover
-  color: #ccc !important
+  &:hover
+    color: #ccc !important
 .right-align
   text-align: right
-
 text
   font-size: .7em
   fill: $dark-gray
   
-// borders on lists
+// BORDERS ON LISTS
 ul ul, li 
   padding-left: 15px
   padding-top: .25em
@@ -52,6 +53,8 @@ li li
   padding: 0
   margin: 0
   border: none
+
+// FORMS
 form
   clear: both
   margin-bottom: 2em
@@ -65,12 +68,8 @@ button
   padding: 1em 0
   margin-top: .5em
 
-//STATE STYLES
-line, rect, path 
-  stroke-linecap: round
-  fill: none
-  stroke: none
-  stroke-width: 1
+// LAYOUT
+// MENUS
 #main_nav
   width: 100%
   background-color: black
@@ -92,7 +91,6 @@ line, rect, path
     display: inline-block
     padding: 0 0 0 15px
     margin: 0
-  
 #menu_states
   position: relative
   ul
@@ -119,6 +117,7 @@ line, rect, path
     margin: 5px 0
   a:hover,a.selected
     color: black!important
+//CONTENT
 #main_content
   width: 960px
   margin: 3.5em auto
@@ -161,13 +160,25 @@ line, rect, path
     list-style-type:  disc
     padding-left: -15px
     margin-left: 15px
-#state_map,#state_trajectory
-  height: 345px
+//MODULE
+.graph-container
   position: relative
-#retail_price
-  position: relative
+  left: -30px
 #rps_progress
-  margin-top: 15px
+  margin-top: 1em
+#carveout_graph_legend
+  position: absolute
+  top: 20px
+  left: 60px
+  & > div
+    margin-bottom: .25em
+#state_trajectory_inputs input
+  float: left
+  margin-left: 2px
+  border: 1px solid #999
+  display: block
+  padding: 2px 5px
+  font-size: .7em
 .module
   margin-top: 2em
   &.narrow
@@ -175,8 +186,27 @@ line, rect, path
     float: left
     &+.module.narrow
       margin-left: 6px
+  &.wide
+    width: 700px
+    position: relative
 section,h2+.module
   margin-top: 1em
+.switch
+  a
+    color: #bbbbbb
+    font-weight: bold
+  &.active a
+    color: $red
+// GRAPHS
+line, rect, path
+  stroke-linecap: round
+  fill: none
+  stroke: none
+  stroke-width: 1
+.chart-line
+  stroke-width: 2
+.chart-area
+  stroke-width: 0
 .mask
   fill: #eee
 .map-state
@@ -187,7 +217,6 @@ section,h2+.module
   fill: $sky-blue
   &.active
     fill: $red
-
 .trajectory
   stroke-width: 2
   stroke: #ccc
@@ -197,16 +226,23 @@ section,h2+.module
   &.hovered
     stroke: $sky-blue
     stroke-width: 3
+#default_trajectory
+  stroke: black
+  stroke-width: 2
+  stroke-dasharray: 1, 8
 .data-point
   stroke-width: 2
   stroke: transparent
   fill: transparent
   pointer-events: none
   &.active
-    fill: #eeeeee
-    stroke: $red
+    fill: $light-gray
+    stroke: black //$red
   &.hovered
     fill: black
+.grid-line
+  stroke: white
+  stroke-width: 2
 .tooltip
   position: fixed
   visibility: hidden
@@ -224,7 +260,7 @@ section,h2+.module
   stroke: black
   stroke-width: 2
 .rps-hash-actual
-  stroke: #eeeeee
+  stroke: $light-gray
   stroke-width: 2
 .grid-data-bar
   fill: $sky-blue
@@ -232,14 +268,6 @@ section,h2+.module
   stroke: white
 .grid-axis
   stroke: white
-#carveout_graph
-  position: relative
-#carveout_graph_legend
-  position: absolute
-  top: 20px
-  left: 60px
-  &>div
-    margin-bottom: .25em
 .carveout-line
   stroke: $light-gray
   stroke-width: 1

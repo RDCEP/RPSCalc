@@ -15,7 +15,7 @@
       <h2>RPS Snapshot</h2>
       <div class="wide module clearfix">
         <h3>Policy Trajectory</h3>
-        <div id="carveout_graph">
+        <div id="carveout_graph" class="graph-container">
           <div id="carveout_graph_legend"></div>
         </div>
       </div>
@@ -40,17 +40,20 @@
         <h3>Grid Mix</h3>
         <div id="grid_mix"></div>
       </div>
-      <form action="/pinwheel" method="get"><button>Compare this state's RPS to the rest of the country</button></form>
+
+{#      <form action="/pinwheel" method="get"><button>Compare this state's RPS to the rest of the country</button></form>#}
+
       <div id="cost_cap_wrap" class="wide module clearfix">
         <h3>Cost Cap Details</h3>
         <div id="cost_cap_details"></div>
       </div>
       <div class="wide module clearfix">
         <h3>Historic retail prices</h3>
-        <div id="retail_price"></div>
+        <div id="retail_price" class="graph-container"></div>
       </div>
 
-      <form action="" method="get"><button>RPS Calculator</button></form>
+{#      <form action="" method="get"><button>RPS Calculator</button></form>#}
+
     </section>
     <section id="legislation" class="clearfix">
       <h2>Legislation</h2>
@@ -65,18 +68,20 @@
     </section>
     <section id="resources" class="clearfix">
       <h2>Resources</h2>
-      <div class="narrow module">
-        <h3>Tools and other links</h3>
-        <div id="tools">
-          <ul></ul>
+      <div class="module wide">
+          <div class="narrow module">
+            <h3>Tools and other links</h3>
+            <div id="tools">
+              <ul></ul>
+            </div>
+          </div>
+          <div class="narrow module clearfix">
+            <h3>References</h3>
+            <div id="references">
+              <ul></ul>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="narrow module clearfix">
-        <h3>References</h3>
-        <div id="references">
-          <ul></ul>
-        </div>
-      </div>
     </section>
   </article>
 {% endblock %}
