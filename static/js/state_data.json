@@ -640,11 +640,11 @@
         "rps_tech_details": [
           {
             "name": "Eligible Technologies",
-            "description": "Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Municipal Solid Waste, CHP/Cogeneration, Coal-Fired w/CCS, Gasification , Anaerobic Digestion, Tidal Energy, Wave Energy"
+            "description": "Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Municipal Solid Waste, CHP/Cogeneration, Coal-Fired w/CCS, Gasification, Anaerobic Digestion, Tidal Energy, Wave Energy"
           },
           {
             "name": "Geographic Eligibility",
-            "description": "If out of state, RECs must be generated with the 'retail electric customer service territory of any provider that is not an alternative electric supplier' (<a href='http://www.legislature.mi.gov/documents/2007-2008/publicact/pdf/2008-PA-0295.pdf'>PA 295</a> 295 &sect;29(1))"
+            "description": "If out of state, RECs must be generated with the 'retail electric customer service territory of any provider that is not an alternative electric supplier' (<a href=\"http://www.legislature.mi.gov/documents/2007-2008/publicact/pdf/2008-PA-0295.pdf\">PA 295</a> &sect;29(1))"
           },
           {
             "name": "Percent of Total Load",
