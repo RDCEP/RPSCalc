@@ -127,7 +127,7 @@ section {}
 
 .price-line {stroke:rgb(86, 180, 233);stroke-width:2;}
 
-#state-wrap li {border:none;padding:0;margin:0;
+#state_wrap li {border:none;padding:0;margin:0;
     list-style-type: disc;padding-left:-15px;margin-left:15px;}
 
 td, th {text-align:left;padding:3px 15px 3px 0;width:200px;}
