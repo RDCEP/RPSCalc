@@ -461,7 +461,6 @@ var FactsPage = function() {
             d3.select(this.parentNode.getElementsByClassName('data-point')[0])
               .classed('active', true);
             tool_tip
-//              .html((i + 2000)+': '+(Math.round(d*100))+'%')
               .html(function() {
                 if (d.date) {
                   return px(d)+': '+(Math.round(py(d)))+'%';
