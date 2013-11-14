@@ -1,5 +1,7 @@
 var Trajectory = function() {
-  var data={trajectory:null, wind:null, solar:null, current:null, min:null, max:null},
+  var data={trajectory:null, wind:null, solar:null, current:null, min:null,
+      max:null, dt:null},
+    dt = [],
     width = 700,
     height = 350,
     padding = {top: 30, right:30, bottom:30, left:30},
@@ -22,7 +24,8 @@ var Trajectory = function() {
     graph = svg.append('g')
       .attr('id', 'graph_layer')
       .attr('transform', 'translate('+padding.left+','+padding.top+')'),
-    dflt = svg.append('g')
+    default_layer = svg.append('g')
+      .attr('id', 'default_layer')
       .attr('transform', 'translate('+padding.left+','+padding.top+')'),
     mask = svg.append('g')
       .attr('id', 'mask_layer'),
@@ -52,6 +55,7 @@ var Trajectory = function() {
       .y1(function(d) { return y(d.data); }),
     time_period_width = x(new Date(2013, 0, 1)) - x(new Date(2012, 0, 1)),
     trajectory,
+    default_trajectory,
     handles,
     inputs
   ;
@@ -59,7 +63,7 @@ var Trajectory = function() {
   function drag_move(d, i, ii) {
     var adjusted = y.invert(d3.event.y),
       delta = Math.round(adjusted / adjust_data.step) * adjust_data.step,
-      rounded = (delta > 0) ? (delta > 50) ? 50 : delta : 0
+      rounded = (delta > y.domain()[0]) ? (delta > y.domain()[1]) ? y.domain()[1] : delta : y.domain()[0]
     ;
     data.current.filter(function(_d) { return _d == d; })[0].data = rounded;
     redraw();
@@ -83,10 +87,11 @@ var Trajectory = function() {
     adjust_dot = null;
     update_session(data);
     redraw();
+    rehover();
   }
 
   function update_session(_data) {
-    console.log(JSON.stringify(_data));
+//    console.log(JSON.stringify(_data));
     d3.xhr('/update')
       .mimeType('application/json')
       .post(JSON.stringify(_data))
@@ -94,17 +99,10 @@ var Trajectory = function() {
     ;
   }
 
-  function redraw() {
-    trajectory
-      .attr('d', trajectory_area(data.trajectory))
-    ;
-    inputs.data(data.current).each(function(d) {
-      d3.select(this).attr('value', function(d) {return d.data;})
-    });
-    handles.data(data.current)
-      .each(function(d,i) {
-        d3.select(this).select('.time-period-rect')
-          .on('mouseover', function() {
+  function rehover() {
+    handles.each(function(d,i) {
+      d3.select(this).select('.time-period-rect')
+        .on('mouseover', function() {
             var _xo = d3.select(this).attr('data-year');
             d3.select(this.parentNode.getElementsByClassName('data-point')[0])
               .classed('active', true);
@@ -114,14 +112,31 @@ var Trajectory = function() {
             d3.select(this.parentNode.getElementsByClassName('data-point')[0])
               .classed('active', false);
           })
-        d3.select(this).select('.data-point')
-          .attr('cy', function() {return y(d.data);})
-          .on('mouseover', function() {
+      ;
+      d3.select(this).select('.data-point')
+        .on('mouseover', function() {
             d3.select(this).classed('active', true).classed('hovered', true);
           })
           .on('mouseout', function() {
             d3.select(this).classed('active', false).classed('hovered', false);
           })
+      ;
+
+    });
+  }
+
+  function redraw() {
+    trajectory
+      .attr('d', trajectory_area(data.trajectory))
+    ;
+    default_trajectory.attr('d', trajectory_line(dt));
+    inputs.data(data.current).each(function(d) {
+      d3.select(this).attr('value', function(d) {return d.data;})
+    });
+    handles.data(data.current)
+      .each(function(d,i) {
+        d3.select(this).select('.data-point')
+          .attr('cy', function() {return y(d.data);})
         ;
         d3.select(this).select('.time-period-label-bkgd')
           .attr('y', y(d.data) - 40)
@@ -134,6 +149,7 @@ var Trajectory = function() {
         ;
       })
     ;
+    d3.select('.y.axis').call(y_axis);
   }
 
   function trajectory_graph(_s) {
@@ -211,9 +227,11 @@ var Trajectory = function() {
       .attr('width', padding.left).attr('height', height+padding.top+padding.bottom)
       .attr('transform', 'translate('+(width+padding.left)+',0)');
     axes.append('g')
+      .attr('class', 'x axis')
       .attr('transform', 'translate(0,'+(height+10)+')')
       .call(x_axis);
     axes.append('g')
+      .attr('class', 'y axis')
       .attr('transform', 'translate('+(0)+',0)')
       .call(y_axis);
     inputs = form.selectAll('input')
@@ -227,68 +245,63 @@ var Trajectory = function() {
         data.current.filter(function(_d) { return _d == d; })[0].data = _v;
         d3.select(this).property('value', _v);
         redraw();
+        rehover();
       })
     ;
-    dflt.append('path')
+    default_trajectory = default_layer.append('path')
       .attr('id', 'default_trajectory')
-      .attr('d', trajectory_line(data.trajectory))
+      .attr('d', trajectory_line(dt))
     ;
-    //TODO: Below is totally repetitive. Rewrite.
-    var drag_switch = d3.select('#drag_switch'),
-      type_switch = d3.select('#type_switch');
-    drag_switch.on('click', function() {
+    var input_switch = d3.selectAll('#drag_switch, #type_switch'),
+      domain_switch = d3.selectAll('#domain_50_switch, #domain_100_switch')
+    ;
+    input_switch.on('click', function(d, i) {
       d3.event.preventDefault();
-      drag_switch.classed('active', function() {
-        var state = drag_switch.classed('active');
-        handle_layer.classed('hidden', state);
-        form.classed('hidden', !state);
-        type_switch.classed('active', state);
-        return (state) ? false : true;
+      var _t = d3.select(this);
+      _t.classed('active', function() {
+        var state = _t.classed('active');
+        handle_layer.classed('hidden', !handle_layer.classed('hidden'));
+        form.classed('hidden', !form.classed('hidden'));
+        input_switch.filter(function(dd, ii) { return i != ii; }).classed('active', state);
+        return !state;
       });
     });
-    type_switch.on('click', function() {
+    domain_switch.on('click', function(d, i) {
       d3.event.preventDefault();
-      type_switch.classed('active', function() {
-        var state = type_switch.classed('active');
-        handle_layer.classed('hidden', !state);
-        form.classed('hidden', state);
-        drag_switch.classed('active', state);
-        return (state) ? false : true;
+      var _t = d3.select(this);
+      _t.classed('active', function() {
+        console.log(y.domain()[1]);
+        var state = _t.classed('active'),
+          _dm = (y.domain()[1] == 100) ? 50 : 100;
+        y.domain([0,_dm]);
+        domain_switch.filter(function(dd, ii) { return i != ii; }).classed('active', state);
+        redraw();
+        return !state;
       });
     });
     redraw();
+    rehover();
   }
 
   this.build = function() {
     d3.json('/static/js/state_data.json', function(_data) {
       var parse_date = d3.time.format('%Y').parse;
 
-      _data.features.forEach(function(d, i) {
-
-        if (d.properties.trajectory) {
-          _date_data = [];
-          d.properties.trajectory.forEach(function(dd, ii) {
-            _date_data.push({'data': dd*100, 'date': parse_date(String(ii+ 2000))});
-          });
-          d.properties.trajectory = _date_data;
-        }
-
-        if (d.properties.carveouts) {
-          d.properties.carveouts.forEach(function(dd, ii) {
-            _date_data = [];
-            dd.data.forEach(function(ddd, iii) {
-              _date_data.push({'data': ddd*100, 'date': parse_date(String(iii+ 2000))});
-            });
-            dd.data = _date_data;
-          });
-        }
-
-      });
-
       var _s = _data.features.filter(function(d) {
         return (d.properties.machine_name == Options.state) ? d : null;
       })[0];
-//      data = _s.properties.trajectory;
+
+      _s.properties.trajectory.forEach(function(d, i) {
+        _s.properties.trajectory[i] = {'data': d*100, 'date': parse_date(String(i+ 2000))};
+        dt[i] = {'data': d*100, 'date': parse_date(String(i+ 2000))};
+      });
+
+      _s.properties.carveouts.forEach(function(d, i) {
+        d.data.forEach(function(dd, ii) {
+          _s.properties.carveouts[i][ii] = {'data': dd*100, 'date': parse_date(String(ii+ 2000))};
+        });
+      });
+
       trajectory_graph(_s);
     });
   };
