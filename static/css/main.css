@@ -52,8 +52,6 @@ a:hover { color: #cccccc !important; }
 
 .right-align { text-align: right; }
 
-path, line, rect { stroke-cap: round; fill: none; }
-
 text { font-size: 0.7em; fill: #333333; }
 
 ul ul, li { padding-left: 15px; padding-top: 0.25em; margin-top: 0.5em; margin-bottom: 1em; border-left: 1px solid #999999; border-top: 1px solid #999999; }
@@ -83,13 +81,14 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 #left_nav li { margin: 5px 0; }
 #left_nav a:hover, #left_nav a.selected { color: black !important; }
 
-#state_wrap, #main_content { width: 960px; margin: 3.5em auto; padding-bottom: 2em; }
-#state_wrap section, #main_content section { margin-left: 230px; width: 730px; padding: 0; border-top: 1px solid #999999; }
-#state_wrap section + section, #main_content section + section { width: 700px; padding: 2em 15px 3em; border: none; margin-top: 0; }
-#state_wrap section + section + section, #main_content section + section + section { width: 700px; padding: 1em 15px 3em; border-top: 1px solid #999999; }
-#state_wrap header, #main_content header { background-color: #cccccc; padding: 1em 15px; height: 100px; position: relative; z-index: 1; }
-#state_wrap header h1, #main_content header h1 { margin: 0; padding: 0; position: absolute; bottom: 1em; line-height: 0.5em; }
-#state_wrap header h1 + img, #main_content header h1 + img { position: absolute; right: 15px; bottom: 15px; height: 100px; }
+#main_content { width: 960px; margin: 3.5em auto; padding-bottom: 2em; }
+#main_content section { margin-left: 230px; width: 730px; padding: 0; border-top: 1px solid #999999; }
+#main_content section + section { width: 700px; padding: 2em 15px 3em; border: none; margin-top: 0; }
+#main_content section + section + section { width: 700px; padding: 1em 15px 3em; border-top: 1px solid #999999; }
+#main_content header { background-color: #cccccc; padding: 1em 15px; height: 100px; position: relative; z-index: 1; }
+#main_content header h1 { margin: 0; padding: 0; position: absolute; bottom: 1em; line-height: 0.5em; }
+#main_content header h1 + img { position: absolute; right: 15px; bottom: 15px; height: 100px; }
+#main_content li { border: none; padding: 0; margin: 0; list-style-type: disc; padding-left: -15px; margin-left: 15px; }
 
 #state_map, #state_trajectory { height: 345px; position: relative; }
 
@@ -116,6 +115,7 @@ section, h2 + .module { margin-top: 1em; }
 
 .data-point { stroke-width: 2; stroke: transparent; fill: transparent; pointer-events: none; }
 .data-point.active { fill: #eeeeee; stroke: #d55e00; }
+.data-point.hovered { fill: black; }
 
 .tooltip { position: fixed; visibility: hidden; padding: 2px 5px; color: white; background-color: black; opacity: 0.8; font-size: 0.8em; pointer-events: none; }
 .tooltip.active { visibility: visible; }
@@ -146,8 +146,6 @@ section, h2 + .module { margin-top: 1em; }
 .carveout-text { line-height: 1.2em; font-size: 0.8em; margin-right: 5px; }
 
 .price-line { stroke: #56b4e9; stroke-width: 2; }
-
-#state_wrap li { border: none; padding: 0; margin: 0; list-style-type: disc; padding-left: -15px; margin-left: 15px; }
 
 td, th { text-align: left; padding: 3px 15px 3px 0; width: 200px; }
 
