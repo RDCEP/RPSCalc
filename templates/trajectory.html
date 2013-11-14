@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block headcss %}<link href="/static/css/main.css" rel="stylesheet">{% endblock %}
+{% block left_nav %}
+<li><a href data-name="trajectory">Set new trajectory</a></li>
+{% endblock %}
+{% block content %}
+  <article id="main_content">
+    <section>
+      <header>
+        <h1></h1>
+        <img src alt>
+      </header>
+    </section>
+    <section id="trajectory" class="clearfix">
+      <h2>Trajectory</h2>
+      <div class="wide module clearfix">
+        <h3>Adjust the state's trajectory [
+          <span id="drag_switch" class="switch active"><a href>drag</a></span> |
+          <span id="type_switch" class="switch"><a href>type</a></span> ] [
+          domain: <span id="domain_50_switch" class="switch active"><a href>50</a></span> |
+          <span id="domain_100_switch" class="switch"><a href>100</a></span> ]
+        </h3>
+        <div id="state_trajectory"></div>
+      </div>
+    </section>
+  </article>
+{% endblock %}
+{% block bodyjs %}
+  <script>
+    Options = window.Options || {};
+    Options.state = '{{ state }}';
+    Options.graph_type = '{{ graph_type }}';
+  </script>
+  <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
+  <script src="/static/js/vendor/json2.js"></script>
+  <script src="/static/js/trajectory.js"></script>
+{% endblock %}

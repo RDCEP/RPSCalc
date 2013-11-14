@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block headcss %}<link href="/static/css/main.css" rel="stylesheet">{% endblock %}
+{% block page %}
+  <header id="main_nav">
+    <nav>
+      <ul id="top_nav" class="clearfix">
+        <li><a href>Home</a></li>
+        <li id="menu_states"><a href>States</a><ul>
+          <li><a href="/arizona">Arizona</a></li>
+          <li><a href="/california">California</a></li>
+          <li><a href="/illinois">Illinois</a></li>
+          <li><a href="/maryland">Maryland</a></li>
+          <li><a href="/michigan">Michigan</a></li>
+          <li><a href="/nevada">Nevada</a></li>
+          <li><a href="/new_jersey">New Jersey</a></li>
+        </ul></li>
+        <li><a href>Cost Calculator</a></li>
+        <li><a href>Policy</a></li>
+        <li><ul id="left_nav">
+          {% block left_nav %}
+          <li><a href data-name="snapshot">Snapshot</a></li>
+          <li><a href data-name="energy">Energy Details</a></li>
+          <li><a href data-name="legislation">Legislation</a></li>
+          <li><a href data-name="resources">Resources</a></li>
+          {% endblock %}
+        </ul></li>
+      </ul>
+    </nav>
+  </header>
+  {% block content %}
+  {% endblock %}
+  {% block bodyjs %}
+  {% endblock %}
+{% endblock %}
