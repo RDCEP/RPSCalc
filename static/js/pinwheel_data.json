@@ -1,0 +1,674 @@
+{ "states": [
+  { "name": "Alabama", "abbr": "AL", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 0},
+      { "name": "renew_interconnect", "value": 0},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Alaska", "abbr": "AK", "region": "northwest",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Arizona", "abbr": "AZ", "region": "southwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Distributed generation carve out"},
+      { "name": "penalties", "value": 0},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 2},
+      { "name": "renew_interconnect", "value": 0},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Arkansas", "abbr": "AR", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "California", "abbr": "CA", "region": "southwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 2},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 2},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Colorado", "abbr": "CO", "region": "northwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Distributed generation carve out"},
+      { "name": "penalties", "value": 0},
+      { "name": "geo_eligible", "value": 1},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Connecticut", "abbr": "CT", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "'Class' system, including combined heat and power (CHP) carve out"},
+      { "name": "penalties", "value": 2},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Delaware", "abbr": "DE", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar carve out"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Florida", "abbr": "FL", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Georgia", "abbr": "GA", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 1},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Hawaii", "abbr": "HI", "region": "southwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 2},
+      { "name": "geo_eligible", "value": 4},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 2},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Idaho", "abbr": "ID", "region": "northwest",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 2},
+      { "name": "renew_interconnect", "value": 0},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Illinois", "abbr": "IL", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar, wind, and distributed generation carve outs"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 4},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Indiana", "abbr": "IN", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 1},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Iowa", "abbr": "IA", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 0},
+      { "name": "geo_eligible", "value": 4},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Kansas", "abbr": "KS", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 2},
+      { "name": "geo_eligible", "value": 1},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Kentucky", "abbr": "KY", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Louisiana", "abbr": "LA", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 2},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Maine", "abbr": "ME", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 1},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Maryland", "abbr": "MD", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar and wind carve outs"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 1},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Massachusetts", "abbr": "MA", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar carve out"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 2},
+      { "name": "net_meter", "value": 1},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Michigan", "abbr": "MI", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 1},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Minnesota", "abbr": "MN", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar carve out"},
+      { "name": "penalties", "value": 0},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Mississippi", "abbr": "MS", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 0},
+      { "name": "renew_interconnect", "value": 0},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Missouri", "abbr": "MO", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar carve out"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 1},
+      { "name": "net_meter", "value": 1},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Montana", "abbr": "MT", "region": "northwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 2},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Nebraska", "abbr": "NE", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 1},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Nevada", "abbr": "NV", "region": "southwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar carve out"},
+      { "name": "penalties", "value": 0},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "New Hampshire", "abbr": "NH", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "New renewables, new thermal, existing biomass, existing hydro carve outs"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 2},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 3},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "New Jersey", "abbr": "NJ", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar and wind carve outs"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 2},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "New Mexico", "abbr": "NM", "region": "southwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar, wind, distributed generation, and 'other' carve outs"},
+      { "name": "penalties", "value": 0},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 2},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "New York", "abbr": "NY", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Distributed generation carve out"},
+      { "name": "penalties", "value": 0},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "North Carolina", "abbr": "NC", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar, swine and poultry waste carve outs"},
+      { "name": "penalties", "value": 0},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "North Dakota", "abbr": "ND", "region": "northwest",
+    "data": [
+      { "name": "rps", "value": 1},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 2},
+      { "name": "renew_interconnect", "value": 0},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Ohio", "abbr": "OH", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar carve out"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 1},
+      { "name": "net_meter", "value": 2},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Oklahoma", "abbr": "OK", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 1},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 2},
+      { "name": "renew_interconnect", "value": 0},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Oregon", "abbr": "OR", "region": "northwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar carve out"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 2},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Pennsylvania", "abbr": "PA", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar carve out, and tiered system"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 2},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Rhode Island", "abbr": "RI", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 2},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "South Carolina", "abbr": "SC", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 1},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "South Dakota", "abbr": "SD", "region": "northwest",
+    "data": [
+      { "name": "rps", "value": 1},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 0},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Tennessee", "abbr": "TN", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 0},
+      { "name": "renew_interconnect", "value": 0},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Texas", "abbr": "TX", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "'Non-wind' carve out"},
+      { "name": "penalties", "value": 2},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Utah", "abbr": "UT", "region": "southwest",
+    "data": [
+      { "name": "rps", "value": 1},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Vermont", "abbr": "VT", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 1},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Virginia", "abbr": "VA", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 1},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Washington", "abbr": "WA", "region": "northwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 2},
+      { "name": "geo_eligible", "value": 1},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "West Virginia", "abbr": "WV", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 1},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 3},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "Wisconsin", "abbr": "WI", "region": "midwest",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 0},
+      { "name": "penalties", "value": 2},
+      { "name": "geo_eligible", "value": 3},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": 1},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Wyoming", "abbr": "WY", "region": "northwest",
+    "data": [
+      { "name": "rps", "value": 0},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 1},
+      { "name": "perform_incentive", "value": 0},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  },
+  { "name": "District of Columbia", "abbr": "DC", "region": "northeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": 1,
+      "legend": "Solar carve out"},
+      { "name": "penalties", "value": 1},
+      { "name": "geo_eligible", "value": 2},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": null},
+      { "name": "reside_rebate", "value": 1}
+    ]
+  },
+  { "name": "Puerto Rico", "abbr": "PR", "region": "southeast",
+    "data": [
+      { "name": "rps", "value": 2},
+      { "name": "tech_req", "value": null},
+      { "name": "penalties", "value": null},
+      { "name": "geo_eligible", "value": null},
+      { "name": "net_meter", "value": 4},
+      { "name": "renew_interconnect", "value": 4},
+      { "name": "perform_incentive", "value": null},
+      { "name": "reside_rebate", "value": 0}
+    ]
+  }
+],
+  "legend": {
+    "rps": { "name": "RPS", "values": ["Does not specify renewable portfolio policies.", "RPS goal suggesting non-binding guidelines", "RPS policy, regulation requiring certain percentage of electricity procurement be from renewable sources"]},
+    "tech_req": { "name": "Technology Requirement", "values": ["None specified", "Yes"]},
+    "penalties": { "name": "Penalties", "values": ["No penalties", "Alternative Compliance Payment (ACP) structure in place", "Penalty fees are incurred for not meeting RPS requirements"]},
+    "geo_eligible": { "name": "Geographic Eligibility", "values": ["No restrictions on eligibility", "Incentivizes (but does not require) in-state production through credit multiplier", "Defines eligibility as regional generation or delivery", "Defines eligibility as state generation or delivery", "Allows only in-state projects as eligible sources"]},
+    "net_meter": { "name": "Net Metering", "values": ["Not available", "Wholesale price earned by producer, state-wide subscriber limit", "Wholesale price earned by producer, no state-wide subscriber limit", "Retail price earned by producer, state-wide subscriber limit", "Retail price earned by producer, no state-wide subscriber limit"]},
+    "renew_interconnect": { "name": "Renewable Interconnects", "values": ["None", "Non-residential system capacity less than 500 kW", "Non-residential system capacity less than 1 MW", "Non-residential system capacity less than 2 MW", "Non-residential system capacity greater than or equal to 2 MW (or no limit)"]},
+    "perform_incentive": { "name": "Performance Incentives", "values": ["No performance based incentives apply to this state", "Regional / Utility / Local / Municipal Policy Only", "State-wide policy(with or without membership in above category)"]},
+    "reside_rebate": { "name": "Residential Rebates", "values": ["None", "Yes"]}
+  },
+  "default_legend": [
+    { "name": "RPS", "values": "This state has either: a regulation requiring procurement of electricity from renewable resources; a goal suggesting guidelines; or no policy" },
+    { "name": "Technology Requirement", "values": "For states that have RPS requirements, specific renewable technologies can be 'carved out' or set aside as a required contribution to the total procurement amount" },
+    { "name": "Penalties", "values": "States with RPS requirements can impose either penalties or a system of 'alternative compliance payments (ACPs)' to reinforce the standards. ACP structures allow for entities to still be 'in compliance' with the RPS even if they are not meeting the procurement goal" },
+    { "name": "Geographic Eligibility", "values": "An important aspect of RPS policy is the economic stimulus created by renewable technology in a state; eligibility policies reflect a desire to keep these positive impacts within state boundaries, or within a region" },
+    { "name": "Net Metering", "values": "States that require net metering allow individual electric consumers to recieve credit for any electricty they produce. Electric providers pay either the rate at which they buy electricity (wholesale price) or the rate at which they sell electricity (retail rate). Some states also limit the availability of net metering by system capacity or percent of total load." },
+    { "name": "Renewable Interconnects", "values": "These rules determine which renewable producers can connect to the grid and how they do so. Different states mandate electric providers connect to renewable sources at different capacity thresholds." },
+    { "name": "Performance Incentives", "values": "These policies allow for or require payment by electric providers for the purchase of renewable energy produced. The most well-known of these policies is a Feed-in Tariff." },
+    { "name": "Residential Rebates", "values": "State residential rebate programs assist home-owners in financing the up-front cost of installing renewable energy systems." }
+  ],
+  "regions": [
+    "midwest",
+    "northeast",
+    "southeast",
+    "southwest",
+    "northwest"
+  ]
+}

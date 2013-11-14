@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <head>
+    <title>RDCEP | RPS Calculator | {{ state|capitalize }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content>
+    <meta name="author" content>
+    <link href="/static/css/normalize.css" rel="stylesheet">
+    <link href="/static/css/states.css" rel="stylesheet">
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+  <header id="main-nav">
+    <nav>
+      <ul id="top-nav" class="clearfix">
+        <li><a href>Home</a></li>
+        <li id="menu-states"><a href>States</a><ul>
+          <li><a href="/state/arizona">Arizona</a></li>
+          <li><a href="/state/california">California</a></li>
+          <li><a href="/state/illinois">Illinois</a></li>
+          <li><a href="/state/nevada">Nevada</a></li>
+          <li><a href="/state/new_jersey">New Jersey</a></li>
+        </ul></li>
+        <li><a href>Cost Calculator</a></li>
+        <li><a href>Policy</a></li>
+        <li><ul id="left-nav">
+          <li><a href data-name="snapshot">Snapshot</a></li>
+          <li><a href data-name="legislation">Legislation</a></li>
+          <li><a href data-name="resources">Resources</a></li>
+        </ul></li>
+      </ul>
+    </nav>
+  </header>
+
+  <article id="state-wrap">
+    <section>
+      <header>
+        <h1></h1>
+        <img src alt>
+      </header>
+    </section>
+    <section id="summary" class="clearfix">
+    </section>
+    <section id="snapshot" class="clearfix">
+      <h2>RPS Snapshot</h2>
+      <div class="wide module clearfix">
+        <h3>Policy Trajectory</h3>
+        <div id="state-map" class="narrow module"></div>
+        <div id="state-trajectory" class="narrow module"></div>
+      </div>
+      <div class="narrow module clearfix">
+        <h3>Overview</h3>
+        <ul id="overview"></ul>
+      </div>
+      <div class="narrow module clearfix">
+        <h3>Current RPS Progress</h3>
+        <p>Compare the goal established in the RPS to what is being achieved:</p>
+        <div id="rps_progress"></div>
+      </div>
+    </section>
+    <section id="legislation" class="clearfix">
+      <h2>Legislation</h2>
+      <div class="wide module clearfix">
+        <h3>Statute</h3>
+        <div id="statute"></div>
+      </div>
+      <div class="wide module clearfix">
+        <h3>RPS Technical Details</h3>
+        <div id="tech_req"></div>
+      </div>
+      <div class="narrow module clearfix">
+        <h3>Cost Cap Details</h3>
+        <div id="cost_cap_details"></div>
+        <button formaction="" formmethod="get">RPS Calculator</button>
+      </div>
+      <div class="narrow module clearfix">
+        <h3 class="right-align">Carveouts</h3>
+        <div id="carveouts"></div>
+        <div id="carveout_graph">
+          <div id="carveout_graph_legend"></div>
+        </div>
+      </div>
+    </section>
+    <section id="resources" class="clearfix">
+      <h2>Resources</h2>
+      <div class="wide module clearfix">
+        <h3>Grid Mix</h3>
+        <div id="grid_mix"></div>
+        <form action="/pinwheel" method="get"><button>Compare this state's RPS to the rest of the country</button></form>
+      </div>
+      <div class="narrow module">
+        <h3>Tools and other links</h3>
+        <div id="tools">
+          <ul></ul>
+        </div>
+      </div>
+      <div class="narrow module clearfix">
+        <h3>References</h3>
+        <div id="references">
+          <ul></ul>
+        </div>
+      </div>
+    </section>
+  </article>
+  <script>
+    Options = window.Options || {};
+    Options.state = '{{ state }}';
+  </script>
+{#  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
+  <script src="/static/js/vendor/d3/d3.min.js" charset="utf-8"></script>
+  <script src="/static/js/state_facts.js"></script>
+</body>
+</html>

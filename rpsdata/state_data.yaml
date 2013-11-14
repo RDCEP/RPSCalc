@@ -1,0 +1,7 @@
+- name: Illinois
+  machine_name: illinois
+  abbr: IL
+  cost_cap:
+    type: 2
+    amount: .02
+  retail: 86.30
