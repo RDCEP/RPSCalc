@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <head>
-    <title>RDCEP | RPS Calculator{% block title %} | {{ state|capitalize }}{% endblock %}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content>
-    <meta name="author" content>
-    <link href="/static/css/normalize.css" rel="stylesheet">
-    <link href="/static/css/{% block maincss %}states{% endblock %}.css" rel="stylesheet">
-  </head>
-  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+{% extends 'base.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block headcss %}<link href="/static/css/main.css" rel="stylesheet">{% endblock %}
+{% block page %}
   <header id="main_nav">
     <nav>
       <ul id="top_nav" class="clearfix">
@@ -40,5 +32,4 @@
   {% endblock %}
   {% block bodyjs %}
   {% endblock %}
-</body>
-</html>
+{% endblock %}

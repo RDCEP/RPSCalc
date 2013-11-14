@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
-{% block maincss %}trajectory{% endblock %}
+{% block headcss %}<link href="/static/css/main.css" rel="stylesheet">{% endblock %}
 {% block left_nav %}
 <li><a href data-name="trajectory">Set new trajectory</a></li>
 {% endblock %}
