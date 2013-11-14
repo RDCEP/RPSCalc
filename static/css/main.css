@@ -40,14 +40,13 @@ em, i { font-style: italic; }
 
 h1, h2, h3, h4, h5, h6 { font-size: 1em; }
 
-h1 { font-size: 1.5em; }
+h1 { font-size: 1.5em; font-weight: bold; }
 
 h2 { font-weight: normal; margin: 0; font-size: 1.5em; color: #333333; position: relative; }
 
 h3 { font-weight: bold; }
 
 a { text-decoration: none; color: #666666; }
-
 a:hover { color: #cccccc !important; }
 
 .right-align { text-align: right; }
@@ -63,8 +62,6 @@ li li { padding: 0; margin: 0; border: none; }
 form { clear: both; margin-bottom: 2em; position: relative; top: 1em; }
 
 button { background-color: #0072b2; border: none; color: #eeeeee; width: 100%; padding: 1em 0; margin-top: 0.5em; }
-
-line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width: 1; }
 
 #main_nav { width: 100%; background-color: black; opacity: 0.8; padding: 0.75em 0; position: fixed; top: 0; z-index: 999; -webkit-transform: translateZ(0); }
 #main_nav a { display: inline-block; }
@@ -90,17 +87,30 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 #main_content header h1 + img { position: absolute; right: 15px; bottom: 15px; height: 100px; }
 #main_content li { border: none; padding: 0; margin: 0; list-style-type: disc; padding-left: -15px; margin-left: 15px; }
 
-#state_map, #state_trajectory { height: 345px; position: relative; }
+.graph-container { position: relative; left: -30px; }
 
-#retail_price { position: relative; }
+#rps_progress { margin-top: 1em; }
 
-#rps_progress { margin-top: 15px; }
+#carveout_graph_legend { position: absolute; top: 20px; left: 60px; }
+#carveout_graph_legend > div { margin-bottom: 0.25em; }
+
+#state_trajectory_inputs input { float: left; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }
 
 .module { margin-top: 2em; }
 .module.narrow { width: 345px; float: left; }
 .module.narrow + .module.narrow { margin-left: 6px; }
+.module.wide { width: 700px; position: relative; }
 
 section, h2 + .module { margin-top: 1em; }
+
+.switch a { color: #bbbbbb; font-weight: bold; }
+.switch.active a { color: #d55e00; }
+
+line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width: 1; }
+
+.chart-line { stroke-width: 2; }
+
+.chart-area { stroke-width: 0; }
 
 .mask { fill: #eeeeee; }
 
@@ -113,9 +123,13 @@ section, h2 + .module { margin-top: 1em; }
 .trajectory.active { stroke: #d55e00; stroke-width: 3; }
 .trajectory.hovered { stroke: #56b4e9; stroke-width: 3; }
 
+#default_trajectory { stroke: black; stroke-width: 2; stroke-dasharray: 1, 8; }
+
 .data-point { stroke-width: 2; stroke: transparent; fill: transparent; pointer-events: none; }
-.data-point.active { fill: #eeeeee; stroke: #d55e00; }
+.data-point.active { fill: #eeeeee; stroke: black; }
 .data-point.hovered { fill: black; }
+
+.grid-line { stroke: white; stroke-width: 2; }
 
 .tooltip { position: fixed; visibility: hidden; padding: 2px 5px; color: white; background-color: black; opacity: 0.8; font-size: 0.8em; pointer-events: none; }
 .tooltip.active { visibility: visible; }
@@ -131,11 +145,6 @@ section, h2 + .module { margin-top: 1em; }
 .grid-data-slice { stroke: white; }
 
 .grid-axis { stroke: white; }
-
-#carveout_graph { position: relative; }
-
-#carveout_graph_legend { position: absolute; top: 20px; left: 60px; }
-#carveout_graph_legend > div { margin-bottom: 0.25em; }
 
 .carveout-line { stroke: #eeeeee; stroke-width: 1; }
 
@@ -167,7 +176,7 @@ th { font-weight: bold; }
 
 .invisible { visibility: hidden; }
 
-.clearfix:before, .clearfix:after { content: " "; }
+.clearfix:before, .clearfix:after { content: " "; display: table; }
 
 .clearfix:after { clear: both; }
 
