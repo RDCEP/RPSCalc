@@ -26,10 +26,12 @@
         <li><a href>Cost Calculator</a></li>
         <li><a href>Policy</a></li>
         <li><ul id="left_nav">
+          {% block left_nav %}
           <li><a href data-name="snapshot">Snapshot</a></li>
           <li><a href data-name="energy">Energy Details</a></li>
           <li><a href data-name="legislation">Legislation</a></li>
           <li><a href data-name="resources">Resources</a></li>
+          {% endblock %}
         </ul></li>
       </ul>
     </nav>
