@@ -11,7 +11,7 @@ var RPSGraph = function() {
     y,
     graph_data = {graph:null, data:null, colors:null},
     svg_id = '#',
-
+    hover_legend = function(_d) { return d; },
     foo
   ;
 
@@ -58,7 +58,9 @@ var RPSGraph = function() {
   this.graph = function(val, colors) {
     if (val) { graph_data.data = val; if (colors) {graph_data.colors = colors} return this; } else { return graph_data; }
   };
-
+  this.hover_legend = function(f) {
+    if (f) { hover_legend = f; } else { return hover_legend; }
+  };
   this.draw = function(el) {
     var layer_translation = 'translate('+padding.left+','+padding.top+')',
       svg = d3.select(el).append('svg').attr('width', width+padding.left+padding.right)
@@ -70,6 +72,7 @@ var RPSGraph = function() {
       axes_layer = svg.append('g').attr('id', 'axes_layer').attr('transform', layer_translation),
       handle_layer = svg.append('g').attr('id', 'handles_layer').attr('transform', layer_translation),
       buttons_layer = svg.append('g').attr('id', 'buttons_layer').attr('transform', layer_translation),
+      segment_width = x(graph_data.data[1]) - x(graph_data.data[0]),
       x_axis = d3.svg.axis().scale(x).orient('bottom'),
       y_axis = d3.svg.axis().scale(y).orient('left'),
       _line = d3.svg.line()
@@ -104,6 +107,64 @@ var RPSGraph = function() {
     mask_layer.append('g')
       .attr('transform', 'translate('+(0)+',0)')
       .call(y_axis);
+
+    //TODO: Declare in global scope
+    //TODO: Need to distinguish data when draggable
+    var handles = handle_layer.selectAll('.time-period')
+      .data(graph_data.data)
+      .enter()
+      .append('g')
+      .attr('class', 'time-period')
+      .attr('transform', function(d, i) {return 'translate('+(x(d.x)-segment_width/2)+',0)';})
+    ;
+    handles.each(function(d, i) {
+      var visible = ((x(d.x) >= x.range()[0]) && (x(d.x) <= x.range()[1]));
+      d3.select(this).append('rect')
+        .attr('class', 'time-period-rect')
+        .attr('height', y.range()[0])
+        .attr('width', time_period_width)
+        .attr('data-x', function(d) { return d.x; })
+        .attr('data-y', function(d) { return d.y; })
+        .attr('data-legend', function(d) { return d.x + ':&nbsp;'+ d.y; })
+        .style('fill', 'transparent')
+        .style('pointer-events', function(d) { return (visible) ? 'all' : 'none'; })
+        .on('mouseover', function() {
+          var _xo = d3.select(this).attr('data-x');
+          d3.select(this.parentNode.getElementsByClassName('data-point')[0])
+            .classed('active', true);
+        })
+        .on('mouseout', function() {
+//          adjust_dot = null;
+          d3.select(this.parentNode.getElementsByClassName('data-point')[0])
+            .classed('active', false);
+        })
+
+      ;
+      d3.select(this).append('circle')
+        .classed('data-point', function(d) { return visible; })
+        .attr('cx', segment_width/2)
+        .attr('cy', function() {return y(d.y);})
+        .attr('r', function(d) { return (visible) ? 6 : 0; })
+        .call(trajectory_drag, i)
+      ;
+      d3.select(this).append('rect')
+        .attr('class', 'time-period-label-bkgd')
+        .attr('height', 20)
+        .attr('width', segment_width-4)
+        .attr('x', 2)
+        .attr('y', y(d.y) - 40)
+//        .attr('data-year', function(d) { return print_date(d.date); })
+        .style('fill', 'transparent')
+      ;
+      d3.select(this).append('text')
+        .attr('class', 'time-period-label-text')
+        .attr('x', segment_width/2)
+        .attr('y', y(d.y) - 22)
+//        .attr('data-year', function(d) { return print_date(d.date); })
+        .style('text-anchor', 'middle')
+      ;
+
+    });
 
   }
 };
