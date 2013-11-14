@@ -523,7 +523,7 @@ var FactsPage = function() {
       tools = d3.select('#tools'),
       references = d3.select('#references'),
       tech_req = d3.select('#tech_req'),
-      seal = d3.select('#state-wrap img')
+      seal = d3.select('#main_content img')
     ;
     seal.attr('src', '/static/images/state_seals/'+_s.properties.abbr+'.png');
     d3.select('#summary')
