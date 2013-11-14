@@ -34,9 +34,6 @@ a:hover
 .right-align
   text-align: right
 
-path, line, rect
-  stroke-cap: round
-  fill: none
 text
   font-size: .7em
   fill: $dark-gray
@@ -122,7 +119,7 @@ line, rect, path
     margin: 5px 0
   a:hover,a.selected
     color: black!important
-#state_wrap, #main_content
+#main_content
   width: 960px
   margin: 3.5em auto
   padding-bottom: 2em
@@ -157,6 +154,13 @@ line, rect, path
         right: 15px
         bottom: 15px
         height: 100px
+  li
+    border: none
+    padding: 0
+    margin: 0
+    list-style-type:  disc
+    padding-left: -15px
+    margin-left: 15px
 #state_map,#state_trajectory
   height: 345px
   position: relative
@@ -201,6 +205,8 @@ section,h2+.module
   &.active
     fill: #eeeeee
     stroke: $red
+  &.hovered
+    fill: black
 .tooltip
   position: fixed
   visibility: hidden
@@ -250,13 +256,6 @@ section,h2+.module
 .price-line
   stroke: $sky-blue
   stroke-width: 2
-#state_wrap li
-  border: none
-  padding: 0
-  margin: 0
-  list-style-type:  disc
-  padding-left: -15px
-  margin-left: 15px
 td, th
   text-align: left
   padding: 3px 15px 3px 0
