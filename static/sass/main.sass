@@ -172,6 +172,8 @@ button
   left: 60px
   & > div
     margin-bottom: .25em
+#state_trajectory_inputs
+  width: 760px
 #state_trajectory_inputs input
   float: left
   margin-left: 2px
@@ -234,7 +236,7 @@ line, rect, path
   stroke-width: 2
   stroke: transparent
   fill: transparent
-  pointer-events: none
+  pointer-events: all //TODO: only for draggable points
   &.active
     fill: $light-gray
     stroke: black //$red

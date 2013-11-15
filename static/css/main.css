@@ -94,6 +94,8 @@ button { background-color: #0072b2; border: none; color: #eeeeee; width: 100%; p
 #carveout_graph_legend { position: absolute; top: 20px; left: 60px; }
 #carveout_graph_legend > div { margin-bottom: 0.25em; }
 
+#state_trajectory_inputs { width: 760px; }
+
 #state_trajectory_inputs input { float: left; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }
 
 .module { margin-top: 2em; }
@@ -125,7 +127,7 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 #default_trajectory { stroke: black; stroke-width: 2; stroke-dasharray: 1, 8; }
 
-.data-point { stroke-width: 2; stroke: transparent; fill: transparent; pointer-events: none; }
+.data-point { stroke-width: 2; stroke: transparent; fill: transparent; pointer-events: all; }
 .data-point.active { fill: #eeeeee; stroke: black; }
 .data-point.hovered { fill: black; }
 
