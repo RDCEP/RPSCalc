@@ -40,11 +40,11 @@ em, i { font-style: italic; }
 
 h1, h2, h3, h4, h5, h6 { font-size: 1em; }
 
-h1 { font-size: 1.5em; font-weight: bold; }
+h1 { font-size: 2em; font-weight: bold; }
 
-h2 { font-weight: normal; margin: 0; font-size: 1.5em; color: #333333; position: relative; }
+h2 { font-weight: bold; margin: 0; font-size: 1.5em; color: #333333; position: relative; }
 
-h3 { font-weight: bold; }
+h3 { font-weight: bold; font-size: 1.2em; margin: 1em 0; }
 
 a { text-decoration: none; color: #666666; }
 a:hover { color: #cccccc !important; }
@@ -80,8 +80,8 @@ button { background-color: #0072b2; border: none; color: #eeeeee; width: 100%; p
 
 #main_content { width: 960px; margin: 3.5em auto; padding-bottom: 2em; }
 #main_content section { margin-left: 230px; width: 730px; padding: 0; border-top: 1px solid #999999; }
-#main_content section + section { width: 700px; padding: 2em 15px 3em; border: none; margin-top: 0; }
-#main_content section + section + section { width: 700px; padding: 1em 15px 3em; border-top: 1px solid #999999; }
+#main_content section + section { width: 700px; padding: 4em 15px 3em; border: none; margin-top: 0; }
+#main_content section + section + section { width: 700px; border-top: 1px solid #999999; }
 #main_content header { background-color: #cccccc; padding: 1em 15px; height: 100px; position: relative; z-index: 1; }
 #main_content header h1 { margin: 0; padding: 0; position: absolute; bottom: 1em; line-height: 0.5em; }
 #main_content header h1 + img { position: absolute; right: 15px; bottom: 15px; height: 100px; }
@@ -98,12 +98,10 @@ button { background-color: #0072b2; border: none; color: #eeeeee; width: 100%; p
 
 #state_trajectory_inputs input { float: left; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }
 
-.module { margin-top: 2em; }
 .module.narrow { width: 345px; float: left; }
 .module.narrow + .module.narrow { margin-left: 6px; }
 .module.wide { width: 700px; position: relative; }
-
-section, h2 + .module { margin-top: 1em; }
+.module.wide + .module.wide { margin-top: 2em; }
 
 .switch a { color: #bbbbbb; font-weight: bold; }
 .switch.active a { color: #d55e00; }

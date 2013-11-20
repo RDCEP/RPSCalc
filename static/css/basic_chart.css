@@ -1,0 +1,20 @@
+body { background-color: #eeeeee; font-family: Calibri, Helvetica, Arial, sans-serif; }
+
+line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width: 1; }
+
+text { font-size: 0.7em; color: #999999; }
+
+.chart-line { stroke-width: 2; }
+
+.chart-area { stroke-width: 0; }
+
+.mask { fill: #eeeeee; }
+
+.grid-line { stroke: white; stroke-width: 2; }
+
+path.domain { stroke: #999999; stroke-width: 2; }
+
+.data-point { stroke-width: 2; stroke: transparent; fill: transparent; pointer-events: none; }
+.data-point.active { fill: #eeeeee; stroke: black; }
+.data-point.draggable { pointer-events: all; }
+.data-point.draggable.hovered { fill: black; }

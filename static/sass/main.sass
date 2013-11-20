@@ -18,16 +18,18 @@ em, i
 h1,h2,h3,h4,h5,h6
   font-size: 1em
 h1
-  font-size: 1.5em
+  font-size: 2em
   font-weight: bold
 h2
-  font-weight: normal
+  font-weight: bold
   margin: 0
   font-size: 1.5em
   color: $dark-gray
   position: relative
 h3
   font-weight: bold
+  font-size: 1.2em
+  margin: 1em 0
 a
   text-decoration: none
   color: #666666
@@ -129,12 +131,11 @@ button
     border-top: 1px solid #999
     &+section
       width: 700px
-      padding: 2em 15px 3em
+      padding: 4em 15px 3em
       border: none
       margin-top: 0
       &+section
         width: 700px
-        padding: 1em 15px 3em
         border-top: 1px solid #999
   header
     background-color: #cccccc
@@ -182,17 +183,18 @@ button
   padding: 2px 5px
   font-size: .7em
 .module
-  margin-top: 2em
   &.narrow
     width: 345px
     float: left
-    &+.module.narrow
+    &+&
       margin-left: 6px
   &.wide
     width: 700px
     position: relative
-section,h2+.module
-  margin-top: 1em
+    &+&
+      margin-top: 2em
+//section
+//  margin-top: 1em
 .switch
   a
     color: #bbbbbb
@@ -210,7 +212,7 @@ line, rect, path
 .chart-area
   stroke-width: 0
 .mask
-  fill: #eee
+  fill: $light-gray
 .map-state
   fill: #dddddd
   stroke-width: 1
