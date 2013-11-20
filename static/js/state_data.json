@@ -252,7 +252,87 @@
       "name": "Colorado",
       "machine_name": "colorado",
       "abbr": "CO",
-      "trajectory": [0,0,0,0,0,0,0,0.03,0.05,0.05,0.05,0.11,0.11,0.11,0.11,0.18,0.18,0.18,0.18,0.18,0.27,0.27,0.27,0.27,0.27,0.27,0.27,0.27,0.27,0.27,0.27]
+      "trajectory": [0,0,0,0,0,0,0,0.03,0.05,0.05,0.05,0.12,0.12,0.12,0.12,0.20,0.20,0.20,0.20,0.20,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30],
+      "carveouts": [
+        {
+          "type": "DG",
+          "data": [0,0,0,0,0,0,0,0,0,0,0,0.01,0.01,0.0125,0.0125,0.0175,0.0175,0.02,0.02,0.02,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03]
+        }
+      ],
+      "snapshot": {
+        "summary": "Colorado's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Colorado.",
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart shows Colorado's policy pathway.\n",
+        "overview": [
+          "<strong>30%</strong> of the state's energy consumption must be from renewable sources by <strong>2020</strong>",
+          "Carve-outs for <strong>distributed generation</strong>",
+          "Explicit cost cap at 2 percent of electric bill annually",
+          "<strong>Two</strong> separate state RPS schedules (primary and secondary)"
+        ],
+        "rps_progress": "0"
+      },
+      "legislation": {
+        "statute": "Colorado is the first state to create a RPS through ballot initiative. In 2004, voters approved Amendment 37 requiring utilities serving 40,000 or more customers to generate or purchase enough renewable energy to comprise 10% of retail electric sales. It would be increased and modified two subsequent times to its current 20%. In 2013, a distributed generation carve-out was added, and coal methane gas and municipal solid waste became eligible technologies (subject to Public Utilities Commission's approval). The same bill--S.B. 252--created a separate RPS schedule for coops, requiring 20% of sales from renewables by 2020 and thereafter.",
+        "rps_tech_details": [
+          {
+            "name": "Eligible Technologies",
+            "description": "Solar-electric, Wind, Geothermal-electric, Biomass facilities that burn nontoxic plants, Landfill gas, Animal waste, Hydropower, Recycled energy, Fuel cells using renewables-sourced hydrogen"
+          },
+          {
+            "name": "Geographic Eligibility",
+            "description": "No Restrictions; tradable RECs can be used to satisfy requirement."
+          },
+          {
+            "name": "Percent of Total Load",
+            "description": "Primary RPS: 58.7%, Secondary RPS: 35.6%"
+          },
+          {
+            "name": "Technology Requirements",
+            "description": "Dist. Gen.- 3% of annual req. for IOUs, 0.75% for cooperatives"
+          },
+          {
+            "name": "Sectors",
+            "description": "Investor-Owned Utilities, Cooperatives and Municipal electric companies"
+          },
+          {
+            "name": "Non-compliance Penalty",
+            "description": "None"
+          }
+        ],
+        "cost_cap_details": "Electric Resource Standards specify the cost of using renewable sources cannot exceed 2% of customer's electricity bill annually.",
+        "carveouts": "The chart below is a breakdown for the primary RPS for IOUs."
+      },
+      "resources": {
+        "tools": {
+          "text": "The links below may provide more technical details to the interested user:",
+          "links": [
+            {
+              "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+              "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+              "description": "Datasets available for download in .xlsx format"
+            },
+            {
+              "name": "MJBeck RPS EDGE",
+              "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+              "description": "Advanced search tool for comparing RPS program data"
+            }
+          ]
+        },
+        "references": {
+          "text": "The resources below proved invaluable in the creation of this page:",
+          "links": [
+            {
+              "name": "DSIRE State Page",
+              "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=CO24R&re=1&ee=1",
+              "description": "Visit for more complete information on RPS details and legislation"
+            },
+            {
+              "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+              "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+              "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+            }
+          ]
+        }
+      }
     },
     "geometry": {
       "type": "Polygon",
@@ -459,7 +539,85 @@
   {
     "type": "Feature",
     "properties": {
-      "abbr": "IA"
+      "name": "Iowa",
+      "machine_name": "iowa",
+      "abbr": "IA",
+      "trajectory": [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+      "carveouts": [],
+      "snapshot": {
+        "summary": "Iowa's Alternative Energy Law (REL) establishes a minimum amount of renewable energy that must be purchased by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Iowa.",
+        "policy_trajectory": "Iowa's REL does not define a 'ramp-up', because the nature of the goal is a specific capacity to be achieved.\n",
+        "overview": [
+          "<strong>105 MW</strong> of renewable sources",
+          "<strong>No</strong> Carve-outs",
+          "No explicit cost cap",
+          "<strong>Two</strong> separate state RPS schedules (primary and secondary)"
+        ],
+        "rps_progress": "0"
+      },
+      "legislation": {
+        "statute": "The Iowa Renewable Energy Law is a capacity-based standard, which requires its investor-owned utilities to own or contract a total of 105 MW of renewable energy. It is split between MidAmerican Energy (55.2 MW, 52.57% of demand) and Alliant Energy Interstate Power and Light (49.8 MW., 47.43% of demand). There are no mandated increases, and the target has already been achieved.",
+        "rps_tech_details": [
+          {
+            "name": "Eligible Technologies",
+            "description": "Solar, Wind, Waste management, Resource recovery, Refuse-derived fuel, Agricultural crops or residues, Wood-burning facilities, or Small hydropower facilities"
+          },
+          {
+            "name": "Geographic Eligibility",
+            "description": "In-state"
+          },
+          {
+            "name": "Percent of Total Load",
+            "description": "75.7%"
+          },
+          {
+            "name": "Technology Requirements",
+            "description": "None (voluntary goal of 1,000 MW wind by 2010)"
+          },
+          {
+            "name": "Sectors",
+            "description": "Investor-Owned Utilities"
+          },
+          {
+            "name": "Non-compliance Penalty",
+            "description": "None"
+          }
+        ],
+        "cost_cap_details": "N/A",
+        "carveouts": "N/A"
+      },
+      "resources": {
+        "tools": {
+          "text": "The links below may provide more technical details to the interested user:",
+          "links": [
+            {
+              "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+              "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+              "description": "Datasets available for download in .xlsx format"
+            },
+            {
+              "name": "MJBeck RPS EDGE",
+              "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+              "description": "Advanced search tool for comparing RPS program data"
+            }
+          ]
+        },
+        "references": {
+          "text": "The resources below proved invaluable in the creation of this page:",
+          "links": [
+            {
+              "name": "DSIRE State Page",
+              "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IA01R&re=1&ee=1",
+              "description": "Visit for more complete information on RPS details and legislation"
+            },
+            {
+              "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+              "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+              "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+            }
+          ]
+        }
+      }
     },
     "geometry": {
       "type": "Polygon",
@@ -472,7 +630,81 @@
       "name": "Kansas",
       "machine_name": "kansas",
       "abbr": "KS",
-      "trajectory": [0,0,0,0,0,0,0,0,0,0,0,0.1,0.1,0.1,0.1,0.1,0.15,0.15,0.15,0.15,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2]
+      "trajectory": [0,0,0,0,0,0,0,0,0,0,0,0.1,0.1,0.1,0.1,0.1,0.15,0.15,0.15,0.15,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2],
+      "carveouts": [],
+      "snapshot": {
+        "summary": "Kansas' Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Kansas.",
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Kansas' pathway is red. Click on another state to learn more about their RPS.",
+        "overview": [
+          "Capacity at least <strong>20%</strong> of peak demand capacity by <strong>2020</strong>",
+          "<strong>No</strong> technology requirements",
+          "Cost-cap at 1% increase in retail rate"
+        ],
+        "rps_progress": "0.0"
+      },
+      "legislation": {
+        "statute": "Adopted in May 2009, Kansas' RPS (<a href=\"http://www.kslegislature.org/li/b2013_14/statute/066_000_0000_chapter/066_012_0000_article/066_012_0056_section/066_012_0056_k/\">K.S.A. Ch. 66 Art. 12 &sect;56-62</a>) requires that total renewable generation capacity be 20% of peak demand by 2020. This RPS is one of the only policies in the country which require a minimum capacity as opposed to a minimum percentage of sales. The Kansas Corporation Commission administers this program.",
+        "rps_tech_details": [
+          {
+            "name": "Eligible Technologies",
+            "description": "Wind, Solar thermal, Photovoltaics, Dedicated crops grown for energy production, Cellulosic agricultural residues, Plant residues, Methane fro landfills or wastewater treatment, Clean and untreated wood products (such as pallets), Existing hydropower, New hydropower, Fuel cells using hydrogen produced from renewable sources, Energy storage that is connected to a renewable source"
+          },
+          {
+            "name": "Geographic Eligibility",
+            "description": "Out of state generation is not prohibited by the KCC as long as it meets the REC requirements outlined in the regulations."
+          },
+          {
+            "name": "Percent of Total Load",
+            "description": "81.5%"
+          },
+          {
+            "name": "Technology Requirements",
+            "description": "None"
+          },
+          {
+            "name": "Sectors",
+            "description": "Investor-owned utilities, Cooperative utilities"
+          },
+          {
+            "name": "Non-compliance Penalty",
+            "description": "No penalties for 2011 or 2012. The 'standard minimum penalty' after this period is 'equal to two times the market value during the calendar year of sufficient RECs to have met the portfolio requirement'. (<a href=\"http://www.kssos.org/other/Final_2012_KAR_Supplement.pdf\">K.A.R. 82-16-3 pg. 646</a>) Penalties can vary if utilities show a 'good faith effort' to comply with the RPS."
+          }
+        ],
+        "cost_cap_details": "Retail rate impact cannot exceed 1% (persuant to recovery mechanism described in K.A.R. 82-16-4)",
+        "carveouts": "Kansas does not have any technology requirements."
+      },
+      "resources": {
+        "tools": {
+          "text": "The links below may provide more technical details to the interested user:",
+          "links": [
+            {
+              "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+              "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+              "description": "<i>Datasets available for download in .xlsx format<i>"
+            },
+            {
+              "name": "MJBeck RPS EDGE",
+              "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+              "description": "<i>Advanced search tool for comparing RPS program data<i>"
+            }
+          ]
+        },
+        "references": {
+          "text": "The resources below proved invaluable in the creation of this page:",
+          "links": [
+            {
+              "name": "Kansas Corporation Commission Energy Division",
+              "href": "http://www.kcc.state.ks.us/energy/index.htm",
+              "description": "Links and descriptions of energy programs in Kansas"
+            },
+            {
+              "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+              "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+              "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+            }
+          ]
+        }
+      }
     },
     "geometry": {
       "type": "Polygon",
@@ -751,7 +983,81 @@
       "name": "Montana",
       "machine_name": "montana",
       "abbr": "MT",
-      "trajectory": [0,0,0,0,0,0,0,0,0.05,0.05,0.1,0.1,0.1,0.1,0.1,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15]
+      "trajectory": [0,0,0,0,0,0,0,0,0.05,0.05,0.1,0.1,0.1,0.1,0.1,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15,0.15],
+      "carveouts": [],
+      "snapshot": {
+        "summary": "Montana's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Montana.",
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Montana's pathway is red. Click on another state to learn more about their RPS.",
+        "overview": [
+          "<strong>15%</strong> of retail sales by 2015",
+          "<strong>No</strong> minimum technology requirements",
+          "Cost cap at 15% of alternative source price"
+        ],
+        "rps_progress": "0.0"
+      },
+      "legislation": {
+        "statute": "Originally enacted in <a href=\"http://leg.mt.gov/bills/mca/69/3/69-3-2004.htm\">2005</a>, and updated as recently as 2013, Montana's Renewable Resource Standard requirs that 15% of retail electricity sales in the state come from renewable sources by 2015. Although there are no technology requirements, state law does require that utilities purchase a minimum amount of power (50MW escalating to 75MW) from 'community renewable energy projects'. The program is administed by the Montana Public Service Commission.",
+        "rps_tech_details": [
+          {
+            "name": "Eligible Technologies",
+            "description": "Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Compressed Air Energy Storage (From Eligible Renewables), Anaerobic Digestion, Fuel Cells using Renewable Fuels"
+          },
+          {
+            "name": "Geographic Eligibility",
+            "description": "Generation can be located in other states as long as the electricity produced is deliverred into Montana."
+          },
+          {
+            "name": "Percent of Total Load",
+            "description": "66.6%"
+          },
+          {
+            "name": "Technology Requirements",
+            "description": "None"
+          },
+          {
+            "name": "Sectors",
+            "description": "Investor-Owned Utility, Retail Supplier"
+          },
+          {
+            "name": "Non-compliance Penalty",
+            "description": "$10 per MWh of credits that the utility failed to procure. "
+          }
+        ],
+        "cost_cap_details": "Utilities do not have to purchase power from renewable sources if the cost exceeds a 15% increase in cost of an alternative source. See <a href=\"http://leg.mt.gov/bills/mca/69/3/69-3-2007.htm\">Title 69 Chapter 3</a>",
+        "carveouts": "Montana does not have any minimum technology requirements."
+      },
+      "resources": {
+        "tools": {
+          "text": "The links below may provide more technical details to the interested user:",
+          "links": [
+            {
+              "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+              "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+              "description": "<i>Datasets available for download in .xlsx format<i>"
+            },
+            {
+              "name": "MJBeck RPS EDGE",
+              "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+              "description": "<i>Advanced search tool for comparing RPS program data<i>"
+            }
+          ]
+        },
+        "references": {
+          "text": "The resources below proved invaluable in the creation of this page:",
+          "links": [
+            {
+              "name": "An Introduction to the Montana Renewable Portfolio Standard",
+              "href": "http://leg.mt.gov/content/Committees/Interim/2013-2014/Energy-and-Telecommunications/Meetings/June-2013/Overview.pdf",
+              "description": "Overview of RPS prepared for Montana state representatives"
+            },
+            {
+              "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+              "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+              "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+            }
+          ]
+        }
+      }
     },
     "geometry": {
       "type": "Polygon",
@@ -1202,7 +1508,81 @@
       "name": "Wisconsin",
       "machine_name": "wisconsin",
       "abbr": "WI",
-      "trajectory": [0,0,0,0,0,0,0.04,0.04,0.04,0.04,0.06,0.06,0.06,0.06,0.06,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]
+      "trajectory": [0,0,0,0,0,0,0.0356,0.0356,0.0356,0.0356,0.0557,0.0557,0.0557,0.0557,0.0557,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957,0.0957],
+      "carveouts": [],
+      "snapshot": {
+        "summary": "Wisconsin's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Wisconsin.",
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart shows Colorado's policy pathway.\n",
+        "overview": [
+          "<strong>9.57%</strong> of the state's energy consumption must be from renewable sources by <strong>2015</strong>",
+          "<strong>No</strong> carve-outs",
+          "No explicit cost cap"
+        ],
+        "rps_progress": "0"
+      },
+      "legislation": {
+        "statute": "Wisconsin enacted Act 9 in 1999; the first state to introduce a RPS without having restructured its electric-utility industry. Originally the RPS required 2.2% of electricity sold to be from renewables by 2012. In 2006, the goal was increased to 10% by 2015. Providers can petition the Public Service Commission to extend the compliance deadline.",
+        "rps_tech_details": [
+          {
+            "name": "Eligible Technologies",
+            "description": "Photovoltaics, Wind, Biomass, Biodiesel, Hydroelectric, Solar Water Heat, Solar Thermal Electric, Solar Thermal Process Heat, Geothermal Electric, Geothermal Heat Pumps, Landfill Gas, Municipal Solid Waste, Biogas, Anaerobic Digestion, Tidal Energy, CHP/Cogeneration, Fuel Cells using Renewable Fuels"
+          },
+          {
+            "name": "Geographic Eligibility",
+            "description": "Renewable energy generated outside of Wisconsin is eligible, but only if the utility delivers it to customers in-state."
+          },
+          {
+            "name": "Percent of Total Load",
+            "description": "100%"
+          },
+          {
+            "name": "Technology Requirements",
+            "description": "None"
+          },
+          {
+            "name": "Sectors",
+            "description": "Utility, Investor-Owned Utility, Municipal Utility, Rural Electric Cooperative"
+          },
+          {
+            "name": "Non-compliance Penalty",
+            "description": "None"
+          }
+        ],
+        "cost_cap_details": "Wisconsin does not have an explicit cost cap",
+        "carveouts": "The chart below is a carve-out breakdown for the RPS, also demonstrating overall ramp-up."
+      },
+      "resources": {
+        "tools": {
+          "text": "The links below may provide more technical details to the interested user:",
+          "links": [
+            {
+              "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+              "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+              "description": "Datasets available for download in .xlsx format"
+            },
+            {
+              "name": "MJBeck RPS EDGE",
+              "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+              "description": "Advanced search tool for comparing RPS program data"
+            }
+          ]
+        },
+        "references": {
+          "text": "The resources below proved invaluable in the creation of this page:",
+          "links": [
+            {
+              "name": "DSIRE State Page",
+              "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=WI05R&re=0&ee=0",
+              "description": "Visit for more complete information on RPS details and legislation"
+            },
+            {
+              "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+              "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+              "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+            }
+          ]
+        }
+      }
     },
     "geometry": {
       "type": "Polygon",
