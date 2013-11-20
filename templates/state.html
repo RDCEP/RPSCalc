@@ -1,6 +1,6 @@
 {% extends 'index.html' %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
-{% block headcss %}<link href="/static/css/main.css" rel="stylesheet">{% endblock %}
+{% block headcss %}<link href="/static/css/main.css?2" rel="stylesheet">{% endblock %}
 {% block content %}
   <article id="main_content">
     <section>
@@ -92,5 +92,5 @@
   </script>
 {#  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
   <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
-  <script src="/static/js/state_facts.js"></script>
+  <script src="/static/js/state_facts.js?3"></script>
 {% endblock %}
