@@ -20,11 +20,9 @@ var RPSGraph = function() {
     mask_layer,
     axes_layer,
     handle_layer,
-    period_layer,
     button_layer,
     segment_width,
     handles,
-    periods,
     tool_tip,
     x_axis,
     y_axis,
@@ -67,7 +65,7 @@ var RPSGraph = function() {
 //      inputs.data(data.current).each(function() {
 //        d3.select(this).attr('value', function(d) {return d.data; });
 //      });
-      periods.data(graph_data.active)
+      handles.data(graph_data.active)
         .each(function(d) {
           d3.select(this).select('.data-point')
             .attr('cy', function() {return y(d.y); });
@@ -83,10 +81,9 @@ var RPSGraph = function() {
     },
     add_hover = function() {
       /*
-       Attach mouse events to <rect>s with hoverable periods (toggle .active)
+       Attach mouse events to <rect>s with hoverable handles (toggle .active)
        */
-      //TODO: data points are now on new layers with data attrs
-      periods.each(function(d) {
+      handles.each(function(d) {
         d3.select(this).select('.time-period-rect')
           .on('mouseover', function() {
             var legend = hover_legend(d);
@@ -116,7 +113,6 @@ var RPSGraph = function() {
       /*
        Attach mouse events to draggable handles (toggle .active)
        */
-      //TODO: data points are now on new layers with data attrs
       handles.each(function() {
         d3.select(this).select('.data-point')
           .on('mouseover', function() {
@@ -131,16 +127,15 @@ var RPSGraph = function() {
     },
     remove_hover = function() {
       /*
-       Remove mouse events from <rect>s with hoverable periods (toggle .active)
+       Remove mouse events from <rect>s with hoverable handles (toggle .active)
        */
-      periods.selectAll('rect').on('mouseover', function() { return null; });
-      periods.selectAll('rect').on('mouseout', function() { return null; });
+      handles.selectAll('rect').on('mouseover', function() { return null; });
+      handles.selectAll('rect').on('mouseout', function() { return null; });
     },
     remove_drag_hover = function() {
       /*
        Remove mouse events from draggable handles (toggle .active)
        */
-      //TODO: data points are now on new layers with data attrs
       adjust_dot.on('mouseover', function() { return null; });
       adjust_dot.on('mouseout', function() { return null; });
     },
@@ -214,7 +209,6 @@ var RPSGraph = function() {
     mask_layer = svg.append('g').attr('id', 'mask_layer');
     axes_layer = svg.append('g').attr('id', 'axes_layer').attr('transform', layer_translation);
     handle_layer = svg.append('g').attr('id', 'handles_layer').attr('transform', layer_translation);
-    period_layer = svg.append('g').attr('id', 'period_layer').attr('transform', layer_translation);
     button_layer = svg.append('g').attr('id', 'buttons_layer').attr('transform', layer_translation);
     return this;
   };
@@ -321,14 +315,13 @@ var RPSGraph = function() {
     hoverable = bool;
     tool_tip = d3.select(svg_id).append('div').attr('id', 'tool_tip');
     segment_width = x(graph_data.data[0][1].x) - x(graph_data.data[0][0].x);
-    periods = period_layer.selectAll('.time-period')
+    handles = handle_layer.selectAll('.time-period')
       .data(graph_data.data[0])
       .enter()
       .append('g')
       .attr('class', 'time-period')
       .attr('transform', function(d) {return 'translate(' + (x(d.x) - segment_width / 2) + ',0)'; });
-    periods.each(function(d, i) {
-      //TODO: data points are now on new layers with data attrs
+    handles.each(function(d, i) {
       var visible = ((x(d.x) >= x.range()[0]) && (x(d.x) <= x.range()[1]));
       d3.select(this).append('rect')
         .attr('class', 'time-period-rect')
