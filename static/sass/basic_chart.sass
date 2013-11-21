@@ -23,6 +23,10 @@ text
 path.domain
   stroke: #999
   stroke-width: 2
+.default_line
+  stroke: black
+  stroke-width: 2
+  stroke-dasharray: 1, 8
 .data-point
   stroke-width: 2
   stroke: transparent
@@ -35,3 +39,15 @@ path.domain
     pointer-events: all
     &.hovered
       fill: black
+#tool_tip
+  position: absolute
+  //position: fixed
+  visibility: hidden
+  padding: 2px 5px
+  color: white
+  background-color: black
+  opacity: .8
+  font-size: .7em
+  pointer-events: none
+  &.active
+    visibility: visible

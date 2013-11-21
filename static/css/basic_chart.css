@@ -14,7 +14,12 @@ text { font-size: 0.7em; color: #999999; }
 
 path.domain { stroke: #999999; stroke-width: 2; }
 
+.default_line { stroke: black; stroke-width: 2; stroke-dasharray: 1, 8; }
+
 .data-point { stroke-width: 2; stroke: transparent; fill: transparent; pointer-events: none; }
 .data-point.active { fill: #eeeeee; stroke: black; }
 .data-point.draggable { pointer-events: all; }
 .data-point.draggable.hovered { fill: black; }
+
+#tool_tip { position: absolute; visibility: hidden; padding: 2px 5px; color: white; background-color: black; opacity: 0.8; font-size: 0.7em; pointer-events: none; }
+#tool_tip.active { visibility: visible; }
