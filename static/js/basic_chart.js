@@ -9,26 +9,31 @@ var RPSGraph = function() {
     y_range = [height, 0],
     x,
     y,
-    graph_data = {graphs: [], data: [], limit: [], inputs: [], active: [] },
+    graph_data = {graphs: [], data: [], limit: [], inputs: [], active: [], ghost: [], default_line: [] },
     svg_id = '#',
-    hover_legend = function(_d) { return _d; },
     layer_translation,
     svg,
+    ghost_layer,
     grid_layer,
     graph_layer,
     default_layer,
     mask_layer,
     axes_layer,
     handle_layer,
+    period_layer,
     button_layer,
     segment_width,
     handles,
+    periods,
+    tool_tip,
     x_axis,
     y_axis,
-    _line,
-    _area,
+    _line = d3.svg.line().x(function(d) { return x(d.x); }).y(function(d) { return y(d.y); }),
+    _area = d3.svg.area().x(function(d) { return x(d.x); }).y0(function() { return y(0); }).y1(function(d) { return y(d.y); }),
     adjust_data = {step: 0.5, start: 0, stop: 0, index: 0},
     adjust_dot,
+    draggable = false,
+    hoverable = false,
     color_list = [
       //d3.rgb(0, 0, 0), //black
       d3.rgb(86, 180, 233), // sky blue
@@ -42,8 +47,13 @@ var RPSGraph = function() {
     colors = function(i) {
       return color_list[i % color_list.length];
     },
-    draggable = false,
-    hoverable = false,
+    hover_legend = function(_d) {
+      var legend = {};
+      legend.html = _d.x + ':&nbsp;' + _d.y;
+      legend.x = x(_d.x) + 10;
+      legend.y = y(_d.y) - padding.top - 10;
+      return legend;
+    },
     redraw = function() {
       graph_data.graphs.each(function(d, i) {
         d3.select(this).attr('d', _area(graph_data.active));
@@ -57,7 +67,7 @@ var RPSGraph = function() {
 //      inputs.data(data.current).each(function() {
 //        d3.select(this).attr('value', function(d) {return d.data; });
 //      });
-      handles.data(graph_data.active)
+      periods.data(graph_data.active)
         .each(function(d) {
           d3.select(this).select('.data-point')
             .attr('cy', function() {return y(d.y); });
@@ -72,23 +82,46 @@ var RPSGraph = function() {
       d3.select('.y.axis').call(y_axis);
     },
     add_hover = function() {
-      handles.each(function() {
+      /*
+       Attach mouse events to <rect>s with hoverable periods (toggle .active)
+       */
+      //TODO: data points are now on new layers with data attrs
+      periods.each(function(d) {
         d3.select(this).select('.time-period-rect')
           .on('mouseover', function() {
+            var legend = hover_legend(d);
+            d3.selectAll('.data-point').classed('active', false);
+            d3.selectAll('.data-point').classed('hovered', false);
             d3.select(this.parentNode.getElementsByClassName('data-point')[0])
+              .classed('active', true);
+            //TODO: return html, x, and y from hover_legend()?
+            tool_tip
+              .html(function() {
+                return legend.html;
+              })
+              .style('position', 'absolute')
+              .style('left', legend.x + 'px')
+              .style('top', legend.y + 'px')
               .classed('active', true);
           })
           .on('mouseout', function() {
             adjust_dot = null;
             d3.select(this.parentNode.getElementsByClassName('data-point')[0])
               .classed('active', false);
+            tool_tip.classed('active', true);
           });
       });
     },
     add_drag_hover = function() {
+      /*
+       Attach mouse events to draggable handles (toggle .active)
+       */
+      //TODO: data points are now on new layers with data attrs
       handles.each(function() {
         d3.select(this).select('.data-point')
           .on('mouseover', function() {
+            d3.selectAll('.data-point').classed('active', false);
+            d3.selectAll('.data-point').classed('hovered', false);
             d3.select(this).classed('active', true).classed('hovered', true);
           })
           .on('mouseout', function() {
@@ -97,10 +130,17 @@ var RPSGraph = function() {
       });
     },
     remove_hover = function() {
-      handles.selectAll('rect').on('mouseover', function() { return null; });
-      handles.selectAll('rect').on('mouseout', function() { return null; });
+      /*
+       Remove mouse events from <rect>s with hoverable periods (toggle .active)
+       */
+      periods.selectAll('rect').on('mouseover', function() { return null; });
+      periods.selectAll('rect').on('mouseout', function() { return null; });
     },
     remove_drag_hover = function() {
+      /*
+       Remove mouse events from draggable handles (toggle .active)
+       */
+      //TODO: data points are now on new layers with data attrs
       adjust_dot.on('mouseover', function() { return null; });
       adjust_dot.on('mouseout', function() { return null; });
     },
@@ -130,6 +170,34 @@ var RPSGraph = function() {
       add_hover();
       add_drag_hover();
     },
+    mask_edges = function() {
+      /*
+       Draw masks on 4 edges of graph -- covers up extra graph underneath axes.
+       */
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', width + padding.left + padding.right).attr('height', padding.top)
+        .attr('transform', 'translate(0,0)');
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', width + padding.left + padding.right).attr('height', padding.bottom)
+        .attr('transform', 'translate(0,' + (height + padding.top) + ')');
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
+        .attr('transform', 'translate(0,0)');
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
+        .attr('transform', 'translate(' + (width + padding.left) + ',0)');
+    },
+    draw_axes = function() {
+      /*
+       Draw x and y axes, ticks, etc.
+       */
+      axes_layer.append('g')
+        .attr('transform', 'translate(0,' + (height + 5) + ')')
+        .call(x_axis);
+      axes_layer.append('g')
+        .attr('transform', 'translate(-5,0)')
+        .call(y_axis);
+    },
     graph_drag = d3.behavior.drag().on('drag', drag_move).on('dragstart', drag_start).on('dragend', drag_end),
     foo;
   //TODO: Should these return eg, _x_domain or _x.domain()? Ie, is _x_domain necessary?
@@ -139,12 +207,14 @@ var RPSGraph = function() {
     layer_translation = 'translate(' + padding.left + ',' + padding.top + ')';
     svg = d3.select(svg_id).append('svg').attr('width', width + padding.left + padding.right)
       .attr('height', height + padding.top + padding.bottom);
+    ghost_layer = svg.append('g').attr('id', 'ghost_layer').attr('transform', layer_translation);
     grid_layer = svg.append('g').attr('id', 'grid_layer').attr('transform', layer_translation);
     graph_layer = svg.append('g').attr('id', 'graph_layer').attr('transform', layer_translation);
     default_layer = svg.append('g').attr('transform', layer_translation);
     mask_layer = svg.append('g').attr('id', 'mask_layer');
     axes_layer = svg.append('g').attr('id', 'axes_layer').attr('transform', layer_translation);
     handle_layer = svg.append('g').attr('id', 'handles_layer').attr('transform', layer_translation);
+    period_layer = svg.append('g').attr('id', 'period_layer').attr('transform', layer_translation);
     button_layer = svg.append('g').attr('id', 'buttons_layer').attr('transform', layer_translation);
     return this;
   };
@@ -196,7 +266,6 @@ var RPSGraph = function() {
     return this;
   };
   this.colors = function(func) {
-    //TODO: Build colors
     if (!func) { return colors; }
     if (typeof func === 'function') {
       colors = func;
@@ -205,9 +274,15 @@ var RPSGraph = function() {
     color_list = func;
     return this;
   };
-  this.hover_legend = function(f) {
+  this.hover_legend = function(func) {
     //TODO: Build legends
-    if (f) { hover_legend = f; } else { return hover_legend; }
+    if (!func) { return hover_legend; }
+    if (typeof func !== 'function') {
+      console.log('hover_legend() expects a function.');
+      return this;
+    }
+    hover_legend = func;
+    return this;
   };
   this.data = function(val) {
     if (!val) { return graph_data.data; }
@@ -244,15 +319,16 @@ var RPSGraph = function() {
       return this;
     }
     hoverable = bool;
+    tool_tip = d3.select(svg_id).append('div').attr('id', 'tool_tip');
     segment_width = x(graph_data.data[0][1].x) - x(graph_data.data[0][0].x);
-    console.log(segment_width, x(graph_data.data[0][0].x));
-    handles = handle_layer.selectAll('.time-period')
+    periods = period_layer.selectAll('.time-period')
       .data(graph_data.data[0])
       .enter()
       .append('g')
       .attr('class', 'time-period')
       .attr('transform', function(d) {return 'translate(' + (x(d.x) - segment_width / 2) + ',0)'; });
-    handles.each(function(d, i) {
+    periods.each(function(d, i) {
+      //TODO: data points are now on new layers with data attrs
       var visible = ((x(d.x) >= x.range()[0]) && (x(d.x) <= x.range()[1]));
       d3.select(this).append('rect')
         .attr('class', 'time-period-rect')
@@ -262,17 +338,7 @@ var RPSGraph = function() {
         .attr('data-y', function(d) { return d.y; })
         .attr('data-legend', function(d) { return d.x + ':&nbsp;' + d.y; })
         .style('fill', 'transparent')
-        .style('pointer-events', function() { return visible ? 'all' : 'none'; })
-        .on('mouseover', function() {
-          var _xo = d3.select(this).attr('data-x');
-          d3.select(this.parentNode.getElementsByClassName('data-point')[0])
-            .classed('active', true);
-        })
-        .on('mouseout', function() {
-//          adjust_dot = null;
-          d3.select(this.parentNode.getElementsByClassName('data-point')[0])
-            .classed('active', false);
-        });
+        .style('pointer-events', function() { return visible ? 'all' : 'none'; });
       d3.select(this).append('circle')
         .classed('data-point', function(d) { return visible; })
         .classed('hoverable', function(d) { return visible; })
@@ -296,9 +362,10 @@ var RPSGraph = function() {
           .style('text-anchor', 'middle');
       }
     });
+    add_hover();
     return this;
   };
-  this.horiz_grid = function(bool) {
+  this.h_grid = function(bool) {
     if (bool === undefined) { return hoverable; }
     if (bool === false) {
       grid_layer.selectAll('.grid-line').remove();
@@ -314,6 +381,31 @@ var RPSGraph = function() {
       .attr('y2', function(d) { return y(d); });
     return this;
   };
+  this.ghost = function(arr) {
+    if (!draggable) {
+      console.log('Graph must be draggable in order to use ghost().');
+      return this;
+    }
+    if (!arr) { return graph_data.ghost; }
+    graph_data.ghost = arr;
+    ghost_layer.append('path')
+      .attr('d', _area(arr))
+      .attr('class', 'ghost_area')
+      .style('fill', '#dddddd');
+    return this;
+  };
+  this.default_line = function(arr) {
+    if (!draggable) {
+      console.log('Graph must be draggable in order to use default_line().');
+      return this;
+    }
+    if (!arr) { return graph_data.default_line; }
+    graph_data.default_line = arr;
+    default_layer.append('path')
+      .attr('d', _line(arr))
+      .attr('class', 'default_line');
+    return this;
+  };
   this.draw = function() {
     graph_data.active = graph_data.data[0];
     x_axis = d3.svg.axis().scale(x).orient('bottom');
@@ -325,32 +417,13 @@ var RPSGraph = function() {
       .x(function(d) { return x(d.x); })
       .y0(function() { return y(0); })
       .y1(function(d) { return y(d.y); });
-      //TODO: Declare in global scope
-      //TODO: Need to distinguish data when draggable
-
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
       .attr('d', function(d) { return _area(d); })
       .attr('class', 'chart-line')
       .style('fill', function(d, i) {return colors(i); });
-    mask_layer.append('rect').attr('class', 'mask')
-      .attr('width', width + padding.left + padding.right).attr('height', padding.top)
-      .attr('transform', 'translate(0,0)');
-    mask_layer.append('rect').attr('class', 'mask')
-      .attr('width', width + padding.left + padding.right).attr('height', padding.bottom)
-      .attr('transform', 'translate(0,' + (height + padding.top) + ')');
-    mask_layer.append('rect').attr('class', 'mask')
-      .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
-      .attr('transform', 'translate(0,0)');
-    mask_layer.append('rect').attr('class', 'mask')
-      .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
-      .attr('transform', 'translate(' + (width + padding.left) + ',0)');
-    axes_layer.append('g')
-      .attr('transform', 'translate(0,' + (height + 5) + ')')
-      .call(x_axis);
-    axes_layer.append('g')
-      .attr('transform', 'translate(-5,0)')
-      .call(y_axis);
+    draw_axes();
+    mask_edges();
     return this;
   };
 };
