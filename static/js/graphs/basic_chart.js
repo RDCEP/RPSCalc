@@ -146,7 +146,7 @@ var RPSGraph = function() {
       adjust_dot.on('mouseout', function() { return null; });
     },
     drag_start = function(d, i) {
-      console.log('start');
+      handles.filter(function(_d) { return _d == d;}).select('.segment-label-text').classed('hidden', labels);
       graph_data.active = graph_data.data[0];
       adjust_dot = d3.select(this);
       adjust_data.start = d.y;
@@ -161,8 +161,8 @@ var RPSGraph = function() {
       redraw();
     },
     drag_end = function(d) {
-      console.log('end');
       //TODO: update session
+      handles.filter(function(_d) { return _d == d;}).select('.segment-label-text').classed('hidden', !labels);
       adjust_data.stop = graph_data.active.filter(function(_d) { return _d === d; })[0].data;
       adjust_dot = null;
       graph_data.data[0] = graph_data.active;
