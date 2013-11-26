@@ -1,4 +1,4 @@
-var RPSGraph = function() {
+var RPSStackedAreaGraph = function() {
   'use strict';
   var width = 700,
     height = 345,
@@ -19,9 +19,11 @@ var RPSGraph = function() {
     default_layer,
     mask_layer,
     axes_layer,
+    period_layer,
     handle_layer,
     button_layer,
     segment_width,
+    periods,
     handles,
     tool_tip,
     x_axis,
@@ -35,19 +37,25 @@ var RPSGraph = function() {
     color_list = [
       //d3.rgb(0, 0, 0), //black
       d3.rgb(86, 180, 233), // sky blue
-      d3.rgb(230, 159, 0),  // orange
       d3.rgb(0, 158, 115),  // bluish green
       d3.rgb(240, 228, 66), // yellow
       d3.rgb(0, 114, 178),  // blue
       d3.rgb(213, 94, 0),   // vermilion
+      d3.rgb(230, 159, 0),  // orange
       d3.rgb(204, 121, 167) // reddish purple
     ],
     colors = function(i) {
       return color_list[i % color_list.length];
     },
+    hover_label_x = function(_d) {
+      return _d.x;
+    },
+    hover_label_y = function(_d) {
+      return _d.y;
+    },
     hover_legend = function(_d) {
       var legend = {};
-      legend.html = _d.x + ':&nbsp;' + _d.y;
+      legend.html = hover_label_x(_d) + ':&nbsp;' + hover_label_y(_d);
       legend.x = x(_d.x) + 10;
       legend.y = y(_d.y) - padding.top - 10;
       return legend;
@@ -305,6 +313,7 @@ var RPSGraph = function() {
     add_drag_hover();
     return this;
   };
+//  this.labeled(bool)
   this.hoverable = function(bool, labels) {
     if (bool === undefined) { return hoverable; }
     if (bool === false) {
@@ -335,6 +344,8 @@ var RPSGraph = function() {
       d3.select(this).append('circle')
         .classed('data-point', function(d) { return visible; })
         .classed('hoverable', function(d) { return visible; })
+        .attr('data-x', function(d) { return d.x; })
+        .attr('data-y', function(d) { return d.y; })
         .attr('cx', segment_width / 2)
         .attr('cy', function() { return y(d.y); })
         .attr('r', function() { return visible ? 6 : 0; });
@@ -403,18 +414,27 @@ var RPSGraph = function() {
     graph_data.active = graph_data.data[0];
     x_axis = d3.svg.axis().scale(x).orient('bottom');
     y_axis = d3.svg.axis().scale(y).orient('left');
-    _line = d3.svg.line()
-      .x(function(d) { return x(d.x); })
-      .y(function(d) { return y(d.y); });
-    _area = d3.svg.area()
-      .x(function(d) { return x(d.x); })
-      .y0(function() { return y(0); })
-      .y1(function(d) { return y(d.y); });
-    graph_data.graphs = graph_layer.selectAll('.chart-line')
-      .data(graph_data.data).enter().append('path')
-      .attr('d', function(d) { return _area(d); })
-      .attr('class', 'chart-line')
+//    _line = d3.svg.line()
+//      .x(function(d) { return x(d.x); })
+//      .y(function(d) { return y(d.y); });
+//    _area = d3.svg.area()
+//      .x(function(d) { return x(d.x); })
+//      .y0(function() { return y(0); })
+//      .y1(function(d) { return y(d.y); });
+    /* changed */
+    segment_width = x(graph_data.data[1][1].x) - x(graph_data.data[0][1].x);
+    graph_data.graphs = graph_layer.selectAll('g')
+      .data(graph_data.data).enter().append('g')
+      .attr('transform', function(d) { return 'translate(' + x(d[0].x) + ',0)'; });
+    graph_data.graphs.each(function(d) {
+      d3.select(this).selectAll('.chart-stacked-area')
+      .data(d).enter().append('rect')
+      .attr('width', segment_width)
+      .attr('height', function(d) { return y(100 - d.y); })
+      .attr('y', function(d) { return (d.type === 'wind') ? y(d.y0 + d.y) : (d.type === 'solar') ? y(d.y) : y(100); })
+      .attr('class', 'chart-stacked-area')
       .style('fill', function(d, i) {return colors(i); });
+    });
     draw_axes();
     mask_edges();
     return this;
