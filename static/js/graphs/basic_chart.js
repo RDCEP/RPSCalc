@@ -46,6 +46,7 @@ var RPSGraph = function() {
     segment_width,
     x_axis,
     y_axis,
+    masks,
     /**********************
      X-segments and handles
      **********************/
@@ -120,6 +121,7 @@ var RPSGraph = function() {
         d3.select(this).select('.segment-rect')
           .on('mouseover', function() {
             update_legend(d);
+            tool_tip.classed('hidden', !hoverable);
             d3.selectAll('.data-point.tight').classed('active', false);
             d3.selectAll('.data-point.tight').classed('hovered', false);
             d3.select(this.parentNode.getElementsByClassName('tight')[0])
@@ -129,7 +131,6 @@ var RPSGraph = function() {
             adjust_dot = null;
             d3.select(this.parentNode.getElementsByClassName('tight')[0])
               .classed('active', false);
-            tool_tip.classed('active', true);
           });
       });
     },
@@ -142,6 +143,7 @@ var RPSGraph = function() {
         d3.select(this).selectAll('.data-point.loose')
           .on('mouseover', function() {
             update_legend(d);
+            tool_tip.classed('hidden', !hoverable);
             d3.selectAll('.data-point.tight').classed('active', false);
             d3.selectAll('.data-point.tight').classed('hovered', false);
             handle.select('.data-point.tight')
@@ -211,6 +213,12 @@ var RPSGraph = function() {
       mask_layer.append('rect').attr('class', 'mask')
         .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
         .attr('transform', 'translate(' + (width + padding.left) + ',0)');
+      masks = mask_layer.selectAll('.mask');
+      if (hoverable) {
+        masks.on('mouseover', function() {
+          tool_tip.classed('hidden', true);
+        });
+      }
     },
     draw_axes = function() {
       /*
