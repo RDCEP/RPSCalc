@@ -22,6 +22,8 @@ path.domain { stroke: #999999; stroke-width: 2; }
 .data-point.draggable { pointer-events: all; }
 .data-point.draggable.hovered { fill: black; }
 
+.chart-wrap { position: relative; }
+
 #tool_tip { position: absolute; visibility: hidden; padding: 2px 5px; color: white; background-color: black; opacity: 0.8; font-size: 0.7em; pointer-events: none; }
 #tool_tip.active { visibility: visible; }
 

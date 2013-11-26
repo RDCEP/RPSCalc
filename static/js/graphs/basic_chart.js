@@ -83,16 +83,6 @@ var RPSGraph = function() {
        */
       return _d;
     },
-    hover_legend = function(_d) {
-      /*
-       Return content for hover legend
-       */
-      var legend = {};
-      legend.html = format_x(_d.x) + ':&nbsp;' + format_y(_d.y);
-      legend.x = x(_d.x) + 10;
-      legend.y = y(_d.y) - padding.top - 10;
-      return legend;
-    },
     redraw = function() {
       graph_data.graphs.each(function(d, i) {
         d3.select(this).attr('d', _area(graph_data.active));
@@ -116,14 +106,10 @@ var RPSGraph = function() {
       d3.select('.y.axis').call(y_axis);
     },
     update_legend = function(_d) {
-      var legend = hover_legend(_d);
       tool_tip
-        .html(function() {
-          return legend.html;
-        })
-        .style('position', 'absolute')
-        .style('left', legend.x + 'px')
-        .style('top', legend.y + 'px')
+        .html(format_x(_d.x) + ':&nbsp;' + format_y(_d.y))
+        .style('left', (x(_d.x) + padding.left + 10) + 'px')
+        .style('top', (y(_d.y) + padding.top) + 'px')
         .classed('active', true);
     },
     add_hover = function() {
@@ -313,16 +299,6 @@ var RPSGraph = function() {
       return this;
     }
     color_list = func;
-    return this;
-  };
-  this.hover_legend = function(func) {
-    //TODO: Build legends
-    if (!func) { return hover_legend; }
-    if (typeof func !== 'function') {
-      console.log('hover_legend() expects a function.');
-      return this;
-    }
-    hover_legend = func;
     return this;
   };
   this.data = function(val) {
