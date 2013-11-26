@@ -85,7 +85,7 @@ var RPSGraph = function() {
     },
     hover_legend = function(_d) {
       /*
-       Return content for hever legend
+       Return content for hover legend
        */
       var legend = {};
       legend.html = format_x(_d.x) + ':&nbsp;' + format_y(_d.y);
@@ -379,12 +379,12 @@ var RPSGraph = function() {
   };
   this.hoverable = function(bool, labels) {
     if (bool === undefined) { return hoverable; }
+    hoverable = bool;
     if (bool === false) {
       d3.selectAll('.data-point.tight').classed('hoverable', false);
       remove_hover();
       return this;
     }
-    hoverable = bool;
     tool_tip = d3.select(svg_id).append('div').attr('id', 'tool_tip');
     segment_width = x(graph_data.data[0][1].x) - x(graph_data.data[0][0].x);
     handles = handle_layer.selectAll('.segment')
@@ -473,7 +473,7 @@ var RPSGraph = function() {
     return this;
   };
   this.format_y = function(func) {
-    if (func === 'undefined') { return format_x; }
+    if (func === 'undefined') { return format_y; }
     format_y = func;
     return this;
   };
