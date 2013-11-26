@@ -499,4 +499,9 @@ var RPSGraph = function() {
   };
 };
 
-var RPSGraphDraggable = new RPSGraph();
+var RPSGraphDraggable = function() {
+  RPSGraph.call(this);
+  this.prototype = new RPSGraph();
+
+};
+RPSGraphDraggable.prototype.constructor = RPSGraphDraggable;
