@@ -3,13 +3,34 @@ var RPSGraph = function() {
   var width = 700,
     height = 345,
     padding = {top: 30, right: 30, bottom: 30, left: 30},
+    /***********************
+     Scale and chart objects
+     ***********************/
     x_domain = [0, 1],
     y_domain = [0, 1],
     x_range = [0, width],
     y_range = [height, 0],
     x,
     y,
+    _line = d3.svg.line().x(function(d) { return x(d.x); }).y(function(d) { return y(d.y); }),
+    _area = d3.svg.area().x(function(d) { return x(d.x); }).y0(function() { return y(0); }).y1(function(d) { return y(d.y); }),
+    /**************
+     Data and color
+     **************/
     graph_data = {graphs: [], data: [], limit: [], inputs: [], active: [], ghost: [], default_line: [] },
+    color_list = [
+      //d3.rgb(0, 0, 0), //black
+      d3.rgb(86, 180, 233), // sky blue
+      d3.rgb(230, 159, 0),  // orange
+      d3.rgb(0, 158, 115),  // bluish green
+      d3.rgb(240, 228, 66), // yellow
+      d3.rgb(0, 114, 178),  // blue
+      d3.rgb(213, 94, 0),   // vermilion
+      d3.rgb(204, 121, 167) // reddish purple
+    ],
+    /*********************
+     SVG and layer objects
+     *********************/
     svg_id = '#',
     layer_translation,
     svg,
@@ -23,42 +44,51 @@ var RPSGraph = function() {
     handle_layer,
     button_layer,
     segment_width,
+    x_axis,
+    y_axis,
+    /**********************
+     X-segments and handles
+     **********************/
     periods,
     handles,
     tool_tip,
     input_form,
-    x_axis,
-    y_axis,
-    _line = d3.svg.line().x(function(d) { return x(d.x); }).y(function(d) { return y(d.y); }),
-    _area = d3.svg.area().x(function(d) { return x(d.x); }).y0(function() { return y(0); }).y1(function(d) { return y(d.y); }),
     adjust_data = {step: 0.5, start: 0, stop: 0, index: 0},
     adjust_dot,
+    /******
+     States
+     ******/
     draggable = false,
     labels = false,
     hoverable = false,
     legend = false,
-    color_list = [
-      //d3.rgb(0, 0, 0), //black
-      d3.rgb(86, 180, 233), // sky blue
-      d3.rgb(230, 159, 0),  // orange
-      d3.rgb(0, 158, 115),  // bluish green
-      d3.rgb(240, 228, 66), // yellow
-      d3.rgb(0, 114, 178),  // blue
-      d3.rgb(213, 94, 0),   // vermilion
-      d3.rgb(204, 121, 167) // reddish purple
-    ],
+    /***************
+     Private methods
+     ***************/
     colors = function(i) {
+      /*
+       Return color from array
+       */
       return color_list[i % color_list.length];
     },
-    hover_label_x = function(_d) {
-      return _d.x;
+    format_x = function(_d) {
+      /*
+       Return x-value for hover legend, label, axis
+       */
+      return _d;
     },
-    hover_label_y = function(_d) {
-      return _d.y;
+    format_y = function(_d) {
+      /*
+       Return y-value for hover legend, label, axis
+       */
+      return _d;
     },
     hover_legend = function(_d) {
+      /*
+       Return content for hever legend
+       */
       var legend = {};
-      legend.html = hover_label_x(_d) + ':&nbsp;' + hover_label_y(_d);
+      legend.html = format_x(_d.x) + ':&nbsp;' + format_y(_d.y);
       legend.x = x(_d.x) + 10;
       legend.y = y(_d.y) - padding.top - 10;
       return legend;
@@ -73,7 +103,7 @@ var RPSGraph = function() {
 //      default_trajectory.attr('d', trajectory_line(dt));
       handles.data(graph_data.active)
         .each(function(d) {
-          d3.select(this).select('.data-point')
+          d3.select(this).selectAll('.data-point')
             .attr('cy', function() {return y(d.y); });
           d3.select(this).select('.segment-label-bkgd')
             .attr('y', y(d.y) - 40);
@@ -85,6 +115,17 @@ var RPSGraph = function() {
         });
       d3.select('.y.axis').call(y_axis);
     },
+    update_legend = function(_d) {
+      var legend = hover_legend(_d);
+      tool_tip
+        .html(function() {
+          return legend.html;
+        })
+        .style('position', 'absolute')
+        .style('left', legend.x + 'px')
+        .style('top', legend.y + 'px')
+        .classed('active', true);
+    },
     add_hover = function() {
       /*
        Attach mouse events to <rect>s with hoverable handles (toggle .active)
@@ -92,24 +133,15 @@ var RPSGraph = function() {
       handles.each(function(d) {
         d3.select(this).select('.segment-rect')
           .on('mouseover', function() {
-            var legend = hover_legend(d);
-            d3.selectAll('.data-point').classed('active', false);
-            d3.selectAll('.data-point').classed('hovered', false);
-            d3.select(this.parentNode.getElementsByClassName('data-point')[0])
-              .classed('active', true);
-            //TODO: return html, x, and y from hover_legend()?
-            tool_tip
-              .html(function() {
-                return legend.html;
-              })
-              .style('position', 'absolute')
-              .style('left', legend.x + 'px')
-              .style('top', legend.y + 'px')
+            update_legend(d);
+            d3.selectAll('.data-point.tight').classed('active', false);
+            d3.selectAll('.data-point.tight').classed('hovered', false);
+            d3.select(this.parentNode.getElementsByClassName('tight')[0])
               .classed('active', true);
           })
           .on('mouseout', function() {
             adjust_dot = null;
-            d3.select(this.parentNode.getElementsByClassName('data-point')[0])
+            d3.select(this.parentNode.getElementsByClassName('tight')[0])
               .classed('active', false);
             tool_tip.classed('active', true);
           });
@@ -119,12 +151,15 @@ var RPSGraph = function() {
       /*
        Attach mouse events to draggable handles (toggle .active)
        */
-      handles.each(function() {
-        d3.select(this).select('.data-point')
+      handles.each(function(d) {
+        var handle = d3.select(this);
+        d3.select(this).selectAll('.data-point.loose')
           .on('mouseover', function() {
-            d3.selectAll('.data-point').classed('active', false);
-            d3.selectAll('.data-point').classed('hovered', false);
-            d3.select(this).classed('active', true).classed('hovered', true);
+            update_legend(d);
+            d3.selectAll('.data-point.tight').classed('active', false);
+            d3.selectAll('.data-point.tight').classed('hovered', false);
+            handle.select('.data-point.tight')
+              .classed('active', true).classed('hovered', true);
           })
           .on('mouseout', function() {
             d3.select(this).classed('active', false).classed('hovered', false);
@@ -146,7 +181,8 @@ var RPSGraph = function() {
       adjust_dot.on('mouseout', function() { return null; });
     },
     drag_start = function(d, i) {
-      handles.filter(function(_d) { return _d == d;}).select('.segment-label-text').classed('hidden', labels);
+      handles.filter(function(_d) { return _d === d; }).select('.segment-label-text').classed('hidden', labels);
+      tool_tip.classed('hidden', true);
       graph_data.active = graph_data.data[0];
       adjust_dot = d3.select(this);
       adjust_data.start = d.y;
@@ -162,7 +198,9 @@ var RPSGraph = function() {
     },
     drag_end = function(d) {
       //TODO: update session
-      handles.filter(function(_d) { return _d == d;}).select('.segment-label-text').classed('hidden', !labels);
+      update_legend(d);
+      tool_tip.classed('hidden', false);
+      handles.filter(function(_d) { return _d === d; }).select('.segment-label-text').classed('hidden', !labels);
       adjust_data.stop = graph_data.active.filter(function(_d) { return _d === d; })[0].data;
       adjust_dot = null;
       graph_data.data[0] = graph_data.active;
@@ -312,7 +350,7 @@ var RPSGraph = function() {
     //TODO: Finish this stub
     handles.each(function(d, i) {
       var handle = d3.select(this);
-      handle.select('.data-point').classed('draggable', true).call(graph_drag, i);
+      handle.selectAll('.data-point').classed('draggable', true).call(graph_drag, i);
       //TODO: Add data- attributes
       handle.append('rect')
         .attr('class', 'segment-label-bkgd')
@@ -342,7 +380,7 @@ var RPSGraph = function() {
   this.hoverable = function(bool, labels) {
     if (bool === undefined) { return hoverable; }
     if (bool === false) {
-      d3.selectAll('.data-point').classed('hoverable', false);
+      d3.selectAll('.data-point.tight').classed('hoverable', false);
       remove_hover();
       return this;
     }
@@ -369,11 +407,21 @@ var RPSGraph = function() {
       d3.select(this).append('circle')
         .classed('data-point', function(d) { return visible; })
         .classed('hoverable', function(d) { return visible; })
+        .classed('tight', true)
         .attr('data-x', function(d) { return d.x; })
         .attr('data-y', function(d) { return d.y; })
         .attr('cx', segment_width / 2)
         .attr('cy', function() { return y(d.y); })
-        .attr('r', function() { return visible ? 6 : 0; });
+        .attr('r', function() { return visible ? 4 : 0; });
+      d3.select(this).append('circle')
+        .classed('data-point', function(d) { return visible; })
+        .classed('hoverable', function(d) { return visible; })
+        .classed('loose', true)
+        .attr('data-x', function(d) { return d.x; })
+        .attr('data-y', function(d) { return d.y; })
+        .attr('cx', segment_width / 2)
+        .attr('cy', function() { return y(d.y); })
+        .attr('r', function() { return visible ? segment_width / 2 : 0; });
     });
     add_hover();
     return this;
@@ -419,6 +467,16 @@ var RPSGraph = function() {
       .attr('class', 'default_line');
     return this;
   };
+  this.format_x = function(func) {
+    if (func === 'undefined') { return format_x; }
+    format_x = func;
+    return this;
+  };
+  this.format_y = function(func) {
+    if (func === 'undefined') { return format_x; }
+    format_y = func;
+    return this;
+  };
   this.draw = function() {
     graph_data.active = graph_data.data[0];
     x_axis = d3.svg.axis().scale(x).orient('bottom');
@@ -440,3 +498,5 @@ var RPSGraph = function() {
     return this;
   };
 };
+
+var RPSGraphDraggable = new RPSGraph();
