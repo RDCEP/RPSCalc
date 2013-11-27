@@ -167,6 +167,7 @@ var RPSGraph = function() {
        */
       adjust_dot.on('mouseover', function() { return null; });
       adjust_dot.on('mouseout', function() { return null; });
+      d3.selectAll('.data-point').on('mouseover', function() { return null; });
     },
     drag_start = function(d, i) {
       handles.filter(function(_d) { return _d === d; }).select('.segment-label-text').classed('hidden', labels);
@@ -378,8 +379,9 @@ var RPSGraph = function() {
       .attr('class', 'segment')
       .attr('transform', function(d) {return 'translate(' + (x(d.x) - segment_width / 2) + ',0)'; });
     handles.each(function(d, i) {
-      var visible = ((x(d.x) >= x.range()[0]) && (x(d.x) <= x.range()[1]));
-      d3.select(this).append('rect')
+      var visible = ((x(d.x) >= x.range()[0]) && (x(d.x) <= x.range()[1])),
+        handle = d3.select(this);
+      handle.append('rect')
         .attr('class', 'segment-rect')
         .attr('height', y.range()[0])
         .attr('width', segment_width)
@@ -388,18 +390,18 @@ var RPSGraph = function() {
         .attr('data-legend', function(d) { return d.x + ':&nbsp;' + d.y; })
         .style('fill', 'transparent')
         .style('pointer-events', function() { return visible ? 'all' : 'none'; });
-      d3.select(this).append('circle')
-        .classed('data-point', function(d) { return visible; })
-        .classed('hoverable', function(d) { return visible; })
+      handle.append('circle')
+        .classed('data-point', function() { return visible; })
+        .classed('hoverable', function() { return visible; })
         .classed('tight', true)
         .attr('data-x', function(d) { return d.x; })
         .attr('data-y', function(d) { return d.y; })
         .attr('cx', segment_width / 2)
         .attr('cy', function() { return y(d.y); })
         .attr('r', function() { return visible ? 4 : 0; });
-      d3.select(this).append('circle')
-        .classed('data-point', function(d) { return visible; })
-        .classed('hoverable', function(d) { return visible; })
+      handle.append('circle')
+        .classed('data-point', function() { return visible; })
+        .classed('hoverable', function() { return visible; })
         .classed('loose', true)
         .attr('data-x', function(d) { return d.x; })
         .attr('data-y', function(d) { return d.y; })
