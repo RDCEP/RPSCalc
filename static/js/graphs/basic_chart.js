@@ -2,10 +2,11 @@ var RPSGraph = function() {
   'use strict';
   var width = 700,
     height = 345,
-    padding = {top: 30, right: 30, bottom: 30, left: 30},
+    padding = {top: 10, right: 10, bottom: 30, left: 30},
     /***********************
      Scale and chart objects
      ***********************/
+    _dbl_domains,
     x_domain = [0, 1],
     y_domain = [0, 1],
     x_range = [0, width],
@@ -17,7 +18,7 @@ var RPSGraph = function() {
     /**************
      Data and color
      **************/
-    graph_data = {graphs: [], data: [], limit: [], inputs: [], active: [], ghost: [], default_line: [] },
+    graph_data = {graphs: [], data: [], inputs: [], active: [], ghost: [], default_line: [] },
     color_list = [
       //d3.rgb(0, 0, 0), //black
       d3.rgb(86, 180, 233), // sky blue
@@ -47,22 +48,22 @@ var RPSGraph = function() {
     x_axis,
     y_axis,
     masks,
+    switches_list,
     /**********************
      X-segments and handles
      **********************/
     periods,
     handles,
     tool_tip,
-    input_form,
+    chart_inputs,
     adjust_data = {step: 0.5, start: 0, stop: 0, index: 0},
     adjust_dot,
     /******
      States
      ******/
-    draggable = false,
-    labels = false,
-    hoverable = false,
-    legend = false,
+    _draggable = false,
+    _labels = false,
+    _hoverable = false,
     /***************
      Private methods
      ***************/
@@ -121,7 +122,7 @@ var RPSGraph = function() {
         d3.select(this).select('.segment-rect')
           .on('mouseover', function() {
             update_legend(d);
-            tool_tip.classed('hidden', !hoverable);
+            tool_tip.classed('hidden', !_hoverable);
             d3.selectAll('.data-point.tight').classed('active', false);
             d3.selectAll('.data-point.tight').classed('hovered', false);
             d3.select(this.parentNode.getElementsByClassName('tight')[0])
@@ -143,7 +144,7 @@ var RPSGraph = function() {
         d3.select(this).selectAll('.data-point.loose')
           .on('mouseover', function() {
             update_legend(d);
-            tool_tip.classed('hidden', !hoverable);
+            tool_tip.classed('hidden', !_hoverable);
             d3.selectAll('.data-point.tight').classed('active', false);
             d3.selectAll('.data-point.tight').classed('hovered', false);
             handle.select('.data-point.tight')
@@ -170,7 +171,7 @@ var RPSGraph = function() {
       d3.selectAll('.data-point').on('mouseover', function() { return null; });
     },
     drag_start = function(d, i) {
-      handles.filter(function(_d) { return _d === d; }).select('.segment-label-text').classed('hidden', labels);
+      handles.filter(function(_d) { return _d === d; }).select('.segment-label-text').classed('hidden', _labels);
       tool_tip.classed('hidden', true);
       graph_data.active = graph_data.data[0];
       adjust_dot = d3.select(this);
@@ -189,7 +190,7 @@ var RPSGraph = function() {
       //TODO: update session
       update_legend(d);
       tool_tip.classed('hidden', false);
-      handles.filter(function(_d) { return _d === d; }).select('.segment-label-text').classed('hidden', !labels);
+      handles.filter(function(_d) { return _d === d; }).select('.segment-label-text').classed('hidden', !_labels);
       adjust_data.stop = graph_data.active.filter(function(_d) { return _d === d; })[0].data;
       adjust_dot = null;
       graph_data.data[0] = graph_data.active;
@@ -211,11 +212,11 @@ var RPSGraph = function() {
       mask_layer.append('rect').attr('class', 'mask')
         .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
         .attr('transform', 'translate(0,0)');
-      mask_layer.append('rect').attr('class', 'mask')
-        .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
+      mask_layer.append('rect').attr('class', 'mask right')
+        .attr('width', padding.right).attr('height', height + padding.top + padding.bottom)
         .attr('transform', 'translate(' + (width + padding.left) + ',0)');
       masks = mask_layer.selectAll('.mask');
-      if (hoverable) {
+      if (_hoverable) {
         masks.on('mouseover', function() {
           tool_tip.classed('hidden', true);
         });
@@ -232,6 +233,26 @@ var RPSGraph = function() {
         .attr('transform', 'translate(-5,0)')
         .call(y_axis);
     },
+    edit_switch_click = function() {
+      d3.event.preventDefault();
+      d3.selectAll(this.parentNode.getElementsByClassName('switch')).each(function() {
+        var current_switch = d3.select(this),
+          layer_toggle = d3.select(current_switch.attr('data-layer-toggle'));
+        layer_toggle.classed('hidden', !layer_toggle.classed('hidden'));
+        current_switch.classed('active', !current_switch.classed('active'));
+      });
+    },
+    domain_switch_click = function() {
+      d3.event.preventDefault();
+      var active_switch = d3.select(this);
+      d3.selectAll(this.parentNode.getElementsByClassName('switch')).each(function() {
+        var current_switch = d3.select(this);
+        current_switch.classed('active', active_switch.attr('data-domain') == current_switch.attr('data-domain'));
+        y.domain([y.domain()[0], active_switch.attr('data-domain')]);
+//        current_switch.classed('active', !current_switch.classed('active'));
+        redraw();
+      });
+    },
     add_labels = function() {
 
     },
@@ -241,6 +262,7 @@ var RPSGraph = function() {
   this.select = function(el) {
     if (!el) { return svg_id; }
     svg_id = el;
+    switches_list = d3.select(el).append('div').attr('id', 'switches');
     layer_translation = 'translate(' + padding.left + ',' + padding.top + ')';
     svg = d3.select(svg_id).append('svg').attr('width', width + padding.left + padding.right)
       .attr('height', height + padding.top + padding.bottom);
@@ -250,8 +272,8 @@ var RPSGraph = function() {
     default_layer = svg.append('g').attr('transform', layer_translation);
     mask_layer = svg.append('g').attr('id', 'mask_layer');
     axes_layer = svg.append('g').attr('id', 'axes_layer').attr('transform', layer_translation);
-    handle_layer = svg.append('g').attr('id', 'handles_layer').attr('transform', layer_translation);
-    button_layer = svg.append('g').attr('id', 'buttons_layer').attr('transform', layer_translation);
+    handle_layer = svg.append('g').attr('id', 'handle_layer').attr('transform', layer_translation);
+    button_layer = svg.append('g').attr('id', 'button_layer').attr('transform', layer_translation);
     return this;
   };
   this.x = function(val) {
@@ -315,16 +337,29 @@ var RPSGraph = function() {
     graph_data.data = val;
     return this;
   };
-  this.draggable = function(bool, _labels) {
-    if (bool === undefined) { return draggable; }
-    if (_labels === undefined) { labels = false; }
-    else { labels = _labels; }
-    if (!hoverable) {
-      draggable = false;
+  this.double_domain = function(arr) {
+    if (arr === undefined) { return _dbl_domains; }
+    _dbl_domains = arr;
+    var domain_switch = switches_list.append('span').attr('id', 'domain_switch').attr('class', 'switch-group');
+    domain_switch.append('span').text('[ ');
+    domain_switch.append('a').attr('id', 'domain_switch_' + arr[0]).attr('class', 'switch active')
+      .attr('data-domain', arr[0]).text(arr[0]).on('click', domain_switch_click);
+    domain_switch.append('span').text(' | ');
+    domain_switch.append('a').attr('id', 'domain_switch' + arr[1]).attr('class', 'switch')
+      .attr('data-domain', arr[1]).text(arr[1]).on('click', domain_switch_click);
+    domain_switch.append('span').text(' ]');
+    return this;
+  };
+  this.draggable = function(bool, _label) {
+    if (bool === undefined) { return _draggable; }
+    if (_label === undefined) { _labels = false; }
+    else { _labels = _label; }
+    if (!_hoverable) {
+      _draggable = false;
       console.log('Cannot set draggable unless hoverable() is explicitly set to true first.');
       return this;
     }
-    draggable = bool;
+    _draggable = bool;
     if (bool === false) {
       d3.selectAll('.data-point').classed('draggable', false);
       d3.selectAll('.segment-label-bkgd').classed('hidden', true);
@@ -332,14 +367,14 @@ var RPSGraph = function() {
       remove_drag_hover();
       return this;
     }
-    //TODO: Finish this stub
+    // Add draggable class and labels to handles
     handles.each(function(d, i) {
       var handle = d3.select(this);
       handle.selectAll('.data-point').classed('draggable', true).call(graph_drag, i);
       //TODO: Add data- attributes
       handle.append('rect')
         .attr('class', 'segment-label-bkgd')
-        .classed('hidden', function() { return !labels; })
+        .classed('hidden', function() { return !_labels; })
         .attr('height', 20)
         .attr('width', segment_width - 4)
         .attr('x', 2)
@@ -347,7 +382,7 @@ var RPSGraph = function() {
         .style('fill', 'transparent');
       handle.append('text')
         .attr('class', 'segment-label-text')
-        .classed('hidden', function() { return !labels; })
+        .classed('hidden', function() { return !_labels; })
         .attr('x', segment_width / 2)
         .attr('y', y(d.y) - 22)
         .style('text-anchor', 'middle')
@@ -355,16 +390,41 @@ var RPSGraph = function() {
           return (d.x > x.invert(0)) ? d3.format('.1f')(d.y) : null;
         });
     });
-    input_form = d3.select(svg_id).append('form')
+    // Add toggle switch
+    var edit_switch = switches_list.append('span').attr('id', 'edit_switch').attr('class', 'switch-group');
+    edit_switch.append('span').text('[ ');
+    edit_switch.append('a').attr('id', 'drag_switch').attr('class', 'switch active')
+      .attr('data-layer-toggle', '#handle_layer').text('drag').on('click', edit_switch_click);
+    edit_switch.append('span').text(' | ');
+    edit_switch.append('a').attr('id', 'type_switch').attr('class', 'switch')
+      .attr('data-layer-toggle', '#chart_inputs').text('type').on('click', edit_switch_click);
+    edit_switch.append('span').text(' ]');
+    chart_inputs = d3.select(svg_id).append('form')
       .attr('id', 'chart_inputs')
       .style('padding-left', padding.left + 'px')
       .classed('hidden', true);
+    // Add inputs
+    graph_data.inputs = chart_inputs.selectAll('input')
+      .data(graph_data.data[0]).enter()
+      .append('input').attr('type', 'text').attr('class', 'chart-input')
+      .attr('data-x', function(d) { return d.x; }).property('value', function(d) { return format_y(d.y); })
+      .style('width', (segment_width - 14) + 'px')
+      .style('display', function(d) {return ((x(d.x) > x.range()[0]) && (x(d.x) <= x.range()[1])) ? 'block' : 'none'; })
+      .on('change', function(d) {
+        var _v = (d3.select(this).property('value'));
+        //TODO: Better max and min
+        _v = (_v > 100) ? 100 : (_v < 0) ? 0 : _v;
+        graph_data.data[0].filter(function(_d) { return _d.x === d.x; })[0].y = _v;
+        d3.select(this).property('value', _v);
+        redraw();
+//        rehover();
+      });
     add_drag_hover();
     return this;
   };
-  this.hoverable = function(bool, labels) {
-    if (bool === undefined) { return hoverable; }
-    hoverable = bool;
+  this.hoverable = function(bool) {
+    if (bool === undefined) { return _hoverable; }
+    _hoverable = bool;
     if (bool === false) {
       d3.selectAll('.data-point.tight').classed('hoverable', false);
       remove_hover();
@@ -413,7 +473,8 @@ var RPSGraph = function() {
     return this;
   };
   this.h_grid = function(bool) {
-    if (bool === undefined) { return hoverable; }
+    //TODO: Don't return null if args undefined
+    if (bool === undefined) { return null; }
     if (bool === false) {
       grid_layer.selectAll('.grid-line').remove();
       return this;
@@ -429,7 +490,7 @@ var RPSGraph = function() {
     return this;
   };
   this.ghost = function(arr) {
-    if (!draggable) {
+    if (!_draggable) {
       console.log('Graph must be draggable in order to use ghost().');
       return this;
     }
@@ -442,7 +503,7 @@ var RPSGraph = function() {
     return this;
   };
   this.default_line = function(arr) {
-    if (!draggable) {
+    if (!_draggable) {
       console.log('Graph must be draggable in order to use default_line().');
       return this;
     }
