@@ -11,10 +11,10 @@ var RPSGraph = function() {
     y_domain = [0, 1],
     x_range = [0, width],
     y_range = [height, 0],
-    x,
-    y,
-    _line = d3.svg.line().x(function(d) { return x(d.x); }).y(function(d) { return y(d.y); }),
-    _area = d3.svg.area().x(function(d) { return x(d.x); }).y0(function() { return y(0); }).y1(function(d) { return y(d.y); }),
+    _x,
+    _y,
+    _line = d3.svg.line().x(function(d) { return _x(d.x); }).y(function(d) { return _y(d.y); }),
+    _area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function() { return _y(0); }).y1(function(d) { return _y(d.y); }),
     /**************
      Data and color
      **************/
@@ -96,22 +96,22 @@ var RPSGraph = function() {
       handles.data(graph_data.active)
         .each(function(d) {
           d3.select(this).selectAll('.data-point')
-            .attr('cy', function() {return y(d.y); });
+            .attr('cy', function() {return _y(d.y); });
           d3.select(this).select('.segment-label-bkgd')
-            .attr('y', y(d.y) - 40);
+            .attr('y', _y(d.y) - 40);
           d3.select(this).select('.segment-label-text')
             .text(function(d) {
-              return (d.x > x.invert(0)) ? d3.format('.1f')(d.y) : null;
+              return (d.x > _x.invert(0)) ? d3.format('.1f')(d.y) : null;
             })
-            .attr('y', y(d.y) - 22);
+            .attr('y', _y(d.y) - 22);
         });
       d3.select('.y.axis').call(y_axis);
     },
     update_legend = function(_d) {
       tool_tip
         .html(format_x(_d.x) + ':&nbsp;' + format_y(_d.y))
-        .style('left', (x(_d.x) + padding.left + 10) + 'px')
-        .style('top', (y(_d.y) + padding.top) + 'px')
+        .style('left', (_x(_d.x) + padding.left + 10) + 'px')
+        .style('top', (_y(_d.y) + padding.top) + 'px')
         .classed('active', true);
     },
     add_hover = function() {
@@ -181,9 +181,9 @@ var RPSGraph = function() {
       remove_drag_hover();
     },
     drag_move = function(d) {
-      var adjusted = y.invert(d3.event.y),
+      var adjusted = _y.invert(d3.event.y),
         delta = Math.round(adjusted / adjust_data.step) * adjust_data.step;
-      graph_data.active.filter(function(_d) { return _d === d; })[0].y = (delta > y.domain()[0]) ? (delta > y.domain()[1]) ? y.domain()[1] : delta : y.domain()[0];
+      graph_data.active.filter(function(_d) { return _d === d; })[0].y = (delta > _y.domain()[0]) ? (delta > _y.domain()[1]) ? _y.domain()[1] : delta : _y.domain()[0];
       redraw();
     },
     drag_end = function(d) {
@@ -248,7 +248,7 @@ var RPSGraph = function() {
       d3.selectAll(this.parentNode.getElementsByClassName('switch')).each(function() {
         var current_switch = d3.select(this);
         current_switch.classed('active', active_switch.attr('data-domain') == current_switch.attr('data-domain'));
-        y.domain([y.domain()[0], active_switch.attr('data-domain')]);
+        _y.domain([_y.domain()[0], active_switch.attr('data-domain')]);
 //        current_switch.classed('active', !current_switch.classed('active'));
         redraw();
       });
@@ -277,24 +277,24 @@ var RPSGraph = function() {
     return this;
   };
   this.x = function(val) {
-    if (!val) { return x; }
-    x = val;
-    x.range([0, width]);
+    if (!val) { return _x; }
+    _x = val;
+    _x.range([0, width]);
     return this;
   };
   this.y = function(val) {
-    if (!val) { return y; }
-    y = val;
-    y.range([height, 0]);
+    if (!val) { return _y; }
+    _y = val;
+    _y.range([height, 0]);
     return this;
   };
   this.domain = function(xd, yd) {
     if (!xd) { return x_domain; }
     x_domain = xd;
-    x.domain(xd);
+    _x.domain(xd);
     if (yd) {
       y_domain = yd;
-      y.domain(yd);
+      _y.domain(yd);
     }
     return this;
   };
@@ -378,16 +378,16 @@ var RPSGraph = function() {
         .attr('height', 20)
         .attr('width', segment_width - 4)
         .attr('x', 2)
-        .attr('y', y(d.y) - 40)
+        .attr('y', _y(d.y) - 40)
         .style('fill', 'transparent');
       handle.append('text')
         .attr('class', 'segment-label-text')
         .classed('hidden', function() { return !_labels; })
         .attr('x', segment_width / 2)
-        .attr('y', y(d.y) - 22)
+        .attr('y', _y(d.y) - 22)
         .style('text-anchor', 'middle')
         .text(function(d) {
-          return (d.x > x.invert(0)) ? d3.format('.1f')(d.y) : null;
+          return (d.x > _x.invert(0)) ? d3.format('.1f')(d.y) : null;
         });
     });
     // Add toggle switch
@@ -409,7 +409,7 @@ var RPSGraph = function() {
       .append('input').attr('type', 'text').attr('class', 'chart-input')
       .attr('data-x', function(d) { return d.x; }).property('value', function(d) { return format_y(d.y); })
       .style('width', (segment_width - 14) + 'px')
-      .style('display', function(d) {return ((x(d.x) > x.range()[0]) && (x(d.x) <= x.range()[1])) ? 'block' : 'none'; })
+      .style('display', function(d) {return ((_x(d.x) > _x.range()[0]) && (_x(d.x) <= _x.range()[1])) ? 'block' : 'none'; })
       .on('change', function(d) {
         var _v = (d3.select(this).property('value'));
         //TODO: Better max and min
@@ -431,19 +431,19 @@ var RPSGraph = function() {
       return this;
     }
     tool_tip = d3.select(svg_id).append('div').attr('id', 'tool_tip');
-    segment_width = x(graph_data.data[0][1].x) - x(graph_data.data[0][0].x);
+    segment_width = _x(graph_data.data[0][1].x) - _x(graph_data.data[0][0].x);
     handles = handle_layer.selectAll('.segment')
       .data(graph_data.data[0])
       .enter()
       .append('g')
       .attr('class', 'segment')
-      .attr('transform', function(d) {return 'translate(' + (x(d.x) - segment_width / 2) + ',0)'; });
+      .attr('transform', function(d) {return 'translate(' + (_x(d.x) - segment_width / 2) + ',0)'; });
     handles.each(function(d, i) {
-      var visible = ((x(d.x) >= x.range()[0]) && (x(d.x) <= x.range()[1])),
+      var visible = ((_x(d.x) >= _x.range()[0]) && (_x(d.x) <= _x.range()[1])),
         handle = d3.select(this);
       handle.append('rect')
         .attr('class', 'segment-rect')
-        .attr('height', y.range()[0])
+        .attr('height', _y.range()[0])
         .attr('width', segment_width)
         .attr('data-x', function(d) { return d.x; })
         .attr('data-y', function(d) { return d.y; })
@@ -457,7 +457,7 @@ var RPSGraph = function() {
         .attr('data-x', function(d) { return d.x; })
         .attr('data-y', function(d) { return d.y; })
         .attr('cx', segment_width / 2)
-        .attr('cy', function() { return y(d.y); })
+        .attr('cy', function() { return _y(d.y); })
         .attr('r', function() { return visible ? 4 : 0; });
       handle.append('circle')
         .classed('data-point', function() { return visible; })
@@ -466,7 +466,7 @@ var RPSGraph = function() {
         .attr('data-x', function(d) { return d.x; })
         .attr('data-y', function(d) { return d.y; })
         .attr('cx', segment_width / 2)
-        .attr('cy', function() { return y(d.y); })
+        .attr('cy', function() { return _y(d.y); })
         .attr('r', function() { return visible ? segment_width / 2 : 0; });
     });
     add_hover();
@@ -480,13 +480,13 @@ var RPSGraph = function() {
       return this;
     }
     grid_layer.selectAll('.grid-line')
-      .data(y.ticks()).enter()
+      .data(_y.ticks()).enter()
       .append('line')
       .attr('class', 'grid-line')
-      .attr('x1', x.range()[0])
-      .attr('x2', x.range()[1])
-      .attr('y1', function(d) { return y(d); })
-      .attr('y2', function(d) { return y(d); });
+      .attr('x1', _x.range()[0])
+      .attr('x2', _x.range()[1])
+      .attr('y1', function(d) { return _y(d); })
+      .attr('y2', function(d) { return _y(d); });
     return this;
   };
   this.ghost = function(arr) {
@@ -526,15 +526,15 @@ var RPSGraph = function() {
   };
   this.draw = function() {
     graph_data.active = graph_data.data[0];
-    x_axis = d3.svg.axis().scale(x).orient('bottom');
-    y_axis = d3.svg.axis().scale(y).orient('left');
+    x_axis = d3.svg.axis().scale(_x).orient('bottom');
+    y_axis = d3.svg.axis().scale(_y).orient('left');
     _line = d3.svg.line()
-      .x(function(d) { return x(d.x); })
-      .y(function(d) { return y(d.y); });
+      .x(function(d) { return _x(d.x); })
+      .y(function(d) { return _y(d.y); });
     _area = d3.svg.area()
-      .x(function(d) { return x(d.x); })
-      .y0(function() { return y(0); })
-      .y1(function(d) { return y(d.y); });
+      .x(function(d) { return _x(d.x); })
+      .y0(function() { return _y(0); })
+      .y1(function(d) { return _y(d.y); });
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
       .attr('d', function(d) { return _area(d); })
