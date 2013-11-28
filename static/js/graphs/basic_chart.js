@@ -7,12 +7,8 @@ var RPSGraph = function() {
      Scale and chart objects
      ***********************/
     _dbl_domains,
-    x_domain = [0, 1],
-    y_domain = [0, 1],
-    x_range = [0, width],
-    y_range = [height, 0],
-    _x,
-    _y,
+    _x = d3.scale.linear().domain([0, 1]).range([0, width]),
+    _y = d3.scale.linear().domain([0, 1]).range([height, 0]),
     _line = d3.svg.line().x(function(d) { return _x(d.x); }).y(function(d) { return _y(d.y); }),
     _area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function() { return _y(0); }).y1(function(d) { return _y(d.y); }),
     /**************
@@ -33,7 +29,6 @@ var RPSGraph = function() {
      SVG and layer objects
      *********************/
     svg_id = '#',
-    layer_translation,
     svg,
     ghost_layer,
     grid_layer,
@@ -56,6 +51,7 @@ var RPSGraph = function() {
     handles,
     tool_tip,
     chart_inputs,
+  //TODO: Is any of this used other than step? Remove?
     adjust_data = {step: 0.5, start: 0, stop: 0, index: 0},
     adjust_dot,
     /******
@@ -64,9 +60,9 @@ var RPSGraph = function() {
     _draggable = false,
     _labels = false,
     _hoverable = false,
-    /***************
-     Private methods
-     ***************/
+    /*****************
+     "Private" methods
+     *****************/
     colors = function(i) {
       /*
        Return color from array
@@ -247,7 +243,7 @@ var RPSGraph = function() {
       var active_switch = d3.select(this);
       d3.selectAll(this.parentNode.getElementsByClassName('switch')).each(function() {
         var current_switch = d3.select(this);
-        current_switch.classed('active', active_switch.attr('data-domain') == current_switch.attr('data-domain'));
+        current_switch.classed('active', active_switch.attr('data-domain') === current_switch.attr('data-domain'));
         _y.domain([_y.domain()[0], active_switch.attr('data-domain')]);
 //        current_switch.classed('active', !current_switch.classed('active'));
         redraw();
@@ -258,12 +254,12 @@ var RPSGraph = function() {
     },
     graph_drag = d3.behavior.drag().on('drag', drag_move).on('dragstart', drag_start).on('dragend', drag_end),
     foo;
-  //TODO: Should these return eg, _x_domain or _x.domain()? Ie, is _x_domain necessary?
   this.select = function(el) {
     if (!el) { return svg_id; }
+
     svg_id = el;
     switches_list = d3.select(el).append('div').attr('id', 'switches');
-    layer_translation = 'translate(' + padding.left + ',' + padding.top + ')';
+    var layer_translation = 'translate(' + padding.left + ',' + padding.top + ')';
     svg = d3.select(svg_id).append('svg').attr('width', width + padding.left + padding.right)
       .attr('height', height + padding.top + padding.bottom);
     ghost_layer = svg.append('g').attr('id', 'ghost_layer').attr('transform', layer_translation);
@@ -289,11 +285,9 @@ var RPSGraph = function() {
     return this;
   };
   this.domain = function(xd, yd) {
-    if (!xd) { return x_domain; }
-    x_domain = xd;
+    if (!xd) { return [_x.domain(), _y.domain()]; }
     _x.domain(xd);
     if (yd) {
-      y_domain = yd;
       _y.domain(yd);
     }
     return this;
@@ -352,8 +346,7 @@ var RPSGraph = function() {
   };
   this.draggable = function(bool, _label) {
     if (bool === undefined) { return _draggable; }
-    if (_label === undefined) { _labels = false; }
-    else { _labels = _label; }
+    if (_label === undefined) { _labels = false; } else { _labels = _label; }
     if (!_hoverable) {
       _draggable = false;
       console.log('Cannot set draggable unless hoverable() is explicitly set to true first.');
@@ -547,6 +540,7 @@ var RPSGraph = function() {
 };
 
 var RPSGraphDraggable = function() {
+  'use strict';
   RPSGraph.call(this);
   this.prototype = new RPSGraph();
 
