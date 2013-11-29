@@ -6,7 +6,7 @@ var RPSGraph = function() {
     /***********************
      Scale and chart objects
      ***********************/
-    _dbl_domains,
+    _max_domains,
     _x = d3.scale.linear().domain([0, 1]).range([0, width]),
     _y = d3.scale.linear().domain([0, 1]).range([height, 0]),
     _line = d3.svg.line().x(function(d) { return _x(d.x); }).y(function(d) { return _y(d.y); }),
@@ -88,7 +88,7 @@ var RPSGraph = function() {
 //      graph_data.inputs.each(function(d, i) {
 //        d3.select(this).attr('value', function(d) {return d.data[i]; });
 //      });
-//      default_trajectory.attr('d', trajectory_line(dt));
+      d3.select('.default_line').attr('d', _line(graph_data.default_line));
       handles.data(graph_data.active)
         .each(function(d) {
           d3.select(this).selectAll('.data-point')
@@ -231,6 +231,9 @@ var RPSGraph = function() {
     },
     edit_switch_click = function() {
       d3.event.preventDefault();
+      if (d3.select(this).classed('active')) {
+        return;
+      }
       d3.selectAll(this.parentNode.getElementsByClassName('switch')).each(function() {
         var current_switch = d3.select(this),
           layer_toggle = d3.select(current_switch.attr('data-layer-toggle'));
@@ -285,7 +288,7 @@ var RPSGraph = function() {
     return this;
   };
   this.domain = function(xd, yd) {
-    if (!xd) { return [_x.domain(), _y.domain()]; }
+    if (xd === undefined) { return [_x.domain(), _y.domain()]; }
     _x.domain(xd);
     if (yd) {
       _y.domain(yd);
@@ -331,16 +334,25 @@ var RPSGraph = function() {
     graph_data.data = val;
     return this;
   };
-  this.double_domain = function(arr) {
-    if (arr === undefined) { return _dbl_domains; }
-    _dbl_domains = arr;
+  this.max_domains = function(arr) {
+    //TODO: This should really be wrapped up with this.domain()
+    if (arr === undefined) { return _max_domains; }
+    _max_domains = arr;
     var domain_switch = switches_list.append('span').attr('id', 'domain_switch').attr('class', 'switch-group');
     domain_switch.append('span').text('[ ');
-    domain_switch.append('a').attr('id', 'domain_switch_' + arr[0]).attr('class', 'switch active')
-      .attr('data-domain', arr[0]).text(arr[0]).on('click', domain_switch_click);
-    domain_switch.append('span').text(' | ');
-    domain_switch.append('a').attr('id', 'domain_switch' + arr[1]).attr('class', 'switch')
-      .attr('data-domain', arr[1]).text(arr[1]).on('click', domain_switch_click);
+    domain_switch.selectAll('.switch')
+      .data(arr).enter()
+      .append('a').attr('id', function(d) { return 'domain_switch_' + d; })
+      .attr('class', 'switch').classed('active', function(d, i) { return d === _y.domain()[1]; })
+      .attr('data-domain', function(d) { return d; })
+      .text(function(d) { return d; }).on('click', domain_switch_click)
+      .call(function(s) {
+        console.log(s);
+        domain_switch.selectAll('span')
+          .data(s[0]).enter()
+          .insert('span', function(d, i) { return s[0][i]; })
+          .text(function(d, i) { return (i === 0) ? 'domain: ' : ' | '; });
+      });
     domain_switch.append('span').text(' ]');
     return this;
   };
