@@ -24,10 +24,22 @@ def update_session(request, **kwargs):
         s[key] = value
     return s
 
-@app.route('/foo')
-def foo():
+@app.route('/basic')
+def basic():
     return render_template(
-        'foo.html'
+        'graphs/basic_chart.html'
+    )
+
+@app.route('/stacked')
+def stacked():
+    return render_template(
+        'graphs/stacked.html'
+    )
+
+@app.route('/test')
+def test():
+    return render_template(
+        'test.html'
     )
 
 @app.route('/update', methods=['POST',])

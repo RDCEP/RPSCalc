@@ -534,8 +534,10 @@ var RPSGraph = function() {
     if (bool === undefined) { return this; }
     _stacked = bool;
     if (bool) {
-      graph_data.stacked = d3.layout.stack(graph_data.data)
+      console.log(graph_data.data);
+      graph_data.data = d3.layout.stack(graph_data.data)
         .values(function(d) { return d.data; });
+      console.log(graph_data.data());
     }
     return this;
   };
