@@ -61,7 +61,18 @@ li li { padding: 0; margin: 0; border: none; }
 
 form { clear: both; margin-bottom: 2em; position: relative; top: 1em; }
 
-button { background-color: #0072b2; border: none; color: #eeeeee; width: 100%; padding: 1em 0; margin-top: 0.5em; }
+#main_content #crumbs { list-style: none; margin: 1em 0; }
+#main_content #crumbs li a { display: block; height: 100%; width: 100%; border: none; color: #eeeeee; }
+#main_content #crumbs li { float: left; position: relative; height: 27.5px; width: 124px; font-size: 15px; line-height: 15px; list-style-type: none !important; margin: 0 2px 0 0 !important; padding: 12.5px 20px 0 40px; background-color: #666666; }
+#main_content #crumbs li:after { content: ""; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 20px solid #666666; position: absolute; right: -20px; top: 0; z-index: 1; }
+#main_content #crumbs li.active { background-color: #0072b2; }
+#main_content #crumbs li.active:after { border-left: 20px solid #0072b2; }
+#main_content #crumbs li:before { content: ""; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 20px solid #eeeeee; position: absolute; left: 0; top: 0; }
+#main_content #crumbs li:first-child { border-top-left-radius: 2px; border-bottom-left-radius: 2px; }
+#main_content #crumbs li:first-child:before { display: none; }
+#main_content #crumbs li:last-child { padding-right: 40px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; width: 60px; }
+#main_content #crumbs li:last-child:after { display: none; }
+#main_content #crumbs button { background-color: #0072b2; border: none; color: #eeeeee; padding: 1em 1.5em 1em 3em; font-size: 1em; line-height: 1em; margin-top: 1em; position: relative; }
 
 #main_nav { width: 100%; background-color: black; opacity: 0.8; padding: 0.75em 0; position: fixed; top: 0; z-index: 999; -webkit-transform: translateZ(0); }
 #main_nav a { display: inline-block; }
@@ -76,6 +87,7 @@ button { background-color: #0072b2; border: none; color: #eeeeee; width: 100%; p
 
 #left_nav { width: 200px; position: absolute; top: 1.75em; left: 0; margin: 1em auto; }
 #left_nav li { margin: 5px 0; }
+#left_nav li.active { font-weight: bold; }
 #left_nav a:hover, #left_nav a.selected { color: black !important; }
 
 #main_content { width: 960px; margin: 3.5em auto; padding-bottom: 2em; }
@@ -87,7 +99,7 @@ button { background-color: #0072b2; border: none; color: #eeeeee; width: 100%; p
 #main_content header h1 + img { position: absolute; right: 15px; bottom: 15px; height: 100px; }
 #main_content li { border: none; padding: 0; margin: 0; list-style-type: disc; padding-left: -15px; margin-left: 15px; }
 
-.graph-container { position: relative; left: -30px; }
+.chart-outer-wrap { padding: 5em 0; }
 
 #rps_progress { margin-top: 1em; }
 

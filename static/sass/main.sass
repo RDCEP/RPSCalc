@@ -1,6 +1,8 @@
 @import globals
 @import colors
 
+$crumb: 20px
+
 html
   height: 100%
   overflow: auto
@@ -62,13 +64,71 @@ form
   margin-bottom: 2em
   position: relative
   top: 1em
-button
-  background-color: #0072b2
-  border: none
-  color: #eeeeee
-  width: 100%
-  padding: 1em 0
-  margin-top: .5em
+#main_content #crumbs
+  list-style: none
+  //display: inline-table
+  margin: 1em 0
+  li a
+    display: block
+    height: 100%
+    width: 100%
+    border: none
+    color: #eeeeee
+  li
+    float: left
+    position: relative
+    height: $crumb * 1.375
+    width: 124px
+    font-size: 15px
+    line-height: 15px
+    list-style-type: none!important
+    margin: 0 2px 0 0!important
+    padding: $crumb*.625 $crumb 0 $crumb*2
+    background-color: $mid-gray
+    &:after
+      content: ''
+      border-top: $crumb solid transparent
+      border-bottom: $crumb solid transparent
+      border-left: $crumb solid $mid-gray
+      position: absolute
+      right: -$crumb
+      top: 0
+      z-index: 1
+    &.active
+      background-color: $blue
+      &:after
+        border-left: $crumb solid $blue
+    &:before
+      content: ''
+      border-top: $crumb solid transparent
+      border-bottom: $crumb solid transparent
+      border-left: $crumb solid $light-gray
+      position: absolute
+      left: 0
+      top: 0
+    &:first-child
+      border-top-left-radius: $crumb/10
+      border-bottom-left-radius: $crumb/10
+      &:before
+        display: none
+    &:last-child
+      padding-right: $crumb*2
+      border-top-right-radius: $crumb/10
+      border-bottom-right-radius: $crumb/10
+      width: 60px
+      &:after
+        display: none
+  button
+    background-color: #0072b2
+    border: none
+    color: #eeeeee
+    padding: 1em 1.5em 1em 3em
+    font-size: 1em
+    line-height: 1em
+    margin-top: 1em
+    position: relative
+
+
 
 // LAYOUT
 // MENUS
@@ -117,6 +177,8 @@ button
   margin: 1em auto
   li
     margin: 5px 0
+    &.active
+      font-weight: bold
   a:hover,a.selected
     color: black!important
 //CONTENT
@@ -162,9 +224,9 @@ button
     padding-left: -15px
     margin-left: 15px
 //MODULE
-.graph-container
-  position: relative
-  left: -30px
+
+.chart-outer-wrap
+  padding: 5em 0
 #rps_progress
   margin-top: 1em
 #carveout_graph_legend
