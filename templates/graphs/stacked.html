@@ -31,9 +31,10 @@
     _s.properties.carveouts.sort(function(a, b) { return a.data[a.data.length-1].y < b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y > b.data[b.data.length-1].y ? 1 : 0 });
     d3.select('#stacked').style('width', width + 'px').style('height', height + 'px');
     var foo = new RPSGraph()
-      .padding(10, 10, 30, 30)
+      .padding(30)
       .width(width).height(height)
       .select('#drag')
+        .title('Set this state\'s carveouts')
       .x(d3.time.scale())
       .y(d3.scale.linear())
       .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, 100])
