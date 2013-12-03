@@ -13,15 +13,19 @@ var RPSGraph = function() {
     y_axis = d3.svg.axis().scale(_y).orient('left'),
     _line = d3.svg.line().x(function(d) { return _x(d.x); }).y(function(d) { return _y(d.y); }),
     _area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y(d.y0); }).y1(function(d) { return _y(d.y + d.y0); }),
-    _stack = d3.layout.stack()
-      .offset('zero')
-      .values(function(d) { return d.data; })
-      .x(function(d) { return d.x; })
-      .y(function(d) { return d.y; }),
+    _stack = d3.layout.stack().offset('zero').values(function(d) { return d.data; }).x(function(d) { return d.x; }).y(function(d) { return d.y; }),
     /**************
      Data and color
      **************/
-    graph_data = {graphs: [], data: [], inputs: [], active: [], ghost: [], default_line: [], nested: [] },
+    graph_data = {
+      graphs: [],       // Graph objects
+      data: [],         // Data
+      inputs: [],       // Inputs below graph
+      active: [],       // Data series currently being altered
+      ghost: [],        // Background area chart
+      default_line: [], // Dotted default line for draggable graphs
+      nested: []        // Nested data needed for handles when graphing multiple series
+    },
     color_list = [
       //d3.rgb(0, 0, 0), //black
       d3.rgb(86, 180, 233), // sky blue
@@ -56,8 +60,7 @@ var RPSGraph = function() {
     handles,
     tool_tip,
     chart_inputs,
-  //TODO: Is any of this used other than step? Remove?
-    adjust_data = {step: 0.5, start: 0, stop: 0, index: 0},
+    adjust_data = {step: 0.5, stop: 0},
     adjust_dot,
     /******
      States
@@ -69,7 +72,7 @@ var RPSGraph = function() {
     /*****************
      "Private" methods
      *****************/
-    colors = function(i) {
+    color = function(i) {
       /*
        Return color from array
        */
@@ -88,15 +91,17 @@ var RPSGraph = function() {
       return _d;
     },
     redraw = function() {
-      if (_stacked) {graph_data.data = _stack(graph_data.data); }
-      graph_data.graphs.data(graph_data.data).attr('d', function(d) { return _area(d.data); });
+      if (_stacked) { graph_data.data = _stack(graph_data.data); }
+      graph_data.graphs
+        .data(graph_data.data)
+        .attr('d', function(d) { return _area(d.data); });
       handles.data(graph_data.nested)
-        .each(function(d) {
+        .each(function() {
           d3.select(this).selectAll('.data-point')
             .attr('cy', function(d) { return _y(d.y + d.y0); });
           d3.select(this).select('.segment-label-bkgd')
             .attr('y', function(d) { return _y(d.values[0].y + d.values[0].y0) - 40; });
-          d3.select(this).select('.segment-label-text')
+          d3.select(this).selectAll('.segment-label-text')
             .text(function(d) {
               return (d.x > _x.invert(0)) ? d3.format('.1f')(d.y) : null;
             })
@@ -105,6 +110,9 @@ var RPSGraph = function() {
       d3.select('.y.axis').call(y_axis);
     },
     nested = function() {
+      /*
+       Transform series data into data nested by time period
+       */
       return d3.nest()
         .key(function(d) { return d.x; })
         .entries([].concat.apply([], graph_data.data.map(function(d) {
@@ -113,19 +121,22 @@ var RPSGraph = function() {
     },
     update_legend = function(_d) {
       var _h = '';
-      _d.forEach(function(d) { _h += format_x(d.x) + ':&nbsp;' + format_y(d.y) + '<br>'; });
+      //TODO: Reverse sort to match stacking order of graph
+      _d.forEach(function(d) {
+        var current_x = _d.length > 1 ? d.type : format_x(d.x);
+        _h += current_x + ':&nbsp;' + format_y(d.y) + '<br>';
+      });
       tool_tip
         .html(_h)
-        .style('left', (_x(_d[0].x) + padding.left + 10) + 'px')
-          //TODO: d3/max()
-        .style('top', (_y(_d[0].y) + padding.top) + 'px')
+        .style('left', (_x(_d[_d.length - 1].x) + padding.left + 10) + 'px')
+        .style('top', (_y(_d[_d.length - 1].y) + padding.top) + 'px')
         .classed('active', true);
     },
     add_hover = function() {
       /*
        Attach mouse events to <rect>s with hoverable handles (toggle .active)
        */
-      handles.each(function(d, i) {
+      handles.each(function(d) {
         var handle = d3.select(this);
         handle.select('.segment-rect')
           .on('mouseover', function() {
@@ -138,7 +149,7 @@ var RPSGraph = function() {
           })
           .on('mouseout', function() {
             adjust_dot = null;
-            d3.select(this.parentNode.getElementsByClassName('tight')[0])
+            handle.selectAll('data-point.tight')
               .classed('active', false);
           });
       });
@@ -179,15 +190,16 @@ var RPSGraph = function() {
       d3.selectAll('.data-point').on('mouseover', function() { return null; });
     },
     max_drag = function(_d) {
+      /*
+       Calculate maximum allowable adjustment of point in series.
+       */
       return d3.max(_max_domains) - ((d3.sum(graph_data.data, function(_dd) { return _dd.data.filter(function(_ddd) { return _ddd.x.getFullYear() == _d.x.getFullYear(); })[0].y; })) - _d.y);
     },
     drag_start = function(d, i) {
-      handles.filter(function(_d) { return _d.x === d.x; }).select('.segment-label-text').classed('hidden', _labels);
+      d3.select('.segment-label-text[data-x="' + d.x.toString() + '"][data-type="' + d.type + '"]').classed('hidden', _labels);
       tool_tip.classed('hidden', true);
       graph_data.active = graph_data.data.filter(function(dd) { return dd.type === d.type; })[0];
       adjust_dot = d3.select(this);
-      adjust_data.start = d.y + d.y0;
-      adjust_data.index = i;
       remove_hover();
       remove_drag_hover();
     },
@@ -195,20 +207,21 @@ var RPSGraph = function() {
       var adjusted = _y.invert(d3.event.y) - d.y0,
         delta = Math.round(adjusted / adjust_data.step) * adjust_data.step;
       graph_data.active.data.filter(function(_d) { return _d === d; })[0].y = (delta > _y.domain()[0]) ? (delta > max_drag(d)) ? max_drag(d) : delta : _y.domain()[0];
-      graph_data.nested = nested();
       graph_data.data.filter(function(dd) { return dd.type === d.type; })[0] = graph_data.active;
+      graph_data.nested = nested();
       redraw();
     },
     drag_end = function(d) {
       //TODO: update session
-//      update_legend(d.values);
+      //TODO: update legend?
+      //TODO: Update legend y position
       tool_tip.classed('hidden', false);
-      handles.filter(function(_d) { return _d.x === d.x; }).select('.segment-label-text').classed('hidden', !_labels);
+      d3.select('.segment-label-text[data-x="' + d.x.toString() + '"][data-type="' + d.type + '"]').classed('hidden', !_labels);
       adjust_data.stop = graph_data.active.data.filter(function(_d) { return _d.x === d.x ; })[0];
-      d3.select(graph_data.inputs.filter(function(_d) { return (_d.x === d.x) && (_d.type === d.type); })[0]).property('value', adjust_data.stop.y);
+      d3.select('.chart-input[data-x="' + d.x.toString() + '"][data-type="' + d.type + '"]')
+        .property('value', adjust_data.stop.y);
       adjust_dot = null;
       graph_data.data.filter(function(dd) { return dd.type === d.type; })[0] = graph_data.active;
-//      update_session(data);
       redraw();
       add_hover();
       add_drag_hover();
@@ -273,13 +286,15 @@ var RPSGraph = function() {
       });
     },
     add_labels = function() {
-
+      //TODO: Move labels out of draggable() into own function
     },
     graph_drag = d3.behavior.drag().on('drag', drag_move).on('dragstart', drag_start).on('dragend', drag_end),
-    foo;
+    pre_draw = function() {
+      x_axis = d3.svg.axis().scale(_x).orient('bottom');
+      y_axis = d3.svg.axis().scale(_y).orient('left');
+    };
   this.select = function(el) {
     if (!el) { return svg_id; }
-
     svg_id = el;
     switches_list = d3.select(el).append('div').attr('id', 'switches');
     var layer_translation = 'translate(' + padding.left + ',' + padding.top + ')';
@@ -333,6 +348,18 @@ var RPSGraph = function() {
     return this;
   };
   this.width = function(val) {
+    /*
+     Set width of graph.
+     ...
+     Args
+     ----
+     val (int): width of DOM element to use as container (Note: *not* the width of the graph itself!)
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     if (!val) { return width; }
     width = val - padding.left - padding.right;
     return this;
@@ -343,21 +370,48 @@ var RPSGraph = function() {
     return this;
   };
   this.colors = function(func) {
-    if (!func) { return colors; }
+    //TODO: Check this. Does it work with strings, lists and funcs?
+    if (func === undefined) { return color; }
     if (typeof func === 'function') {
-      colors = func;
-      return this;
+      color = func;
+    } else if (typeof func === 'string') {
+      color = function() { return func; }
+    } else {
+      color_list = func;
     }
-    color_list = func;
     return this;
   };
-  this.data = function(val) {
-    if (!val) { return graph_data.data; }
-    graph_data.data = val;
+  this.data = function(arr) {
+    /*
+     Set data series to graph.
+     ...
+     Args
+     ----
+     arr (Array): Array of Arrays of Objects {x: foo, y: bar, y0: [0]}
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
+    if (arr === undefined) { return graph_data.data; }
+    graph_data.data = arr;
     graph_data.nested = nested();
     return this;
   };
   this.max_domains = function(arr) {
+    /*
+     Create multiple domain switch
+     ...
+     Args
+     ----
+     arr (Array): Array of numerics
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     //TODO: This should really be wrapped up with this.domain()
     if (arr === undefined) { return _max_domains; }
     _max_domains = arr;
@@ -379,6 +433,19 @@ var RPSGraph = function() {
     return this;
   };
   this.draggable = function(bool, _label) {
+    /*
+     Create draggable interface.
+     ...
+     Args
+     ----
+     bool (Boolean): true if graph should be draggable
+     _label (Boolean): true if nodes should have visible labels
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     if (bool === undefined) { return _draggable; }
     if (_label === undefined) { _labels = false; } else { _labels = _label; }
     if (!_hoverable) {
@@ -398,7 +465,6 @@ var RPSGraph = function() {
     handles.each(function(d, i) {
       var handle = d3.select(this);
       handle.selectAll('.data-point').classed('draggable', true).call(graph_drag, i);
-      //TODO: Add data- attributes
       handle.selectAll('segment-label-bkgd')
         .data(function(d) { return d.values; }).enter()
         .append('rect')
@@ -418,6 +484,7 @@ var RPSGraph = function() {
         .attr('x', segment_width / 2)
         .attr('y', function(d) { return _y(d.y) - 22; })
         .attr('data-x', function(d) { return d.x; })
+        .attr('data-type', function(d) { return d.type; })
         .style('text-anchor', 'middle')
         .text(function(d) {
           return (d.x > _x.invert(0)) ? d3.format('.1f')(d.y) : null;
@@ -463,6 +530,18 @@ var RPSGraph = function() {
     return this;
   };
   this.hoverable = function(bool) {
+    /*
+     Create hoverable interface.
+     ...
+     Args
+     ----
+     bool (Boolean): true if graph should be hoverable
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     if (bool === undefined) { return _hoverable; }
     _hoverable = bool;
     if (bool === false) {
@@ -522,9 +601,19 @@ var RPSGraph = function() {
     return this;
   };
   this.h_grid = function(bool) {
-    //TODO: Don't return null if args undefined
-    if (bool === undefined) { return null; }
-    if (bool === false) {
+    /*
+     Draw horizontal gridlines
+     ...
+     Args
+     ----
+     bool (Boolean): true if gridlines should be drawn
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
+    if (bool !== true) {
       grid_layer.selectAll('.grid-line').remove();
       return this;
     }
@@ -539,6 +628,18 @@ var RPSGraph = function() {
     return this;
   };
   this.ghost = function(arr) {
+    /*
+     Create static area in background of graph
+     ...
+     Args
+     ----
+     arr (Array): Array of Objects to chart {x: foo, y: bar, y0: 0}
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     if (!_draggable) {
       console.log('Graph must be draggable in order to use ghost().');
       return this;
@@ -552,6 +653,18 @@ var RPSGraph = function() {
     return this;
   };
   this.default_line = function(arr) {
+    /*
+     Draw static dotted line in foreground of graph to represent 'default'
+     ...
+     Args
+     ----
+     arr (Array): Array of Objects to chart {x: foo, y: bar, y0: 0}
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     if (!_draggable) {
       console.log('Graph must be draggable in order to use default_line().');
       return this;
@@ -564,16 +677,52 @@ var RPSGraph = function() {
     return this;
   };
   this.format_x = function(func) {
+    /*
+     Format function for data in x axis
+     ...
+     Args
+     ----
+     func (Function): function that accepts an argument and returns a String
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     if (func === undefined) { return format_x; }
     format_x = func;
     return this;
   };
   this.format_y = function(func) {
+    /*
+     Format function for data in y axis
+     ...
+     Args
+     ----
+     func (Function): function that accepts an argument and returns a String
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     if (func === undefined) { return format_y; }
     format_y = func;
     return this;
   };
   this.stacked = function(bool) {
+    /*
+     Determine whether or not to stack data, rather than overlap
+     ...
+     Args
+     ----
+     bool (Boolean): true if graph should stack
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     if (bool === undefined) { return this; }
     _stacked = bool;
     if (bool) {
@@ -586,11 +735,23 @@ var RPSGraph = function() {
     return this;
   };
   this.draw = function() {
+    /*
+     Draw all data
+     ...
+     Args
+     ----
+     null
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
       .attr('d', function(d) { return _area(d.data); })
       .attr('class', 'chart-line')
-      .style('fill', function(d, i) {return colors(i); });
+      .style('fill', function(d, i) {return color(i); });
     draw_axes();
     mask_edges();
     return this;

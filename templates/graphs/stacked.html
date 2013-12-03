@@ -18,7 +18,6 @@
     _s = _data.features.filter(function(d) {
       return (d.properties.machine_name == 'illinois') ? d : null;
     })[0];
-
     _s.properties.carveouts.forEach(function(d, i) {
       if (d.type === 'wind' || d.type === 'solar') {
         d.data.forEach(function(dd, ii) {
