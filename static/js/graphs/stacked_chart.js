@@ -9,12 +9,19 @@ var RPSGraph = function() {
     _max_domains,
     _x = d3.scale.linear().domain([0, 1]).range([0, width]),
     _y = d3.scale.linear().domain([0, 1]).range([height, 0]),
+    x_axis = d3.svg.axis().scale(_x).orient('bottom'),
+    y_axis = d3.svg.axis().scale(_y).orient('left'),
     _line = d3.svg.line().x(function(d) { return _x(d.x); }).y(function(d) { return _y(d.y); }),
-    _area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function() { return _y(0); }).y1(function(d) { return _y(d.y); }),
+    _area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y(d.y0); }).y1(function(d) { return _y(d.y + d.y0); }),
+    _stack = d3.layout.stack()
+      .offset('zero')
+      .values(function(d) { return d.data; })
+      .x(function(d) { return d.x; })
+      .y(function(d) { return d.y; }),
     /**************
      Data and color
      **************/
-    graph_data = {graphs: [], data: [], inputs: [], active: [], ghost: [], default_line: [] },
+    graph_data = {graphs: [], data: [], inputs: [], active: [], ghost: [], default_line: [], nested: [] },
     color_list = [
       //d3.rgb(0, 0, 0), //black
       d3.rgb(86, 180, 233), // sky blue
@@ -40,8 +47,6 @@ var RPSGraph = function() {
     handle_layer,
     button_layer,
     segment_width,
-    x_axis,
-    y_axis,
     masks,
     switches_list,
     /**********************
@@ -83,46 +88,52 @@ var RPSGraph = function() {
       return _d;
     },
     redraw = function() {
-      graph_data.graphs.each(function(d, i) {
-        d3.select(this).attr('d', _area(graph_data.active.data));
-      });
-//      graph_data.inputs.each(function(d, i) {
-//        d3.select(this).attr('value', function(d) {return d.data[i]; });
-//      });
-      d3.select('.default_line').attr('d', _line(graph_data.default_line.data));
-      handles.data(graph_data.active.data)
+      if (_stacked) {graph_data.data = _stack(graph_data.data); }
+      graph_data.graphs.data(graph_data.data).attr('d', function(d) { return _area(d.data); });
+      handles.data(graph_data.nested)
         .each(function(d) {
           d3.select(this).selectAll('.data-point')
-            .attr('cy', function() {return _y(d.y); });
+            .attr('cy', function(d) { return _y(d.y + d.y0); });
           d3.select(this).select('.segment-label-bkgd')
-            .attr('y', _y(d.y) - 40);
+            .attr('y', function(d) { return _y(d.values[0].y + d.values[0].y0) - 40; });
           d3.select(this).select('.segment-label-text')
             .text(function(d) {
               return (d.x > _x.invert(0)) ? d3.format('.1f')(d.y) : null;
             })
-            .attr('y', _y(d.y) - 22);
+            .attr('y', function(d) { return _y(d.y + d.y0) - 22; });
         });
       d3.select('.y.axis').call(y_axis);
     },
+    nested = function() {
+      return d3.nest()
+        .key(function(d) { return d.x; })
+        .entries([].concat.apply([], graph_data.data.map(function(d) {
+          d.data.forEach(function(dd) { dd.type = d.type; }); return d.data;
+        })));
+    },
     update_legend = function(_d) {
+      var _h = '';
+      _d.forEach(function(d) { _h += format_x(d.x) + ':&nbsp;' + format_y(d.y) + '<br>'; });
       tool_tip
-        .html(format_x(_d.x) + ':&nbsp;' + format_y(_d.y))
-        .style('left', (_x(_d.x) + padding.left + 10) + 'px')
-        .style('top', (_y(_d.y) + padding.top) + 'px')
+        .html(_h)
+        .style('left', (_x(_d[0].x) + padding.left + 10) + 'px')
+          //TODO: d3/max()
+        .style('top', (_y(_d[0].y) + padding.top) + 'px')
         .classed('active', true);
     },
     add_hover = function() {
       /*
        Attach mouse events to <rect>s with hoverable handles (toggle .active)
        */
-      handles.each(function(d) {
-        d3.select(this).select('.segment-rect')
+      handles.each(function(d, i) {
+        var handle = d3.select(this);
+        handle.select('.segment-rect')
           .on('mouseover', function() {
-            update_legend(d);
+            update_legend(d.values);
             tool_tip.classed('hidden', !_hoverable);
             d3.selectAll('.data-point.tight').classed('active', false);
             d3.selectAll('.data-point.tight').classed('hovered', false);
-            d3.select(this.parentNode.getElementsByClassName('tight')[0])
+            handle.selectAll('.data-point.tight')
               .classed('active', true);
           })
           .on('mouseout', function() {
@@ -139,12 +150,12 @@ var RPSGraph = function() {
       handles.each(function(d) {
         var handle = d3.select(this);
         d3.select(this).selectAll('.data-point.loose')
-          .on('mouseover', function() {
-            update_legend(d);
+          .on('mouseover', function(dd, ii) {
+            update_legend(d.values);
             tool_tip.classed('hidden', !_hoverable);
             d3.selectAll('.data-point.tight').classed('active', false);
             d3.selectAll('.data-point.tight').classed('hovered', false);
-            handle.select('.data-point.tight')
+            handle.selectAll('.data-point.tight').filter(function(ddd, iii) { return ii === iii; })
               .classed('active', true).classed('hovered', true);
           })
           .on('mouseout', function() {
@@ -167,30 +178,38 @@ var RPSGraph = function() {
       adjust_dot.on('mouseout', function() { return null; });
       d3.selectAll('.data-point').on('mouseover', function() { return null; });
     },
+    max_sum = function(_d) {
+//      _y.domain()[1] - d3.sum(graph_data.data, function(_d) { return _d.data.filter(function(_dd) { _dd.x === d.x; })[0].x; });
+      console.log(graph_data.nested);//.rollup(function(leaves) { return d3.sum(leaves, function(l) { return l.y; }); }));
+    },
     drag_start = function(d, i) {
-      handles.filter(function(_d) { return _d === d; }).select('.segment-label-text').classed('hidden', _labels);
+      handles.filter(function(_d) { return _d.x === d.x; }).select('.segment-label-text').classed('hidden', _labels);
       tool_tip.classed('hidden', true);
-      graph_data.active = graph_data.data[0];
+      graph_data.active = graph_data.data.filter(function(dd) { return dd.type === d.type; })[0];
       adjust_dot = d3.select(this);
-      adjust_data.start = d.y;
+      adjust_data.start = d.y + d.y0;
       adjust_data.index = i;
       remove_hover();
       remove_drag_hover();
     },
-    drag_move = function(d) {
-      var adjusted = _y.invert(d3.event.y),
+    drag_move = function(d,i) {
+      var adjusted = _y.invert(d3.event.y) - d.y0,
         delta = Math.round(adjusted / adjust_data.step) * adjust_data.step;
+      max_sum(d);
       graph_data.active.data.filter(function(_d) { return _d === d; })[0].y = (delta > _y.domain()[0]) ? (delta > _y.domain()[1]) ? _y.domain()[1] : delta : _y.domain()[0];
+      graph_data.nested = nested();
+      graph_data.data.filter(function(dd) { return dd.type === d.type; })[0] = graph_data.active;
       redraw();
     },
     drag_end = function(d) {
       //TODO: update session
-      update_legend(d);
+//      update_legend(d.values);
       tool_tip.classed('hidden', false);
-      handles.filter(function(_d) { return _d === d; }).select('.segment-label-text').classed('hidden', !_labels);
-      adjust_data.stop = graph_data.active.data.filter(function(_d) { return _d === d; })[0].data;
+      handles.filter(function(_d) { return _d.x === d.x; }).select('.segment-label-text').classed('hidden', !_labels);
+      adjust_data.stop = graph_data.active.data.filter(function(_d) { return _d.x === d.x ; })[0];
+      d3.select(graph_data.inputs.filter(function(_d) { return (_d.x === d.x) && (_d.type === d.type); })[0]).property('value', adjust_data.stop.y);
       adjust_dot = null;
-      graph_data.data[0] = graph_data.active;
+      graph_data.data.filter(function(dd) { return dd.type === d.type; })[0] = graph_data.active;
 //      update_session(data);
       redraw();
       add_hover();
@@ -280,12 +299,14 @@ var RPSGraph = function() {
     if (!val) { return _x; }
     _x = val;
     _x.range([0, width]);
+    x_axis = d3.svg.axis().scale(_x).orient('bottom');
     return this;
   };
   this.y = function(val) {
     if (!val) { return _y; }
     _y = val;
     _y.range([height, 0]);
+    y_axis = d3.svg.axis().scale(_y).orient('left');
     return this;
   };
   this.domain = function(xd, yd) {
@@ -333,6 +354,7 @@ var RPSGraph = function() {
   this.data = function(val) {
     if (!val) { return graph_data.data; }
     graph_data.data = val;
+    graph_data.nested = nested();
     return this;
   };
   this.max_domains = function(arr) {
@@ -377,19 +399,25 @@ var RPSGraph = function() {
       var handle = d3.select(this);
       handle.selectAll('.data-point').classed('draggable', true).call(graph_drag, i);
       //TODO: Add data- attributes
-      handle.append('rect')
+      handle.selectAll('segment-label-bkgd')
+        .data(function(d) { return d.values; }).enter()
+        .append('rect')
         .attr('class', 'segment-label-bkgd')
         .classed('hidden', function() { return !_labels; })
         .attr('height', 20)
         .attr('width', segment_width - 4)
         .attr('x', 2)
-        .attr('y', _y(d.y) - 40)
+        .attr('y', _y(d.values[0].y) - 40)
+        .attr('data-x', function(d) { return d.x; })
         .style('fill', 'transparent');
-      handle.append('text')
+      handle.selectAll('.segment-label-text')
+        .data(function(d) { return d.values; }).enter()
+        .append('text')
         .attr('class', 'segment-label-text')
         .classed('hidden', function() { return !_labels; })
         .attr('x', segment_width / 2)
-        .attr('y', _y(d.y) - 22)
+        .attr('y', function(d) { return _y(d.y) - 22; })
+        .attr('data-x', function(d) { return d.x; })
         .style('text-anchor', 'middle')
         .text(function(d) {
           return (d.x > _x.invert(0)) ? d3.format('.1f')(d.y) : null;
@@ -409,20 +437,26 @@ var RPSGraph = function() {
       .style('padding-left', padding.left + 'px')
       .classed('hidden', true);
     // Add inputs
-    graph_data.inputs = chart_inputs.selectAll('input')
-      .data(graph_data.data[0].data).enter()
+    var input_rows = chart_inputs.selectAll('div')
+      .data(graph_data.data).enter()
+      .append('div').attr('data-type', function(d) { return d.type; })
+      .style('width', (width + padding.left + padding.right) + 'px');
+    graph_data.inputs = input_rows.selectAll('input')
+      .data(function(d) { return d.data; }).enter()
       .append('input').attr('type', 'text').attr('class', 'chart-input')
-      .attr('data-x', function(d) { return d.x; }).property('value', function(d) { return format_y(d.y); })
+      .attr('data-x', function(d) { return d.x; })
+      .attr('data-type', function(d) {  return d.type; })
+      .property('value', function(d) { return format_y(d.y); })
       .style('width', (segment_width - 14) + 'px')
       .style('display', function(d) {return ((_x(d.x) > _x.range()[0]) && (_x(d.x) <= _x.range()[1])) ? 'block' : 'none'; })
       .on('change', function(d) {
         var _v = (d3.select(this).property('value'));
         //TODO: Better max and min
-        _v = (_v > 100) ? 100 : (_v < 0) ? 0 : _v;
-        graph_data.data[0].data.filter(function(_d) { return _d.x === d.x; })[0].y = _v;
-        d3.select(this).property('value', _v);
+        _v = (_v > 100) ? 100 : (_v < d.y0) ? d.y0 : _v;
+        graph_data.data.filter(function(_d) { return _d.type === d.type; })[0].data.filter(function(_d) { return _d.x === d.x; })[0].y = +_v;
+        console.log(_v, graph_data.data);
+        d3.select(this).property('value', +_v);
         redraw();
-//        rehover();
       });
     add_drag_hover();
     return this;
@@ -439,13 +473,14 @@ var RPSGraph = function() {
 //    console.log(graph_data.data)
     segment_width = _x(graph_data.data[0].data[1].x) - _x(graph_data.data[0].data[0].x);
     handles = handle_layer.selectAll('.segment')
-      .data(graph_data.data[0].data)
+//      .data(graph_data.data[0].data)
+      .data(graph_data.nested)
       .enter()
       .append('g')
       .attr('class', 'segment')
-      .attr('transform', function(d) {return 'translate(' + (_x(d.x) - segment_width / 2) + ',0)'; });
+      .attr('transform', function(d) {return 'translate(' + (_x(d.values[0].x) - segment_width / 2) + ',0)'; });
     handles.each(function(d, i) {
-      var visible = ((_x(d.x) >= _x.range()[0]) && (_x(d.x) <= _x.range()[1])),
+      var visible = ((_x(d.values[0].x) >= _x.range()[0]) && (_x(d.values[0].x) <= _x.range()[1])),
         handle = d3.select(this);
       handle.append('rect')
         .attr('class', 'segment-rect')
@@ -456,24 +491,31 @@ var RPSGraph = function() {
         .attr('data-legend', function(d) { return d.x + ':&nbsp;' + d.y; })
         .style('fill', 'transparent')
         .style('pointer-events', function() { return visible ? 'all' : 'none'; });
-      handle.append('circle')
+      handle.selectAll('.data-point.tight')
+        .data(function(d) { return d.values; }).enter()
+        .append('circle')
         .classed('data-point', function() { return visible; })
         .classed('hoverable', function() { return visible; })
         .classed('tight', true)
         .attr('data-x', function(d) { return d.x; })
         .attr('data-y', function(d) { return d.y; })
+        .attr('data-type', function(d) { return d.type; })
         .attr('cx', segment_width / 2)
-        .attr('cy', function() { return _y(d.y); })
+        .attr('cy', function(d) { return _y(d.y + d.y0); })
         .attr('r', function() { return visible ? 4 : 0; });
-      handle.append('circle')
+      handle.selectAll('.data-point.loose')
+        .data(function(d) { return d.values; }).enter()
+        .append('circle')
         .classed('data-point', function() { return visible; })
         .classed('hoverable', function() { return visible; })
         .classed('loose', true)
         .attr('data-x', function(d) { return d.x; })
         .attr('data-y', function(d) { return d.y; })
+        .attr('data-type', function(d) { return d.type; })
         .attr('cx', segment_width / 2)
-        .attr('cy', function() { return _y(d.y); })
+        .attr('cy', function(d) { return _y(d.y + d.y0); })
         .attr('r', function() { return visible ? segment_width / 2 : 0; });
+      handles.data(graph_data.data[0]);
     });
     add_hover();
     return this;
@@ -534,24 +576,15 @@ var RPSGraph = function() {
     if (bool === undefined) { return this; }
     _stacked = bool;
     if (bool) {
-      console.log(graph_data.data);
-      graph_data.data = d3.layout.stack(graph_data.data)
-        .values(function(d) { return d.data; });
-      console.log(graph_data.data());
+      graph_data.data = d3.layout.stack()
+        .offset('zero')
+        .values(function(d) { return d.data; })
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; })(graph_data.data);
     }
     return this;
   };
   this.draw = function() {
-    graph_data.active = graph_data.data[0];
-    x_axis = d3.svg.axis().scale(_x).orient('bottom');
-    y_axis = d3.svg.axis().scale(_y).orient('left');
-    _line = d3.svg.line()
-      .x(function(d) { return _x(d.x); })
-      .y(function(d) { return _y(d.y); });
-    _area = d3.svg.area()
-      .x(function(d) { return _x(d.x); })
-      .y0(function() { return _y(0); })
-      .y1(function(d) { return _y(d.y); });
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
       .attr('d', function(d) { return _area(d.data); })

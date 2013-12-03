@@ -18,12 +18,18 @@
     _s = _data.features.filter(function(d) {
       return (d.properties.machine_name == 'illinois') ? d : null;
     })[0];
-    _s.properties.carveouts.forEach(function(d) {
-      d.data.forEach(function(dd, ii) {
-        var _t = _s.properties.trajectory[ii];
-        d.data[ii] = {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : dd / _s.properties.trajectory[ii] * 100};
-      });
+
+    _s.properties.carveouts.forEach(function(d, i) {
+      if (d.type === 'wind' || d.type === 'solar') {
+        d.data.forEach(function(dd, ii) {
+          var _t = _s.properties.trajectory[ii];
+          d.data[ii] = {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : dd / _s.properties.trajectory[ii] * 100, type: d.type};
+        });
+      } else {
+        _s.properties.carveouts.splice(i, 1);
+      }
     });
+    _s.properties.carveouts.sort(function(a, b) { return a.data[a.data.length-1].y < b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y > b.data[b.data.length-1].y ? 1 : 0 });
     d3.select('#stacked').style('width', width + 'px').style('height', height + 'px');
     var foo = new RPSGraph()
       .padding(10, 10, 30, 30)
@@ -33,14 +39,15 @@
       .y(d3.scale.linear())
       .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, 100])
       .max_domains([50, 100])
-      .data([_s.properties.carveouts])
-      .stacked(true)
-      .hoverable(true)
-      .draggable(true)
-{#      .ghost(_s.properties.trajectory)#}
-{#      .default_line(_s.properties.trajectory)#}
       .format_x(function(x) { return x.getFullYear(); })
       .format_y(function(y) { return d3.format('.1f')(y); })
+      .data(_s.properties.carveouts)
+      .stacked(true)
+      .hoverable(true)
+      .draggable(true, false)
+{#      .ghost(_s.properties.trajectory)#}
+{#      .default_line(_s.properties.trajectory)#}
+
 {#      .colors(['#f00'])#}
       .h_grid(true)
       .draw();
