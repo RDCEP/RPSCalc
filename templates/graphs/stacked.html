@@ -29,7 +29,7 @@
       }
     });
     _s.properties.carveouts.sort(function(a, b) { return a.data[a.data.length-1].y < b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y > b.data[b.data.length-1].y ? 1 : 0 });
-    d3.select('#stacked').style('width', width + 'px').style('height', height + 'px');
+    d3.select('#drag').style('width', width + 'px').style('height', height + 'px');
     var foo = new RPSGraph()
       .padding(30)
       .width(width).height(height)
