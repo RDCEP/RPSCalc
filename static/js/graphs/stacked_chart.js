@@ -157,7 +157,7 @@ var RPSGraph = function() {
           })
           .on('mouseout', function() {
             adjust_dot = null;
-            handle.selectAll('data-point.tight')
+            handle.selectAll('data-point')
               .classed('active', false);
           });
       });
@@ -248,7 +248,7 @@ var RPSGraph = function() {
       // bottom
       mask_layer.append('rect').attr('class', 'mask')
         .attr('width', width + padding.left + padding.right).attr('height', _h_grid ? padding.bottom - 1 : padding.bottom)
-        .attr('transform', 'translate(0,' + _h_grid ? height + padding.top : height + padding.top + 1 + ')');
+        .attr('transform', 'translate(0,' + (_h_grid ? (height + padding.top) : (height + padding.top + 1)) + ')');
       // left
       mask_layer.append('rect').attr('class', 'mask')
         .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
@@ -348,7 +348,9 @@ var RPSGraph = function() {
     svg_id = el;
     title = d3.select(svg_id).append('h3');
     switches_list = d3.select(el).append('div').attr('id', 'switches');
-    svg = d3.select(svg_id).append('div').attr('class', 'chart-wrap')
+    svg = d3.select(svg_id).append('div')
+      .attr('class', 'chart-wrap')
+      .style('left', '-' + padding.left + 'px')
       .append('svg')
       .attr('width', width + padding.left + padding.right)
       .attr('height', height + padding.top + padding.bottom)
@@ -369,7 +371,7 @@ var RPSGraph = function() {
   this.title = function(str, align) {
     if (str === undefined) { return title.text(); }
     title.html(str);
-    if (align) { title.style('padding-left', padding.left + 'px'); }
+//    if (align) { title.style('padding-left', padding.left + 'px'); }
     return this;
   };
   this.x = function(val) {
