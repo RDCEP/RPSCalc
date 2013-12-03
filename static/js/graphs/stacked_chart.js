@@ -73,6 +73,7 @@ var RPSGraph = function() {
     _hoverable = false,
     _stacked = false,
     _outlines = true,
+    _h_grid = true,
     /*****************
      "Private" methods
      *****************/
@@ -236,18 +237,22 @@ var RPSGraph = function() {
       /*
        Draw masks on 4 edges of graph -- covers up extra graph underneath axes.
        */
+      // top
       mask_layer.append('rect').attr('class', 'mask')
-        .attr('width', width + padding.left + padding.right).attr('height', padding.top)
+        .attr('width', width + padding.left + padding.right).attr('height', _h_grid ? padding.top - 1 : padding.top)
         .attr('transform', 'translate(0,0)');
-      mask_layer.append('rect').attr('class', 'mask')
-        .attr('width', width + padding.left + padding.right).attr('height', padding.bottom)
-        .attr('transform', 'translate(0,' + (height + padding.top) + ')');
-      mask_layer.append('rect').attr('class', 'mask')
-        .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
-        .attr('transform', 'translate(0,0)');
+      // right
       mask_layer.append('rect').attr('class', 'mask right')
         .attr('width', padding.right).attr('height', height + padding.top + padding.bottom)
         .attr('transform', 'translate(' + (width + padding.left) + ',0)');
+      // bottom
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', width + padding.left + padding.right).attr('height', _h_grid ? padding.bottom - 1 : padding.bottom)
+        .attr('transform', 'translate(0,' + _h_grid ? height + padding.top : height + padding.top + 1 + ')');
+      // left
+      mask_layer.append('rect').attr('class', 'mask')
+        .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
+        .attr('transform', 'translate(0,0)');
       masks = mask_layer.selectAll('.mask');
       if (_hoverable) {
         masks.on('mouseover', function() {
@@ -299,52 +304,6 @@ var RPSGraph = function() {
       x_axis = d3.svg.axis().scale(_x).orient('bottom');
       y_axis = d3.svg.axis().scale(_y).orient('left');
     };
-  this.select = function(el) {
-    if (!el) { return svg_id; }
-    svg_id = el;
-    var layer_translation = 'translate(' + padding.left + ',' + padding.top + ')';
-    title = d3.select(svg_id).append('h3').style('padding-left', padding.left + 'px');
-    switches_list = d3.select(el).append('div').attr('id', 'switches');
-    svg = d3.select(svg_id).append('div').attr('class', 'chart-wrap').append('svg').attr('width', width + padding.left + padding.right)
-      .attr('height', height + padding.top + padding.bottom);
-    ghost_layer = svg.append('g').attr('id', 'ghost_layer').attr('transform', layer_translation);
-    grid_layer = svg.append('g').attr('id', 'grid_layer').attr('transform', layer_translation);
-    graph_layer = svg.append('g').attr('id', 'graph_layer').attr('transform', layer_translation);
-    outline_layer = svg.append('g').attr('id', 'outline_layer').attr('transform', layer_translation);
-    default_layer = svg.append('g').attr('transform', layer_translation);
-    mask_layer = svg.append('g').attr('id', 'mask_layer');
-    axes_layer = svg.append('g').attr('id', 'axes_layer').attr('transform', layer_translation);
-    handle_layer = svg.append('g').attr('id', 'handle_layer').attr('transform', layer_translation);
-    button_layer = svg.append('g').attr('id', 'button_layer').attr('transform', layer_translation);
-    return this;
-  };
-  this.x = function(val) {
-    if (!val) { return _x; }
-    _x = val;
-    _x.range([0, width]);
-    x_axis = d3.svg.axis().scale(_x).orient('bottom');
-    return this;
-  };
-  this.y = function(val) {
-    if (!val) { return _y; }
-    _y = val;
-    _y.range([height, 0]);
-    y_axis = d3.svg.axis().scale(_y).orient('left');
-    return this;
-  };
-  this.title = function(str) {
-    if (str === undefined) { return title.text(); }
-    title.text(str);
-    return this;
-  };
-  this.domain = function(xd, yd) {
-    if (xd === undefined) { return [_x.domain(), _y.domain()]; }
-    _x.domain(xd);
-    if (yd) {
-      _y.domain(yd);
-    }
-    return this;
-  };
   this.padding = function(all, sides, bottom, left) {
     if (!all) { return padding; }
     padding = {top: all, right: all, bottom: all, left: all};
@@ -382,33 +341,54 @@ var RPSGraph = function() {
     height = val - padding.top - padding.bottom;
     return this;
   };
-  this.colors = function(func) {
-    if (func === undefined) { return color; }
-    if (typeof func === 'function') {
-      color = func;
-    } else if (typeof func === 'string') {
-      color = function() { return func; }
-    } else {
-      color_list = func;
-    }
+  this.select = function(el) {
+    if (!el) { return svg_id; }
+    svg_id = el;
+    title = d3.select(svg_id).append('h3').style('padding-left', padding.left + 'px');
+    switches_list = d3.select(el).append('div').attr('id', 'switches');
+    svg = d3.select(svg_id).append('div').attr('class', 'chart-wrap')
+      .append('svg')
+      .attr('width', width + padding.left + padding.right)
+      .attr('height', height + padding.top + padding.bottom)
+      .append('g')
+      .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
+    ghost_layer = svg.append('g').attr('id', 'ghost_layer');
+    grid_layer = svg.append('g').attr('id', 'grid_layer');
+    graph_layer = svg.append('g').attr('id', 'graph_layer');
+    outline_layer = svg.append('g').attr('id', 'outline_layer');
+    default_layer = svg.append('g').attr('id', 'default_layer');
+    mask_layer = svg.append('g').attr('id', 'mask_layer')
+      .attr('transform', 'translate(-' + padding.left + ',-' + padding.top + ')');
+    axes_layer = svg.append('g').attr('id', 'axes_layer');
+    handle_layer = svg.append('g').attr('id', 'handle_layer');
+    button_layer = svg.append('g').attr('id', 'button_layer');
     return this;
   };
-  this.data = function(arr) {
-    /*
-     Set data series to graph.
-     ...
-     Args
-     ----
-     arr (Array): Array of Arrays of Objects {x: foo, y: bar, y0: [0]}
-     ...
-     Returns
-     -------
-     RPSGraph
-     ...
-     */
-    if (arr === undefined) { return graph_data.data; }
-    graph_data.data = arr;
-    graph_data.nested = nested();
+  this.title = function(str) {
+    if (str === undefined) { return title.text(); }
+    title.text(str);
+    return this;
+  };
+  this.x = function(val) {
+    if (!val) { return _x; }
+    _x = val;
+    _x.range([0, width]);
+    x_axis = d3.svg.axis().scale(_x).orient('bottom');
+    return this;
+  };
+  this.y = function(val) {
+    if (!val) { return _y; }
+    _y = val;
+    _y.range([height, 0]);
+    y_axis = d3.svg.axis().scale(_y).orient('left');
+    return this;
+  };
+  this.domain = function(xd, yd) {
+    if (xd === undefined) { return [_x.domain(), _y.domain()]; }
+    _x.domain(xd);
+    if (yd) {
+      _y.domain(yd);
+    }
     return this;
   };
   this.max_domains = function(arr) {
@@ -442,6 +422,69 @@ var RPSGraph = function() {
           .text(function(d, i) { return (i === 0) ? 'domain: ' : ' | '; });
       });
     domain_switch.append('span').html('&nbsp;]');
+    return this;
+  };
+  this.format_x = function(func) {
+    /*
+     Format function for data in x axis
+     ...
+     Args
+     ----
+     func (Function): function that accepts an argument and returns a String
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
+    if (func === undefined) { return format_x; }
+    format_x = func;
+    return this;
+  };
+  this.format_y = function(func) {
+    /*
+     Format function for data in y axis
+     ...
+     Args
+     ----
+     func (Function): function that accepts an argument and returns a String
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
+    if (func === undefined) { return format_y; }
+    format_y = func;
+    return this;
+  };
+  this.colors = function(func) {
+    if (func === undefined) { return color; }
+    if (typeof func === 'function') {
+      color = func;
+    } else if (typeof func === 'string') {
+      color = function() { return func; }
+    } else {
+      color_list = func;
+    }
+    return this;
+  };
+  this.data = function(arr) {
+    /*
+     Set data series to graph.
+     ...
+     Args
+     ----
+     arr (Array): Array of Arrays of Objects {x: foo, y: bar, y0: [0]}
+     ...
+     Returns
+     -------
+     RPSGraph
+     ...
+     */
+    if (arr === undefined) { return graph_data.data; }
+    graph_data.data = arr;
+    graph_data.nested = nested();
     return this;
   };
   this.draggable = function(bool, _label) {
@@ -519,10 +562,13 @@ var RPSGraph = function() {
       .classed('hidden', true);
     // Add inputs
     var input_rows = chart_inputs.selectAll('div')
-      .data(graph_data.data).enter()
-      .append('div').attr('data-type', function(d) { return d.type; })
-      .style('width', (width + padding.left + padding.right) + 'px')
-      .sort(function(a, b) { return a.data[a.data.length-1].y > b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y < b.data[b.data.length-1].y ? 1 : 0 });
+      .data(graph_data.data.reverse()).enter()
+      .append('div')
+      .attr('class', 'clearfix')
+      .attr('data-type', function(d) { return d.type; })
+      .style('width', (width + padding.left + padding.right) + 'px');
+//      .sort(function(a, b) { return a.data[a.data.length-1].y > b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y < b.data[b.data.length-1].y ? 1 : 0 });
+    graph_data.data.reverse();
     graph_data.inputs = input_rows.selectAll('input')
       .data(function(d) { return d.data; }).enter()
       .append('input').attr('type', 'text').attr('class', 'chart-input')
@@ -625,7 +671,8 @@ var RPSGraph = function() {
      RPSGraph
      ...
      */
-    if (bool !== true) {
+    if (bool === undefined) { return _h_grid; }
+    if (bool === false) {
       grid_layer.selectAll('.grid-line').remove();
       return this;
     }
@@ -686,40 +733,6 @@ var RPSGraph = function() {
     default_layer.append('path')
       .attr('d', _line(arr.data))
       .attr('class', 'default_line');
-    return this;
-  };
-  this.format_x = function(func) {
-    /*
-     Format function for data in x axis
-     ...
-     Args
-     ----
-     func (Function): function that accepts an argument and returns a String
-     ...
-     Returns
-     -------
-     RPSGraph
-     ...
-     */
-    if (func === undefined) { return format_x; }
-    format_x = func;
-    return this;
-  };
-  this.format_y = function(func) {
-    /*
-     Format function for data in y axis
-     ...
-     Args
-     ----
-     func (Function): function that accepts an argument and returns a String
-     ...
-     Returns
-     -------
-     RPSGraph
-     ...
-     */
-    if (func === undefined) { return format_y; }
-    format_y = func;
     return this;
   };
   this.stacked = function(bool) {
