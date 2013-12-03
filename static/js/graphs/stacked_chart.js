@@ -368,7 +368,7 @@ var RPSGraph = function() {
   };
   this.title = function(str, align) {
     if (str === undefined) { return title.text(); }
-    title.text(str);
+    title.html(str);
     if (align) { title.style('padding-left', padding.left + 'px'); }
     return this;
   };
