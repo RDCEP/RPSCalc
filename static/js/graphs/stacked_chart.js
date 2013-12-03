@@ -121,16 +121,16 @@ var RPSGraph = function() {
     },
     update_legend = function(_d) {
       var _h = '';
-      //TODO: Reverse sort to match stacking order of graph
-      _d.forEach(function(d) {
+      _d.reverse().forEach(function(d) {
         var current_x = _d.length > 1 ? d.type : format_x(d.x);
         _h += current_x + ':&nbsp;' + format_y(d.y) + '<br>';
       });
       tool_tip
         .html(_h)
-        .style('left', (_x(_d[_d.length - 1].x) + padding.left + 10) + 'px')
-        .style('top', (_y(_d[_d.length - 1].y) + padding.top) + 'px')
+        .style('left', (_x(_d[0].x) + padding.left + 10) + 'px')
+        .style('top', (_y(_d[0].y) + padding.top) + 'px')
         .classed('active', true);
+      _d.reverse();
     },
     add_hover = function() {
       /*
@@ -195,33 +195,32 @@ var RPSGraph = function() {
        */
       return d3.max(_max_domains) - ((d3.sum(graph_data.data, function(_dd) { return _dd.data.filter(function(_ddd) { return _ddd.x.getFullYear() == _d.x.getFullYear(); })[0].y; })) - _d.y);
     },
-    drag_start = function(d, i) {
-      d3.select('.segment-label-text[data-x="' + d.x.toString() + '"][data-type="' + d.type + '"]').classed('hidden', _labels);
+    drag_start = function(_d) {
+      d3.select('.segment-label-text[data-x="' + _d.x.toString() + '"][data-type="' + _d.type + '"]').classed('hidden', _labels);
       tool_tip.classed('hidden', true);
-      graph_data.active = graph_data.data.filter(function(dd) { return dd.type === d.type; })[0];
+      graph_data.active = graph_data.data.filter(function(d) { return d.type === _d.type; })[0];
       adjust_dot = d3.select(this);
       remove_hover();
       remove_drag_hover();
     },
-    drag_move = function(d,i) {
-      var adjusted = _y.invert(d3.event.y) - d.y0,
+    drag_move = function(_d) {
+      var adjusted = _y.invert(d3.event.y) - _d.y0,
         delta = Math.round(adjusted / adjust_data.step) * adjust_data.step;
-      graph_data.active.data.filter(function(_d) { return _d === d; })[0].y = (delta > _y.domain()[0]) ? (delta > max_drag(d)) ? max_drag(d) : delta : _y.domain()[0];
-      graph_data.data.filter(function(dd) { return dd.type === d.type; })[0] = graph_data.active;
+      graph_data.active.data.filter(function(d) { return _d === d; })[0].y = (delta > _y.domain()[0]) ? (delta > max_drag(_d)) ? max_drag(_d) : delta : _y.domain()[0];
+      graph_data.data.filter(function(d) { return d.type === _d.type; })[0] = graph_data.active;
       graph_data.nested = nested();
       redraw();
     },
-    drag_end = function(d) {
+    drag_end = function(_d) {
       //TODO: update session
-      //TODO: update legend?
-      //TODO: Update legend y position
+      update_legend(d3.select('.segment-rect[data-x="' + _d.x.toString() + '"]').datum().values);
       tool_tip.classed('hidden', false);
-      d3.select('.segment-label-text[data-x="' + d.x.toString() + '"][data-type="' + d.type + '"]').classed('hidden', !_labels);
-      adjust_data.stop = graph_data.active.data.filter(function(_d) { return _d.x === d.x ; })[0];
-      d3.select('.chart-input[data-x="' + d.x.toString() + '"][data-type="' + d.type + '"]')
+      d3.select('.segment-label-text[data-x="' + _d.x.toString() + '"][data-type="' + _d.type + '"]').classed('hidden', !_labels);
+      adjust_data.stop = graph_data.active.data.filter(function(d) { return _d.x === d.x ; })[0];
+      d3.select('.chart-input[data-x="' + _d.x.toString() + '"][data-type="' + _d.type + '"]')
         .property('value', adjust_data.stop.y);
       adjust_dot = null;
-      graph_data.data.filter(function(dd) { return dd.type === d.type; })[0] = graph_data.active;
+      graph_data.data.filter(function(d) { return d.type === _d.type; })[0] = graph_data.active;
       redraw();
       add_hover();
       add_drag_hover();
@@ -370,7 +369,6 @@ var RPSGraph = function() {
     return this;
   };
   this.colors = function(func) {
-    //TODO: Check this. Does it work with strings, lists and funcs?
     if (func === undefined) { return color; }
     if (typeof func === 'function') {
       color = func;
@@ -566,9 +564,7 @@ var RPSGraph = function() {
         .attr('class', 'segment-rect')
         .attr('height', _y.range()[0])
         .attr('width', segment_width)
-        .attr('data-x', function(d) { return d.x; })
-        .attr('data-y', function(d) { return d.y; })
-        .attr('data-legend', function(d) { return d.x + ':&nbsp;' + d.y; })
+        .attr('data-x', function(d) { return d.values[0].x; })
         .style('fill', 'transparent')
         .style('pointer-events', function() { return visible ? 'all' : 'none'; });
       handle.selectAll('.data-point.tight')
