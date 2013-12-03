@@ -293,8 +293,10 @@ var RPSGraph = function() {
         current_switch.classed('active', active_switch.attr('data-domain') === current_switch.attr('data-domain'));
         _y.domain([_y.domain()[0], active_switch.attr('data-domain')]);
         d3.select('.y.axis').call(y_axis);
-        redraw();
       });
+      redraw();
+      graph_data.default_line
+        .attr('d', function(d) { return _line(d.data); });
     },
     add_labels = function() {
       //TODO: Move labels out of draggable() into own function
@@ -344,7 +346,7 @@ var RPSGraph = function() {
   this.select = function(el) {
     if (!el) { return svg_id; }
     svg_id = el;
-    title = d3.select(svg_id).append('h3').style('padding-left', padding.left + 'px');
+    title = d3.select(svg_id).append('h3');
     switches_list = d3.select(el).append('div').attr('id', 'switches');
     svg = d3.select(svg_id).append('div').attr('class', 'chart-wrap')
       .append('svg')
@@ -364,9 +366,10 @@ var RPSGraph = function() {
     button_layer = svg.append('g').attr('id', 'button_layer');
     return this;
   };
-  this.title = function(str) {
+  this.title = function(str, align) {
     if (str === undefined) { return title.text(); }
     title.text(str);
+    if (align) { title.style('padding-left', padding.left + 'px'); }
     return this;
   };
   this.x = function(val) {
@@ -728,10 +731,10 @@ var RPSGraph = function() {
       console.log('Graph must be draggable in order to use default_line().');
       return this;
     }
-    if (!arr) { return graph_data.default_line; }
-    graph_data.default_line = arr;
-    default_layer.append('path')
-      .attr('d', _line(arr.data))
+    if (arr === undefined) { return graph_data.default_line; }
+    graph_data.default_line = default_layer.selectAll('.default_line')
+      .data(arr).enter().append('path')
+      .attr('d', function(d) { return _line(d.data); })
       .attr('class', 'default_line');
     return this;
   };
@@ -783,7 +786,6 @@ var RPSGraph = function() {
         .attr('d', function(d) { return _line(d.data); })
         .attr('class', 'chart-outline')
     }
-    console.log(graph_data.data);
     draw_axes();
     mask_edges();
     return this;
