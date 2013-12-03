@@ -178,9 +178,8 @@ var RPSGraph = function() {
       adjust_dot.on('mouseout', function() { return null; });
       d3.selectAll('.data-point').on('mouseover', function() { return null; });
     },
-    max_sum = function(_d) {
-//      _y.domain()[1] - d3.sum(graph_data.data, function(_d) { return _d.data.filter(function(_dd) { _dd.x === d.x; })[0].x; });
-      console.log(graph_data.nested);//.rollup(function(leaves) { return d3.sum(leaves, function(l) { return l.y; }); }));
+    max_drag = function(_d) {
+      return d3.max(_max_domains) - ((d3.sum(graph_data.data, function(_dd) { return _dd.data.filter(function(_ddd) { return _ddd.x.getFullYear() == _d.x.getFullYear(); })[0].y; })) - _d.y);
     },
     drag_start = function(d, i) {
       handles.filter(function(_d) { return _d.x === d.x; }).select('.segment-label-text').classed('hidden', _labels);
@@ -195,8 +194,7 @@ var RPSGraph = function() {
     drag_move = function(d,i) {
       var adjusted = _y.invert(d3.event.y) - d.y0,
         delta = Math.round(adjusted / adjust_data.step) * adjust_data.step;
-      max_sum(d);
-      graph_data.active.data.filter(function(_d) { return _d === d; })[0].y = (delta > _y.domain()[0]) ? (delta > _y.domain()[1]) ? _y.domain()[1] : delta : _y.domain()[0];
+      graph_data.active.data.filter(function(_d) { return _d === d; })[0].y = (delta > _y.domain()[0]) ? (delta > max_drag(d)) ? max_drag(d) : delta : _y.domain()[0];
       graph_data.nested = nested();
       graph_data.data.filter(function(dd) { return dd.type === d.type; })[0] = graph_data.active;
       redraw();
@@ -243,9 +241,11 @@ var RPSGraph = function() {
        Draw x and y axes, ticks, etc.
        */
       axes_layer.append('g')
+        .attr('class', 'x axis')
         .attr('transform', 'translate(0,' + (height + 5) + ')')
         .call(x_axis);
       axes_layer.append('g')
+        .attr('class', 'y axis')
         .attr('transform', 'translate(-5,0)')
         .call(y_axis);
     },
@@ -268,7 +268,7 @@ var RPSGraph = function() {
         var current_switch = d3.select(this);
         current_switch.classed('active', active_switch.attr('data-domain') === current_switch.attr('data-domain'));
         _y.domain([_y.domain()[0], active_switch.attr('data-domain')]);
-//        current_switch.classed('active', !current_switch.classed('active'));
+        d3.select('.y.axis').call(y_axis);
         redraw();
       });
     },
@@ -440,7 +440,8 @@ var RPSGraph = function() {
     var input_rows = chart_inputs.selectAll('div')
       .data(graph_data.data).enter()
       .append('div').attr('data-type', function(d) { return d.type; })
-      .style('width', (width + padding.left + padding.right) + 'px');
+      .style('width', (width + padding.left + padding.right) + 'px')
+      .sort(function(a, b) { return a.data[a.data.length-1].y > b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y < b.data[b.data.length-1].y ? 1 : 0 });
     graph_data.inputs = input_rows.selectAll('input')
       .data(function(d) { return d.data; }).enter()
       .append('input').attr('type', 'text').attr('class', 'chart-input')
@@ -452,7 +453,7 @@ var RPSGraph = function() {
       .on('change', function(d) {
         var _v = (d3.select(this).property('value'));
         //TODO: Better max and min
-        _v = (_v > 100) ? 100 : (_v < d.y0) ? d.y0 : _v;
+        _v = (_v > max_drag(d)) ? format_y(max_drag(d)) : (_v < d.y0) ? d.y0 : _v;
         graph_data.data.filter(function(_d) { return _d.type === d.type; })[0].data.filter(function(_d) { return _d.x === d.x; })[0].y = +_v;
         console.log(_v, graph_data.data);
         d3.select(this).property('value', +_v);
