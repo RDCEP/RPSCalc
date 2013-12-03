@@ -77,6 +77,16 @@ def trajectory(state):
         graph_type='trajectory',
     )
 
+@app.route('/<state>/carveouts')
+def carveouts(state):
+    kwargs = {'state':state}
+    _s = update_session(request, **kwargs)
+    return render_template(
+        'carveouts.html',
+        state=_s['state'],
+        graph_type='carveouts',
+    )
+
 @app.route('/<state>/wind')
 def wind(state):
     kwargs = {'state':state}
