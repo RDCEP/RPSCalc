@@ -96,7 +96,7 @@ button { background-color: #0072b2; border: none; color: #eeeeee; width: 100%; p
 
 #state_trajectory_inputs { width: 760px; }
 
-#state_trajectory_inputs input { float: left; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }
+#state_trajectory_inputs input { float: left; text-align: right; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }
 
 .module.narrow { width: 345px; float: left; }
 .module.narrow + .module.narrow { margin-left: 6px; }
