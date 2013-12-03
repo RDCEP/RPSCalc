@@ -210,52 +210,68 @@ line, rect, path
   stroke-width: 1
 .chart-line
   stroke-width: 2
+.chart-outline
+  stroke-width: 2
+  stroke: $light-gray
 .chart-area
   stroke-width: 0
 .mask
   fill: $light-gray
-.map-state
-  fill: #dddddd
-  stroke-width: 1
-  stroke: $light-gray
-.rps-state
-  fill: $sky-blue
-  &.active
-    fill: $red
-.trajectory
+.grid-line
+  stroke: white
   stroke-width: 2
-  stroke: #ccc
-  &.active
-    stroke: $red
-    stroke-width: 3
-  &.hovered
-    stroke: $sky-blue
-    stroke-width: 3
-#default_trajectory
+path.domain
+  stroke: #999
+  stroke-width: 0
+.default_line
   stroke: black
   stroke-width: 2
   stroke-dasharray: 1, 8
 .data-point
-  stroke-width: 2
+  stroke-width: 3
+  cursor: ns-resize
   stroke: transparent
   fill: transparent
-  pointer-events: all //TODO: only for draggable points
+  pointer-events: none //TODO: only for draggable points
+  .loose
+    stroke-width: 5
+    pointer-events: all
   &.active
     fill: $light-gray
     stroke: black //$red
-  &.hovered
-    fill: black
-.grid-line
-  stroke: white
-  stroke-width: 2
-.tooltip
-  position: fixed
+  &.draggable
+    pointer-events: all
+    &.hovered
+      fill: black
+.chart-wrap
+  position: relative
+#switches
+  padding: 0 0 0 50px
+.switch-group
+  font-size: .8em
+.switch
+  cursor: pointer
+  color: #bbbbbb
+  font-weight: bold
+  &.active
+    color: $red
+.chart-input
+  float: left
+  text-align: right
+  margin-left: 2px
+  border: 1px solid #999
+  display: block
+  padding: 2px 5px
+  font-size: .7em
+#tool_tip
+  position: absolute
+  //position: fixed
   visibility: hidden
   padding: 2px 5px
   color: white
   background-color: black
   opacity: .8
-  font-size: .8em
+  font-size: .7em
   pointer-events: none
   &.active
     visibility: visible

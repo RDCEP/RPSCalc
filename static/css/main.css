@@ -110,29 +110,37 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 .chart-line { stroke-width: 2; }
 
+.chart-outline { stroke-width: 2; stroke: #eeeeee; }
+
 .chart-area { stroke-width: 0; }
 
 .mask { fill: #eeeeee; }
 
-.map-state { fill: #dddddd; stroke-width: 1; stroke: #eeeeee; }
-
-.rps-state { fill: #56b4e9; }
-.rps-state.active { fill: #d55e00; }
-
-.trajectory { stroke-width: 2; stroke: #cccccc; }
-.trajectory.active { stroke: #d55e00; stroke-width: 3; }
-.trajectory.hovered { stroke: #56b4e9; stroke-width: 3; }
-
-#default_trajectory { stroke: black; stroke-width: 2; stroke-dasharray: 1, 8; }
-
-.data-point { stroke-width: 2; stroke: transparent; fill: transparent; pointer-events: all; }
-.data-point.active { fill: #eeeeee; stroke: black; }
-.data-point.hovered { fill: black; }
-
 .grid-line { stroke: white; stroke-width: 2; }
 
-.tooltip { position: fixed; visibility: hidden; padding: 2px 5px; color: white; background-color: black; opacity: 0.8; font-size: 0.8em; pointer-events: none; }
-.tooltip.active { visibility: visible; }
+path.domain { stroke: #999999; stroke-width: 0; }
+
+.default_line { stroke: black; stroke-width: 2; stroke-dasharray: 1, 8; }
+
+.data-point { stroke-width: 3; cursor: ns-resize; stroke: transparent; fill: transparent; pointer-events: none; }
+.data-point .loose { stroke-width: 5; pointer-events: all; }
+.data-point.active { fill: #eeeeee; stroke: black; }
+.data-point.draggable { pointer-events: all; }
+.data-point.draggable.hovered { fill: black; }
+
+.chart-wrap { position: relative; }
+
+#switches { padding: 0 0 0 50px; }
+
+.switch-group { font-size: 0.8em; }
+
+.switch { cursor: pointer; color: #bbbbbb; font-weight: bold; }
+.switch.active { color: #d55e00; }
+
+.chart-input { float: left; text-align: right; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }
+
+#tool_tip { position: absolute; visibility: hidden; padding: 2px 5px; color: white; background-color: black; opacity: 0.8; font-size: 0.7em; pointer-events: none; }
+#tool_tip.active { visibility: visible; }
 
 .rps-diff { fill: #d55e00; }
 
