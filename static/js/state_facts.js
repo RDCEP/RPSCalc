@@ -261,7 +261,7 @@ var FactsPage = function() {
         .text('trillions BTU')
         .attr('transform', 'translate(' + _wt + ',' + (_h + _mt + _mb + 15) + ')')
         .attr('class', 'grid-axis-text');
-      grid_bars = grid_mix.selectAll('.grid-data')
+      var grid_bars = grid_mix.selectAll('.grid-data')
         .data(data.data)
         .enter()
         .append('g')
