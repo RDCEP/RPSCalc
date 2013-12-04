@@ -24,24 +24,6 @@ def update_session(request, **kwargs):
         s[key] = value
     return s
 
-@app.route('/basic')
-def basic():
-    return render_template(
-        'graphs/basic_chart.html'
-    )
-
-@app.route('/stacked')
-def stacked():
-    return render_template(
-        'graphs/stacked.html'
-    )
-
-@app.route('/test')
-def test():
-    return render_template(
-        'test.html'
-    )
-
 @app.route('/update', methods=['POST',])
 def update():
     try:
@@ -85,16 +67,6 @@ def carveouts(state):
         'carveouts.html',
         state=_s['state'],
         graph_type='carveouts',
-    )
-
-@app.route('/<state>/wind')
-def wind(state):
-    kwargs = {'state':state}
-    _s = update_session(request, **kwargs)
-    return render_template(
-        'wind_carveout.html',
-        state=_s['state'],
-        graph_type='wind_carveout',
     )
 
 @app.route('/eia_api/retail')
