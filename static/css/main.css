@@ -63,14 +63,16 @@ form { clear: both; margin-bottom: 2em; position: relative; top: 1em; }
 
 #main_content #crumbs { list-style: none; margin: 1em 0; }
 #main_content #crumbs li a { display: block; height: 100%; width: 100%; border: none; color: #eeeeee; }
-#main_content #crumbs li { float: left; position: relative; height: 27.5px; width: 124px; font-size: 15px; line-height: 15px; list-style-type: none !important; margin: 0 2px 0 0 !important; padding: 12.5px 20px 0 40px; background-color: #666666; }
+#main_content #crumbs li { float: left; position: relative; height: 27.5px; width: 89px; font-size: 15px; line-height: 15px; list-style-type: none !important; margin: 0 2px 0 0 !important; padding: 12.5px 20px 0 40px; background-color: #666666; }
+#main_content #crumbs li#crumb_pricing { width: 145px; }
+#main_content #crumbs li#crumb_cost { width: 109px; }
 #main_content #crumbs li:after { content: ""; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 20px solid #666666; position: absolute; right: -20px; top: 0; z-index: 1; }
 #main_content #crumbs li.active { background-color: #0072b2; }
 #main_content #crumbs li.active:after { border-left: 20px solid #0072b2; }
 #main_content #crumbs li:before { content: ""; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 20px solid #eeeeee; position: absolute; left: 0; top: 0; }
 #main_content #crumbs li:first-child { border-top-left-radius: 2px; border-bottom-left-radius: 2px; }
 #main_content #crumbs li:first-child:before { display: none; }
-#main_content #crumbs li:last-child { padding-right: 40px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; width: 60px; }
+#main_content #crumbs li:last-child { padding-right: 40px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; }
 #main_content #crumbs li:last-child:after { display: none; }
 #main_content #crumbs button { background-color: #0072b2; border: none; color: #eeeeee; padding: 1em 1.5em 1em 3em; font-size: 1em; line-height: 1em; margin-top: 1em; position: relative; }
 

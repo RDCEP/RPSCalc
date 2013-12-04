@@ -78,13 +78,17 @@ form
     float: left
     position: relative
     height: $crumb * 1.375
-    width: 124px
+    width: 89px
     font-size: 15px
     line-height: 15px
     list-style-type: none!important
     margin: 0 2px 0 0!important
     padding: $crumb*.625 $crumb 0 $crumb*2
     background-color: $mid-gray
+    &#crumb_pricing
+      width: 145px
+    &#crumb_cost
+      width: 109px
     &:after
       content: ''
       border-top: $crumb solid transparent
@@ -115,7 +119,6 @@ form
       padding-right: $crumb*2
       border-top-right-radius: $crumb/10
       border-bottom-right-radius: $crumb/10
-      width: 60px
       &:after
         display: none
   button
@@ -127,9 +130,6 @@ form
     line-height: 1em
     margin-top: 1em
     position: relative
-
-
-
 // LAYOUT
 // MENUS
 #main_nav

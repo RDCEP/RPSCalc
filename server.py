@@ -69,6 +69,16 @@ def carveouts(state):
         graph_type='carveouts',
     )
 
+@app.route('/<state>/pricing')
+def pricing(state):
+    kwargs = {'state':state}
+    _s = update_session(request, **kwargs)
+    return render_template(
+        'pricing.html',
+        state=_s['state'],
+        graph_type='carveouts',
+    )
+
 @app.route('/eia_api/retail')
 def eia_api_retail():
     api_key = "D82A092DA301308805ECAB18A123BB4A"

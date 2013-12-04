@@ -4,6 +4,8 @@
 {% block left_nav %}
 <li><a href="/{{ state }}/trajectory" data-name="trajectory">Set RPS trajectory</a></li>
 <li class="active"><a href data-name="carveouts">Set carveouts</a></li>
+<li><a href="/{{ state }}/pricing" data-name="pricing">Set cost cap &amp; pricing</a></li>
+<li><a href="/{{ state }}/cost" data-name="cost">Projected cost</a></li>
 {% endblock %}
 {% block content %}
   <article id="main_content">
@@ -27,10 +29,10 @@
         consequat arcu hendrerit id. Sed feugiat ultrices volutpat. Nam volutpat aliquam ultricies. Phasellus
         orci erat, pretium eget velit ut, congue sodales massa. Aliquam erat volutpat.</p>
       <ul id="crumbs">
-        <li><a href="/{{ state }}/trajectory">RPS Trajectory</a>
-        <li class="active"><a href="/{{ state }}/carveouts">RPS Carveouts</a></li>
-        <li><a href="/{{ state }}/pricing">Cost cap &amp; Pricing</a></li>
-        <li><a href="/{{ state }}/end">Finish</a></li>
+        <li id="crumb_trajectory"><a href="/{{ state }}/trajectory">Trajectory</a>
+        <li id="crumb_carveouts" class="active"><a href="/{{ state }}/carveouts">Carveouts</a></li>
+        <li id="crumb_pricing"><a href="/{{ state }}/pricing">Cost cap &amp; Pricing</a></li>
+        <li id="crumb_cost"><a href="/{{ state }}/end">Projected Cost</a></li>
       </ul>
     </section>
   </article>
