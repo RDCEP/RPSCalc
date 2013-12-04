@@ -105,49 +105,9 @@
   <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
   <script src="/static/js/graphs/stacked_chart.js"></script>
   <script>
-    var width = 760,
-        height = 400,
-        padding = 30,
-        container = '#carveouts',
-        parse_date = d3.time.format('%Y').parse;
-    d3.json('/static/js/state_data.json', function(_data) {
-      var def_line = [{data: []}],
-          data = [{type: 'rps', data: []}]
-          _s = _data.features.filter(function(d) {
-            return (d.properties.machine_name == Options.state) ? d : null;
-          })[0];
-      // Parse trajectory data
-      _s.properties.carveouts.forEach(function(d, i) {
-        if (d.type === 'wind' || d.type === 'solar') {
-          d.data.forEach(function(dd, ii) {
-            var _t = _s.properties.trajectory[ii];
-            d.data[ii] = {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : dd / _s.properties.trajectory[ii] * 100, type: d.type};
-          });
-        } else {
-          _s.properties.carveouts.splice(i, 1);
-        }
-      });
-      _s.properties.carveouts.sort(function(a, b) { return a.data[a.data.length-1].y < b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y > b.data[b.data.length-1].y ? 1 : 0 });
-      // Set header info
-      d3.select('#main_content img').attr('src', '/static/images/state_seals/' + _s.properties.abbr + '.png');
-      d3.select('h1').text(_s.properties.name);
-      var foo = new RPSGraph()
-        .padding(30)
-        .width(width).height(height)
-        .select(container)
-        .title('Adjust the state&rsquo;s carveouts')
-        .x(d3.time.scale())
-        .y(d3.scale.linear())
-        .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, 100])
-        .max_domains([50, 100])
-        .format_x(function(x) { return x.getFullYear(); })
-        .format_y(function(y) { return d3.format('.1f')(y); })
-        .data(_s.properties.carveouts)
-        .stacked(true)
-        .hoverable(true)
-        .draggable(true, false)
-        .h_grid(true)
-        .draw();
+    d3.json('/static/js/prices/IL.json', function(_data) {
+      var retail = Math.round(_data.data.slice(-1)[0].data * 10);
+      d3.select('#policy_retail').property('value', retail);
     });
   </script>
 {% endblock %}
