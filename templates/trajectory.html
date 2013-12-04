@@ -48,6 +48,7 @@
     var width = 760,
         height = 300,
         padding = 30,
+        empty = true,
         container = '#trajectory',
         parse_date = d3.time.format('%Y').parse;
     d3.json('/static/js/state_data.json', function(_data) {
@@ -58,6 +59,7 @@
           })[0];
 
       if (_s.properties.trajectory.length > 0) {
+        empty = false;
         // Parse trajectory data
         _s.properties.trajectory.forEach(function(d, i) {
           data[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
@@ -92,7 +94,9 @@
         .draggable(true, false)
         .default_line(def_line)
         .h_grid(true)
-        .draw();
+        .draw()
+        .zeroes(empty);
+      console.log(empty);
     });
   </script>
 {% endblock %}

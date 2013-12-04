@@ -49,6 +49,7 @@
     var width = 760,
         height = 400,
         padding = 30,
+        empty = true,
         container = '#carveouts',
         carveout_types = ['wind', 'solar'],
         parse_date = d3.time.format('%Y').parse;
@@ -58,9 +59,6 @@
           _s = _data.features.filter(function(d) {
             return (d.properties.machine_name == Options.state) ? d : null;
           })[0];
-      carveout_types.forEach(function(d, i) {
-
-      });
       // Parse trajectory data
       //TODO: Rewrite JSON carveouts as percent of RPS, not percent of total energy
       //TODO: The loop below is total crap
@@ -68,6 +66,7 @@
         var carveout_type = carveout_types[i],
           carveout_data = data.filter(function(e) { return e.type === carveout_type })[0],
           carveout = _s.properties.carveouts.filter(function(d) { return d.type === carveout_type; });
+        empty = empty ? carveout.length === 0 : false;
         carveout = carveout.length > 0 ? carveout[0].data : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         carveout.forEach(function(d, ii) {
           var _t = _s.properties.trajectory[ii];
@@ -94,7 +93,8 @@
         .hoverable(true)
         .draggable(true, false)
         .h_grid(true)
-        .draw();
+        .draw()
+        .zeroes(empty);
     });
   </script>
 {% endblock %}

@@ -767,6 +767,13 @@ var RPSGraph = function() {
     }
     return this;
   };
+  this.zeroes = function(bool) {
+    if (bool) {
+      var e = document.createEvent('SVGEvents');
+      e.initEvent('click', true, true);
+      d3.select('#type_switch').node().dispatchEvent(e);
+    }
+  };
   this.draw = function() {
     /*
      Draw all data
