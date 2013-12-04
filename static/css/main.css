@@ -99,6 +99,8 @@ form { clear: both; margin-bottom: 2em; position: relative; top: 1em; }
 #main_content header h1 + img { position: absolute; right: 15px; bottom: 15px; height: 100px; }
 #main_content li { border: none; padding: 0; margin: 0; list-style-type: disc; padding-left: -15px; margin-left: 15px; }
 
+.chart-layer { pointer-events: none; }
+
 .chart-outer-wrap { padding: 5em 0; }
 
 #rps_progress { margin-top: 1em; }
@@ -126,7 +128,7 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 .chart-area { stroke-width: 0; }
 
-.mask { fill: #eeeeee; }
+.mask { fill: #eeeeee; pointer-events: all; }
 
 .grid-line { stroke: white; stroke-width: 2; }
 

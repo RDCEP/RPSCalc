@@ -257,6 +257,8 @@ var RPSGraph = function() {
       if (_hoverable) {
         masks.on('mouseover', function() {
           tool_tip.classed('hidden', true);
+          d3.selectAll('.data-point').classed('active', false);
+          d3.selectAll('.data-point').classed('hovered', false);
         });
       }
     },
@@ -366,6 +368,7 @@ var RPSGraph = function() {
     axes_layer = svg.append('g').attr('id', 'axes_layer');
     handle_layer = svg.append('g').attr('id', 'handle_layer');
     button_layer = svg.append('g').attr('id', 'button_layer');
+    svg.selectAll('g').attr('class', 'chart-layer');
     return this;
   };
   this.title = function(str, align) {
