@@ -3,6 +3,14 @@
 
 $crumb: 20px
 
+@mixin columns($c, $g)
+  -moz-column-count: $c /* Firefox */
+  -webkit-column-count: $c /* Safari and Chrome */
+  column-count: $c
+  -moz-column-gap: $g
+  -webkit-column-gap: $g
+  column-gap: $g
+
 html
   height: 100%
   overflow: auto
@@ -185,6 +193,7 @@ form
 #menu_states
   position: relative
   ul
+    @include columns(2, 2em)
     border: none
     position: absolute
     top: 100%
