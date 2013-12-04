@@ -64,6 +64,35 @@ form
   margin-bottom: 2em
   position: relative
   top: 1em
+#pricing_form
+  fieldset
+    float: left
+    padding: 20px
+    margin: 0 0 20px 0
+    background-color: lighten($sky-blue, 20)
+    &.narrow
+      width: 180px
+    &.wide
+      width: 620px
+    &+fieldset
+      margin: 0 0 20px 20px
+    h4
+      font-weight: bold
+      font-size: 1.2em
+      margin: 0 0 1em
+    div
+      margin-bottom: 10px
+    input
+      background-color: #ffffff
+      border: none
+      padding: 2px 5px
+      text-align: right
+      float: right
+      &[type=text]
+        width: 40px
+    label
+      float: left
+
 #main_content #crumbs
   list-style: none
   //display: inline-table
@@ -369,6 +398,7 @@ path.domain
 .price-line
   stroke: $sky-blue
   stroke-width: 2
+
 td, th
   text-align: left
   padding: 3px 15px 3px 0

@@ -22,12 +22,62 @@
         sem. In nisl velit, pellentesque in elit at, adipiscing sodales metus. Vestibulum faucibus placerat
         lectus at aliquam.</p>
       <div id="pricing" class="module clearfix chart-outer-wrap">
-        <form>
-          <fieldset id="wind_costs">
-            <label for="wind_installation">Installation</label>
-            <div>
+        <form id="pricing_form">
+          <fieldset id="wind_costs" class="narrow">
+            <h4>Wind Costs</h4>
+            <div class="clearfix">
+              <label for="wind_installation">Installation ($/W)</label>
               <input type="text" value="2" id="wind_installation" name="wind_installation">
-              <span>$ / W</span>
+            </div>
+            <div class="clearfix">
+              <label for="wind_om">O &amp; M ($/MWh)</label>
+              <input type="text" value="10" id="wind_om" name="wind_om">
+            </div>
+            <div class="clearfix">
+              <label for="wind_integration">Integration ($/MWh)</label>
+              <input type="text" value="5" id="wind_integration" name="wind_integration">
+            </div>
+            <div class="clearfix">
+              <label for="wind_amortization">Amortization (%)</label>
+              <input type="text" value="9" id="wind_amortization" name="wind_amortization">
+            </div>
+          </fieldset>
+          <fieldset id="solar_costs" class="narrow">
+            <h4>Solar Costs</h4>
+            <div class="clearfix">
+              <label for="solar_installation">Installation ($/W)</label>
+              <input type="text" value="3.45" id="solar_installation" name="solar_installation">
+            </div>
+            <div class="clearfix">
+              <label for="solar_om">O &amp; M ($/MWh)</label>
+              <input type="text" value="0.012" id="solar_om" name="solar_om">
+            </div>
+            <div class="clearfix">
+              <label for="solar_integration">Integration ($/MWh)</label>
+              <input type="text" value="0" id="solar_integration" name="solar_integration">
+            </div>
+            <div class="clearfix">
+              <label for="solar_amortization">Amortization (%)</label>
+              <input type="text" value="9" id="solar_amortization" name="solar_amortization">
+            </div>
+          </fieldset>
+          <fieldset id="policy_costs" class="narrow">
+            <h4>Policy choices</h4>
+            <div class="clearfix">
+              <label for="policy_costcap">Cost cap (%)</label>
+              <input type="text" value="2" id="policy_costcap" name="policy_costcap">
+            </div>
+            <div class="clearfix">
+              <label for="policy_retail">Retail ($/MWh)</label>
+              <input type="text" value="100" id="policy_retail" name="policy_retail">
+            </div>
+            <div class="clearfix">
+              <label for="policy_wholesale">Wholesale ($/MWh)</label>
+              <input type="text" value="35" id="policy_wholesale" name="policy_wholesale">
+            </div>
+            <div class="clearfix">
+              <label for="policy_ptc">PTC</label>
+              <input type="checkbox" id="policy_ptc" name="policy_ptc">
             </div>
           </fieldset>
         </form>
@@ -41,7 +91,7 @@
         <li id="crumb_trajectory"><a href="/{{ state }}/trajectory">Trajectory</a>
         <li id="crumb_carveouts"><a href="/{{ state }}/carveouts">Carveouts</a></li>
         <li id="crumb_pricing" class="active"><a href="/{{ state }}/pricing">Cost cap &amp; Pricing</a></li>
-        <li id="crumb_cost"><a href="/{{ state }}/end">Projected Cost</a></li>
+        <li id="crumb_cost"><a href="/{{ state }}/cost">Projected Cost</a></li>
       </ul>
     </section>
   </article>
