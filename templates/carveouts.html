@@ -50,24 +50,26 @@
         height = 400,
         padding = 30,
         container = '#carveouts',
+        carveout_types = ['wind', 'solar'],
         parse_date = d3.time.format('%Y').parse;
     d3.json('/static/js/state_data.json', function(_data) {
       var def_line = [{data: []}],
-          data = [{type: 'rps', data: []}]
+          data = [{type: 'wind', data: []}, {type: 'solar', data: []}]
           _s = _data.features.filter(function(d) {
             return (d.properties.machine_name == Options.state) ? d : null;
           })[0];
-      // Parse trajectory data
-      _s.properties.carveouts.forEach(function(d, i) {
-        if (d.type === 'wind' || d.type === 'solar') {
-          d.data.forEach(function(dd, ii) {
-            var _t = _s.properties.trajectory[ii];
-            d.data[ii] = {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : dd / _s.properties.trajectory[ii] * 100, type: d.type};
-          });
-        } else {
-          _s.properties.carveouts.splice(i, 1);
-        }
+      carveout_types.forEach(function(d, i) {
+
       });
+      // Parse trajectory data
+      _s.properties.carveouts.filter(function(d) { return d.type === 'wind' || d.type === 'solar'}).forEach(function(d, i) {
+        d.data.forEach(function(dd, ii) {
+          var _t = _s.properties.trajectory[ii];
+          data.filter(function(e) { return e.type === d.type })[0].data[ii]= {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : dd / _s.properties.trajectory[ii] * 100, type: d.type};
+{#            d.data[ii] = {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : dd / _s.properties.trajectory[ii] * 100, type: d.type};#}
+        });
+      });
+      if (data)
       _s.properties.carveouts.sort(function(a, b) { return a.data[a.data.length-1].y < b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y > b.data[b.data.length-1].y ? 1 : 0 });
       // Set header info
       d3.select('#main_content img').attr('src', '/static/images/state_seals/' + _s.properties.abbr + '.png');

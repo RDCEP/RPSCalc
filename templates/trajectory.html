@@ -56,14 +56,20 @@
           _s = _data.features.filter(function(d) {
             return (d.properties.machine_name == Options.state) ? d : null;
           })[0];
-      // Parse trajectory data
-      _s.properties.trajectory.forEach(function(d, i) {
-        data[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
-      });
-      // Parse default trajectory
-      _s.properties.trajectory.forEach(function(d, i) {
-        def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
-      });
+
+      if (_s.properties.trajectory.length > 0) {
+        // Parse trajectory data
+        _s.properties.trajectory.forEach(function(d, i) {
+          data[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
+        });
+        // Parse default trajectory
+        _s.properties.trajectory.forEach(function(d, i) {
+          def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
+        });
+      } else {
+        data[0].data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        def_line[0].data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      }
       // Set header info
       d3.select('#main_content img').attr('src', '/static/images/state_seals/' + _s.properties.abbr + '.png');
       d3.select('h1').text(_s.properties.name);
