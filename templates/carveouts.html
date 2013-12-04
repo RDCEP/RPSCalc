@@ -62,15 +62,19 @@
 
       });
       // Parse trajectory data
-      _s.properties.carveouts.filter(function(d) { return d.type === 'wind' || d.type === 'solar'}).forEach(function(d, i) {
-        d.data.forEach(function(dd, ii) {
+      //TODO: Rewrite JSON carveouts as percent of RPS, not percent of total energy
+      //TODO: The loop below is total crap
+      for (var i = 0; i < carveout_types.length; ++i) {
+        var carveout_type = carveout_types[i],
+          carveout_data = data.filter(function(e) { return e.type === carveout_type })[0],
+          carveout = _s.properties.carveouts.filter(function(d) { return d.type === carveout_type; });
+        carveout = carveout.length > 0 ? carveout[0].data : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        carveout.forEach(function(d, ii) {
           var _t = _s.properties.trajectory[ii];
-          data.filter(function(e) { return e.type === d.type })[0].data[ii]= {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : dd / _s.properties.trajectory[ii] * 100, type: d.type};
-{#            d.data[ii] = {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : dd / _s.properties.trajectory[ii] * 100, type: d.type};#}
+          carveout_data.data[ii]= {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : d / _s.properties.trajectory[ii] * 100, type: carveout_type};
         });
-      });
-      if (data)
-      _s.properties.carveouts.sort(function(a, b) { return a.data[a.data.length-1].y < b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y > b.data[b.data.length-1].y ? 1 : 0 });
+      }
+      data.sort(function(a, b) { return a.data[a.data.length-1].y < b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y > b.data[b.data.length-1].y ? 1 : 0 });
       // Set header info
       d3.select('#main_content img').attr('src', '/static/images/state_seals/' + _s.properties.abbr + '.png');
       d3.select('h1').text(_s.properties.name);
@@ -85,7 +89,7 @@
         .max_domains([50, 100])
         .format_x(function(x) { return x.getFullYear(); })
         .format_y(function(y) { return d3.format('.1f')(y); })
-        .data(_s.properties.carveouts)
+        .data(data)
         .stacked(true)
         .hoverable(true)
         .draggable(true, false)
