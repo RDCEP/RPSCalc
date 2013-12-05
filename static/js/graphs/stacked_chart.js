@@ -75,7 +75,7 @@ var RPSGraph = function() {
     _stacked = false,
     _outlines = true,
     _h_grid = true,
-    _lined = false,
+    _lines = false,
     /*****************
      "Private" methods
      *****************/
@@ -776,9 +776,9 @@ var RPSGraph = function() {
       d3.select('#type_switch').node().dispatchEvent(e);
     }
   };
-  this.lined = function(bool) {
-    if (bool === undefined) { return _lined; }
-    _lined = bool;
+  this.lines = function(bool) {
+    if (bool === undefined) { return _lines; }
+    _lines = bool;
     _chart_f = bool ? _line : _area;
     return this;
   };
@@ -795,7 +795,7 @@ var RPSGraph = function() {
      RPSGraph
      ...
      */
-    var style_prop = _lined ? 'stroke' : 'fill';
+    var style_prop = _lines ? 'stroke' : 'fill';
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
       .attr('d', function(d) { return _chart_f(d.data); })
