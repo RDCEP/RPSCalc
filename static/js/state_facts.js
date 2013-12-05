@@ -106,7 +106,7 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
-    d3.json('/static/js/gridmix/' + _s.machine_name + '.json', function(data) {
+    d3.json('/static/js/data/gridmix/' + Options.state + '.json', function(data) {
       var _max = data.maximum,
         _th = 0, // height of title
         _rh = 20, //row height
@@ -213,7 +213,7 @@ var FactsPage = function() {
     });
   }
 
-  d3.json('/static/js/state_data/state_data.json', function(_data) {
+  d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
 
     var def_line = [{data: []}],
       data = [{type: 'rps', data: []}],
@@ -223,13 +223,10 @@ var FactsPage = function() {
       references = d3.select('#references'),
       tech_req = d3.select('#tech_req'),
       seal = d3.select('#main_content img'),
-      _s = _data.features.filter(function(d) {
-        return (d.properties.machine_name == Options.state) ? d : null;
-      })[0],
       parse_date = d3.time.format('%Y').parse;
 
-    if (_s.properties.carveouts) {
-      _s.properties.carveouts.forEach(function(d) {
+    if (_data.carveouts) {
+      _data.carveouts.forEach(function(d) {
         var carveout = {type: d.type, data: []};
         d.data.forEach(function(_d, i) {
           carveout.data.push({'y': _d * 100, 'y0': 0, 'x': parse_date(String(i + 2000))});
@@ -238,13 +235,13 @@ var FactsPage = function() {
       });
     }
 
-    if (_s.properties.trajectory.length > 0) {
+    if (_data.trajectory.length > 0) {
       // Parse trajectory data
-      _s.properties.trajectory.forEach(function(d, i) {
+      _data.trajectory.forEach(function(d, i) {
         data[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
       });
       // Parse default trajectory
-      _s.properties.trajectory.forEach(function(d, i) {
+      _data.trajectory.forEach(function(d, i) {
         def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
       });
     } else {
@@ -255,14 +252,14 @@ var FactsPage = function() {
     }
     d3.select('#summary')
       .append('p')
-      .html(_s.properties.snapshot.summary);
+      .html(_data.snapshot.summary);
     d3.select('#overview').selectAll('li')
-      .data(_s.properties.snapshot.overview)
+      .data(_data.snapshot.overview)
       .enter()
       .append('li')
       .html(function(d) { return d; });
     statute.append('p')
-      .html(_s.properties.legislation.statute);
+      .html(_data.legislation.statute);
     var tbl = tech_req.append('table');
     tbl.append('tr')
       .selectAll('th')
@@ -271,7 +268,7 @@ var FactsPage = function() {
       .append('th')
       .text(function(d) { return d; });
     tbl.selectAll('.row')
-      .data(_s.properties.legislation.rps_tech_details)
+      .data(_data.legislation.rps_tech_details)
       .enter()
       .append('tr')
       .attr('class', 'row')
@@ -279,27 +276,27 @@ var FactsPage = function() {
         return '<td>' + d.name + '</td><td>' + d.description + '</td>';
       });
     tech_req.selectAll('tr')
-      .data(_s.properties.legislation.rps_tech_details)
+      .data(_data.legislation.rps_tech_details)
       .enter();
     d3.select('#cost_cap_details')
       .append('p')
-      .html(_s.properties.legislation.cost_cap_details);
+      .html(_data.legislation.cost_cap_details);
     d3.select('#carveouts')
       .append('p')
-      .html(_s.properties.legislation.carveouts);
+      .html(_data.legislation.carveouts);
     tools.insert('p', 'ul')
-      .html(_s.properties.resources.tools.text);
+      .html(_data.resources.tools.text);
     tools.select('ul').selectAll('li')
-      .data(_s.properties.resources.tools.links)
+      .data(_data.resources.tools.links)
       .enter()
       .append('li')
       .html(function(d) {
         return '<a href="' + d.href + '">' + d.name + '</a>&nbsp;&mdash;&nbsp;' + d.description;
       });
     references.insert('p', 'ul')
-      .html(_s.properties.resources.references.text);
+      .html(_data.resources.references.text);
     references.select('ul').selectAll('li')
-      .data(_s.properties.resources.references.links)
+      .data(_data.resources.references.links)
       .enter()
       .append('li')
       .html(function(d) {
@@ -318,11 +315,11 @@ var FactsPage = function() {
       .h_grid(true)
       .draw();
 
-    rps_progress(data[0].data, _s.properties.snapshot.rps_progress);
+    rps_progress(data[0].data, _data.snapshot.rps_progress);
 
-    grid_mix_bars(_s.properties);
+    grid_mix_bars(_data);
 
-    d3.json('/static/js/prices/' + _s.properties.machine_name + '.json', function(_data) {
+    d3.json('/static/js/data/prices/' + _data.machine_name + '.json', function(_data) {
       data = [{type: 'retail', data: []}];
       parse_date = d3.time.format('%m-%Y').parse;
       _data.data.forEach(function(d, i) {

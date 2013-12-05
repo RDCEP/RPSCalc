@@ -45,18 +45,15 @@
         padding = 30,
         container = '#trajectory',
         parse_date = d3.time.format('%Y').parse;
-    d3.json('/static/js/state_data.json', function(_data) {
+    d3.json('/static/js/data/states/' + options.state + '.json', function(_data) {
       var def_line = [{data: []}],
-          data = [{type: 'rps', data: []}]
-          _s = _data.features.filter(function(d) {
-            return (d.properties.machine_name == Options.state) ? d : null;
-          })[0];
+          data = [{type: 'rps', data: []}];
       // Parse trajectory data
-      _s.properties.trajectory.forEach(function(d, i) {
+      _data.trajectory.forEach(function(d, i) {
         data[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
       });
       // Parse default trajectory
-      _s.properties.trajectory.forEach(function(d, i) {
+      _data.trajectory.forEach(function(d, i) {
         def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
       });
       // Set header info
