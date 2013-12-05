@@ -26,6 +26,10 @@
           <fieldset id="wind_costs" class="narrow">
             <h4>Wind Costs</h4>
             <div class="clearfix">
+              <label for="wind_capacity">Capacity factor</label>
+              <input type="text" value=".5" id="wind_capcity" name="wind_capcity">
+            </div>
+            <div class="clearfix">
               <label for="wind_installation">Installation ($/W)</label>
               <input type="text" value="2" id="wind_installation" name="wind_installation">
             </div>
@@ -44,6 +48,10 @@
           </fieldset>
           <fieldset id="solar_costs" class="narrow">
             <h4>Solar Costs</h4>
+            <div class="clearfix">
+              <label for="solar_capacity">Capacity factor</label>
+              <input type="text" value=".1" id="solar_capcity" name="solar_capcity">
+            </div>
             <div class="clearfix">
               <label for="solar_installation">Installation ($/W)</label>
               <input type="text" value="3.45" id="solar_installation" name="solar_installation">

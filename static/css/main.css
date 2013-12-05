@@ -61,6 +61,8 @@ li li { padding: 0; margin: 0; border: none; }
 
 form { clear: both; margin-bottom: 2em; position: relative; top: 1em; }
 
+input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #222222; }
+
 #pricing_form fieldset { float: left; padding: 20px; margin: 0 0 20px 0; background-color: #b0dcf5; }
 #pricing_form fieldset.narrow { width: 180px; }
 #pricing_form fieldset.wide { width: 620px; }
