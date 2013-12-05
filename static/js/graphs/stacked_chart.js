@@ -14,6 +14,7 @@ var RPSGraph = function() {
     _line = d3.svg.line().x(function(d) { return _x(d.x); }).y(function(d) { return _y(d.y + d.y0); }),
     _area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y(d.y0); }).y1(function(d) { return _y(d.y + d.y0); }),
     _stack = d3.layout.stack().offset('zero').values(function(d) { return d.data; }).x(function(d) { return d.x; }).y(function(d) { return d.y; }),
+    _chart_f = _area,
     /**************
      Data and color
      **************/
@@ -74,6 +75,7 @@ var RPSGraph = function() {
     _stacked = false,
     _outlines = true,
     _h_grid = true,
+    _lined = false,
     /*****************
      "Private" methods
      *****************/
@@ -99,7 +101,7 @@ var RPSGraph = function() {
       if (_stacked) { graph_data.data = _stack(graph_data.data); }
       graph_data.graphs
         .data(graph_data.data)
-        .attr('d', function(d) { return _area(d.data); });
+        .attr('d', function(d) { return _chart_f(d.data); });
       graph_data.outlines
         .data(graph_data.data.slice(0, -1))
         .attr('d', function(d) { return _line(d.data); });
@@ -774,6 +776,12 @@ var RPSGraph = function() {
       d3.select('#type_switch').node().dispatchEvent(e);
     }
   };
+  this.lined = function(bool) {
+    if (bool === undefined) { return _lined; }
+    _lined = bool;
+    _chart_f = bool ? _line : _area;
+    return this;
+  };
   this.draw = function() {
     /*
      Draw all data
@@ -787,11 +795,12 @@ var RPSGraph = function() {
      RPSGraph
      ...
      */
+    var style_prop = _lined ? 'stroke' : 'fill';
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
-      .attr('d', function(d) { return _area(d.data); })
+      .attr('d', function(d) { return _chart_f(d.data); })
       .attr('class', 'chart-line')
-      .style('fill', function(d, i) {return color(i); });
+      .style(style_prop, function(d, i) {return color(i); });
     if (_outlines) {
       graph_data.outlines = outline_layer.selectAll('.chart-outline')
         .data(graph_data.data.slice(0, -1)).enter().append('path')

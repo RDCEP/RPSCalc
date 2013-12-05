@@ -430,6 +430,7 @@ var FactsPage = function() {
         .format_y(function(y) { return d3.format('.1f')(y); })
         .data(data)
         .h_grid(true)
+        .lined(true)
         .draw();
     });
 
