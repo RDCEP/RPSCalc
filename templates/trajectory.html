@@ -46,7 +46,7 @@
         empty = true,
         container = '#trajectory',
         parse_date = d3.time.format('%Y').parse;
-    d3.json('/static/js/state_data.json', function(_data) {
+    d3.json('/static/js/state_data/state_data.json', function(_data) {
       var def_line = [{data: []}],
           data = [{type: 'rps', data: []}],
           _s = _data.features.filter(function(d) {
