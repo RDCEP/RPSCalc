@@ -106,7 +106,7 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
-    d3.json('/static/js/gridmix/' + _s.abbr + '.json', function(data) {
+    d3.json('/static/js/gridmix/' + _s.machine_name + '.json', function(data) {
       var _max = data.maximum,
         _th = 0, // height of title
         _rh = 20, //row height
@@ -339,10 +339,6 @@ var FactsPage = function() {
         def_line[0].data[i] = {y: 0, x: parse_date(String(i + 2000)), y0: 0};
       }
     }
-    // Set header info
-    d3.select('h1').text(_s.properties.name);
-
-    seal.attr('src', '/static/images/state_seals/' + _s.properties.abbr + '.png');
     d3.select('#summary')
       .append('p')
       .html(_s.properties.snapshot.summary);
@@ -412,13 +408,12 @@ var FactsPage = function() {
 
     grid_mix_bars(_s.properties);
 
-    d3.json('/static/js/prices/' + _s.properties.abbr + '.json', function(_data) {
+    d3.json('/static/js/prices/' + _s.properties.machine_name + '.json', function(_data) {
       data = [{type: 'retail', data: []}];
       parse_date = d3.time.format('%m-%Y').parse;
       _data.data.forEach(function(d, i) {
         data[0].data.push({y: +d.data, y0: 0, x: parse_date(d.date)})
       });
-      console.log(d3.extent(data[0].data, function(d) { return d.x; }));
       var retail_chart = new RPSGraph()
         .padding(30)
         .width(760).height(height)
@@ -430,7 +425,7 @@ var FactsPage = function() {
         .format_y(function(y) { return d3.format('.1f')(y); })
         .data(data)
         .h_grid(true)
-        .lined(true)
+        .lines(true)
         .draw();
     });
 

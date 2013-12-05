@@ -4,6 +4,7 @@ import urlparse
 from flask import render_template, request, make_response, abort
 from flask_beaker import BeakerSession
 from uwsgi_app import app
+from utils.states import STATES
 
 session_opts = {
     'session.type': 'ext:memcached',
@@ -96,7 +97,7 @@ def eia_api_retail():
 @app.route('/eia_api/<state>/retail')
 def eia_api_state_retail(state):
     api_key = 'D82A092DA301308805ECAB18A123BB4A'
-    json_file = 'static/js/prices/{}.json'.format(state)
+    json_file = 'static/js/prices/{}.json'.format(STATES[state][1])
     series_id = 'ELEC.PRICE.{}-ALL.Q'.format(state)
     eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}'.format(api_key, series_id)
     _d = json.loads(urllib2.urlopen(eia_url).read())
@@ -159,7 +160,7 @@ def eia_api(state):
         })
     div = 25. if m <= 100. else 100. if m <= 1000. else 500.
     m = ceil(m / div) * div
-    with open('static/js/gridmix/{}.json'.format(state), 'w') as f:
+    with open('static/js/gridmix/{}.json'.format(STATES[state][1]), 'w') as f:
         f.write(
             json.dumps(
                 {'data': d, 'maximum': m,
