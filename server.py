@@ -28,6 +28,7 @@ def update_session(request, **kwargs):
 @app.route('/update', methods=['POST',])
 def update():
     try:
+        print request.data
         kwargs = json.loads(request.data)
         update_session(request, **kwargs)
         return 'Session updated.'

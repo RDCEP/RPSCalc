@@ -22,7 +22,7 @@
             <h4>Wind Costs</h4>
             <div class="clearfix">
               <label for="wind_capacity">Capacity factor</label>
-              <input type="text" value=".5" id="wind_capcity" name="wind_capcity">
+              <input type="text" value=".5" id="wind_capacity" name="wind_capacity">
             </div>
             <div class="clearfix">
               <label for="wind_installation">Installation ($/W)</label>
@@ -45,7 +45,7 @@
             <h4>Solar Costs</h4>
             <div class="clearfix">
               <label for="solar_capacity">Capacity factor</label>
-              <input type="text" value=".1" id="solar_capcity" name="solar_capcity">
+              <input type="text" value=".1" id="solar_capacity" name="solar_capacity">
             </div>
             <div class="clearfix">
               <label for="solar_installation">Installation ($/W)</label>
@@ -55,10 +55,10 @@
               <label for="solar_om">O &amp; M ($/MWh)</label>
               <input type="text" value="0.012" id="solar_om" name="solar_om">
             </div>
-            <div class="clearfix">
-              <label for="solar_integration">Integration ($/MWh)</label>
-              <input type="text" value="0" id="solar_integration" name="solar_integration">
-            </div>
+{#            <div class="clearfix">#}
+{#              <label for="solar_integration">Integration ($/MWh)</label>#}
+{#              <input type="text" value="0" id="solar_integration" name="solar_integration">#}
+{#            </div>#}
             <div class="clearfix">
               <label for="solar_amortization">Amortization (%)</label>
               <input type="text" value="9" id="solar_amortization" name="solar_amortization">
@@ -100,12 +100,10 @@
   </article>
 {% endblock %}
 {% block bodyjs %}
-  <script>
-    Options = window.Options || {};
-    Options.state = '{{ state }}';
-    Options.graph_type = '{{ graph_type }}';
-  </script>
+  {{ super() }}
   <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
+  <script src="/static/js/vendor/json2.js"></script>
   <script src="/static/js/graphs/stacked_chart.js"></script>
   <script src="/static/js/calculator/pricing.js"></script>
+  <script src="/static/js/calculator/session.js"></script>
 {% endblock %}

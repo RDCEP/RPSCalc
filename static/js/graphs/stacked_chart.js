@@ -231,6 +231,7 @@ var RPSGraph = function() {
         .property('value', adjust_data.stop.y);
       adjust_dot = null;
       graph_data.data.filter(function(d) { return d.type === _d.type; })[0] = graph_data.active;
+      Options.data[_d.type] = graph_data.active;
       redraw();
       add_hover();
       add_drag_hover();

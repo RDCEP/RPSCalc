@@ -46,5 +46,11 @@
     {% endblock %}
   {% endblock %}
   {% block bodyjs %}
+  <script>
+    Options = window.Options || {};
+    Options.state = '{{ state }}';
+    Options.graph_type = '{{ graph_type }}';
+    Options.data = {};
+  </script>
   {% endblock %}
 {% endblock %}

@@ -7,8 +7,6 @@ var width = 760,
 d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
   var def_line = [{data: []}],
       data = [{type: 'rps', data: []}];
-
-
   if (_data.trajectory.length > 0) {
     empty = false;
     // Parse trajectory data
