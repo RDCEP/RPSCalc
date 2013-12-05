@@ -6,21 +6,7 @@ var FactsPage = function() {
     projection,
     handles;
 
-  function get_color(i) {
-    var color_list = [
-      //d3.rgb(0, 0, 0), //black
-      d3.rgb(86, 180, 233), // sky blue
-      d3.rgb(230, 159, 0),  // orange
-      d3.rgb(0, 158, 115),  // bluish green
-      d3.rgb(240, 228, 66), // yellow
-      d3.rgb(0, 114, 178),  // blue
-      d3.rgb(213, 94, 0),   // vermilion
-      d3.rgb(204, 121, 167) // reddish purple
-    ];
-    return color_list[i];
-  }
-
-  function rps_progress(_s) {
+  function rps_progress(trajectory, progress) {
     /*
      Draw bar chart for current RPS progress.
      ...
@@ -39,9 +25,9 @@ var FactsPage = function() {
         .append('svg')
         .attr('height', rpsp_height + 50)
         .attr('width', _wd),
-      final = _s.trajectory[_s.trajectory.length - 6].data,
-      current = _s.trajectory.filter(function(d) { return d.date.getFullYear() === 2013; })[0].data,
-      actual = _s.snapshot.rps_progress * 100,
+      final = trajectory[trajectory.length - 6].y,
+      current = trajectory.filter(function(d) { return d.x.getFullYear() === 2013; })[0].y,
+      actual = progress * 100,
       diff = Math.abs(actual - current);
     rpsp.append('rect')
       .attr('height', rpsp_height)
@@ -109,104 +95,6 @@ var FactsPage = function() {
           return 'translate(' + h_offset + ',' + v_offset + ')';
         });
     });
-  }
-
-  function carveout_graph(_s) {
-    /*
-     Draw area chart of carveouts.
-     ...
-     Args
-     ----
-     _s: Object representing active state
-     ...
-     */
-    _s.carveouts.splice(0, 0, {type: 'RPS', data: _s.trajectory});
-    var padding = {top: 30, right: 30, bottom: 30, left: 30},
-      _h = height * 0.75, //y_max * 2 * height
-      _w = width * 2,
-      domain_y = [0, d3.max(_s.trajectory, function(d) { return d.data; })],
-      domain_x = [new Date(2013, 0, 1), new Date(2030, 0, 1)],
-      x = d3.time.scale().domain(domain_x).range([0, _w]),
-      y = d3.scale.linear().domain(domain_y).range([_h, 0]),
-      x_axis = d3.svg.axis().scale(x).orient('bottom'),
-      y_axis = d3.svg.axis().scale(y).orient('left'),
-      trajectory_line = d3.svg.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.data); }),
-      trajectory_area = d3.svg.area()
-        .x(function(d) { return x(d.date); })
-        .y0(function(d) { return y(0); })
-        .y1(function(d) { return y(d.data); }),
-      svg = d3.select('#carveout_graph')
-        .insert('svg', 'div')
-        .attr('height', _h + padding.top + padding.bottom)
-        .attr('width', _w + padding.left + padding.right),
-      grid_layer = svg.append('g')
-        .attr('id', 'grid_layer')
-        .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')'),
-      graph_layer = svg.append('g')
-        .attr('id', 'graph_layer')
-        .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')'),
-      mask_layer = svg.append('g')
-        .attr('id', 'mask_layer'),
-      axes_layer = svg.append('g')
-        .attr('id', 'axes_layer')
-        .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')'),
-      handle_layer = svg.append('g')
-        .attr('id', 'handles_layer')
-        .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')'),
-      buttons_layer = svg.append('g')
-        .attr('id', 'buttons_layer')
-        .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')'),
-      legend = d3.select('#carveout_graph_legend')
-        .selectAll('div')
-        .data(_s.carveouts)
-        .enter()
-        .append('div')
-        .style('top', padding.top + 'px')
-        .style('position', 'relative')
-        .attr('class', 'clearfix'),
-      areas = graph_layer.selectAll('.carveout-area')
-        .data(_s.carveouts)
-        .enter()
-        .append('path')
-        .attr('class', 'carveout-area')
-        .attr('d', function(d) { return trajectory_area(d.data); })
-        .style('fill', function(d, i) { return get_color(i); });
-    mask_layer.append('rect').attr('class', 'mask')
-      .attr('width', _w + padding.left + padding.right).attr('height', padding.top)
-      .attr('transform', 'translate(0,0)');
-    mask_layer.append('rect').attr('class', 'mask')
-      .attr('width', _w + padding.left + padding.right).attr('height', padding.bottom)
-      .attr('transform', 'translate(0,' + (_h + padding.top) + ')');
-    mask_layer.append('rect').attr('class', 'mask')
-      .attr('width', padding.left).attr('height', _h + padding.top + padding.bottom)
-      .attr('transform', 'translate(0,0)');
-    mask_layer.append('rect').attr('class', 'mask')
-      .attr('width', padding.left).attr('height', _h + padding.top + padding.bottom)
-      .attr('transform', 'translate(' + (_w + padding.left) + ',0)');
-    graph_layer.selectAll('.carveout-line')
-      .data(_s.carveouts)
-      .enter()
-      .append('path')
-      .attr('class', 'carveout-line')
-      .attr('d', function(d) { return trajectory_line(d.data); });
-    axes_layer.append('g')
-      .attr('transform', 'translate(0,' + (_h + 10) + ')')
-      .call(x_axis);
-    axes_layer.append('g')
-      .attr('transform', 'translate(0,0)')
-      .call(y_axis);
-    legend.append('div')
-      .style('background-color', function(d, i) { return get_color(i); })
-      .attr('class', 'carveout-swatch');
-    legend.append('p')
-      .text(function(d) { return d.type; })
-      .attr('class', 'carveout-text');
-    if (_s.carveouts.length > 0) {
-      d3.select('#carve_out_wrap h3')
-        .classed('right-align', true);
-    }
   }
 
   function grid_mix_bars(_s) {
@@ -410,89 +298,50 @@ var FactsPage = function() {
     });
   }
 
-  function add_hover_segments(data, x, y, fx, fy, g, tool_tip, px, py, color) {
-    g.selectAll('.time-period')
-      .data(data)
-      .enter()
-      .append('g')
-      .attr('class', 'time-period')
-      .attr('transform', function(d, i) {
-        return 'translate(' + (x.range()[1] / (data.length - 1)) * i + ',0)';
-      })
-      .each(function(d, i) {
-        d3.select(this).append('rect')
-          .attr('height', y.range()[0])
-          .attr('width', x.range()[1] / (data.length))
-          .attr('transform', function(d, i) {
-            return 'translate(' + (x.range()[1] / (data.length - 1)) * i + ',0)';
-          })
-          .attr('data-year', function() {
-             return i + 2000;
-          })
-          .style('fill', 'transparent')
-          .on('mouseover', function(d) {
-            //TODO: There's gotta be a better way to do this (and below)
-            var _xo = d3.select(this).attr('data-year');
-            d3.select(this.parentNode.getElementsByClassName('data-point')[0])
-              .classed('active', true);
-            tool_tip
-              .html(function() {
-                return (d.date) ? px(d) + ': ' + (Math.round(py(d))) + '%' : px(i) + ': ' + (Math.round(py(d))) + '%';
-              })
-              .style('position', 'absolute')
-              .style('top', (y(d * 100) - margin - 10) + 'px')
-              .style('left', (x(new Date(_xo, 0, 1)) + 10) + 'px')
-              .classed('active', true)
-            ;
-          })
-          .on('mouseout', function() {
-            d3.select(this.parentNode.getElementsByClassName('data-point')[0])
-              .classed('active', false);
-            tool_tip.classed('active', false);
-          })
-        ;
-        d3.select(this).append('circle')
-          .classed('data-point', true)
-          .attr('cx', function(d) { return 0;})//return x(fx(d)); })
-          .attr('cy', function(d) {return y(fy(d));})
-          .attr('r', 6)
-        ;
-      });
-  }
 
-  d3.json('/static/js/state_data.json', function(data) {
-    /*
-     Load state_data JSON object and draw page
-     */
-    var _date_data,
-      parse_date = d3.time.format('%Y').parse;
-    data.features.forEach(function(d, i) {
-      if (d.properties.trajectory) {
-        _date_data = [];
-        d.properties.trajectory.forEach(function(dd, ii) {
-          _date_data.push({'data': dd * 100, 'date': parse_date(String(ii + 2000))});
-        });
-        d.properties.trajectory = _date_data;
-      }
-      if (d.properties.carveouts) {
-        d.properties.carveouts.forEach(function(dd) {
-          _date_data = [];
-          dd.data.forEach(function(ddd, iii) {
-            _date_data.push({'data': ddd * 100, 'date': parse_date(String(iii + 2000))});
-          });
-          dd.data = _date_data;
-        });
-      }
-    });
-    var _s = data.features.filter(function(d) {
-      return (d.properties.machine_name === Options.state) ? d : null;
-    })[0];
-    d3.select('h1').text(_s.properties.name);
-    var statute = d3.select('#statute'),
+  d3.json('/static/js/state_data.json', function(_data) {
+
+    var def_line = [{data: []}],
+      data = [{type: 'rps', data: []}],
+      legend = d3.select('#carveout_graph_legend'),
+      statute = d3.select('#statute'),
       tools = d3.select('#tools'),
       references = d3.select('#references'),
       tech_req = d3.select('#tech_req'),
-      seal = d3.select('#main_content img');
+      seal = d3.select('#main_content img'),
+      _s = _data.features.filter(function(d) {
+        return (d.properties.machine_name == Options.state) ? d : null;
+      })[0],
+      parse_date = d3.time.format('%Y').parse;
+
+    if (_s.properties.carveouts) {
+      _s.properties.carveouts.forEach(function(d) {
+        var carveout = {type: d.type, data: []};
+        d.data.forEach(function(_d, i) {
+          carveout.data.push({'y': _d * 100, 'y0': 0, 'x': parse_date(String(i + 2000))});
+        });
+        data.push(carveout);
+      });
+    }
+
+    if (_s.properties.trajectory.length > 0) {
+      // Parse trajectory data
+      _s.properties.trajectory.forEach(function(d, i) {
+        data[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
+      });
+      // Parse default trajectory
+      _s.properties.trajectory.forEach(function(d, i) {
+        def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
+      });
+    } else {
+      for (var i = 0; i < 31; ++i) {
+        data[0].data[i] = {y: 0, x: parse_date(String(i + 2000)), y0: 0};
+        def_line[0].data[i] = {y: 0, x: parse_date(String(i + 2000)), y0: 0};
+      }
+    }
+    // Set header info
+    d3.select('h1').text(_s.properties.name);
+
     seal.attr('src', '/static/images/state_seals/' + _s.properties.abbr + '.png');
     d3.select('#summary')
       .append('p')
@@ -546,20 +395,49 @@ var FactsPage = function() {
       .html(function(d) {
         return '<a href="'+ d.href+'">'+d.name+'</a>&nbsp;&mdash;&nbsp;'+ d.description;
       });
+    var foo = new RPSGraph()
+      .padding(30)
+      .width(760).height(height)
+      .select('#carveout_graph')
+      .x(d3.time.scale())
+      .y(d3.scale.linear())
+      .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, 50])
+      .format_x(function(x) { return x.getFullYear(); })
+      .format_y(function(y) { return d3.format('.1f')(y); })
+      .data(data)
+      .h_grid(true)
+      .draw();
 
-    // RPS progress chart
-    rps_progress(_s.properties);
+    rps_progress(data[0].data, _s.properties.snapshot.rps_progress);
 
-    // Carveout chart
-    carveout_graph(_s.properties);
-
-    //Grid mix chart
     grid_mix_bars(_s.properties);
 
-    // Retail price history
-    retail_price_history(_s.properties);
+    d3.json('/static/js/prices/' + _s.properties.abbr + '.json', function(_data) {
+      data = [{type: 'retail', data: []}];
+      parse_date = d3.time.format('%m-%Y').parse;
+      _data.data.forEach(function(d, i) {
+        data[0].data.push({y: +d.data, y0: 0, x: parse_date(d.date)})
+      });
+      console.log(d3.extent(data[0].data, function(d) { return d.x; }));
+      var retail_chart = new RPSGraph()
+        .padding(30)
+        .width(760).height(height)
+        .select('#retail_price')
+        .x(d3.time.scale())
+        .y(d3.scale.linear())
+        .domain(d3.extent(data[0].data, function(d) { return d.x; }), d3.extent(data[0].data, function(d) { return d.y; }))
+        .format_x(function(x) { return x.getFullYear(); })
+        .format_y(function(y) { return d3.format('.1f')(y); })
+        .data(data)
+        .h_grid(true)
+        .draw();
+    });
 
   });
+
+
+
+
 
   // Left menu navigation
   d3.selectAll('#left-nav a')
