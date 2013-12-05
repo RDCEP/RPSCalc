@@ -55,7 +55,7 @@ def trajectory(state):
     kwargs = {'state':state}
     _s = update_session(request, **kwargs)
     return render_template(
-        'trajectory.html',
+        'calculator/trajectory.html',
         state=_s['state'],
         graph_type='trajectory',
     )
@@ -65,7 +65,7 @@ def carveouts(state):
     kwargs = {'state':state}
     _s = update_session(request, **kwargs)
     return render_template(
-        'carveouts.html',
+        'calculator/carveouts.html',
         state=_s['state'],
         graph_type='carveouts',
     )
@@ -75,7 +75,7 @@ def pricing(state):
     kwargs = {'state':state}
     _s = update_session(request, **kwargs)
     return render_template(
-        'pricing.html',
+        'calculator/pricing.html',
         state=_s['state'],
         graph_type='carveouts',
     )

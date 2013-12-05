@@ -107,10 +107,5 @@
   </script>
   <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
   <script src="/static/js/graphs/stacked_chart.js"></script>
-  <script>
-    d3.json('/static/js/data/prices/' + Options.state + '.json', function(_data) {
-      var retail = Math.round(_data.data.slice(-1)[0].data * 10);
-      d3.select('#policy_retail').property('value', retail);
-    });
-  </script>
+  <script src="/static/js/calculator/pricing.js"></script>
 {% endblock %}
