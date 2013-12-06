@@ -20,14 +20,12 @@ rec = function() {
     var wind_rec = d.y / 100 * wind,
       solar_rec = data.solar.data[i].y / 100 * solar,
       other_rec = (100 - data.solar.data[i].y - d.y) / 100 * wind * .65,
-      year = +d.x.split('-')[0],
-      pow = year >= 2013 ? year - 2013 : NaN;
-    _cap.data[i] = {x: new Date(d.x), y0: 0, y: (data.policy_costcap / Math.pow(1.01, pow)) / data.trajectory.data[i].y * 100};
+      year = +d.x.split('-')[0];
+    _cap.data[i] = {x: new Date(d.x), y0: 0, y: year >= 2013 ? (data.policy_costcap * Math.pow(1.01, year - 2013)) / data.trajectory.data[i].y * 100 : 0};
     _rec.data[i] = {x: new Date(d.x), y0: 0, y: (wind_rec + solar_rec + other_rec)};
   });
   return [_rec,_cap];
 };
-console.log(rec());
 var width = 760,
   height = 300,
   padding = 30,
