@@ -23,6 +23,7 @@ d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
       def_line[0].data[i] = {y: 0, x: parse_date(String(i + 2000)), y0: 0};
     }
   }
+  Options.data['trajectory'] = data[0];
   var foo = new RPSGraph()
     .padding(30)
     .width(width).height(height)
@@ -42,5 +43,4 @@ d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
     .h_grid(true)
     .draw()
     .zeroes(empty);
-  Options.data['trajectory'] = data[0];
 });
