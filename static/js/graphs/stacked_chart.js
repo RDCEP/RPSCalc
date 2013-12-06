@@ -780,6 +780,7 @@ var RPSGraph = function() {
   this.lines = function(bool) {
     if (bool === undefined) { return _lines; }
     _lines = bool;
+    _outlines = !bool;
     _chart_f = bool ? _line : _area;
     return this;
   };
