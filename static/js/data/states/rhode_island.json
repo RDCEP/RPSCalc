@@ -1,0 +1,121 @@
+{
+    "machine_name": "rhode_island",
+    "name": "Rhode Island",
+    "trajectory": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.03,
+        0.035,
+        0.04,
+        0.045,
+        0.055,
+        0.065,
+        0.075,
+        0.085,
+        0.1,
+        0.115,
+        0.13,
+        0.145,
+        0.16,
+        0.16,
+        0.16,
+        0.16,
+        0.16,
+        0.16,
+        0.16,
+        0.16,
+        0.16,
+        0.16,
+        0.16,
+        0.16
+    ],
+    "legislation": {
+        "statute": "Established in 2004, with compliance required beginning in 2007, Rhode Island's Renewable Energy Standard requires that all obligated utilities procure 16% of retail electric sales from renewable sources by 2020. The maximum amount of existing renewable resources that can be applied to compliance with the standard is capped at 2.0% of total retail sales. This law is administered by the Rhode Island Public Utilities Comission. In a seperate 2009 law (<a href=\"http://webserver.rilin.state.ri.us/Statutes/TITLE39/39-26.1/39-26.1-1.HTM\">Long-term Contracting Standard for Renewable Energy</a>) electric distribution companies will be required to enter into long-term contracts with new renewable energy facilities totaling 90 MW of capacity by 2014 (of which 3 MW must be from in-state solar).",
+        "rps_tech_details": [
+            {
+                "name": "Eligible Technologies",
+                "description": "Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Anaerobic Digestion, Tidal Energy, Wave Energy, Ocean Thermal, Biodiesel, Fuel Cells using Renewable Fuels"
+            },
+            {
+                "name": "Geographic Eligibility",
+                "description": "All credits must be generated within or delivered into the New England Power Pool (NEPOOL) Control Area"
+            },
+            {
+                "name": "Percent of Total Load",
+                "description": "99.3"
+            },
+            {
+                "name": "Technology Requirements",
+                "description": "Rhode Island's RES does not have any technology carve-outs"
+            },
+            {
+                "name": "Sectors",
+                "description": "Investor-Owned Utility, Retail Supplier"
+            },
+            {
+                "name": "Non-compliance Penalty",
+                "description": "Alternative compliance payment of $50.00 2003 dollars adjusted by the consumer price index (currently <a href=\"http://www.bls.gov/data/inflation_calculator.htm\">$63.46</a>) per MWh of renewable energy obligation"
+            }
+        ],
+        "carveouts": "Rhode Island's RES does not have any minimum technology requirements. However, RI's Long-Term Contracting Standard for Renewable Energy (2009) establishes a <i>de facto</i> carve-out for in-state solar (3 MW capacity per utility by 2014). <a href=\"http://sos.ri.gov/documents/archives/regdocs/released/pdf/PUC/5933.pdf\">Rules</a> established by RI's PUC.",
+        "cost_cap_details": "Electricity distribution companies in Rhode Island can recover all costs incurred by complying with the RES. They not recover costs associated with penalties for non-compliance. (See RES Rules 8.4) Rhode Island's 'Long-Term Contracting Standards for Renewable Energy' does include a cost-cap. To maintain compliance with that law, utilities only have to enter long-term contracts when they are deemed 'comercially reasonable' by the PUC."
+    },
+    "carveouts": [],
+    "snapshot": {
+        "overview": [
+            "<strong>16%</strong> of retail sales by 2019",
+            "No minimum technology requirements",
+            "No cost cap included in RES"
+        ],
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Rhode Island's pathway is red. Click on another state to learn more about their RES.",
+        "rps_progress": ".19",
+        "summary": "Rhode Island's Renewable Portfolio Standard (actually called Renewable Energy Standard or RES) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RES and how they work together to define the minimum amount of renewable energy that will be sold in Rhode Island."
+    },
+    "abbr": "RI",
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.ripuc.ri.gov/utilityinfo/res.html",
+                    "name": "Rhode Island Public Utilities Commission",
+                    "description": "Information and links for RI's Renewable Energy Standard"
+                },
+                {
+                    "href": "http://www.ripuc.ri.gov/utilityinfo/RESRules(7-25-07).pdf",
+                    "name": "Rhode Island's PUC Regulations",
+                    "description": "Rules Governing RI's RES"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
+        },
+        "grid_mix": {
+            "text": "This overview from Energy Information Administration (EIA) demonstrates Illinois's current sources for electricity",
+            "data": []
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "<i>Datasets available for download in .xlsx format<i>"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
+                }
+            ]
+        }
+    }
+}

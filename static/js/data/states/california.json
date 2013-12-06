@@ -1,0 +1,175 @@
+{
+    "machine_name": "california",
+    "name": "California",
+    "trajectory": [
+        0,
+        0,
+        0,
+        0,
+        0.14,
+        0.15,
+        0.16,
+        0.17,
+        0.18,
+        0.19,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.217,
+        0.233,
+        0.25,
+        0.27,
+        0.29,
+        0.31,
+        0.33,
+        0.33,
+        0.33,
+        0.33,
+        0.33,
+        0.33,
+        0.33,
+        0.33,
+        0.33,
+        0.33,
+        0.33
+    ],
+    "legislation": {
+        "statute": "Established in 2002, California's Renewable Portfolio Standard (RPS) was last updated in April 2011. <a href=\"http://info.sen.ca.gov/pub/11-12/bill/sen/sb_0001-0050/sbx1_2_bill_20110412_chaptered.html\">This law</a> requires all electricity retailers in the state acheive the goal of 33% of retail sales from renewables by 2020. The RPS program is administered in tandem by the <a href=\"http://www.energy.ca.gov/portfolio/index.html\">California Energy Commission</a> and the <a href=\"http://www.cpuc.ca.gov/PUC/energy/Renewables/overview\">California Public Utilities Commission</a>.",
+        "rps_tech_details": [
+            {
+                "name": "Eligible Technologies",
+                "description": "Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Geothermal Electric, Municipal Solid Waste, Energy Storage, Anaerobic Digestion, Small Hydroelectric, Tidal Energy, Wave Energy, Ocean Thermal, Biodiesel, Fuel Cells using Renewable Fuels"
+            },
+            {
+                "name": "Geographic Eligibility",
+                "description": "As of 2011 limited trading of RECs produced in the 14 states and two Canadian provinces of the Western Electricity Coordiniating Council (WECC) can count towards a utilities RPS requirement. Up to 25% of a utilities requirements can be accounted for through eligible RECs for the compliance period ending in 2013, 15% for the compliance period ending in 2016 and 10% thereafter."
+            },
+            {
+                "name": "Percent of Total Load",
+                "description": "98.2%; includes IOUs, municipal utilities, and ESP/CCAs"
+            },
+            {
+                "name": "Technology Requirements",
+                "description": "No technology minimums stated, <a href=\"http://www.cpuc.ca.gov/PUC/energy/electric/storage.htm\">storage requirements being considered</a>"
+            },
+            {
+                "name": "Sectors",
+                "description": "Investor-owned utilities (IOUs), municipal utilities, and electricity service providers (ESPs)/community choice aggregators (CCAs)"
+            },
+            {
+                "name": "Penalty",
+                "description": "$0.05/kWh non-compliance penalty; limited to $25 million annually per provider"
+            }
+        ],
+        "carveouts": "California does not have any minimum technology requirements at this time.",
+        "cost_cap_details": "Retailers are required to meet renewable targets provided that sufficient funds are available in the state's 'virtual' fund designed to cover just and reasonable above market costs for new renewable energy resources. If funds are insufficient to cover procurement of renewable power, retailers are allowed to limit their annual procurement obligation. \nEstimate how California's cost cap can effect their RPS's efficacy"
+    },
+    "carveouts": [],
+    "snapshot": {
+        "overview": [
+            "<strong>33%</strong> of the state's energy consumption must be from renewable sources by <strong>2020</strong> subject to the cost cap",
+            "<strong>No</strong> carve-outs or technology requirements",
+            "<strong>No</strong> explicit cost cap",
+            "Enacted 2002&mdash;one of the <strong>first</strong> and most aggresive in the country"
+        ],
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. California's pathway is red. Click on another state to learn more about their RPS.",
+        "rps_progress": ".2",
+        "summary": "California's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in California."
+    },
+    "abbr": "CA",
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:\n",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=CA",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                },
+                {
+                    "href": "http://www.wecc.biz/WREGIS/Pages/default.aspx",
+                    "name": "Western Renewable Generation Information System",
+                    "description": "REC tracking system for WECC"
+                }
+            ]
+        },
+        "grid_mix": {
+            "text": "This overview from Energy Information Administration (EIA) demonstrates California's current sources for electricity",
+            "data": [
+                {
+                    "sector": "Coal",
+                    "data": 50
+                },
+                {
+                    "sector": "Natural Gas",
+                    "data": 2200
+                },
+                {
+                    "sector": "Gasoline excl. Ethanol",
+                    "data": 1700
+                },
+                {
+                    "sector": "Distillate Fuel Oil",
+                    "data": 550
+                },
+                {
+                    "sector": "Jet Fuel",
+                    "data": 540
+                },
+                {
+                    "sector": "LPG",
+                    "data": 50
+                },
+                {
+                    "sector": "Residual Fuel",
+                    "data": 200
+                },
+                {
+                    "sector": "Other Petroleum",
+                    "data": 350
+                },
+                {
+                    "sector": "Nuclear Electric Power",
+                    "data": 400
+                },
+                {
+                    "sector": "Hydroelectric Power",
+                    "data": 420
+                },
+                {
+                    "sector": "Biomass",
+                    "data": 270
+                },
+                {
+                    "sector": "Other Renewables",
+                    "data": 260
+                },
+                {
+                    "sector": "Net Interstate Flow of Electricity",
+                    "data": 800
+                }
+            ]
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
+                }
+            ]
+        }
+    }
+}

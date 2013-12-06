@@ -1,0 +1,112 @@
+{
+    "machine_name": "kansas",
+    "name": "Kansas",
+    "trajectory": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.1,
+        0.15,
+        0.15,
+        0.15,
+        0.15,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2
+    ],
+    "legislation": {
+        "statute": "Adopted in May 2009, Kansas' RPS (<a href=\"http://www.kslegislature.org/li/b2013_14/statute/066_000_0000_chapter/066_012_0000_article/066_012_0056_section/066_012_0056_k/\">K.S.A. Ch. 66 Art. 12 &sect;56-62</a>) requires that total renewable generation capacity be 20% of peak demand by 2020. This RPS is one of the only policies in the country which require a minimum capacity as opposed to a minimum percentage of sales. The Kansas Corporation Commission administers this program.",
+        "rps_tech_details": [
+            {
+                "name": "Eligible Technologies",
+                "description": "Wind, Solar thermal, Photovoltaics, Dedicated crops grown for energy production, Cellulosic agricultural residues, Plant residues, Methane fro landfills or wastewater treatment, Clean and untreated wood products (such as pallets), Existing hydropower, New hydropower, Fuel cells using hydrogen produced from renewable sources, Energy storage that is connected to a renewable source"
+            },
+            {
+                "name": "Geographic Eligibility",
+                "description": "Out of state generation is not prohibited by the KCC as long as it meets the REC requirements outlined in the regulations."
+            },
+            {
+                "name": "Percent of Total Load",
+                "description": "81.5%"
+            },
+            {
+                "name": "Technology Requirements",
+                "description": "None"
+            },
+            {
+                "name": "Sectors",
+                "description": "Investor-owned utilities, Cooperative utilities"
+            },
+            {
+                "name": "Non-compliance Penalty",
+                "description": "No penalties for 2011 or 2012. The 'standard minimum penalty' after this period is 'equal to two times the market value during the calendar year of sufficient RECs to have met the portfolio requirement'. (<a href=\"http://www.kssos.org/other/Final_2012_KAR_Supplement.pdf\">K.A.R. 82-16-3 pg. 646</a>) Penalties can vary if utilities show a 'good faith effort' to comply with the RPS."
+            }
+        ],
+        "carveouts": "Kansas does not have any technology requirements.",
+        "cost_cap_details": "Retail rate impact cannot exceed 1% (persuant to recovery mechanism described in K.A.R. 82-16-4)"
+    },
+    "carveouts": [],
+    "snapshot": {
+        "overview": [
+            "Capacity at least <strong>20%</strong> of peak demand capacity by <strong>2020</strong>",
+            "<strong>No</strong> technology requirements",
+            "Cost-cap at 1% increase in retail rate"
+        ],
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Kansas' pathway is red. Click on another state to learn more about their RPS.",
+        "rps_progress": "0.0",
+        "summary": "Kansas' Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Kansas."
+    },
+    "abbr": "KS",
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.kcc.state.ks.us/energy/index.htm",
+                    "name": "Kansas Corporation Commission Energy Division",
+                    "description": "Links and descriptions of energy programs in Kansas"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "<i>Datasets available for download in .xlsx format<i>"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
+                }
+            ]
+        }
+    }
+}

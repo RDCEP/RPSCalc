@@ -1,0 +1,226 @@
+{
+    "machine_name": "illinois",
+    "name": "Illinois",
+    "trajectory": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.02,
+        0.04,
+        0.05,
+        0.06,
+        0.07,
+        0.08,
+        0.09,
+        0.1,
+        0.115,
+        0.13,
+        0.145,
+        0.16,
+        0.175,
+        0.19,
+        0.205,
+        0.22,
+        0.235,
+        0.25,
+        0.25,
+        0.25,
+        0.25,
+        0.25
+    ],
+    "legislation": {
+        "statute": "The current RPS was enacted in 2007 through creation of Illinois Power Agency (IPA). The IPA's purpose was to develop electricity procurement plans for renewable power. The legislation more specifically: 75% (equal to 18.75% total power sales in 2025) wind power annually for IOUs, and 60% for ARES by 2020; The 6% (equating to 1.5% of total retail sales) annual solar carve out ramps up for IOUs in 2013, and in 2016 for ARES., 1% carve out for distributed generation. Renewable generation limited to \u201ccost-effective\u201d resources. Renewable energy may be bundled with RECs. In 2011, anaerobic digestion was added to eligible resources. A second efficiency portfolio standard exists.",
+        "rps_tech_details": [
+            {
+                "name": "Eligible Technologies",
+                "description": "Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Anaerobic Digestion, Biodiesel"
+            },
+            {
+                "name": "Geographic Eligibility",
+                "description": "(Only IOUs) Through 2011: in-state (if insufficient cost-effective resources, can procure from adjoining states, or regions). After 2011: equal preference to in- and out-of-state."
+            },
+            {
+                "name": "Percent of Total Load",
+                "description": "Primary RPS: 39.9%, Secondary RPS: 49%"
+            },
+            {
+                "name": "Technology Requirements",
+                "description": "Wind (IOUs) - 75% of annual Req., Wind (ARES) - 60% of annual req., PV (all) - 6% of annual req., Dist. gen. (IOUs) - 1% of annual req."
+            },
+            {
+                "name": "Sectors",
+                "description": "Investor-Owned Utilities, Retail Suppliers. Municipal electric companies and Electric Cooperative exempt from RPS."
+            },
+            {
+                "name": "Non-compliance Penalty",
+                "description": "For Com-Ed: $0.946/MWh (for hourly customer loads). For Ameren: $0.973/MWh"
+            }
+        ],
+        "carveouts": "Illinois' wind technology requirement comprises the majority of its RPS goals. The chart below is a breakdown for the primary RPS for IOUs. It remains consistent at 75% of the standard each year.",
+        "cost_cap_details": "Renewable energy procurement is limited to cost-effective resources. The cost cap is set at 'the greater of an additional 0.5% of the amount paid per kWh during the year ending in 2010, or 2% of the amount paid per kWh during the year ending May, 2007.' If exceeded, RPS requirements are placed under a 'freeze.' In addition, a second cost-effectiveness test: cost of procurement of renewable energy must not exceed benchmarks based on market prices for renewable energy in the region (determined by the IPA). Estimate how Illinois' cost cap can effect their RPS's efficacy:"
+    },
+    "carveouts": [
+        {
+            "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0.015,
+                0.03,
+                0.038,
+                0.045,
+                0.053,
+                0.06,
+                0.068,
+                0.075,
+                0.086,
+                0.098,
+                0.109,
+                0.12,
+                0.131,
+                0.143,
+                0.154,
+                0.165,
+                0.176,
+                0.188,
+                0.188,
+                0.188,
+                0.188,
+                0.188
+            ],
+            "type": "wind"
+        },
+        {
+            "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0.0004,
+                0.0012,
+                0.0027,
+                0.006,
+                0.007,
+                0.008,
+                0.009,
+                0.01,
+                0.011,
+                0.011,
+                0.012,
+                0.013,
+                0.014,
+                0.015,
+                0.015,
+                0.015,
+                0.015,
+                0.015
+            ],
+            "type": "solar"
+        },
+        {
+            "data": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0.0004,
+                0.0007,
+                0.001,
+                0.0012,
+                0.0013,
+                0.0015,
+                0.0016,
+                0.0018,
+                0.0019,
+                0.0021,
+                0.0022,
+                0.0024,
+                0.0025,
+                0.0025,
+                0.0025,
+                0.0025,
+                0.0025
+            ],
+            "type": "DG"
+        }
+    ],
+    "snapshot": {
+        "overview": [
+            "<strong>25%</strong> of the state's energy consumption must be from renewable sources by <strong>2025</strong>",
+            "Carve-outs for <strong>wind</strong>, <strong>solar</strong> and <strong>distributed generation</strong>",
+            "Explicit cost cap at 2 percent of sales",
+            "<strong>Two</strong> separate state RPS schedules (primary and secondary)"
+        ],
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. California's pathway is red. Click on another state to learn more about their RPS.\n",
+        "rps_progress": ".06",
+        "summary": "Illinois's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Illinois."
+    },
+    "abbr": "IL",
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IL04R&re=1&ee=0",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<e>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</em>"
+                }
+            ]
+        },
+        "grid_mix": {
+            "text": "This overview from Energy Information Administration (EIA) demonstrates Illinois's current sources for electricity",
+            "data": []
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
+                }
+            ]
+        }
+    }
+}

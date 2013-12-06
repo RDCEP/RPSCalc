@@ -1,0 +1,112 @@
+{
+    "machine_name": "wisconsin",
+    "name": "Wisconsin",
+    "trajectory": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0.0356,
+        0.0356,
+        0.0356,
+        0.0356,
+        0.0557,
+        0.0557,
+        0.0557,
+        0.0557,
+        0.0557,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957,
+        0.0957
+    ],
+    "legislation": {
+        "statute": "Wisconsin enacted Act 9 in 1999; the first state to introduce a RPS without having restructured its electric-utility industry. Originally the RPS required 2.2% of electricity sold to be from renewables by 2012. In 2006, the goal was increased to 10% by 2015. Providers can petition the Public Service Commission to extend the compliance deadline.",
+        "rps_tech_details": [
+            {
+                "name": "Eligible Technologies",
+                "description": "Photovoltaics, Wind, Biomass, Biodiesel, Hydroelectric, Solar Water Heat, Solar Thermal Electric, Solar Thermal Process Heat, Geothermal Electric, Geothermal Heat Pumps, Landfill Gas, Municipal Solid Waste, Biogas, Anaerobic Digestion, Tidal Energy, CHP/Cogeneration, Fuel Cells using Renewable Fuels"
+            },
+            {
+                "name": "Geographic Eligibility",
+                "description": "Renewable energy generated outside of Wisconsin is eligible, but only if the utility delivers it to customers in-state."
+            },
+            {
+                "name": "Percent of Total Load",
+                "description": "100%"
+            },
+            {
+                "name": "Technology Requirements",
+                "description": "None"
+            },
+            {
+                "name": "Sectors",
+                "description": "Utility, Investor-Owned Utility, Municipal Utility, Rural Electric Cooperative"
+            },
+            {
+                "name": "Non-compliance Penalty",
+                "description": "None"
+            }
+        ],
+        "carveouts": "The chart below is a carve-out breakdown for the RPS, also demonstrating overall ramp-up.",
+        "cost_cap_details": "Wisconsin does not have an explicit cost cap"
+    },
+    "carveouts": [],
+    "snapshot": {
+        "overview": [
+            "<strong>9.57%</strong> of the state's energy consumption must be from renewable sources by <strong>2015</strong>",
+            "<strong>No</strong> carve-outs",
+            "No explicit cost cap"
+        ],
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart shows Colorado's policy pathway.\n",
+        "rps_progress": "0",
+        "summary": "Wisconsin's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Wisconsin."
+    },
+    "abbr": "WI",
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=WI05R&re=0&ee=0",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
+                }
+            ]
+        }
+    }
+}
