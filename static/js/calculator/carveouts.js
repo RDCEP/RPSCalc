@@ -21,6 +21,7 @@ d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
       var _t = _data.trajectory[ii];
       carveout_data.data[ii]= {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : d / _data.trajectory[ii] * 100, type: carveout_type};
     });
+    Options.data[carveout_type] = carveout_data;
   }
   data.sort(function(a, b) { return a.data[a.data.length-1].y < b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y > b.data[b.data.length-1].y ? 1 : 0 });
   var foo = new RPSGraph()

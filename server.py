@@ -1,8 +1,8 @@
 import urllib2
 import json
 import urlparse
-from flask import render_template, request, make_response, abort
-from flask_beaker import BeakerSession
+from flask import render_template, request, make_response, abort, sessions, session
+# from flask_beaker import BeakerSession
 from uwsgi_app import app
 from utils.states import STATES
 
@@ -17,23 +17,15 @@ session_opts = {
 
 app.config['DEBUG'] = True
 app.config['SECRET_KEY'] = 'REPLACE_ME'
-BeakerSession(app)
-
-def update_session(request, **kwargs):
-    s = request.environ.get('beaker.session')
-    for key, value in kwargs.iteritems():
-        s[key] = value
-    return s
+# BeakerSession(app)
 
 @app.route('/update', methods=['POST',])
 def update():
-    try:
-        print request.data
-        kwargs = json.loads(request.data)
-        update_session(request, **kwargs)
-        return 'Session updated.'
-    except:
-        abort(500)
+    for k, v in request.get_json(force=True).iteritems():
+        session[k] = v
+    return 'Session updated.'
+    # except:
+    #     abort(500)
 
 @app.route('/pinwheel')
 def pinwheel():
@@ -44,41 +36,38 @@ def pinwheel():
 @app.route('/<state>')
 def state(state):
     if state == 'favicon.ico': abort(404)
-    kwargs = {'state':state}
-    _s = update_session(request, **kwargs)
     return render_template(
         'state.html',
-        state=_s['state'],
+        state=state,
     )
 
 @app.route('/<state>/trajectory')
 def trajectory(state):
-    kwargs = {'state':state}
-    _s = update_session(request, **kwargs)
     return render_template(
         'calculator/trajectory.html',
-        state=_s['state'],
-        graph_type='trajectory',
+        state=state,
     )
 
 @app.route('/<state>/carveouts')
 def carveouts(state):
-    kwargs = {'state':state}
-    _s = update_session(request, **kwargs)
     return render_template(
         'calculator/carveouts.html',
-        state=_s['state'],
-        graph_type='carveouts',
+        state=state,
     )
 
 @app.route('/<state>/pricing')
 def pricing(state):
-    kwargs = {'state':state}
-    _s = update_session(request, **kwargs)
     return render_template(
         'calculator/pricing.html',
-        state=_s['state'],
-        graph_type='carveouts',
+        state=state,
+    )
+
+@app.route('/<state>/cost')
+def cost(state):
+    return render_template(
+        'calculator/cost.html',
+        state=state,
+        session_data=json.dumps(session.items())
     )
 
 @app.route('/eia_api/retail')

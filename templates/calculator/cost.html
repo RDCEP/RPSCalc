@@ -16,7 +16,9 @@
         eget eget dolor. Sed felis diam, imperdiet eget nulla ornare, semper viverra ante. Pellentesque in risus
         sem. In nisl velit, pellentesque in elit at, adipiscing sodales metus. Vestibulum faucibus placerat
         lectus at aliquam.</p>
-      <div id="trajectory" class="module clearfix chart-outer-wrap"></div>
+      <div id="trajectory" class="module clearfix chart-outer-wrap">
+        {{ options_data }}
+      </div>
       <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
         Donec sodales semper erat. Suspendisse molestie turpis tempor leo dictum, commodo lacinia tellus laoreet.
         Sed consequat felis eget nulla vulputate, placerat pulvinar sapien rhoncus. Nam mollis est neque, faucibus
@@ -35,5 +37,13 @@
   {{ super() }}
   <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
   <script src="/static/js/graphs/stacked_chart.js"></script>
+  <script src="/static/js/calculator/session.js"></script>
   <script src="/static/js/calculator/cost.js"></script>
+  <script>
+  var x = {{ session_data|safe }};
+  x.forEach(function(d) {
+    Options.data[d[0]] = d[1];
+  });
+  console.log(Options);
+  </script>
 {% endblock %}

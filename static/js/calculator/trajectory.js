@@ -42,4 +42,5 @@ d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
     .h_grid(true)
     .draw()
     .zeroes(empty);
+  Options.data['trajectory'] = data[0];
 });

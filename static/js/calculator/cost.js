@@ -21,6 +21,7 @@ rec = function() {
     },
 
 
+
   wind_cost = function(inst, integ, om, amort, capfac, decrease, wholesale) {
     return ((inst * ptc * amort) / (8765 * capfac) + om + int) * decrease - wholesale;
   };
