@@ -35,14 +35,11 @@
 {% block bodyjs %}
   {{ super() }}
   <script>
-  var data = {};
-  var x = {{ session_data|safe }};
-  x.forEach(function(d) {
-    data[d[0]] = ['wind', 'solar', 'trajectory', 'policy_ptc'].indexOf(d[0]) < 0 ? +d[1] : d[1];
-  });
+
   </script>
   <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
   <script src="/static/js/vendor/json2.js"></script>
+  <script src="/static/js/graphs/intersect.js"></script>
   <script src="/static/js/graphs/stacked_chart.js"></script>
   <script src="/static/js/calculator/session.js"></script>
   <script src="/static/js/calculator/cost.js"></script>

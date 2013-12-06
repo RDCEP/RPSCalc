@@ -1,7 +1,7 @@
 import urllib2
 import json
 import urlparse
-from flask import render_template, request, make_response, abort, sessions, session
+from flask import render_template, request, make_response, abort, sessions, session, redirect
 # from flask_beaker import BeakerSession
 from uwsgi_app import app
 from utils.states import STATES
@@ -32,6 +32,8 @@ def state_check(state):
     #TODO: Make this a decorator
     try:
         session['update_state'] = state != session['state']
+        if session['update_state']:
+            session.clear()
     except KeyError:
         session['update_state'] = False
     session['state'] = state
@@ -49,6 +51,7 @@ def state_page(state):
     return render_template(
         'state.html',
         state=state,
+        session_data=json.dumps(session.items()),
     )
 
 @app.route('/<state>/trajectory')
@@ -57,31 +60,40 @@ def trajectory(state):
     return render_template(
         'calculator/trajectory.html',
         state=state,
+        session_data=json.dumps(session.items()),
     )
 
 @app.route('/<state>/carveouts')
 def carveouts(state):
     state_check(state)
+    if not session.has_key('trajectory'):
+        return redirect('/%s/trajectory' % state)
     return render_template(
         'calculator/carveouts.html',
         state=state,
+        session_data=json.dumps(session.items()),
     )
 
 @app.route('/<state>/pricing')
 def pricing(state):
     state_check(state)
+    if not session.has_key('trajectory'):
+        return redirect('/%s/trajectory' % state)
     return render_template(
         'calculator/pricing.html',
         state=state,
+        session_data=json.dumps(session.items()),
     )
 
 @app.route('/<state>/cost')
 def cost(state):
     state_check(state)
+    if not session.has_key('trajectory'):
+        return redirect('/%s/trajectory' % state)
     return render_template(
         'calculator/cost.html',
         state=state,
-        session_data=json.dumps(session.items())
+        session_data=json.dumps(session.items()),
     )
 
 @app.route('/eia_api/retail')

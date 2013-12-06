@@ -51,6 +51,11 @@
     Options.state = '{{ state }}';
     Options.graph_type = '{{ graph_type }}';
     Options.data = {};
+    var x = {{ session_data|safe or '[]' }};
+    x.forEach(function(d) {
+      Options.data[d[0]] = +d[1] > -Infinity ? +d[1] : d[1];
+    });
+    Options.data.update_state = Options.data.update_state || false;
   </script>
   {% endblock %}
 {% endblock %}

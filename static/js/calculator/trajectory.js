@@ -1,13 +1,21 @@
 var width = 760,
-    height = 300,
-    padding = 30,
-    empty = true,
-    container = '#trajectory',
-    parse_date = d3.time.format('%Y').parse;
+  height = 300,
+  padding = 30,
+  empty = true,
+  container = '#trajectory',
+  parse_date = d3.time.format('%Y').parse;
 d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
   var def_line = [{data: []}],
-      data = [{type: 'rps', data: []}];
-  if (_data.trajectory.length > 0) {
+    data = [{type: 'rps', data: []}],
+    trajectory = Options.data.trajectory || false;
+  if (trajectory && trajectory.data.length > 0) {
+    trajectory.data.forEach(function(d, i) {
+      data[0].data[i] = {y: d.y, x: new Date(d.x), y0: 0};
+    });
+    _data.trajectory.forEach(function(d, i) {
+      def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
+    });
+  } else if (_data.trajectory.length > 0) {
     empty = false;
     // Parse trajectory data
     _data.trajectory.forEach(function(d, i) {
