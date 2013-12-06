@@ -593,7 +593,6 @@ var RPSGraph = function() {
         //TODO: Better max and min
         _v = (_v > max_drag(d)) ? format_y(max_drag(d)) : (_v < d.y0) ? d.y0 : _v;
         graph_data.data.filter(function(_d) { return _d.type === d.type; })[0].data.filter(function(_d) { return _d.x === d.x; })[0].y = +_v;
-        console.log(_v, graph_data.data);
         d3.select(this).property('value', +_v);
         redraw();
       });
@@ -621,10 +620,8 @@ var RPSGraph = function() {
       return this;
     }
     tool_tip = d3.select('.chart-wrap').append('div').attr('id', 'tool_tip');
-//    console.log(graph_data.data)
     segment_width = _x(graph_data.data[0].data[1].x) - _x(graph_data.data[0].data[0].x);
     handles = handle_layer.selectAll('.segment')
-//      .data(graph_data.data[0].data)
       .data(graph_data.nested)
       .enter()
       .append('g')
