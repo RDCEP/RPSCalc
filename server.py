@@ -21,11 +21,20 @@ app.config['SECRET_KEY'] = 'REPLACE_ME'
 
 @app.route('/update', methods=['POST',])
 def update():
-    for k, v in request.get_json(force=True).iteritems():
-        session[k] = v
-    return 'Session updated.'
-    # except:
-    #     abort(500)
+    try:
+        for k, v in request.get_json(force=True).iteritems():
+            session[k] = v
+        return 'Session updated.'
+    except:
+        abort(500)
+
+def state_check(state):
+    #TODO: Make this a decorator
+    try:
+        session['update_state'] = state != session['state']
+    except KeyError:
+        session['update_state'] = False
+    session['state'] = state
 
 @app.route('/pinwheel')
 def pinwheel():
@@ -34,8 +43,9 @@ def pinwheel():
     )
 
 @app.route('/<state>')
-def state(state):
+def state_page(state):
     if state == 'favicon.ico': abort(404)
+    state_check(state)
     return render_template(
         'state.html',
         state=state,
@@ -43,6 +53,7 @@ def state(state):
 
 @app.route('/<state>/trajectory')
 def trajectory(state):
+    state_check(state)
     return render_template(
         'calculator/trajectory.html',
         state=state,
@@ -50,6 +61,7 @@ def trajectory(state):
 
 @app.route('/<state>/carveouts')
 def carveouts(state):
+    state_check(state)
     return render_template(
         'calculator/carveouts.html',
         state=state,
@@ -57,6 +69,7 @@ def carveouts(state):
 
 @app.route('/<state>/pricing')
 def pricing(state):
+    state_check(state)
     return render_template(
         'calculator/pricing.html',
         state=state,
@@ -64,6 +77,7 @@ def pricing(state):
 
 @app.route('/<state>/cost')
 def cost(state):
+    state_check(state)
     return render_template(
         'calculator/cost.html',
         state=state,
