@@ -2,22 +2,21 @@
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block headcss %}<link href="/static/css/main.css" rel="stylesheet">{% endblock %}
 {% block left_nav %}
-<li class="active"><a href data-name="trajectory">Set RPS trajectory</a></li>
+<li><a href data-name="trajectory">Set RPS trajectory</a></li>
 <li><a href="/{{ state }}/carveouts" data-name="carveouts">Set carveouts</a></li>
 <li><a href="/{{ state }}/pricing" data-name="pricing">Set cost cap &amp; pricing</a></li>
-<li><a href="/{{ state }}/cost" data-name="cost">Projected cost</a></li>
+<li class="active"><a href="/{{ state }}/cost" data-name="cost">Projected cost</a></li>
 {% endblock %}
 {% block content %}
   <article id="main_content">
     {{ super() }}
     <section class="clearfix">
-      <h2>Trajectory</h2>
+      <h2>Cost cap</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et metus vitae neque molestie hendrerit
         eget eget dolor. Sed felis diam, imperdiet eget nulla ornare, semper viverra ante. Pellentesque in risus
         sem. In nisl velit, pellentesque in elit at, adipiscing sodales metus. Vestibulum faucibus placerat
         lectus at aliquam.</p>
-      <div id="trajectory" class="module clearfix chart-outer-wrap">
-        {{ options_data }}
+      <div id="cost_cap" class="module clearfix chart-outer-wrap">
       </div>
       <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
         Donec sodales semper erat. Suspendisse molestie turpis tempor leo dictum, commodo lacinia tellus laoreet.
@@ -25,25 +24,27 @@
         consequat arcu hendrerit id. Sed feugiat ultrices volutpat. Nam volutpat aliquam ultricies. Phasellus
         orci erat, pretium eget velit ut, congue sodales massa. Aliquam erat volutpat.</p>
       <ul id="crumbs">
-        <li id="crumb_trajectory" class="active"><a href="/{{ state }}/trajectory">Trajectory</a>
+        <li id="crumb_trajectory"><a href="/{{ state }}/trajectory">Trajectory</a>
         <li id="crumb_carveouts"><a href="/{{ state }}/carveouts">Carveouts</a></li>
         <li id="crumb_pricing"><a href="/{{ state }}/pricing">Cost cap &amp; Pricing</a></li>
-        <li id="crumb_cost"><a href="/{{ state }}/cost">Projected Cost</a></li>
+        <li id="crumb_cost" class="active"><a href="/{{ state }}/cost">Projected Cost</a></li>
       </ul>
     </section>
   </article>
 {% endblock %}
 {% block bodyjs %}
   {{ super() }}
+  <script>
+  var data = {};
+  var x = {{ session_data|safe }};
+  x.forEach(function(d) {
+    data[d[0]] = ['wind', 'solar', 'trajectory', 'policy_ptc'].indexOf(d[0]) < 0 ? +d[1] : d[1];
+  });
+  </script>
   <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
+  <script src="/static/js/vendor/json2.js"></script>
   <script src="/static/js/graphs/stacked_chart.js"></script>
   <script src="/static/js/calculator/session.js"></script>
   <script src="/static/js/calculator/cost.js"></script>
-  <script>
-  var x = {{ session_data|safe }};
-  x.forEach(function(d) {
-    Options.data[d[0]] = d[1];
-  });
-  console.log(Options);
-  </script>
+
 {% endblock %}
