@@ -144,7 +144,7 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 .mask { fill: #eeeeee; pointer-events: all; }
 
-.grid-line { stroke: white; stroke-width: 2; }
+.grid-line { stroke: white; stroke-width: 1; }
 
 path.domain { stroke: #999999; stroke-width: 0; }
 
