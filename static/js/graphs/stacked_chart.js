@@ -43,8 +43,10 @@ var RPSGraph = function() {
      *********************/
     svg_id = '#',
     svg,
+    svg_defs,
     ghost_layer,
     grid_layer,
+    clip_layer,
     graph_layer,
     outline_layer,
     default_layer,
@@ -361,9 +363,11 @@ var RPSGraph = function() {
       .attr('height', height + padding.top + padding.bottom)
       .append('g')
       .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
+    svg_defs = svg.append('defs');
     ghost_layer = svg.append('g').attr('id', 'ghost_layer');
     grid_layer = svg.append('g').attr('id', 'grid_layer');
     graph_layer = svg.append('g').attr('id', 'graph_layer');
+    clip_layer = svg.append('g').attr('id', 'clip_layer');
     outline_layer = svg.append('g').attr('id', 'outline_layer');
     default_layer = svg.append('g').attr('id', 'default_layer');
     mask_layer = svg.append('g').attr('id', 'mask_layer')
@@ -719,7 +723,7 @@ var RPSGraph = function() {
       .style('fill', '#dddddd');
     return this;
   };
-  this.default_line = function(arr) {
+  this.default_line = function(arr, style_hash) {
     /*
      Draw static dotted line in foreground of graph to represent 'default'
      ...
@@ -732,15 +736,16 @@ var RPSGraph = function() {
      RPSGraph
      ...
      */
-    if (!_draggable) {
-      console.log('Graph must be draggable in order to use default_line().');
-      return this;
-    }
+//    if (!_draggable) {
+//      console.log('Graph must be draggable in order to use default_line().');
+//      return this;
+//    }
     if (arr === undefined) { return graph_data.default_line; }
     graph_data.default_line = default_layer.selectAll('.default_line')
       .data(arr).enter().append('path')
       .attr('d', function(d) { return _line(d.data); })
-      .attr('class', 'default_line');
+      .attr('class', 'default_line')
+      .style(style_hash);
     return this;
   };
   this.stacked = function(bool) {
@@ -774,6 +779,30 @@ var RPSGraph = function() {
       d3.select('#type_switch').node().dispatchEvent(e);
     }
   };
+  this.intersect = function(a, b, c) {
+    var invert_area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); });
+    svg_defs.append('clipPath')
+      .attr('id', 'clip_path_a')
+      .append('path')
+      .attr('id', 'clip_path_a_path')
+      .attr('d', invert_area(a.data));
+    svg_defs.append('clipPath')
+      .attr('id', 'clip_path_b')
+      .append('path')
+      .attr('id', 'clip_path_b_path')
+      .attr('d', _area(b.data));
+    svg_defs.append('clipPath')
+      .attr('id', 'clip_intersection')
+      .attr('clip-path', 'url(#clip_path_a)')
+      .append('use')
+      .attr('xlink:href', '#clip_path_b_path');
+    clip_layer.append('rect')
+      .attr('width', width)
+      .attr('height', height)
+      .style('fill', c)
+      .attr('clip-path', 'url(#clip_intersection)');
+    return this;
+  };
   this.lines = function(bool) {
     if (bool === undefined) { return _lines; }
     _lines = bool;
@@ -797,9 +826,15 @@ var RPSGraph = function() {
     var style_prop = _lines ? 'stroke' : 'fill';
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
-      .attr('d', function(d) { return _chart_f(d.data); })
+      .attr('d', function(d) {
+        if (d.invert) {
+          return d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); })(d.data);
+        }
+        return _chart_f(d.data);
+      })
       .attr('class', 'chart-line')
-      .style(style_prop, function(d, i) {return color(i); });
+      .style('fill', function(d, i) { return (!_lines || d.invert) ? color(i) : null; })
+      .style('stroke', function(d, i) { return (_lines && !d.invert) ? color(i) : null; });
     if (_outlines) {
       graph_data.outlines = outline_layer.selectAll('.chart-outline')
         .data(graph_data.data.slice(0, -1)).enter().append('path')
