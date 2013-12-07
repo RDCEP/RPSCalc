@@ -308,7 +308,7 @@ var FactsPage = function() {
       .select('#carveout_graph')
       .x(d3.time.scale())
       .y(d3.scale.linear())
-      .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, 50])
+      .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, d3.extent(data[0].data, function(d) { return d.y; })[1]])
       .format_x(function(x) { return x.getFullYear(); })
       .format_y(function(y) { return d3.format('.1f')(y); })
       .data(data)
