@@ -2,10 +2,10 @@
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block headcss %}<link href="/static/css/main.css" rel="stylesheet">{% endblock %}
 {% block left_nav %}
-<li><a href data-name="trajectory">Set RPS trajectory</a></li>
+<li><a href="/{{ state }}/trajectory" data-name="trajectory">Set RPS trajectory</a></li>
 <li><a href="/{{ state }}/carveouts" data-name="carveouts">Set carveouts</a></li>
 <li><a href="/{{ state }}/pricing" data-name="pricing">Set cost cap &amp; pricing</a></li>
-<li class="active"><a href="/{{ state }}/cost" data-name="cost">Projected cost</a></li>
+<li class="active"><a href data-name="cost">Projected cost</a></li>
 {% endblock %}
 {% block content %}
   <article id="main_content">
