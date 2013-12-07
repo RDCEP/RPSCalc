@@ -802,7 +802,7 @@ var RPSGraph = function() {
     pattern.append('image')
       .attr('width', 16)
       .attr('height', 16)
-      .attr('xlink:href', '/static/images/map-stripes.png')
+      .attr('xlink:href', '/static/images/svg/stripes_red.png')
     svg_defs.append('clipPath')
       .attr('id', 'clip_path_a')
       .append('path')
@@ -818,16 +818,12 @@ var RPSGraph = function() {
       .attr('clip-path', 'url(#clip_path_a)')
       .append('use')
       .attr('xlink:href', '#clip_path_b_path');
-    clip_layer.append('rect')
-      .attr('width', width)
-      .attr('height', height)
-      .style('fill', c || 'black')
-      .attr('clip-path', 'url(#clip_intersection)');
-    clip_layer.append('rect')
+    mask_layer.append('rect')
       .attr('width', width)
       .attr('height', height)
       .style('fill', 'url(#clip_pattern)')
-      .attr('clip-path', 'url(#clip_intersection)');
+      .attr('clip-path', 'url(#clip_intersection)')
+      .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
 //      .style('fill', c)
 //      .attr('clip-path', 'url(#clip_intersection)');
     return this;
@@ -837,6 +833,11 @@ var RPSGraph = function() {
     _lines = bool;
     _outlines = !bool;
     _chart_f = bool ? _line : _area;
+    return this;
+  };
+  this.outlines = function(bool) {
+    if (bool == undefined) { return _outlines; }
+    _outlines = bool;
     return this;
   };
   this.draw = function() {
