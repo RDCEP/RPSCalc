@@ -37,7 +37,6 @@ var width = 760,
     .padding(30)
     .width(width).height(height)
     .select(container)
-    .title('')
     .x(d3.time.scale())
     .y(d3.scale.linear())
     .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, 50])
