@@ -361,13 +361,15 @@ var RPSGraph = function() {
       .append('svg')
       .attr('width', width + padding.left + padding.right)
       .attr('height', height + padding.top + padding.bottom)
+      .attr('xmlns', 'http://www.w3.org/2000/svg')
+      .attr('version', '1.1')
       .append('g')
       .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
     svg_defs = svg.append('defs');
     ghost_layer = svg.append('g').attr('id', 'ghost_layer');
     grid_layer = svg.append('g').attr('id', 'grid_layer');
-    graph_layer = svg.append('g').attr('id', 'graph_layer');
     clip_layer = svg.append('g').attr('id', 'clip_layer');
+    graph_layer = svg.append('g').attr('id', 'graph_layer');
     outline_layer = svg.append('g').attr('id', 'outline_layer');
     default_layer = svg.append('g').attr('id', 'default_layer');
     mask_layer = svg.append('g').attr('id', 'mask_layer')
@@ -698,7 +700,7 @@ var RPSGraph = function() {
       .attr('y2', function(d) { return _y(d); });
     return this;
   };
-  this.ghost = function(arr) {
+  this.ghost = function(arr, clr) {
     /*
      Create static area in background of graph
      ...
@@ -711,16 +713,23 @@ var RPSGraph = function() {
      RPSGraph
      ...
      */
-    if (!_draggable) {
-      console.log('Graph must be draggable in order to use ghost().');
-      return this;
-    }
+//    if (!_draggable) {
+//      console.log('Graph must be draggable in order to use ghost().');
+//      return this;
+//    }
     if (!arr) { return graph_data.ghost; }
     graph_data.ghost = arr;
-    ghost_layer.append('path')
-      .attr('d', _area(arr))
-      .attr('class', 'ghost_area')
-      .style('fill', '#dddddd');
+    ghost_layer.selectAll('.ghost-area')
+      .data(arr).enter()
+      .append('path')
+      .attr('d', function(d) {
+        if (d.invert) {
+          return d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); })(d.data);
+        }
+        return _area(d.data);
+      })
+      .attr('class', 'ghost-area')
+      .style('fill', clr || '#dddddd');
     return this;
   };
   this.default_line = function(arr, style_hash) {
@@ -736,10 +745,10 @@ var RPSGraph = function() {
      RPSGraph
      ...
      */
-//    if (!_draggable) {
-//      console.log('Graph must be draggable in order to use default_line().');
-//      return this;
-//    }
+    if (!_draggable) {
+      console.log('Graph must be draggable in order to use default_line().');
+      return this;
+    }
     if (arr === undefined) { return graph_data.default_line; }
     graph_data.default_line = default_layer.selectAll('.default_line')
       .data(arr).enter().append('path')
@@ -781,6 +790,19 @@ var RPSGraph = function() {
   };
   this.intersect = function(a, b, c) {
     var invert_area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); });
+    var pattern = svg_defs.append('pattern')
+      .attr('id', 'clip_pattern')
+      .attr('width', 16)
+      .attr('height', 16)
+      .attr('patternUnits', 'userSpaceOnUse');
+    pattern.append('rect')
+      .attr('width', 16)
+      .attr('height', 16)
+      .attr('fill', c || 'black');
+    pattern.append('image')
+      .attr('width', 16)
+      .attr('height', 16)
+      .attr('xlink:href', '/static/images/map-stripes.png')
     svg_defs.append('clipPath')
       .attr('id', 'clip_path_a')
       .append('path')
@@ -799,8 +821,15 @@ var RPSGraph = function() {
     clip_layer.append('rect')
       .attr('width', width)
       .attr('height', height)
-      .style('fill', c)
+      .style('fill', c || 'black')
       .attr('clip-path', 'url(#clip_intersection)');
+    clip_layer.append('rect')
+      .attr('width', width)
+      .attr('height', height)
+      .style('fill', 'url(#clip_pattern)')
+      .attr('clip-path', 'url(#clip_intersection)');
+//      .style('fill', c)
+//      .attr('clip-path', 'url(#clip_intersection)');
     return this;
   };
   this.lines = function(bool) {

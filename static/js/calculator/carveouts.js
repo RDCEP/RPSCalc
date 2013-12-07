@@ -17,9 +17,10 @@ d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
     var carveout_type = carveout_types[i],
       carveout_data = data.filter(function(e) { return e.type === carveout_type })[0],
       _stored = stored[carveout_type] !== false,
-      carveout = _stored ? stored[carveout_type].data : _data.carveouts.filter(function(d) { return d.type === carveout_type; })[0].data;
+      //TODO: data is not defined when no carveouts (end of next line)
+      carveout = _data.carveouts.filter(function(d) { return d.type === carveout_type; })[0];
+      carveout = _stored ? stored[carveout_type].data : carveout ? carveout.data : [];
     empty = empty ? carveout.length === 0 : false;
-    console.log(carveout);
     carveout = carveout.length > 0 ? carveout : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     carveout.forEach(function(d, ii) {
       var _t = _data.trajectory[ii];

@@ -43,13 +43,12 @@ var width = 760,
     .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, 50])
     .format_x(function(x) { return x.getFullYear(); })
     .format_y(function(y) { return d3.format('.1f')(y); })
-    .data(rec())
+    .data([rec()[1]])
+    .ghost([rec()[0]], d3.rgb(200,200,200))
     .stacked(false)
     .hoverable(true)
-    .colors([d3.rgb(240,228,66), 'white'])
-    .default_line([rec()[1]], {'stroke': d3.rgb(0,114,178), 'stroke-dasharray': 0, 'stroke-width': 4})
+    .colors([d3.rgb(0,114,178), 'white'])
     .h_grid(true)
     .lines(true)
     .intersect(rec()[0], rec()[1], d3.rgb(213,94,0))
-
     .draw();
