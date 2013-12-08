@@ -339,13 +339,7 @@ var FactsPage = function() {
         .lines(true)
         .draw();
     });
-
   });
-
-
-
-
-
   // Left menu navigation
   d3.selectAll('#left-nav a')
     .on('click', function() {
