@@ -1,7 +1,7 @@
 var FactsPage = function() {
   'use strict';
   var width = 345,
-    height = 345,
+    height = 400,
     margin = 20,
     projection,
     handles;
@@ -216,7 +216,7 @@ var FactsPage = function() {
   d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
 
     var def_line = [{data: []}],
-      data = [{type: 'rps', data: []}],
+      data = [{type: 'RPS', data: []}],
       legend = d3.select('#carveout_graph_legend'),
       statute = d3.select('#statute'),
       tools = d3.select('#tools'),
@@ -317,9 +317,10 @@ var FactsPage = function() {
       .title('Policy Trajectory')
       .h_grid(true)
       .legend(true)
+      .outlines(true)
       .draw();
 
-    rps_progress(data[0].data, _data.snapshot.rps_progress);
+    rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.snapshot.rps_progress);
 
     grid_mix_bars(_data);
 
@@ -331,7 +332,7 @@ var FactsPage = function() {
       });
       var retail_chart = new RPSGraph()
         .padding(30)
-        .width(760).height(height)
+        .width(760).height(200)
         .select('#retail_price')
         .x(d3.time.scale())
         .y(d3.scale.linear())
@@ -344,13 +345,15 @@ var FactsPage = function() {
         .draw();
     });
   });
+
   // Left menu navigation
-  d3.selectAll('#left-nav a')
+  d3.selectAll('#left_nav a')
     .on('click', function() {
       d3.event.preventDefault();
       window.location.hash = this.getAttribute('data-name');
+      console.log(window.location.hash);
       d3.select('#main-nav').style('display', 'none').style('display', 'block');
-      var _oy = (window.pageYOffset || document.body.scrollTop) - document.getElementById('left-nav').getBoundingClientRect().top + 1;
+      var _oy = (window.pageYOffset || document.body.scrollTop) - document.getElementById('left_nav').getBoundingClientRect().top + 1;
       window.scroll(0, _oy);
     });
 };

@@ -1,6 +1,6 @@
 (function() {
   var width = 760,
-    height = 300,
+    height = 400,
     padding = 30,
     empty = true,
     container = '#trajectory',

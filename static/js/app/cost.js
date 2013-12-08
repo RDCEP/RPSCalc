@@ -27,7 +27,7 @@
     return [_cap, _rec];
   };
   var width = 760,
-    height = 300,
+    height = 400,
     padding = 30,
     container = '#cost_cap',
     cap_rec = get_cap_and_rec(),
