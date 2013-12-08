@@ -138,7 +138,7 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 .chart-line { stroke-width: 2; }
 
-.chart-outline { stroke-width: 2; stroke: #eeeeee; }
+.chart-outline { stroke: #eeeeee; }
 
 .chart-area { stroke-width: 0; }
 
