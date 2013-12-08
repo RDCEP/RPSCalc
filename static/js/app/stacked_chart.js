@@ -41,7 +41,7 @@ var RPSGraph = function() {
     /*********************
      SVG and layer objects
      *********************/
-    svg_id = '#',
+    svg_id = null,
     svg,
     svg_defs,
     ghost_layer,
@@ -305,6 +305,9 @@ var RPSGraph = function() {
       graph_data.default_line
         .attr('d', function(d) { return _line(d.data); });
     },
+    pre_id = function(str) {
+      return svg_id + '_' + str;
+    },
     add_labels = function() {
       //TODO: Move labels out of draggable() into own function
     },
@@ -352,42 +355,43 @@ var RPSGraph = function() {
   };
   this.select = function(el) {
     if (!el) { return svg_id; }
-    svg_id = el;
-    title = d3.select(svg_id).append('h3');
-    switches_list = d3.select(el).append('div').attr('id', 'switches');
-    svg = d3.select(svg_id).append('div')
+    svg_id = el.replace('#', '');
+    switches_list = d3.select(el).append('div')
+      .attr({ 'id': pre_id('switches'),
+        'class': 'switches-wrap' });
+    svg = d3.select('#'+svg_id).append('div')
       .attr('class', 'chart-wrap')
       .style({
         'left': '-' + padding.left + 'px',
         'width': (width + padding.left) + 'px'
       })
       .append('svg')
-      .attr({
-        'xmlns': 'http://www.w3.org/2000/svg',
+      .attr({ 'xmlns': 'http://www.w3.org/2000/svg',
         'xmlns:xmlns:xlink': 'http://www.w3.org/1999/xlink',
-        'version': '1.1'
-      })
-      .attr('width', width + padding.left + padding.right)
-      .attr('height', height + padding.top + padding.bottom)
+        'version': '1.1',
+        'width': width + padding.left + padding.right,
+        'height': height + padding.top + padding.bottom,
+        'id': pre_id('chart_svg') })
       .append('g')
       .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
     svg_defs = svg.append('defs');
-    ghost_layer = svg.append('g').attr('id', 'ghost_layer');
-    grid_layer = svg.append('g').attr('id', 'grid_layer');
-    clip_layer = svg.append('g').attr('id', 'clip_layer');
-    graph_layer = svg.append('g').attr('id', 'graph_layer');
-    outline_layer = svg.append('g').attr('id', 'outline_layer');
-    default_layer = svg.append('g').attr('id', 'default_layer');
-    mask_layer = svg.append('g').attr('id', 'mask_layer')
+    ghost_layer = svg.append('g').attr('id', pre_id('ghost_layer'));
+    grid_layer = svg.append('g').attr('id', pre_id('grid_layer'));
+    clip_layer = svg.append('g').attr('id', pre_id('clip_layer'));
+    graph_layer = svg.append('g').attr('id', pre_id('graph_layer'));
+    outline_layer = svg.append('g').attr('id', pre_id('outline_layer'));
+    default_layer = svg.append('g').attr('id', pre_id('default_layer'));
+    mask_layer = svg.append('g').attr('id', pre_id('mask_layer'))
       .attr('transform', 'translate(-' + padding.left + ',-' + padding.top + ')');
-    axes_layer = svg.append('g').attr('id', 'axes_layer');
-    handle_layer = svg.append('g').attr('id', 'handle_layer');
-    button_layer = svg.append('g').attr('id', 'button_layer');
+    axes_layer = svg.append('g').attr('id', pre_id('axes_layer'));
+    handle_layer = svg.append('g').attr('id', pre_id('handle_layer'));
+    button_layer = svg.append('g').attr('id', pre_id('button_layer'));
     svg.selectAll('g').attr('class', 'chart-layer');
     return this;
   };
   this.title = function(str, align) {
     if (str === undefined) { return title.text(); }
+    title = d3.select('#' + svg_id).insert('h3', '.chart-wrap');
     title.html(str);
 //    if (align) { title.style('padding-left', padding.left + 'px'); }
     return this;
@@ -430,11 +434,10 @@ var RPSGraph = function() {
     //TODO: This should really be wrapped up with this.domain()
     if (arr === undefined) { return _max_domains; }
     _max_domains = arr;
-    var domain_switch = title.append('span').attr('id', 'domain_switch').attr('class', 'switch-group');
+    var domain_switch = title.append('span').attr('class', 'switch-group');
     domain_switch.append('span').html('&nbsp;[&nbsp;');
     domain_switch.selectAll('.switch')
-      .data(arr).enter()
-      .append('a').attr('id', function(d) { return 'domain_switch_' + d; })
+      .data(arr).enter().append('a')
       .attr('class', 'switch').classed('active', function(d, i) { return d === _y.domain()[1]; })
       .attr('data-domain', function(d) { return d; })
       .text(function(d) { return d; }).on('click', domain_switch_click)
@@ -569,16 +572,15 @@ var RPSGraph = function() {
         });
     });
     // Add toggle switch
-    var edit_switch = title.append('span').attr('id', 'edit_switch').attr('class', 'switch-group');
+    var edit_switch = title.append('span');
     edit_switch.append('span').html('&nbsp;[&nbsp;');
-    edit_switch.append('a').attr('id', 'drag_switch').attr('class', 'switch active')
+    edit_switch.append('a')
       .attr('data-layer-toggle', '#handle_layer').text('drag').on('click', edit_switch_click);
     edit_switch.append('span').text(' | ');
-    edit_switch.append('a').attr('id', 'type_switch').attr('class', 'switch')
+    edit_switch.append('a')
       .attr('data-layer-toggle', '#chart_inputs').text('type').on('click', edit_switch_click);
     edit_switch.append('span').html('&nbsp;]');
     chart_inputs = d3.select('.chart-wrap').append('form')
-      .attr('id', 'chart_inputs')
       .attr('class', 'clearfix')
       .style('padding-left', padding.left + 'px')
       .classed('hidden', true);
@@ -630,7 +632,7 @@ var RPSGraph = function() {
       remove_hover();
       return this;
     }
-    tool_tip = d3.select('.chart-wrap').append('div').attr('id', 'tool_tip');
+    tool_tip = d3.select('.chart-wrap').append('div').attr('class', 'tool_tip');
     segment_width = _x(graph_data.data[0].data[1].x) - _x(graph_data.data[0].data[0].x);
     handles = handle_layer.selectAll('.segment')
       .data(graph_data.nested)
@@ -796,7 +798,7 @@ var RPSGraph = function() {
   this.intersect = function(a, b, c) {
     var invert_area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); });
     var pattern = svg_defs.append('pattern')
-      .attr('id', 'clip_pattern')
+      .attr('id', pre_id('clip_pattern'))
       .attr('width', 16)
       .attr('height', 16)
       .attr('patternUnits', 'userSpaceOnUse');
@@ -809,25 +811,25 @@ var RPSGraph = function() {
       .attr('height', 16)
       .attr('xlink:href', '/static/images/svg/stripes_red.png')
     svg_defs.append('clipPath')
-      .attr('id', 'clip_path_a')
+      .attr('id', pre_id('clip_path_a'))
       .append('path')
-      .attr('id', 'clip_path_a_path')
+      .attr('id', pre_id('clip_path_a_path'))
       .attr('d', invert_area(a.data));
     svg_defs.append('clipPath')
-      .attr('id', 'clip_path_b')
+      .attr('id', pre_id('clip_path_b'))
       .append('path')
-      .attr('id', 'clip_path_b_path')
+      .attr('id', pre_id('clip_path_b_path'))
       .attr('d', _area(b.data));
     svg_defs.append('clipPath')
-      .attr('id', 'clip_intersection')
-      .attr('clip-path', 'url(#clip_path_a)')
+      .attr('id', pre_id('clip_intersection'))
+      .attr('clip-path', 'url(#' + pre_id('clip_path_a') + ')')
       .append('use')
-      .attr('xlink:href', '#clip_path_b_path');
+      .attr('xlink:href', '#' + pre_id('clip_path_b_path'));
     mask_layer.append('rect')
       .attr('width', width)
       .attr('height', height)
-      .style('fill', 'url(#clip_pattern)')
-      .attr('clip-path', 'url(#clip_intersection)')
+      .style('fill', 'url(#' + pre_id('clip_pattern') + ')')
+      .attr('clip-path', 'url(#' + pre_id('clip_intersection') + ')')
       .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
 //      .style('fill', c)
 //      .attr('clip-path', 'url(#clip_intersection)');
@@ -844,6 +846,22 @@ var RPSGraph = function() {
     if (bool == undefined) { return _outlines; }
     _outlines = bool;
     return this;
+  };
+  this.legend = function(bool) {
+    //TODO: Don't return this without bool
+    if (bool === undefined) { return this; }
+    if (bool) {
+      var legend = d3.select('#' + svg_id).insert('div', '.chart-wrap')
+        .attr('class', 'chart-legend');
+      graph_data.data.forEach(function(d, i) {
+        var legend_unit = legend.append('span')
+          .attr('class', 'legend-row');
+        legend_unit.append('span').attr('class', 'legend-swatch')
+          .style('background-color', color(i));
+        legend_unit.append('span').attr('class', 'legend-text').text(d.type);
+      });
+      return this;
+    }
   };
   this.draw = function() {
     /*
