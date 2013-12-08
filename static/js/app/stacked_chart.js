@@ -282,14 +282,7 @@ var RPSGraph = function() {
     pre_id = function(str) {
       return svg_id + '_' + str;
     },
-    add_labels = function() {
-      //TODO: Move labels out of draggable() into own function
-    },
-    graph_drag = d3.behavior.drag().on('drag', drag_move).on('dragstart', drag_start).on('dragend', drag_end),
-    pre_draw = function() {
-      x_axis = d3.svg.axis().scale(_x).orient('bottom');
-      y_axis = d3.svg.axis().scale(_y).orient('left');
-    };
+    graph_drag = d3.behavior.drag().on('drag', drag_move).on('dragstart', drag_start).on('dragend', drag_end);
   this.padding = function(all, sides, bottom, left) {
     if (!all) { return padding; }
     padding = {top: all, right: all, bottom: all, left: all};
