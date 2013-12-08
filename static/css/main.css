@@ -165,6 +165,9 @@ path.domain { stroke: #999999; stroke-width: 0; }
 .switch { cursor: pointer; color: #bbbbbb; font-weight: bold; }
 .switch.active { color: #d55e00; }
 
+.chart-input-row { width: 101%; margin-bottom: 2px; position: relative; }
+.chart-input-row h6 { position: absolute; right: 100%; bottom: 1px; font-size: 0.7em; }
+
 .chart-input { float: left; text-align: right; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }
 
 #tool_tip { position: absolute; visibility: hidden; padding: 2px 5px; color: white; background-color: black; opacity: 0.8; font-size: 0.7em; pointer-events: none; }

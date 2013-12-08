@@ -357,7 +357,10 @@ var RPSGraph = function() {
     switches_list = d3.select(el).append('div').attr('id', 'switches');
     svg = d3.select(svg_id).append('div')
       .attr('class', 'chart-wrap')
-      .style('left', '-' + padding.left + 'px')
+      .style({
+        'left': '-' + padding.left + 'px',
+        'width': (width + padding.left) + 'px'
+      })
       .append('svg')
       .attr({
         'xmlns': 'http://www.w3.org/2000/svg',
@@ -578,25 +581,24 @@ var RPSGraph = function() {
       .attr('id', 'chart_inputs')
       .attr('class', 'clearfix')
       .style('padding-left', padding.left + 'px')
-      .style('padding-right', padding.right + 'px')
       .classed('hidden', true);
     // Add inputs
     var input_rows = chart_inputs.selectAll('div')
       .data(graph_data.data.reverse()).enter()
       .append('div')
-      .attr('class', 'clearfix')
-      .attr('data-type', function(d) { return d.type; })
-      .style('width', (width + padding.left + padding.right) + 'px');
-//      .sort(function(a, b) { return a.data[a.data.length-1].y > b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y < b.data[b.data.length-1].y ? 1 : 0 });
+      .attr('class', 'clearfix chart-input-row')
+      .attr('data-type', function(d) { return d.type; });
+    input_rows.append('h6').text(function(d) { return d.type; });
     graph_data.data.reverse();
     graph_data.inputs = input_rows.selectAll('input')
       .data(function(d) { return d.data; }).enter()
-      .append('input').attr('type', 'text').attr('class', 'chart-input')
-      .attr('data-x', function(d) { return d.x; })
-      .attr('data-type', function(d) {  return d.type; })
+      .append('input')
+      .attr({'type': 'text', 'class': 'chart-input',
+        'data-x': function(d) { return d.x; },
+        'data-type': function(d) {  return d.type; }})
       .property('value', function(d) { return format_y(d.y); })
-      .style('width', (segment_width - 14) + 'px')
-      .style('display', function(d) {return ((_x(d.x) > _x.range()[0]) && (_x(d.x) <= _x.range()[1])) ? 'block' : 'none'; })
+      .style({ 'width': (segment_width - 14) + 'px',
+        'display': function(d) {return ((_x(d.x) > _x.range()[0]) && (_x(d.x) <= _x.range()[1])) ? 'block' : 'none'; } })
       .on('change', function(d) {
         var _v = (d3.select(this).property('value'));
         //TODO: Better max and min
