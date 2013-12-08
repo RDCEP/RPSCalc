@@ -860,8 +860,8 @@ var RPSGraph = function() {
           .style('background-color', color(i));
         legend_unit.append('span').attr('class', 'legend-text').text(d.type);
       });
-      return this;
     }
+    return this;
   };
   this.draw = function() {
     /*
@@ -890,7 +890,9 @@ var RPSGraph = function() {
       .style('stroke', function(d, i) { return (_lines && !d.invert) ? color(i) : null; });
     if (_outlines) {
       graph_data.outlines = outline_layer.selectAll('.chart-outline')
-        .data(graph_data.data.slice(0, -1)).enter().append('path')
+        .data(function() {
+          return _stacked ? graph_data.data.slice(0, -1) : graph_data.data.reverse().slice(0, -1)
+        }).enter().append('path')
         .attr('d', function(d) { return _line(d.data); })
         .attr('class', 'chart-outline')
     }
