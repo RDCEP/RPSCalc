@@ -359,10 +359,13 @@ var RPSGraph = function() {
       .attr('class', 'chart-wrap')
       .style('left', '-' + padding.left + 'px')
       .append('svg')
+      .attr({
+        'xmlns': 'http://www.w3.org/2000/svg',
+        'xmlns:xmlns:xlink': 'http://www.w3.org/1999/xlink',
+        'version': '1.1'
+      })
       .attr('width', width + padding.left + padding.right)
       .attr('height', height + padding.top + padding.bottom)
-      .attr('xmlns', 'http://www.w3.org/2000/svg')
-      .attr('version', '1.1')
       .append('g')
       .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
     svg_defs = svg.append('defs');
@@ -876,11 +879,3 @@ var RPSGraph = function() {
     return this;
   };
 };
-
-var RPSGraphDraggable = function() {
-  'use strict';
-  RPSGraph.call(this);
-  this.prototype = new RPSGraph();
-
-};
-RPSGraphDraggable.prototype.constructor = RPSGraphDraggable;
