@@ -48,15 +48,14 @@ var RPSGraph = function() {
     grid_layer,
     clip_layer,
     graph_layer,
+    intersect_layer,
     outline_layer,
     default_layer,
-    mask_layer,
     axes_layer,
     period_layer,
     handle_layer,
     button_layer,
     segment_width,
-    masks,
     switches_list,
     title,
     /**********************
@@ -154,12 +153,14 @@ var RPSGraph = function() {
           .on('mouseover', function() {
             update_legend(d.values);
             tool_tip.classed('hidden', !_hoverable);
-            d3.selectAll('.data-point.tight').classed('active', false);
-            d3.selectAll('.data-point.tight').classed('hovered', false);
             handle.selectAll('.data-point.tight')
               .classed('active', true);
           })
           .on('mouseout', function() {
+            tool_tip.classed('hidden', true);
+            d3.selectAll('.data-point.tight')
+              .classed('active', false)
+              .classed('hovered', false);
             adjust_dot = null;
             handle.selectAll('data-point')
               .classed('active', false);
@@ -176,12 +177,13 @@ var RPSGraph = function() {
           .on('mouseover', function(dd, ii) {
             update_legend(d.values);
             tool_tip.classed('hidden', !_hoverable);
-            d3.selectAll('.data-point.tight').classed('active', false);
-            d3.selectAll('.data-point.tight').classed('hovered', false);
-            handle.selectAll('.data-point.tight').filter(function(ddd, iii) { return ii === iii; })
+            handle.selectAll('.data-point.tight')
+              .filter(function(ddd, iii) { return ii === iii; })
               .classed('active', true).classed('hovered', true);
           })
           .on('mouseout', function() {
+            d3.selectAll('.data-point.tight')
+              .classed('active', false).classed('hovered', false);
             d3.select(this).classed('active', false).classed('hovered', false);
           });
       });
@@ -190,15 +192,16 @@ var RPSGraph = function() {
       /*
        Remove mouse events from <rect>s with hoverable handles (toggle .active)
        */
-      handles.selectAll('rect').on('mouseover', function() { return null; });
-      handles.selectAll('rect').on('mouseout', function() { return null; });
+      handles.selectAll('rect')
+        .on('mouseover', function() { return null; })
+        .on('mouseout', function() { return null; });
     },
     remove_drag_hover = function() {
       /*
        Remove mouse events from draggable handles (toggle .active)
        */
-      adjust_dot.on('mouseover', function() { return null; });
-      adjust_dot.on('mouseout', function() { return null; });
+      adjust_dot.on('mouseover', function() { return null; })
+        .on('mouseout', function() { return null; });
       d3.selectAll('.data-point').on('mouseover', function() { return null; });
     },
     max_drag = function(_d) {
@@ -237,35 +240,6 @@ var RPSGraph = function() {
       redraw();
       add_hover();
       add_drag_hover();
-    },
-    mask_edges = function() {
-      /*
-       Draw masks on 4 edges of graph -- covers up extra graph underneath axes.
-       */
-      // top
-      mask_layer.append('rect').attr('class', 'mask')
-        .attr('width', width + padding.left + padding.right).attr('height', _h_grid ? padding.top - 1 : padding.top)
-        .attr('transform', 'translate(0,0)');
-      // right
-      mask_layer.append('rect').attr('class', 'mask right')
-        .attr('width', padding.right).attr('height', height + padding.top + padding.bottom)
-        .attr('transform', 'translate(' + (width + padding.left) + ',0)');
-      // bottom
-      mask_layer.append('rect').attr('class', 'mask')
-        .attr('width', width + padding.left + padding.right).attr('height', _h_grid ? padding.bottom - 1 : padding.bottom)
-        .attr('transform', 'translate(0,' + (_h_grid ? (height + padding.top) : (height + padding.top + 1)) + ')');
-      // left
-      mask_layer.append('rect').attr('class', 'mask')
-        .attr('width', padding.left).attr('height', height + padding.top + padding.bottom)
-        .attr('transform', 'translate(0,0)');
-      masks = mask_layer.selectAll('.mask');
-      if (_hoverable) {
-        masks.on('mouseover', function() {
-          tool_tip.classed('hidden', true);
-          d3.selectAll('.data-point').classed('active', false);
-          d3.selectAll('.data-point').classed('hovered', false);
-        });
-      }
     },
     draw_axes = function() {
       /*
@@ -379,10 +353,11 @@ var RPSGraph = function() {
     grid_layer = svg.append('g').attr('id', pre_id('grid_layer'));
     clip_layer = svg.append('g').attr('id', pre_id('clip_layer'));
     graph_layer = svg.append('g').attr('id', pre_id('graph_layer'));
+    svg_defs.append('clipPath').attr("id", "graph_clip").append("rect")
+      .attr({'width': width, 'height': height });
+    intersect_layer = svg.append('g').attr('id', pre_id('outline_layer'));
     outline_layer = svg.append('g').attr('id', pre_id('outline_layer'));
     default_layer = svg.append('g').attr('id', pre_id('default_layer'));
-    mask_layer = svg.append('g').attr('id', pre_id('mask_layer'))
-      .attr('transform', 'translate(-' + padding.left + ',-' + padding.top + ')');
     axes_layer = svg.append('g').attr('id', pre_id('axes_layer'));
     handle_layer = svg.append('g').attr('id', pre_id('handle_layer'));
     button_layer = svg.append('g').attr('id', pre_id('button_layer'));
@@ -761,6 +736,7 @@ var RPSGraph = function() {
       .data(arr).enter().append('path')
       .attr('d', function(d) { return _line(d.data); })
       .attr('class', 'default_line')
+      .attr('clip-path', 'url(#graph_clip)')
       .style(style_hash);
     return this;
   };
@@ -825,12 +801,11 @@ var RPSGraph = function() {
       .attr('clip-path', 'url(#' + pre_id('clip_path_a') + ')')
       .append('use')
       .attr('xlink:href', '#' + pre_id('clip_path_b_path'));
-    mask_layer.append('rect')
+    intersect_layer.append('rect')
       .attr('width', width)
       .attr('height', height)
       .style('fill', 'url(#' + pre_id('clip_pattern') + ')')
-      .attr('clip-path', 'url(#' + pre_id('clip_intersection') + ')')
-      .attr('transform', 'translate(' + padding.left + ',' + padding.top + ')');
+      .attr('clip-path', 'url(#' + pre_id('clip_intersection') + ')');
 //      .style('fill', c)
 //      .attr('clip-path', 'url(#clip_intersection)');
     return this;
@@ -840,6 +815,12 @@ var RPSGraph = function() {
     _lines = bool;
     _outlines = !bool;
     _chart_f = bool ? _line : _area;
+    return this;
+  };
+  this.interpolate = function(str) {
+    if (str === undefined) { return this; }
+    _line.interpolate(str);
+    _area.interpolate(str);
     return this;
   };
   this.outlines = function(bool) {
@@ -886,6 +867,7 @@ var RPSGraph = function() {
         return _chart_f(d.data);
       })
       .attr('class', 'chart-line')
+      .attr('clip-path', 'url(#graph_clip)')
       .style('fill', function(d, i) { return (!_lines || d.invert) ? color(i) : null; })
       .style('stroke', function(d, i) { return (_lines && !d.invert) ? color(i) : null; });
     if (_outlines) {
@@ -895,9 +877,9 @@ var RPSGraph = function() {
         }).enter().append('path')
         .attr('d', function(d) { return _line(d.data); })
         .attr('class', 'chart-outline')
+        .attr('clip-path', 'url(#graph_clip)');
     }
     draw_axes();
-    mask_edges();
     return this;
   };
 };
