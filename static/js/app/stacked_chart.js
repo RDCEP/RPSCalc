@@ -261,7 +261,7 @@ var RPSGraph = function() {
       }
       d3.selectAll(this.parentNode.getElementsByClassName('switch')).each(function() {
         var current_switch = d3.select(this),
-          layer_toggle = d3.select(current_switch.attr('data-layer-toggle'));
+          layer_toggle = d3.select('#' + current_switch.attr('data-layer-toggle'));
         layer_toggle.classed('hidden', !layer_toggle.classed('hidden'));
         current_switch.classed('active', !current_switch.classed('active'));
       });
@@ -540,24 +540,25 @@ var RPSGraph = function() {
         });
     });
     // Add toggle switch
-    var edit_switch = title.append('span');
+    var edit_switch = title.append('span').attr('class', 'switch-group');
     edit_switch.append('span').html('&nbsp;[&nbsp;');
-    edit_switch.append('a')
-      .attr('data-layer-toggle', '#handle_layer').text('drag').on('click', edit_switch_click);
+    edit_switch.append('a').attr('class', 'switch active')
+      .attr('data-layer-toggle', pre_id('handle_layer')).text('drag').on('click', edit_switch_click);
     edit_switch.append('span').text(' | ');
-    edit_switch.append('a')
-      .attr('data-layer-toggle', '#chart_inputs').text('type').on('click', edit_switch_click);
+    edit_switch.append('a').attr('class', 'switch')
+      .attr('data-layer-toggle', pre_id('chart_inputs')).text('type').on('click', edit_switch_click);
     edit_switch.append('span').html('&nbsp;]');
     chart_inputs = d3.select('.chart-wrap').append('form')
-      .attr('class', 'clearfix')
+      .attr({ 'class': 'clearfix',
+        'id': pre_id('chart_inputs') })
       .style('padding-left', padding.left + 'px')
       .classed('hidden', true);
     // Add inputs
     var input_rows = chart_inputs.selectAll('div')
       .data(graph_data.data.reverse()).enter()
       .append('div')
-      .attr('class', 'clearfix chart-input-row')
-      .attr('data-type', function(d) { return d.type; });
+      .attr({ 'class': 'clearfix chart-input-row',
+        'data-type': function(d) { return d.type; } });
     input_rows.append('h6').text(function(d) { return d.type; });
     graph_data.data.reverse();
     graph_data.inputs = input_rows.selectAll('input')
@@ -761,7 +762,7 @@ var RPSGraph = function() {
     if (bool) {
       var e = document.createEvent('SVGEvents');
       e.initEvent('click', true, true);
-      d3.select('#type_switch').node().dispatchEvent(e);
+      d3.select('[data-layer-toggle="#' + pre_id('chart_inputs') + '"]').node().dispatchEvent(e);
     }
   };
   this.intersect = function(a, b, c) {
