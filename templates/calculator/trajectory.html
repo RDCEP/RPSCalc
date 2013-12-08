@@ -33,8 +33,9 @@
 {% endblock %}
 {% block bodyjs %}
   {{ super() }}
-  <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
-  <script src="/static/js/app/stacked_chart.js"></script>
-  <script src="/static/js/app/session.js"></script>
-  <script src="/static/js/app/trajectory.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.11/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+  <script src="/static/js/app/stacked_chart.min.js"></script>
+  <script src="/static/js/app/session.min.js"></script>
+  <script src="/static/js/app/trajectory.min.js"></script>
 {% endblock %}

@@ -35,9 +35,6 @@
         <h3>Grid Mix</h3>
         <div id="grid_mix"></div>
       </div>
-
-{#      <form action="/pinwheel" method="get"><button>Compare this state's RPS to the rest of the country</button></form>#}
-
       <div id="cost_cap_wrap" class="wide module clearfix">
         <h3>Cost Cap Details</h3>
         <div id="cost_cap_details"></div>
@@ -46,9 +43,6 @@
         <h3>Historic retail prices</h3>
         <div id="retail_price" class="chart-wrap"></div>
       </div>
-
-{#      <form action="" method="get"><button>RPS Calculator</button></form>#}
-
     </section>
     <section id="legislation" class="clearfix">
       <h2>Legislation</h2>
@@ -85,8 +79,8 @@
     Options = window.Options || {};
     Options.state = '{{ state }}';
   </script>
-{#  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>#}
-  <script src="/static/js/vendor/d3.v3.min.js" charset="utf-8"></script>
-  <script src="/static/js/app/stacked_chart.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.11/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+  <script src="/static/js/app/stacked_chart.min.js"></script>
   <script src="/static/js/app/state_facts.js?3"></script>
 {% endblock %}
