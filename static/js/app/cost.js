@@ -35,6 +35,7 @@
       .padding(30)
       .width(width).height(height)
       .select(container)
+      .title('Will we break the cap?')
       .x(d3.time.scale())
       .y(d3.scale.linear())
       .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, 50])
@@ -45,6 +46,7 @@
       .hoverable(true)
       .colors([d3.rgb(213,94,0), d3.rgb(86,180,233)])
       .h_grid(true)
+      .legend(true)
       .outlines(false)
       .intersect(cap_rec[0], cap_rec[1], d3.rgb(213,94,0))
       .draw();

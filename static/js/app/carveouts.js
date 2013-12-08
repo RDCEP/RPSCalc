@@ -49,6 +49,7 @@
       .hoverable(true)
       .draggable(true, false)
       .h_grid(true)
+      .legend(true)
       .draw()
       .zeroes(empty);
   });

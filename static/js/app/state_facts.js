@@ -250,6 +250,7 @@ var FactsPage = function() {
         def_line[0].data[i] = {y: 0, x: parse_date(String(i + 2000)), y0: 0};
       }
     }
+
     d3.select('#summary')
       .append('p')
       .html(_data.snapshot.summary);
@@ -302,6 +303,7 @@ var FactsPage = function() {
       .html(function(d) {
         return '<a href="'+ d.href+'">'+d.name+'</a>&nbsp;&mdash;&nbsp;'+ d.description;
       });
+
     var trajectory = new RPSGraph()
       .padding(30)
       .width(760).height(height)
@@ -312,6 +314,7 @@ var FactsPage = function() {
       .format_x(function(x) { return x.getFullYear(); })
       .format_y(function(y) { return d3.format('.1f')(y); })
       .data(data)
+      .title('Policy Trajectory')
       .h_grid(true)
       .legend(true)
       .draw();
