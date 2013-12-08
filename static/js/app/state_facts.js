@@ -327,21 +327,25 @@ var FactsPage = function() {
     d3.json('/static/js/data/prices/' + _data.machine_name + '.json', function(_data) {
       data = [{type: 'retail', data: []}];
       parse_date = d3.time.format('%m-%Y').parse;
+
       _data.data.forEach(function(d, i) {
         data[0].data.push({y: +d.data, y0: 0, x: parse_date(d.date)})
       });
+
       var retail_chart = new RPSGraph()
-        .padding(30)
+        .padding(30, 10, 30, 50)
         .width(760).height(200)
         .select('#retail_price')
         .x(d3.time.scale())
         .y(d3.scale.linear())
-        .domain(d3.extent(data[0].data, function(d) { return d.x; }), d3.extent(data[0].data, function(d) { return d.y; }))
+        .domain(d3.extent(data[0].data, function(d) { return d.x; }),
+          d3.extent(data[0].data, function(d, i) { return i === 0 ? Math.floor(d.y) - .1 : Math.ceil(d.y) + .1; }))
         .format_x(function(x) { return x.getFullYear(); })
         .format_y(function(y) { return d3.format('.1f')(y); })
         .data(data)
         .h_grid(true)
         .lines(true)
+        .interpolate('monotone')
         .draw();
     });
   });
