@@ -302,10 +302,10 @@ var FactsPage = function() {
       .html(function(d) {
         return '<a href="'+ d.href+'">'+d.name+'</a>&nbsp;&mdash;&nbsp;'+ d.description;
       });
-    var foo = new RPSGraph()
+    var trajectory = new RPSGraph()
       .padding(30)
       .width(760).height(height)
-      .select('#carveout_graph')
+      .select('carveout_graph')
       .x(d3.time.scale())
       .y(d3.scale.linear())
       .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, d3.extent(data[0].data, function(d) { return d.y; })[1]])
@@ -313,6 +313,7 @@ var FactsPage = function() {
       .format_y(function(y) { return d3.format('.1f')(y); })
       .data(data)
       .h_grid(true)
+      .legend(true)
       .draw();
 
     rps_progress(data[0].data, _data.snapshot.rps_progress);
