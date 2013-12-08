@@ -24,7 +24,6 @@
       carveout = carveout.length > 0 ? carveout : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       carveout.forEach(function(d, ii) {
         var _t = _data.trajectory[ii];
-        console.log(d, _t);
         if (_stored && !Options.data.update_state) {
           carveout_data.data[ii]= {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : d.y, type: carveout_type};
         } else {
