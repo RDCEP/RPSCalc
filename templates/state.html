@@ -75,12 +75,7 @@
   </article>
 {% endblock %}
 {% block bodyjs %}
-  <script>
-    Options = window.Options || {};
-    Options.state = '{{ state }}';
-  </script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.11/d3.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+  {{ super() }}
   <script src="/static/js/app/stacked_chart.min.js"></script>
   <script src="/static/js/app/state_facts.js?3"></script>
 {% endblock %}
