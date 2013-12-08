@@ -273,12 +273,6 @@ input
   padding: 3em 0 5em
 #rps_progress
   margin-top: 1em
-#carveout_graph_legend
-  position: absolute
-  top: 20px
-  left: 60px
-  & > div
-    margin-bottom: .25em
 #state_trajectory_inputs
   width: 760px
 #state_trajectory_inputs input
@@ -314,6 +308,8 @@ line, rect, path
   fill: none
   stroke: none
   stroke-width: 1
+.x.axis text
+  text-anchor: end!important
 .chart-line
   stroke-width: 2
 .chart-outline
@@ -352,7 +348,7 @@ path.domain
       fill: black
 .chart-wrap
   position: relative
-#switches
+.switches-wrap
   padding: 0 0 0 50px
 .switch-group
   font-size: .8em
@@ -379,7 +375,18 @@ path.domain
   display: block
   padding: 2px 5px
   font-size: .7em
-#tool_tip
+.chart-legend
+  background-color: $light-gray
+  span
+    display: inline-block
+    &.legend-swatch
+      width: 10px
+      height: 10px
+      margin-right: 5px
+    &.legend-text
+      margin-right: 10px
+      font-size: .7em
+.tool_tip
   position: absolute
   //position: fixed
   visibility: hidden

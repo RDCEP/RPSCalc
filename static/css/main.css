@@ -119,9 +119,6 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 
 #rps_progress { margin-top: 1em; }
 
-#carveout_graph_legend { position: absolute; top: 20px; left: 60px; }
-#carveout_graph_legend > div { margin-bottom: 0.25em; }
-
 #state_trajectory_inputs { width: 760px; }
 
 #state_trajectory_inputs input { float: left; text-align: right; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }
@@ -135,6 +132,8 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 .switch.active a { color: #d55e00; }
 
 line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width: 1; }
+
+.x.axis text { text-anchor: end !important; }
 
 .chart-line { stroke-width: 2; }
 
@@ -158,7 +157,7 @@ path.domain { stroke: #999999; stroke-width: 0; }
 
 .chart-wrap { position: relative; }
 
-#switches { padding: 0 0 0 50px; }
+.switches-wrap { padding: 0 0 0 50px; }
 
 .switch-group { font-size: 0.8em; }
 
@@ -170,8 +169,13 @@ path.domain { stroke: #999999; stroke-width: 0; }
 
 .chart-input { float: left; text-align: right; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }
 
-#tool_tip { position: absolute; visibility: hidden; padding: 2px 5px; color: white; background-color: black; opacity: 0.8; font-size: 0.7em; pointer-events: none; }
-#tool_tip.active { visibility: visible; }
+.chart-legend { background-color: #eeeeee; }
+.chart-legend span { display: inline-block; }
+.chart-legend span.legend-swatch { width: 10px; height: 10px; margin-right: 5px; }
+.chart-legend span.legend-text { margin-right: 10px; font-size: 0.7em; }
+
+.tool_tip { position: absolute; visibility: hidden; padding: 2px 5px; color: white; background-color: black; opacity: 0.8; font-size: 0.7em; pointer-events: none; }
+.tool_tip.active { visibility: visible; }
 
 .rps-diff { fill: #d55e00; }
 
