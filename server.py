@@ -1,5 +1,6 @@
 import urllib2
 import json
+from datetime import datetime
 import urlparse
 from flask import render_template, request, make_response, abort, sessions, session, redirect
 # from flask_beaker import BeakerSession
@@ -50,6 +51,7 @@ def state_page(state):
     state_check(state)
     return render_template(
         'state.html',
+        now=datetime.now().microsecond,
         state=state,
         session_data=json.dumps(session.items()),
     )
@@ -59,6 +61,7 @@ def trajectory(state):
     state_check(state)
     return render_template(
         'calculator/trajectory.html',
+        now=datetime.now().microsecond,
         state=state,
         session_data=json.dumps(session.items()),
     )
@@ -71,6 +74,7 @@ def carveouts(state):
     return render_template(
         'calculator/carveouts.html',
         state=state,
+        now=datetime.now().microsecond,
         session_data=json.dumps(session.items()),
     )
 
@@ -81,6 +85,7 @@ def pricing(state):
         return redirect('/%s/trajectory' % state)
     return render_template(
         'calculator/pricing.html',
+        now=datetime.now().microsecond,
         state=state,
         session_data=json.dumps(session.items()),
     )
@@ -92,6 +97,7 @@ def cost(state):
         return redirect('/%s/trajectory' % state)
     return render_template(
         'calculator/cost.html',
+        now=datetime.now().microsecond,
         state=state,
         session_data=json.dumps(session.items()),
     )
