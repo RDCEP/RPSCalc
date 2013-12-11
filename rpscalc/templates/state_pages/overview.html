@@ -1,0 +1,70 @@
+{% extends 'state.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block content %}
+  <section id="summary" class="clearfix">
+  </section>
+  <section id="snapshot" class="clearfix">
+    <h2>RPS Snapshot</h2>
+    <div class="wide module clearfix">
+      <div id="carveout_graph" class="chart-wrap">
+      </div>
+    </div>
+    <div class="wide module clearfix">
+      <div class="narrow module clearfix">
+        <h3 class="narrow">Overview</h3>
+        <ul id="overview"></ul>
+      </div>
+      <div id="carveouts" class="narrow module">
+        <h3>Carveouts</h3>
+      </div>
+    </div>
+    <div class="wide module clearfix">
+      <h3>Current RPS Progress</h3>
+      <p>Compare the goal established in the RPS to what is being achieved:</p>
+      <div id="rps_progress"></div>
+    </div>
+  </section>
+  <section id="energy" class="clearfix">
+    <h2>Energy Details</h2>
+    <div class="wide module clearfix">
+      <h3>Grid Mix</h3>
+      <div id="grid_mix"></div>
+    </div>
+    <div id="cost_cap_wrap" class="wide module clearfix">
+      <h3>Cost Cap Details</h3>
+      <div id="cost_cap_details"></div>
+    </div>
+    <div class="wide module clearfix">
+      <h3>Historic retail prices</h3>
+      <div id="retail_price" class="chart-wrap"></div>
+    </div>
+  </section>
+  <section id="legislation" class="clearfix">
+    <h2>Legislation</h2>
+    <div class="wide module clearfix">
+      <h3>Statute</h3>
+      <div id="statute"></div>
+    </div>
+    <div class="wide module clearfix">
+      <h3>RPS Technical Details</h3>
+      <div id="tech_req"></div>
+    </div>
+  </section>
+  <section id="resources" class="clearfix">
+    <h2>Resources</h2>
+    <div class="module wide">
+        <div class="narrow module">
+          <h3>Tools and other links</h3>
+          <div id="tools">
+            <ul></ul>
+          </div>
+        </div>
+        <div class="narrow module clearfix">
+          <h3>References</h3>
+          <div id="references">
+            <ul></ul>
+          </div>
+        </div>
+      </div>
+  </section>
+{% endblock %}

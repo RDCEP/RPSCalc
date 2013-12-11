@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Pinwheel/Sunburst Work</title>
-  <link rel=stylesheet href=/static/css/pinwheel.css media=all>
+  <link rel=stylesheet href={{ url_for('static', filename='css/pinwheel.css') }} media=all>
 </head>
 <body>
 <article id=graph-wrap>
@@ -22,7 +22,7 @@
     </ul>
   </div>
 </article>
-<script src=/static/js/vendor/d3.v3.min.js charset=utf-8></script>
-<script src=/static/js/app/pinwheel.js></script>
+<script src={{ url_for('static', filename='js/vendor/d3.v3.min.js') }} charset=utf-8></script>
+<script src={{ url_for('static', filename='js/app/pinwheel.js') }}></script>
 </body>
 </html>

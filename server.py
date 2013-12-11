@@ -1,10 +1,9 @@
 import urllib2
 import json
-import urlparse
-from flask import render_template, request, make_response, abort, sessions, session, redirect
+from flask import render_template, request, abort, session, redirect
 # from flask_beaker import BeakerSession
 from uwsgi_app import app
-from utils.states import STATES
+from rpscalc.utils.states import STATES
 
 session_opts = {
     'session.type': 'ext:memcached',
@@ -135,7 +134,7 @@ def eia_api_state_retail(state):
 def eia_api(state):
     #TODO: this should be run as a cron every month or so. Should not be a public URL.
     from math import ceil
-    from numpy import linspace
+
     eia = {
         'api_key': 'D82A092DA301308805ECAB18A123BB4A',
         'url': 'http://api.eia.gov/series?api_key{{}}&series_id={{}}',

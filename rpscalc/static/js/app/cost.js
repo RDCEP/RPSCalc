@@ -50,4 +50,10 @@
       .outlines(false)
       .intersect(cap_rec[0], cap_rec[1], d3.rgb(213,94,0))
       .draw();
+  var over_legend = d3.select('.chart-legend').append('span').attr('class', 'legend-row');
+  console.log(over_legend);
+  over_legend.append('span').attr('class', 'legend-swatch')
+    .style('background-color', d3.rgb(213,94,0))
+    .style('background-image', 'url(/static/images/svg/stripes_sky-blue.png)');
+  over_legend.append('span').attr('class', 'legend-text').text('REC exceeds Costcap');
 }());

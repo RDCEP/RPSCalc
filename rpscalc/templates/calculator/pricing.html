@@ -1,0 +1,103 @@
+{% extends 'state.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block left_nav %}
+<li><a href="/{{ state }}/trajectory" data-name="trajectory">Set RPS trajectory</a></li>
+<li><a href data-name="carveouts">Set carveouts</a></li>
+<li class="active"><a href="/{{ state }}/pricing" data-name="pricing">Set cost cap &amp; pricing</a></li>
+<li><a href="/{{ state }}/cost" data-name="cost">Projected cost</a></li>
+{% endblock %}
+{% block content %}
+  <section class="clearfix">
+    <h2>Cost cap and pricing</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et metus vitae neque molestie hendrerit
+      eget eget dolor. Sed felis diam, imperdiet eget nulla ornare, semper viverra ante. Pellentesque in risus
+      sem. In nisl velit, pellentesque in elit at, adipiscing sodales metus. Vestibulum faucibus placerat
+      lectus at aliquam.</p>
+    <div id="pricing" class="module clearfix chart-outer-wrap">
+      <form id="pricing_form">
+        <fieldset id="wind_costs" class="narrow">
+          <h4>Wind Costs</h4>
+          <div class="clearfix">
+            <label for="wind_capacity">Capacity factor</label>
+            <input type="text" value=".33" id="wind_capacity" name="wind_capacity" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="wind_installation">Installation ($/W)</label>
+            <input type="text" value="2" id="wind_installation" name="wind_installation" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="wind_om">O &amp; M ($/MWh)</label>
+            <input type="text" value="10" id="wind_om" name="wind_om" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="wind_integration">Integration ($/MWh)</label>
+            <input type="text" value="5" id="wind_integration" name="wind_integration" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="wind_amortization">Amortization (%)</label>
+            <input type="text" value="9" id="wind_amortization" name="wind_amortization" pattern="[0-9]*\.*[0-9]+">
+          </div>
+        </fieldset>
+        <fieldset id="solar_costs" class="narrow">
+          <h4>Solar Costs</h4>
+          <div class="clearfix">
+            <label for="solar_capacity">Capacity factor</label>
+            <input type="text" value=".1" id="solar_capacity" name="solar_capacity" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="solar_installation">Installation ($/W)</label>
+            <input type="text" value="3.45" id="solar_installation" name="solar_installation" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="solar_om">O &amp; M ($/MWh)</label>
+            <input type="text" value="0.012" id="solar_om" name="solar_om" pattern="[0-9]*\.*[0-9]+">
+          </div>
+{#            <div class="clearfix">#}
+{#              <label for="solar_integration">Integration ($/MWh)</label>#}
+{#              <input type="text" value="0" id="solar_integration" name="solar_integration">#}
+{#            </div>#}
+          <div class="clearfix">
+            <label for="solar_amortization">Amortization (%)</label>
+            <input type="text" value="9" id="solar_amortization" name="solar_amortization" pattern="[0-9]*\.*[0-9]+">
+          </div>
+        </fieldset>
+        <fieldset id="policy_costs" class="narrow">
+          <h4>Policy choices</h4>
+          <div class="clearfix">
+            <label for="policy_costcap">Cost cap (%)</label>
+            <input type="text" value="2" id="policy_costcap" name="policy_costcap" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="policy_retail">Retail ($/MWh)</label>
+            <input type="text" value="100" id="policy_retail" name="policy_retail" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="policy_wholesale">Wholesale ($/MWh)</label>
+            <input type="text" value="35" id="policy_wholesale" name="policy_wholesale" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="policy_ptc">PTC</label>
+            <input type="checkbox" id="policy_ptc" name="policy_ptc" checked>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+      Donec sodales semper erat. Suspendisse molestie turpis tempor leo dictum, commodo lacinia tellus laoreet.
+      Sed consequat felis eget nulla vulputate, placerat pulvinar sapien rhoncus. Nam mollis est neque, faucibus
+      consequat arcu hendrerit id. Sed feugiat ultrices volutpat. Nam volutpat aliquam ultricies. Phasellus
+      orci erat, pretium eget velit ut, congue sodales massa. Aliquam erat volutpat.</p>
+    <ul id="crumbs">
+      <li id="crumb_trajectory"><a href="/{{ state }}/trajectory">Trajectory</a>
+      <li id="crumb_carveouts"><a href="/{{ state }}/carveouts">Carveouts</a></li>
+      <li id="crumb_pricing" class="active"><a href="/{{ state }}/pricing">Cost cap &amp; Pricing</a></li>
+      <li id="crumb_cost"><a href="/{{ state }}/cost">Projected Cost</a></li>
+    </ul>
+  </section>
+{% endblock %}
+{% block bodyjs %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/app/stacked_chart.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app/session.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app/pricing.js') }}"></script>
+{% endblock %}

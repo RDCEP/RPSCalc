@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
-{% block headcss %}<link href="/static/css/main.css" rel="stylesheet">{% endblock %}
 {% block page %}
   <header id="main_nav">
     <nav>
@@ -35,16 +34,18 @@
       </ul>
     </nav>
   </header>
-  {% block content %}
-    {% block state_header %}
-      <section>
-        <header>
-          <h1>{{ state|replace('_', ' ')|title }}</h1>
-          <img src="/static/images/state_seals/{{ state }}.png" alt="State seal of {{ state|capitalize }}">
-        </header>
-      </section>
-    {% endblock %}
+  <article id="main_content">
+  {% block header %}
+    <section>
+      <header>
+        <h1>{{ state|replace('_', ' ')|title }}</h1>
+        <img src="{{ url_for('static', filename='images/state_seals/%s.png' % state) }}" alt="State seal of {{ state|capitalize }}">
+      </header>
+    </section>
   {% endblock %}
+  {% block content %}
+  {% endblock %}
+  </article>
   {% block bodyjs %}
   <script>
     Options = window.Options || {};
