@@ -81,14 +81,15 @@ input
   fieldset
     float: left
     padding: 20px
-    margin: 0 0 20px 0
-    background-color: lighten($sky-blue, 20)
+    margin: 0 20px 20px 0
+    background-color: $lighter-gray
+    border:
+      top: 1px solid #999999
+      left: 1px solid #999999
     &.narrow
-      width: 180px
+      width: 279px
     &.wide
       width: 620px
-    &+fieldset
-      margin: 0 0 20px 20px
     h4
       font-weight: bold
       font-size: 1.2em
@@ -96,7 +97,7 @@ input
     div
       margin-bottom: 10px
     input
-      background-color: #ffffff
+      background-color: $light-gray
       border: none
       padding: 2px 5px
       text-align: right

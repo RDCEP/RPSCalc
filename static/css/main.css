@@ -63,13 +63,12 @@ form { clear: both; margin-bottom: 2em; position: relative; top: 1em; }
 
 input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #222222; }
 
-#pricing_form fieldset { float: left; padding: 20px; margin: 0 0 20px 0; background-color: #b0dcf5; }
-#pricing_form fieldset.narrow { width: 180px; }
+#pricing_form fieldset { float: left; padding: 20px; margin: 0 20px 20px 0; background-color: #fafafa; border-top: 1px solid #999999; border-left: 1px solid #999999; }
+#pricing_form fieldset.narrow { width: 279px; }
 #pricing_form fieldset.wide { width: 620px; }
-#pricing_form fieldset + fieldset { margin: 0 0 20px 20px; }
 #pricing_form fieldset h4 { font-weight: bold; font-size: 1.2em; margin: 0 0 1em; }
 #pricing_form fieldset div { margin-bottom: 10px; }
-#pricing_form fieldset input { background-color: white; border: none; padding: 2px 5px; text-align: right; float: right; }
+#pricing_form fieldset input { background-color: #eeeeee; border: none; padding: 2px 5px; text-align: right; float: right; }
 #pricing_form fieldset input[type=text] { width: 40px; }
 #pricing_form fieldset label { float: left; }
 
