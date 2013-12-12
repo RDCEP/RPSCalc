@@ -9,10 +9,11 @@ var RPSGraph = function() {
     _max_domains,
     _x = d3.scale.linear().domain([0, 1]).range([0, width]),
     _y = d3.scale.linear().domain([0, 1]).range([height, 0]),
-    x_axis = d3.svg.axis().scale(_x).orient('bottom'),
+    x_axis = d3.svg.axis().scale(_x).orient('bottom').tickSize(6).innerTickSize(6),
     y_axis = d3.svg.axis().scale(_y).orient('left'),
     _line = d3.svg.line().x(function(d) { return _x(d.x); }).y(function(d) { return _y(d.y + d.y0); }),
     _area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y(d.y0); }).y1(function(d) { return _y(d.y + d.y0); }),
+    _invert_area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); }),
     _stack = d3.layout.stack().offset('zero').values(function(d) { return d.data; }).x(function(d) { return d.x; }).y(function(d) { return d.y; }),
     _chart_f = _area,
     /**************
@@ -21,6 +22,7 @@ var RPSGraph = function() {
     graph_data = {
       graphs: [],       // Graph objects
       outlines: [],     // Graph outline objects
+      intersection: null,
       data: [],         // Data
       inputs: [],       // Inputs below graph
       active: [],       // Data series currently being altered
@@ -102,10 +104,22 @@ var RPSGraph = function() {
       if (_stacked) { graph_data.data = _stack(graph_data.data); }
       graph_data.graphs
         .data(graph_data.data)
-        .attr('d', function(d) { return _chart_f(d.data); });
-      graph_data.outlines
-        .data(graph_data.data.slice(0, -1))
-        .attr('d', function(d) { return _line(d.data); });
+        .attr('d', function(d) {
+        //TODO: This is written twice -- store in a function
+        if (d.invert) {
+          return d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); })(d.data);
+        }
+        return _chart_f(d.data);
+      });
+      if (graph_data.intersection) {
+        graph_data.intersection
+          .attr('d', function(d) { return _invert_area(d.data); });
+      }
+      if (_outlines) {
+        graph_data.outlines
+          .data(graph_data.data.slice(0, -1))
+          .attr('d', function(d) { return _line(d.data); });
+      }
       handles.data(graph_data.nested)
         .each(function() {
           d3.select(this).selectAll('.data-point')
@@ -368,14 +382,14 @@ var RPSGraph = function() {
     if (!val) { return _x; }
     _x = val;
     _x.range([0, width]);
-    x_axis = d3.svg.axis().scale(_x).orient('bottom');
+    x_axis.scale(_x);
     return this;
   };
   this.y = function(val) {
     if (!val) { return _y; }
     _y = val;
     _y.range([height, 0]);
-    y_axis = d3.svg.axis().scale(_y).orient('left');
+    y_axis.scale(_y);
     return this;
   };
   this.domain = function(xd, yd) {
@@ -766,7 +780,7 @@ var RPSGraph = function() {
     }
   };
   this.intersect = function(a, b, c) {
-    var invert_area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); });
+    console.log(a);
     var pattern = svg_defs.append('pattern')
       .attr('id', pre_id('clip_pattern'))
       .attr('width', 16)
@@ -780,11 +794,12 @@ var RPSGraph = function() {
       .attr('width', 16)
       .attr('height', 16)
       .attr('xlink:href', '/static/images/svg/stripes_red.png')
-    svg_defs.append('clipPath')
+    graph_data.intersection = svg_defs.selectAll(pre_id('clip_path_a'))
+      .data([a]).enter().append('clipPath')
       .attr('id', pre_id('clip_path_a'))
       .append('path')
       .attr('id', pre_id('clip_path_a_path'))
-      .attr('d', invert_area(a.data));
+      .attr('d', function(d) { return _invert_area(d.data); });
     svg_defs.append('clipPath')
       .attr('id', pre_id('clip_path_b'))
       .append('path')
