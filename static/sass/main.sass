@@ -311,8 +311,12 @@ line, rect, path
   fill: none
   stroke: none
   stroke-width: 1
-.x.axis text
-  text-anchor: end!important
+.x.axis
+  text
+    text-anchor: end!important
+.axis line
+  stroke-width: 1
+  stroke: #999999
 .chart-line
   stroke-width: 2
 .chart-outline
@@ -327,7 +331,7 @@ line, rect, path
   stroke-width: 1
 path.domain
   stroke: #999
-  stroke-width: 0
+  stroke-width: 1
 .default_line
   stroke: black
   stroke-width: 2

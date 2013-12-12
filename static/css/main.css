@@ -135,6 +135,8 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 .x.axis text { text-anchor: end !important; }
 
+.axis line { stroke-width: 1; stroke: #999999; }
+
 .chart-line { stroke-width: 2; }
 
 .chart-outline { stroke: #eeeeee; }
@@ -145,7 +147,7 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 .grid-line { stroke: white; stroke-width: 1; }
 
-path.domain { stroke: #999999; stroke-width: 0; }
+path.domain { stroke: #999999; stroke-width: 1; }
 
 .default_line { stroke: black; stroke-width: 2; stroke-dasharray: 1, 8; }
 
