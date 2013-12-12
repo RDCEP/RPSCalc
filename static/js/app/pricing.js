@@ -31,13 +31,25 @@
 }());
   */
 (function() {
+  var retail,
+    price_and_policy,
+    region;
   d3.json('/static/js/data/retail/' + Options.state + '.json', function(_data) {
-    var retail = Math.round(_data.data.slice(-1)[0].data * 10);
-    d3.select('#policy_retail').property('value', retail);
+    retail = Math.round(_data.data.slice(-1)[0].data * 10);
   });
+  d3.json('/static/js/data/states' + Options.state + '.json', function(_data) {
+    price_and_policy = _data.price_and_policy ? _data.price_and_policy : false;
+  });
+//  d3.select('#policy_retail').property('value', retail);
   d3.selectAll('input')
     .each(function(d) {
-      var input = d3.select(this);
+      var input = d3.select(this),
+        name = input.attr('name');
+      if (Options.data[name]) {
+        input.property('value', Options.data[name]);
+      } else {
+
+      }
       Options.data[input.attr('name')] = input.property('value');
       input.on('change', function() {
         Options.data[input.attr('name')] = input.property('value');
