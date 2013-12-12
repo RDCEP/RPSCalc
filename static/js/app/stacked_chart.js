@@ -113,7 +113,7 @@ var RPSGraph = function() {
       });
       if (graph_data.intersection) {
         graph_data.intersection
-          .attr('d', function(d) { return _invert_area(d.data); });
+          .attr('d', function(d, i) { return d.invert ? _invert_area(d.data) : _area(d.data); });
       }
       if (_outlines) {
         graph_data.outlines
@@ -362,7 +362,7 @@ var RPSGraph = function() {
     graph_layer = svg.append('g').attr('id', pre_id('graph_layer'));
     svg_defs.append('clipPath').attr("id", "graph_clip").append("rect")
       .attr({'width': width, 'height': height });
-    intersect_layer = svg.append('g').attr('id', pre_id('outline_layer'));
+    intersect_layer = svg.append('g').attr('id', pre_id('intersect_layer'));
     outline_layer = svg.append('g').attr('id', pre_id('outline_layer'));
     default_layer = svg.append('g').attr('id', pre_id('default_layer'));
     axes_layer = svg.append('g').attr('id', pre_id('axes_layer'));
@@ -793,23 +793,19 @@ var RPSGraph = function() {
     pattern.append('image')
       .attr('width', 16)
       .attr('height', 16)
-      .attr('xlink:href', '/static/images/svg/stripes_red.png')
-    graph_data.intersection = svg_defs.selectAll(pre_id('clip_path_a'))
-      .data([a]).enter().append('clipPath')
-      .attr('id', pre_id('clip_path_a'))
+      .attr('xlink:href', '/static/images/svg/stripes_red.png');
+    graph_data.intersection = svg_defs.selectAll('.intersection-path')
+      .data([a, b]).enter().append('clipPath')
+      .attr('id', function(d, i) { return pre_id('clip_path_' + i); })
+      .attr('class', 'intersection-path')
       .append('path')
-      .attr('id', pre_id('clip_path_a_path'))
-      .attr('d', function(d) { return _invert_area(d.data); });
-    svg_defs.append('clipPath')
-      .attr('id', pre_id('clip_path_b'))
-      .append('path')
-      .attr('id', pre_id('clip_path_b_path'))
-      .attr('d', _area(b.data));
+      .attr('id', function(d, i) { return pre_id('clip_path_' + i + '_path'); })
+      .attr('d', function(d, i) { return d.invert ? _invert_area(d.data) : _area(d.data); });
     svg_defs.append('clipPath')
       .attr('id', pre_id('clip_intersection'))
-      .attr('clip-path', 'url(#' + pre_id('clip_path_a') + ')')
+      .attr('clip-path', 'url(#' + pre_id('clip_path_0') + ')')
       .append('use')
-      .attr('xlink:href', '#' + pre_id('clip_path_b_path'));
+      .attr('xlink:href', '#' + pre_id('clip_path_1_path'));
     intersect_layer.append('rect')
       .attr('width', width)
       .attr('height', height)
@@ -869,12 +865,7 @@ var RPSGraph = function() {
     var style_prop = _lines ? 'stroke' : 'fill';
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
-      .attr('d', function(d) {
-        if (d.invert) {
-          return d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); })(d.data);
-        }
-        return _chart_f(d.data);
-      })
+      .attr('d', function(d) { return d.invert ? _invert_area(d.data) : _chart_f(d.data); })
       .attr('class', 'chart-line')
       .attr('clip-path', 'url(#graph_clip)')
       .style('fill', function(d, i) { return (!_lines || d.invert) ? color(i) : null; })
