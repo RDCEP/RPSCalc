@@ -2,7 +2,7 @@
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
 <li><a href="/{{ state }}/trajectory" data-name="trajectory">Set RPS trajectory</a></li>
-<li><a href data-name="carveouts">Set carveouts</a></li>
+<li><a href="/{{ state }}/carveouts" data-name="carveouts">Set carveouts</a></li>
 <li class="active"><a href="/{{ state }}/pricing" data-name="pricing">Set cost cap &amp; pricing</a></li>
 <li><a href="/{{ state }}/cost" data-name="cost">Projected cost</a></li>
 {% endblock %}
@@ -18,7 +18,7 @@
       <div id="pricing" class="module clearfix chart-outer-wrap">
         <form id="pricing_form">
           <fieldset id="wind_costs" class="narrow">
-            <h4>Wind Costs</h4>
+            <h4>Wind parameters</h4>
             <div class="clearfix">
               <label for="wind_capacity">Capacity factor</label>
               <input type="text" value=".33" id="wind_capacity" name="wind_capacity" pattern="[0-9]*\.*[0-9]+">
@@ -41,7 +41,7 @@
             </div>
           </fieldset>
           <fieldset id="solar_costs" class="narrow">
-            <h4>Solar Costs</h4>
+            <h4>Solar parameters</h4>
             <div class="clearfix">
               <label for="solar_capacity">Capacity factor</label>
               <input type="text" value=".1" id="solar_capacity" name="solar_capacity" pattern="[0-9]*\.*[0-9]+">
@@ -54,21 +54,24 @@
               <label for="solar_om">O &amp; M ($/MWh)</label>
               <input type="text" value="0.012" id="solar_om" name="solar_om" pattern="[0-9]*\.*[0-9]+">
             </div>
-{#            <div class="clearfix">#}
-{#              <label for="solar_integration">Integration ($/MWh)</label>#}
-{#              <input type="text" value="0" id="solar_integration" name="solar_integration">#}
-{#            </div>#}
             <div class="clearfix">
               <label for="solar_amortization">Amortization (%)</label>
               <input type="text" value="9" id="solar_amortization" name="solar_amortization" pattern="[0-9]*\.*[0-9]+">
             </div>
           </fieldset>
-          <fieldset id="policy_costs" class="narrow">
-            <h4>Policy choices</h4>
+          <fieldset id="policy_costs" class="narrow" style="clear:left;">
+            <h4>Policy parameters</h4>
             <div class="clearfix">
               <label for="policy_costcap">Cost cap (%)</label>
               <input type="text" value="2" id="policy_costcap" name="policy_costcap" pattern="[0-9]*\.*[0-9]+">
             </div>
+            <div class="clearfix">
+              <label for="policy_ptc">PTC</label>
+              <input type="checkbox" id="policy_ptc" name="policy_ptc" checked>
+            </div>
+          </fieldset>
+          <fieldset id="policy_costs" class="narrow">
+            <h4>Pricing parameters</h4>
             <div class="clearfix">
               <label for="policy_retail">Retail ($/MWh)</label>
               <input type="text" value="100" id="policy_retail" name="policy_retail" pattern="[0-9]*\.*[0-9]+">
@@ -78,8 +81,8 @@
               <input type="text" value="35" id="policy_wholesale" name="policy_wholesale" pattern="[0-9]*\.*[0-9]+">
             </div>
             <div class="clearfix">
-              <label for="policy_ptc">PTC</label>
-              <input type="checkbox" id="policy_ptc" name="policy_ptc" checked>
+              <label for="policy_annualgrowth">Annual growth (%)</label>
+              <input type="text" value="1" id="policy_annualgrowth" name="policy_annualgrowth" pattern="[0-9]*\.*[0-9]+">
             </div>
           </fieldset>
         </form>
