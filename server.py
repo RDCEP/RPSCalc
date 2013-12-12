@@ -102,6 +102,15 @@ def cost(state):
         session_data=json.dumps(session.items()),
     )
 
+@app.route('/glossary')
+def glossary():
+    return render_template(
+        'glossary.html',
+        now=datetime.now().microsecond,
+        session_data=json.dumps(session.items()),
+        state='Glossary'
+    )
+
 @app.route('/eia_api/retail')
 def eia_api_retail():
     api_key = "D82A092DA301308805ECAB18A123BB4A"
