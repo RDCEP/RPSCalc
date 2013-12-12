@@ -324,7 +324,7 @@ var FactsPage = function() {
 
     grid_mix_bars(_data);
 
-    d3.json('/static/js/data/prices/' + _data.machine_name + '.json', function(_data) {
+    d3.json('/static/js/data/retail/' + _data.machine_name + '.json', function(_data) {
       data = [{type: 'retail', data: []}];
       parse_date = d3.time.format('%m-%Y').parse;
 

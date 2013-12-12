@@ -31,7 +31,7 @@
 }());
   */
 (function() {
-  d3.json('/static/js/data/prices/' + Options.state + '.json', function(_data) {
+  d3.json('/static/js/data/retail/' + Options.state + '.json', function(_data) {
     var retail = Math.round(_data.data.slice(-1)[0].data * 10);
     d3.select('#policy_retail').property('value', retail);
   });
