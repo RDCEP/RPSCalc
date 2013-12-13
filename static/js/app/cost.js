@@ -1,13 +1,16 @@
 (function() {
+  var pp = Options.data.price_and_policy;
+  console.log('od:', Options.data);
+  console.log('pp:', pp);
   var wind_cost = function() {
-    var ptc = Options.data.policy_ptc === 'on' ? 0.7 : 1.0,
+    var ptc = pp.policy_ptc ? 0.7 : 1.0,
       decrease = 1;
-    return (((Options.data.wind_installation * 1000000) * ptc * (Options.data.wind_amortization / 100)) / (8765 * Options.data.wind_capacity) + Options.data.wind_om + Options.data.wind_integration) * decrease - Options.data.policy_wholesale;
+    return (((pp.wind_installation * 1000000) * ptc * (pp.wind_amortization / 100)) / (8765 * pp.wind_capacity) + pp.wind_om + pp.wind_integration) * decrease - pp.policy_wholesale;
   };
   var solar_cost = function() {
-    var ptc = Options.data.ptc === 'on' ? 0.7 : 1.0,
+    var ptc = pp.ptc === 'on' ? 0.7 : 1.0,
       decrease = 1;
-    return (((Options.data.solar_installation * 1000000) * (Options.data.solar_amortization / 100) + Options.data.solar_om)) * ptc / (8765 * Options.data.solar_capacity) * decrease - Options.data.policy_wholesale;
+    return (((pp.solar_installation * 1000000) * (pp.solar_amortization / 100) + pp.solar_om)) * ptc / (8765 * pp.solar_capacity) * decrease - pp.policy_wholesale;
   };
   var get_cap_and_rec = function() {
     var _rec = {type: 'REC', data: []},
@@ -21,7 +24,7 @@
         //TODO: This .65 is crap now. It comes from the IL/IA code from the original paper
         other_rec = (100 - Options.data.solar.data[i].y - d.y) / 100 * wind * .65,
         year = d.x.getFullYear();
-      _cap.data[i] = {x: new Date(d.x), y0: 0, y: year >= 2013 ? (Options.data.policy_costcap * Math.pow(1.01, year - 2013)) / Options.data.trajectory.data[i].y * 100 : 0};
+      _cap.data[i] = {x: new Date(d.x), y0: 0, y: year >= 2013 ? (pp.policy_costcap * Math.pow(1.01, year - 2013)) / Options.data.trajectory.data[i].y * 100 : 0};
       _rec.data[i] = {x: new Date(d.x), y0: 0, y: (wind_rec + solar_rec + other_rec)};
     });
     return [_cap, _rec];
