@@ -776,11 +776,10 @@ var RPSGraph = function() {
     if (bool) {
       var e = document.createEvent('SVGEvents');
       e.initEvent('click', true, true);
-      d3.select('[data-layer-toggle="#' + pre_id('chart_inputs') + '"]').node().dispatchEvent(e);
+      d3.select('[data-layer-toggle="' + pre_id('chart_inputs') + '"]').node().dispatchEvent(e);
     }
   };
   this.intersect = function(a, b, c) {
-    console.log(a);
     var pattern = svg_defs.append('pattern')
       .attr('id', pre_id('clip_pattern'))
       .attr('width', 16)
