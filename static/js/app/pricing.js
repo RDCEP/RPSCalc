@@ -1,58 +1,46 @@
-/*
-(function() {
-  d3.json('/static/js/data/prices/' + Options.state + '.json', function(_data) {
-    var retail = Math.round(_data.data.slice(-1)[0].data * 10);
-    d3.select('#policy_retail').property('value', retail);
-  });
-  d3.selectAll('input')
-//    .each(function() {
-//      var input = d3.select(this);
-//      Options.data[input.attr('name')] = input.property('value');
-//    })
-    .property('value', function() {
-      var input = d3.select(this);
-      if (input.attr('type') === 'text') {
-        return Options.data[input.attr('name')] || input.property('value');
-      }
-      return null;
-    })
-    .property('checked', function() {
-      var input = d3.select(this);
-      if (input.attr('type') === 'checkbox') {
-        return Options.data[input.attr('name')] || input.property('value');
-      }
-      return null;
-    })
-    .on('change', function() {
-      var input = d3.select(this);
-      var prop = input.attr('type') === 'checkbox' ? 'checked' : 'value';
-      Options.data[input.attr('name')] = input.property(prop);
-    });
-}());
-  */
 (function() {
   var retail,
-    price_and_policy,
-    region;
-  d3.json('/static/js/data/retail/' + Options.state + '.json', function(_data) {
-    retail = Math.round(_data.data.slice(-1)[0].data * 10);
-  });
-  d3.json('/static/js/data/states' + Options.state + '.json', function(_data) {
-    price_and_policy = _data.price_and_policy ? _data.price_and_policy : false;
-  });
-//  d3.select('#policy_retail').property('value', retail);
-  d3.selectAll('input')
-    .each(function(d) {
-      var input = d3.select(this),
-        name = input.attr('name');
-      if (Options.data[name]) {
-        input.property('value', Options.data[name]);
-      } else {
-
-      }
-      Options.data[input.attr('name')] = input.property('value');
-      input.on('change', function() {
-        Options.data[input.attr('name')] = input.property('value');
-      });
+    region,
+    state_pp,
+    default_pp,
+    session_pp = Options.data.price_and_policy;
+  Options.data.price_and_policy = session_pp || {};
+  d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
+    state_pp = _data.price_and_policy || false;
+    region = state_pp.region || 'default';
+    d3.json('/static/js/data/pricing2.json', function(_defaults) {
+      default_pp = _defaults[region];
+      console.log(_defaults);
+      d3.selectAll('input')
+        .property('value', function() {
+          var input = d3.select(this),
+            name = input.attr('name'),
+            type = input.attr('type');
+          if (type === 'checkbox') {
+            input.property('checked', function() {
+              var val = session_pp[name] ? session_pp[name] : state_pp[name] ? state_pp[name] : default_pp[name];
+              console.log(name, val, default_pp);
+              Options.data.price_and_policy[name] = val;
+              return val;
+            });
+            return null;
+          } else {
+            var val = (session_pp[name]) ? session_pp[name] : (state_pp[name]) ? state_pp[name] : default_pp[name];
+            Options.data.price_and_policy[name] = val;
+            return val;
+          }
+        })
+        .on('change', function() {
+          var input = d3.select(this),
+            name = input.attr('name'),
+            type = input.attr('type');
+          if (type === 'checkbox') {
+            console.log(input.property('checked'));
+            Options.data.price_and_policy[name] = input.property('checked');
+          } else {
+            Options.data.price_and_policy[name] =  parseFloat(input.property('value'));
+          }
+        });
     });
+  });
 }());
