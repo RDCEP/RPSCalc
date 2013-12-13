@@ -52,15 +52,11 @@
     Options = window.Options || {};
     Options.state = '{{ state }}';
     Options.graph_type = '{{ graph_type }}';
-    Options.data = {};
-    var x = {{ session_data|safe or '[]' }};
-    x.forEach(function(d) {
-      Options.data[d[0]] = +d[1] > -Infinity ? +d[1] : d[1];
-    });
-    Options.data.update_state = Options.data.update_state || false;
+    Options.data = {{ session_data|safe }};
   </script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.11/d3.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+  <script src="/static/js/vendor/d3.v3.min.js"></script>
   <script src="/static/js/app/stacked_chart.js?{{ now }}"></script>
   <script src="/static/js/app/session.js?{{ now }}"></script>
   {% endblock %}

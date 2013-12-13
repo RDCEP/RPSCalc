@@ -39,6 +39,9 @@ def state_check(state):
         session['update_state'] = False
     session['state'] = state
 
+def session_json():
+    return json.dumps({ k: v for k, v in session.iteritems()})
+
 @app.route('/pinwheel')
 def pinwheel():
     return render_template(
@@ -53,7 +56,7 @@ def state_page(state):
         'state.html',
         now=datetime.now().microsecond,
         state=state,
-        session_data=json.dumps(session.items()),
+        session_data=session_json(),
     )
 
 @app.route('/<state>/trajectory')
@@ -63,7 +66,7 @@ def trajectory(state):
         'calculator/trajectory.html',
         now=datetime.now().microsecond,
         state=state,
-        session_data=json.dumps(session.items()),
+        session_data=session_json(),
     )
 
 @app.route('/<state>/carveouts')
@@ -75,7 +78,7 @@ def carveouts(state):
         'calculator/carveouts.html',
         state=state,
         now=datetime.now().microsecond,
-        session_data=json.dumps(session.items()),
+        session_data=session_json(),
     )
 
 @app.route('/<state>/pricing')
@@ -87,7 +90,7 @@ def pricing(state):
         'calculator/pricing.html',
         now=datetime.now().microsecond,
         state=state,
-        session_data=json.dumps(session.items()),
+        session_data=session_json(),
     )
 
 @app.route('/<state>/cost')
@@ -99,7 +102,7 @@ def cost(state):
         'calculator/cost.html',
         now=datetime.now().microsecond,
         state=state,
-        session_data=json.dumps(session.items()),
+        session_data=session_json(),
     )
 
 @app.route('/glossary')
@@ -107,7 +110,7 @@ def glossary():
     return render_template(
         'glossary.html',
         now=datetime.now().microsecond,
-        session_data=json.dumps(session.items()),
+        session_data=session_json(),
         state='Glossary'
     )
 
