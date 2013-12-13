@@ -1,16 +1,17 @@
 {
   "default": {
-    "wind_capacity": .3,
+    "wind_capacity": 0.33,
     "wind_installation": 2,
     "wind_om": 10,
     "wind_integration": 5,
     "wind_amortization": 9,
-    "solar_capacity": .3,
-    "solar_installation": 2,
-    "solar_om": 10,
+    "solar_capacity": 0.15,
+    "solar_installation": 3.5,
+    "solar_om": 0.012,
     "solar_amortization": 9,
     "policy_costcap": 2,
     "policy_wholesale": 35,
-    "policy_annualgrowth": 1
+    "policy_annualgrowth": 1,
+    "policy_ptc": true
   }
 }

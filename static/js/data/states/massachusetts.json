@@ -34,5 +34,10 @@
     ],
     "machine_name": "massachusetts",
     "name": "Massachusetts",
-    "abbr": "MA"
+    "abbr": "MA",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 150
+    }
 }
