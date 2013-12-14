@@ -2,7 +2,10 @@ import json
 from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, abort
 
-mod = Blueprint('calculator', __name__, url_prefix='')
+mod = Blueprint('calculator', __name__, url_prefix='/calculator')
+
+def session_json():
+    return json.dumps({ k: v for k, v in session.iteritems()})
 
 @mod.route('/update', methods=['POST',])
 def update():
@@ -13,40 +16,40 @@ def update():
     except:
         abort(500)
 
-@mod.route('/<state>/trajectory')
-def trajectory(state):
+@mod.route('/trajectory')
+def trajectory():
     return render_template(
         'calculator/trajectory.html',
-        state=state,
-        session_data=json.dumps(session.items()),
+        state=session['state'],
+        session_data=session_json(),
     )
 
-@mod.route('/<state>/carveouts')
-def carveouts(state):
+@mod.route('/carveouts')
+def carveouts():
     if 'trajectory' not in session.keys():
         return redirect('/%s/trajectory' % state)
     return render_template(
         'calculator/carveouts.html',
-        state=state,
-        session_data=json.dumps(session.items()),
+        state=session['state'],
+        session_data=session_json(),
     )
 
-@mod.route('/<state>/pricing')
-def pricing(state):
+@mod.route('/pricing')
+def pricing():
     if 'trajectory' not in session.keys():
         return redirect('/%s/trajectory' % state)
     return render_template(
         'calculator/pricing.html',
-        state=state,
-        session_data=json.dumps(session.items()),
+        state=session['state'],
+        session_data=session_json(),
     )
 
-@mod.route('/<state>/cost')
-def cost(state):
+@mod.route('/cost')
+def cost():
     if 'trajectory' not in session.keys():
         return redirect('/%s/trajectory' % state)
     return render_template(
         'calculator/cost.html',
-        state=state,
-        session_data=json.dumps(session.items()),
+        state=session['state'],
+        session_data=session_json(),
     )
