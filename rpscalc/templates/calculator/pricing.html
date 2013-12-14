@@ -1,12 +1,13 @@
 {% extends 'state.html' %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-<li><a href="/{{ state }}/trajectory" data-name="trajectory">Set RPS trajectory</a></li>
-<li><a href data-name="carveouts">Set carveouts</a></li>
+<li><a href="{{ url_for('calculator.trajectory') }}" data-name="trajectory">Set RPS trajectory</a></li>
+<li><a href="{{ url_for('calculator.carveouts') }}" data-name="carveouts">Set carveouts</a></li>
 <li class="active"><a href="/{{ state }}/pricing" data-name="pricing">Set cost cap &amp; pricing</a></li>
-<li><a href="/{{ state }}/cost" data-name="cost">Projected cost</a></li>
+<li><a href="{{ url_for('calculator.cost') }}" data-name="cost">Projected cost</a></li>
 {% endblock %}
 {% block content %}
+  {{ super() }}
   <section class="clearfix">
     <h2>Cost cap and pricing</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et metus vitae neque molestie hendrerit
