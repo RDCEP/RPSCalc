@@ -6,10 +6,9 @@
     container = '#trajectory',
     parse_date = d3.time.format('%Y').parse;
   d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
-    console.log(_data);
     var def_line = [{data: []}],
       data = [{type: 'rps', data: []}],
-      trajectory = Options.data.trajectory || false;
+      trajectory = Options.data.trajectory;
     if (trajectory && trajectory.data.length > 0) {
       trajectory.data.forEach(function(d, i) {
         data[0].data[i] = {y: d.y, x: new Date(d.x), y0: 0};

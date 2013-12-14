@@ -1,4 +1,8 @@
 (function() {
+  Options.data.trajectory = Options.data.trajectory || false;
+  Options.data.solar = Options.data.solar || false;
+  Options.data.wind = Options.data.wind || false;
+  Options.data.price_and_policy = Options.data.price_and_policy || false;
   var update_session = function() {
     d3.event.preventDefault();
     var clicked = d3.select(this);

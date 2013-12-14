@@ -63,13 +63,12 @@ form { clear: both; margin-bottom: 2em; position: relative; top: 1em; }
 
 input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #222222; }
 
-#pricing_form fieldset { float: left; padding: 20px; margin: 0 0 20px 0; background-color: #b0dcf5; }
-#pricing_form fieldset.narrow { width: 180px; }
+#pricing_form fieldset { float: left; padding: 20px; margin: 0 20px 20px 0; background-color: #fafafa; border-top: 1px solid #999999; border-left: 1px solid #999999; }
+#pricing_form fieldset.narrow { width: 279px; }
 #pricing_form fieldset.wide { width: 620px; }
-#pricing_form fieldset + fieldset { margin: 0 0 20px 20px; }
 #pricing_form fieldset h4 { font-weight: bold; font-size: 1.2em; margin: 0 0 1em; }
 #pricing_form fieldset div { margin-bottom: 10px; }
-#pricing_form fieldset input { background-color: white; border: none; padding: 2px 5px; text-align: right; float: right; }
+#pricing_form fieldset input { background-color: #eeeeee; border: none; padding: 2px 5px; text-align: right; float: right; }
 #pricing_form fieldset input[type=text] { width: 40px; }
 #pricing_form fieldset label { float: left; }
 
@@ -136,6 +135,8 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 .x.axis text { text-anchor: end !important; }
 
+.axis line { stroke-width: 1; stroke: #999999; }
+
 .chart-line { stroke-width: 2; }
 
 .chart-outline { stroke: #eeeeee; }
@@ -146,7 +147,7 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 .grid-line { stroke: white; stroke-width: 1; }
 
-path.domain { stroke: #999999; stroke-width: 0; }
+path.domain { stroke: #999999; stroke-width: 1; }
 
 .default_line { stroke: black; stroke-width: 2; stroke-dasharray: 1, 8; }
 
@@ -208,6 +209,10 @@ td + td, th + th { width: 500px; }
 tr { border-top: 1px solid #cccccc; }
 
 th { font-weight: bold; }
+
+#glossary dt, #glossary dd { float: left; margin-bottom: 1em; }
+#glossary dt { width: 200px; margin-right: 20px; font-weight: bold; }
+#glossary dd { width: 480px; }
 
 .ir { background-color: transparent; border: 0; overflow: hidden; /* IE 6/7 fallback */*text-indent: -9999px */ }
 

@@ -20,7 +20,7 @@
         _stored = stored[carveout_type] !== false,
         carveout = _data.carveouts.filter(function(d) { return d.type === carveout_type; })[0];
         carveout = _stored ? stored[carveout_type].data : carveout ? carveout.data : [];
-      empty = empty ? carveout.length === 0 : false;
+      empty = empty ? carveout.length === 0 : d3.sum(carveout, function(d) { return d.y; }) === 0;
       carveout = carveout.length > 0 ? carveout : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       carveout.forEach(function(d, ii) {
         var _t = _data.trajectory[ii];
@@ -50,7 +50,7 @@
       .draggable(true, false)
       .h_grid(true)
       .legend(true)
-      .draw()
-      .zeroes(empty);
+      .draw();
+    carveouts.zeroes(empty);
   });
 }());
