@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block header %}
+  <section>
+    <header>
+      <h1>{{ state|replace('_', ' ')|title }}</h1>
+      <img src="{{ url_for('static', filename='images/state_seals/' + state + '.png') }}" alt="State seal of {{ state|capitalize }}">
+    </header>
+  </section>
+{% endblock %}
+{% block bodyjs %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/app/state_facts.js') }}"></script>
+{% endblock %}

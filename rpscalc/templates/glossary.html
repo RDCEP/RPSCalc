@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+{% block left_nav %}{% endblock %}
+{% block content %}
+    {{ super() }}
+    <section id="glossary" class="clearfix">
+    </section>
+{% endblock %}
+{% block bodyjs %}
+  {{ super() }}
+  <script>
+  d3.json('/static/js/data/glossary.json', function(_data) {
+    var left_nav = d3.select('#left_nav'),
+      glossary = d3.select('#glossary').append('dl'),
+      defs = glossary.selectAll('.definition')
+        .data(_data).enter().append('dd')
+        .attr('class', 'definition')
+        .attr('id', function(d, i) { return 'definition_' + i; })
+        .text(function(d) { return d.def; });
+    defs.each(function(d, i) {
+      glossary.insert('dt', '#definition_' + i)
+        .attr('id', d.id)
+        .text(d.term);
+      left_nav.append('li').append('a')
+        .attr('href', '#' + d.id).text(d.term.replace(/\(.+\)/, ''))
+        .attr('data-name', d.id)
+        .on('click', function() {
+          d3.event.preventDefault();
+          window.location.hash = this.getAttribute('data-name');
+          d3.select('#main-nav').style('display', 'none').style('display', 'block');
+          var _oy = (window.pageYOffset || document.body.scrollTop) - document.getElementById('left_nav').getBoundingClientRect().top + 1;
+          window.scroll(0, _oy);
+        });
+    });
+  });
+  </script>
+{% endblock %}

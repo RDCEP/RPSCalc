@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block headcss %}<link href="{{ url_for('static', filename='css/main.css?' + now) }}" rel="stylesheet">{% endblock %}
+{% block page %}
+  <header id="main_nav">
+    <nav>
+      <ul id="top_nav" class="clearfix">
+        <li><a href>Home</a></li>
+        <li id="menu_states"><a href>States</a><ul>
+          <li><a href="{{ url_for('state_pages.overview', state='arizona') }}">Arizona</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='california') }}">California</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='hawaii') }}">Hawai&lsquo;i</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='illinois') }}">Illinois</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='iowa') }}">Iowa</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='kansas') }}">Kansas</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='maryland') }}">Maryland</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='michigan') }}">Michigan</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='montana') }}">Montana</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='nevada') }}">Nevada</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='new_jersey') }}">New Jersey</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='ohio') }}">Ohio</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='rhode_island') }}">Rhode Island</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='washington') }}">Washington</a></li>
+          <li><a href="{{ url_for('state_pages.overview', state='wisconsin') }}">Wisconsin</a></li>
+        </ul></li>
+        <li><a href="{{ url_for('calculator.trajectory') }}">Cost Calculator</a></li>
+        <li><a href="/glossary">Glossary</a></li>
+        <li><a href>Documentation</a></li>
+        <li><ul id="left_nav">
+          {% block left_nav %}
+          <li><a href data-name="snapshot">Snapshot</a></li>
+          <li><a href data-name="energy">Energy Details</a></li>
+          <li><a href data-name="legislation">Legislation</a></li>
+          <li><a href data-name="resources">Resources</a></li>
+          {% endblock %}
+        </ul></li>
+      </ul>
+    </nav>
+  </header>
+  <article id="main_content">
+  {% block content %}
+    {% block header %}
+      <section>
+        <header>
+          <h1>{{ title|replace('_', ' ')|title }}</h1>
+        </header>
+      </section>
+    {% endblock %}
+  {% endblock %}
+  </article>
+  {% block bodyjs %}
+  <script>
+    Options = window.Options || {};
+    Options.state = '{{ state }}';
+    Options.graph_type = '{{ graph_type }}';
+    Options.data = {{ session_data|safe }};
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.11/d3.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
+  <script src="{{ url_for('static', 'js/app/stacked_chart.js?' + now) }}"></script>
+  <script src="{{ url_for('static', 'js/app/session.js?' + now) }}"></script>
+  {% endblock %}
+{% endblock %}
