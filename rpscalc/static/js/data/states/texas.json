@@ -1,5 +1,79 @@
 {
-    "machine_name": "texas",
-    "abbr": "TX",
-    "name": "Texas"
+  "machine_name": "texas",
+  "abbr": "TX",
+  "name": "Texas",
+  "trajectory": [0,0,0,0,0,2280,0,2280,2280,3272,3272,4264,4264,5256,5256,5880,5880,5880,5880,5880,5880,5880,5880,5880,5880,10000,10000,10000,10000,10000,10000],
+  "snapshot": {
+    "summary": "Texas's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Texas.",
+    "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Texas's pathway is red. Click on another state to learn more about their RPS.",
+    "overview": [
+      "<strong>10,000 MW</strong> of the state's energy consumption must be from renewable sources by <strong>2025</strong>",
+      "Carve-outs for <strong>non-wind</strong>",
+      "Currently No Explicit cost cap for percent of sales"
+    ],
+    "rps_progress": 1.0
+  },
+  "legislation": {
+    "statute": "The current RPS was enacted in 2005 by S.B 20, which revised the original RPS mandate for Texas created by the Public Utility Commission of Texas (PUCT) in 1999. In both cases, the purpose was to develop electricity procurement plans for renewable power. The current S.B 20 legislation more specifically: 5,880 MW (roughly 5% of Texas' electricity demand) of renewable power annually by 2015 and 10,000 MW by 2025. Since wind power accounts for nearly all of the current renewable energy generation in Texas, S.B 20 created a target of 500 MW of renewable-energy generation from resources other than wind. Renewable energy may be bundled with RECs.",
+    "rps_tech_details": [
+      {
+        "name": "Eligible Technologies",
+        "description": "Solar Water Heat, Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Geothermal Heat Pumps, Tidal Energy, Wave Energy, Ocean Thermal"
+      },
+      {
+        "name": "Geographic Eligibility",
+        "description": "Texas meets 100% of its requirements through to 2025 with in-state wind power at present."
+      },
+      {
+        "name": "Percent of Total Load",
+        "description": "Primary RPS: 75.9%"
+      },
+      {
+        "name": "Technology Requirements",
+        "description": "Non-Wind 500 MW annual Req."
+      },
+      {
+        "name": "Sectors",
+        "description": "Investor-Owned Utilities and Retail Suppliers. Municipal Utilities and Coops May Opt-in."
+      },
+      {
+        "name": "Non-compliance Penalty",
+        "description": "For Com-Ed: $0.946/MWh (for hourly customer loads). For Ameren: $0.973/MWh"
+      }
+    ],
+    "cost_cap_details": "Renewable energy procurement is limited to cost-effective resources. The cost cap is set at 'the greater of an additional 0.5% of the amount paid per kWh during the year ending in 2010, or 2% of the amount paid per kWh during the year ending May, 2007.' If exceeded, RPS requirements are placed under a 'freeze.' In addition, a second cost-effectiveness test: cost of procurement of renewable energy must not exceed benchmarks based on market prices for renewable energy in the region (determined by the IPA). Estimate how Illinois' cost cap can effect their RPS's efficacy:",
+    "carveouts": "Texas' non-wind technology requirement comprises the majority of its RPS goals. The chart below is a breakdown for the primary RPS for IOUs. It remains consistent at 75% of the standard each year."
+  },
+  "resources": {
+    "tools": {
+      "text": "The links below may provide more technical details to the interested user:",
+      "links": [
+        {
+          "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+          "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+          "description": "Datasets available for download in .xlsx format"
+        },
+        {
+          "name": "MJBeck RPS EDGE",
+          "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+          "description": "Advanced search tool for comparing RPS program data"
+        }
+      ]
+    },
+    "references": {
+      "text": "The resources below proved invaluable in the creation of this page:",
+      "links": [
+        {
+          "name": "DSIRE State Page",
+          "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IL04R&re=1&ee=0",
+          "description": "Visit for more complete information on RPS details and legislation"
+        },
+        {
+          "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+          "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+          "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+        }
+      ]
+    }
+  }
 }
