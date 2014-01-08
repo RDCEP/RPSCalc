@@ -1,0 +1,34 @@
+{% extends 'state.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block left_nav %}
+<li><a href="{{ url_for('calculator.trajectory') }}" data-name="trajectory">Set RPS trajectory</a></li>
+<li><a href="{{ url_for('calculator.carveouts') }}" data-name="carveouts">Set carveouts</a></li>
+<li><a href="{{ url_for('calculator.pricing') }}" data-name="pricing">Set cost cap &amp; pricing</a></li>
+<li><a href="{{ url_for('calculator.cost') }}" data-name="cost">Projected cost</a></li>
+{% endblock %}
+{% block content %}
+  {{ super() }}
+  <section class="clearfix">
+    <h2>Sumpin' sumpin'</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et metus vitae neque molestie hendrerit
+      eget eget dolor. Sed felis diam, imperdiet eget nulla ornare, semper viverra ante. Pellentesque in risus
+      sem. In nisl velit, pellentesque in elit at, adipiscing sodales metus. Vestibulum faucibus placerat
+      lectus at aliquam.</p>
+    <div id="pricing" class="module clearfix chart-outer-wrap"></div>
+    <div id="trajectory" class="module clearfix chart-outer-wrap"></div>
+    <div id="carveouts" class="module clearfix chart-outer-wrap"></div>
+    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+      Donec sodales semper erat. Suspendisse molestie turpis tempor leo dictum, commodo lacinia tellus laoreet.
+      Sed consequat felis eget nulla vulputate, placerat pulvinar sapien rhoncus. Nam mollis est neque, faucibus
+      consequat arcu hendrerit id. Sed feugiat ultrices volutpat. Nam volutpat aliquam ultricies. Phasellus
+      orci erat, pretium eget velit ut, congue sodales massa. Aliquam erat volutpat.</p>
+  </section>
+{% endblock %}
+{% block bodyjs %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/app/stacked_chart.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app/session.js') }}"></script>
+{#  <script src="{{ url_for('static', filename='js/app/advanced/trajectory.js') }}"></script>#}
+  <script src="{{ url_for('static', filename='js/app/advanced/carveouts.js') }}"></script>
+{#  <script src="{{ url_for('static', filename='js/app/advanced/cost.js') }}"></script>#}
+{% endblock %}

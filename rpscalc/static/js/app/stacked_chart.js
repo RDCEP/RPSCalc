@@ -881,4 +881,7 @@ var RPSGraph = function() {
     draw_axes();
     return this;
   };
+  this.redraw = function() {
+    redraw();
+  };
 };

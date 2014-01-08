@@ -53,3 +53,13 @@ def cost():
         state=session['state'],
         session_data=session_json(),
     )
+
+@mod.route('/advanced')
+def advanced():
+    if 'trajectory' not in session.keys():
+        return redirect('/%s/trajectory' % state)
+    return render_template(
+        'calculator/advanced.html',
+        state=session['state'],
+        session_data=session_json(),
+    )
