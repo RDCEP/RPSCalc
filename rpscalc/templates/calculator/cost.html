@@ -22,10 +22,10 @@
       consequat arcu hendrerit id. Sed feugiat ultrices volutpat. Nam volutpat aliquam ultricies. Phasellus
       orci erat, pretium eget velit ut, congue sodales massa. Aliquam erat volutpat.</p>
     <ul id="crumbs">
-      <li id="crumb_trajectory"><a href="/{{ state }}/trajectory">Trajectory</a>
-      <li id="crumb_carveouts"><a href="/{{ state }}/carveouts">Carveouts</a></li>
-      <li id="crumb_pricing"><a href="/{{ state }}/pricing">Cost cap &amp; Pricing</a></li>
-      <li id="crumb_cost" class="active"><a href="/{{ state }}/cost">Projected Cost</a></li>
+      <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory') }}">Trajectory</a>
+      <li id="crumb_carveouts"><a href="{{ url_for('calculator.carveouts') }}">Carveouts</a></li>
+      <li id="crumb_pricing"><a href="{{ url_for('calculator.pricing') }}">Cost cap &amp; Pricing</a></li>
+      <li id="crumb_cost" class="active"><a href="{{ url_for('calculator.cost') }}">Projected Cost</a></li>
     </ul>
   </section>
 {% endblock %}
