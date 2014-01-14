@@ -30,7 +30,5 @@
 {% endblock %}
 {% block bodyjs %}
 {{ super() }}
-<script src="{{ url_for('static', filename='js/app/stacked_chart.js') }}"></script>
-<script src="{{ url_for('static', filename='js/app/session.js') }}"></script>
-<script src="{{ url_for('static', filename='js/app/trajectory.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app/trajectory.js') }}?{{ now }}"></script>
 {% endblock %}

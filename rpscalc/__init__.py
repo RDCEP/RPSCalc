@@ -1,15 +1,31 @@
-from flask import Flask, render_template, Blueprint
+from datetime import datetime
+from flask import Flask, render_template, session
+from rpscalc.filters import session_json, session_cleared
 # from flask.ext.sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config.from_object('config')
 app.url_map.strict_slashes = False
+app.jinja_env.filters['session_json'] = session_json
+app.jinja_env.filters['session_cleared'] = session_cleared
 
 # db = SQLAlchemy(app)
 
 @app.errorhandler(404)
 def not_found(error):
     return render_template('errors/404.html'), 404
+
+
+#TODO: Delete this. Replace with filter.
+@app.context_processor
+def session_clear():
+    return dict(session_clear='false')
+
+
+@app.context_processor
+def template_now():
+    return dict(now=datetime.now().microsecond)
+
 
 # Load and register Blueprints
 from rpscalc.state_pages.views import mod as state_pages_module

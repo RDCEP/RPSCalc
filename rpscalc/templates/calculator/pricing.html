@@ -101,7 +101,7 @@
 {% endblock %}
 {% block bodyjs %}
 {{ super() }}
-<script src="{{ url_for('static', filename='js/app/stacked_chart.js') }}"></script>
-<script src="{{ url_for('static', filename='js/app/session.js') }}"></script>
-<script src="{{ url_for('static', filename='js/app/pricing.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app/stacked_chart.js') }}?{{ now }}"></script>
+<script src="{{ url_for('static', filename='js/app/session.js') }}?{{ now }}"></script>
+<script src="{{ url_for('static', filename='js/app/pricing.js') }}?{{ now }}"></script>
 {% endblock %}

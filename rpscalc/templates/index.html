@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
-{% block headcss %}<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">{% endblock %}
+{% block headcss %}<link href="{{ url_for('static', filename='css/main.css') }}?{{ now }}" rel="stylesheet">{% endblock %}
 {% block page %}
   <header id="main_nav">
     <nav>
@@ -48,13 +48,16 @@
     {% endblock %}
   {% endblock %}
   </article>
-  {% block bodyjs %}
   <script>
     Options = window.Options || {};
+    {%- block session_data -%}
+    Options.data = {{ session|session_json|safe }};
+    {%- endblock -%}
     Options.state = '{{ state }}';
     Options.graph_type = '{{ graph_type }}';
-    Options.data = {{ session_data|safe }};
+    Options.old_state = (Options.state == Options.old_state) ? Options.state : Options.old_state;
   </script>
+  {% block bodyjs %}
   <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.11/d3.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20121008/json2.js"></script>
   <script src="{{ url_for('static', filename='js/app/stacked_chart.js') }}"></script>

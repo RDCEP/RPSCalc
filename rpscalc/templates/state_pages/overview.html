@@ -69,3 +69,10 @@
       </div>
   </section>
 {% endblock %}
+{% block session_data %}
+  Options.data = {{ session|session_cleared|safe }}
+{% endblock %}
+{% block bodyjs %}
+{{ super() }}
+  <script src="{{ url_for('static', filename='js/app/state_facts.js') }}"></script>
+{% endblock %}

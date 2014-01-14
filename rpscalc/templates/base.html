@@ -12,8 +12,8 @@
 
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
-  {% block headcss %}<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">{% endblock %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}?{{ now }}">
+  {% block headcss %}<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?{{ now }}">{% endblock %}
   <script src="{{ url_for('static', filename='js/vendor/modernizr.min.js') }}"></script>
 </head>
 <body>

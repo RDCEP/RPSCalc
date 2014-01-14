@@ -12,5 +12,5 @@ def overview(state):
     return render_template(
         'state_pages/overview.html',
         state=state,
-        session_data=json.dumps(session.items()),
+        session_clear='true',
     )
