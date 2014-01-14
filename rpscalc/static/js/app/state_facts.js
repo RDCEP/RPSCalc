@@ -354,10 +354,22 @@ var FactsPage = function() {
   d3.selectAll('#left_nav a')
     .on('click', function() {
       d3.event.preventDefault();
-      window.location.hash = this.getAttribute('data-name');
+      var start_y = window.pageYOffset
+        , pane = this.getAttribute('data-name')
+        , pane_y = document.getElementById(pane).getBoundingClientRect().top
+        , pane_h = document.getElementById(pane).getBoundingClientRect().height
+        , buffer_y = document.getElementById('left_nav').getBoundingClientRect().top
+        , body = document.body
+        , html = document.documentElement
+        , height = Math.max( body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight );
+      console.log(start_y, pane_y, buffer_y, window.innerHeight, height);
+      d3.select('body').style('padding-bottom', function() {
+        return ((height - (start_y + pane_y)) < window.innerHeight) ? (window.innerHeight - pane_h - buffer_y)+'px' : 0;
+      });
+      window.location.hash = pane;
       d3.select('#main-nav').style('display', 'none').style('display', 'block');
-      var _oy = (window.pageYOffset || document.body.scrollTop) - document.getElementById('left_nav').getBoundingClientRect().top + 1;
-      window.scroll(0, _oy);
+      window.scroll(0, pane_y + start_y - buffer_y + 1);
     });
 };
 var facts_page = new FactsPage();
