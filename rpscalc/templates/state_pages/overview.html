@@ -75,4 +75,9 @@
 {% block bodyjs %}
 {{ super() }}
   <script src="{{ url_for('static', filename='js/app/state_facts.js') }}"></script>
+  <script>
+    d3.xhr('/calculator/clear')
+      .mimeType('application/json')
+      .post(JSON.stringify(Options.data));
+  </script>
 {% endblock %}

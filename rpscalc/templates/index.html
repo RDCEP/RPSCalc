@@ -55,7 +55,6 @@
     {%- endblock -%}
     Options.state = '{{ state }}';
     Options.graph_type = '{{ graph_type }}';
-    Options.old_state = (Options.state == Options.old_state) ? Options.state : Options.old_state;
   </script>
   {% block bodyjs %}
   <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.11/d3.min.js"></script>
