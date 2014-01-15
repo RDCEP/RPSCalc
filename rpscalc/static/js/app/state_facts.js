@@ -21,6 +21,11 @@ var FactsPage = function() {
       domain_y = [0, 50],
       rpsp_height = 40,
       rpsp_margin = 15,
+      rpsp_legend = d3.select('#rps_progress')
+        .append('div')
+        .attr('class', 'chart-legend')
+        .style('margin-bottom', '10px'),
+      legend_row, legend_swatch, legend_text,
       rpsp = d3.select('#rps_progress')
         .append('svg')
         .attr('height', rpsp_height + 50)
@@ -29,6 +34,26 @@ var FactsPage = function() {
       current = trajectory.filter(function(d) { return d.x.getFullYear() === 2013; })[0].y,
       actual = progress * 100,
       diff = Math.abs(actual - current);
+    if (current > 0) {
+      legend_row = rpsp_legend.append('span')
+        .attr('class', 'legend-row');
+      legend_row.append('span')
+        .attr('class', 'legend-swatch')
+        .style('background-color', d3.rgb(86, 180, 233));
+      legend_row.append('span')
+        .attr('class', 'legend-text')
+        .html('Current progress');
+    }
+    if (diff > 0) {
+      legend_row = rpsp_legend.append('span')
+        .attr('class', 'legend-row');
+      legend_row.append('span')
+        .attr('class', 'legend-swatch')
+        .style('background-color', d3.rgb(213, 94, 0));
+      legend_row.append('span')
+        .attr('class', 'legend-text')
+        .html('Behind current goal');
+    }
     rpsp.append('rect')
       .attr('height', rpsp_height)
       .attr('width', _wd)
