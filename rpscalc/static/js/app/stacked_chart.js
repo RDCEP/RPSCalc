@@ -1,6 +1,7 @@
 var RPSGraph = function() {
   'use strict';
-  var width = 700,
+  var Options = window.Options || {},
+    width = 700,
     height = 345,
     padding = {top: 10, right: 10, bottom: 30, left: 30},
     /***********************
@@ -13,7 +14,7 @@ var RPSGraph = function() {
     y_axis = d3.svg.axis().scale(_y).orient('left'),
     _line = d3.svg.line().x(function(d) { return _x(d.x); }).y(function(d) { return _y(d.y + d.y0); }),
     _area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y(d.y0); }).y1(function(d) { return _y(d.y + d.y0); }),
-    _invert_area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); }),
+    _invert_area = d3.svg.area().x(function(d) { return _x(d.x); }).y0(function() { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); }),
     _stack = d3.layout.stack().offset('zero').values(function(d) { return d.data; }).x(function(d) { return d.x; }).y(function(d) { return d.y; }),
     _chart_f = _area,
     /**************
@@ -54,7 +55,7 @@ var RPSGraph = function() {
     outline_layer,
     default_layer,
     axes_layer,
-    period_layer,
+//    period_layer,
     handle_layer,
     button_layer,
     segment_width,
@@ -63,7 +64,7 @@ var RPSGraph = function() {
     /**********************
      X-segments and handles
      **********************/
-    periods,
+//    periods,
     handles,
     tool_tip,
     chart_inputs,
@@ -113,7 +114,7 @@ var RPSGraph = function() {
       });
       if (graph_data.intersection) {
         graph_data.intersection
-          .attr('d', function(d, i) { return d.invert ? _invert_area(d.data) : _area(d.data); });
+          .attr('d', function(d) { return d.invert ? _invert_area(d.data) : _area(d.data); });
       }
       if (_outlines) {
         graph_data.outlines
@@ -420,7 +421,7 @@ var RPSGraph = function() {
     domain_switch.append('span').html('&nbsp;[&nbsp;');
     domain_switch.selectAll('.switch')
       .data(arr).enter().append('a')
-      .attr('class', 'switch').classed('active', function(d, i) { return d === _y.domain()[1]; })
+      .attr('class', 'switch').classed('active', function(d) { return d === _y.domain()[1]; })
       .attr('data-domain', function(d) { return d; })
       .text(function(d) { return d; }).on('click', domain_switch_click)
       .call(function(s) {
@@ -623,7 +624,7 @@ var RPSGraph = function() {
       .append('g')
       .attr('class', 'segment')
       .attr('transform', function(d) {return 'translate(' + (_x(d.values[0].x) - segment_width / 2) + ',0)'; });
-    handles.each(function(d, i) {
+    handles.each(function(d) {
       var visible = ((_x(d.values[0].x) >= _x.range()[0]) && (_x(d.values[0].x) <= _x.range()[1])),
         handle = d3.select(this);
       handle.append('rect')
@@ -714,7 +715,7 @@ var RPSGraph = function() {
       .append('path')
       .attr('d', function(d) {
         if (d.invert) {
-          return d3.svg.area().x(function(d) { return _x(d.x); }).y0(function(d) { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); })(d.data);
+          return d3.svg.area().x(function(d) { return _x(d.x); }).y0(function() { return _y.range()[1]; }).y1(function(d) { return _y(d.y + d.y0); })(d.data);
         }
         return _area(d.data);
       })
@@ -799,7 +800,7 @@ var RPSGraph = function() {
       .attr('class', 'intersection-path')
       .append('path')
       .attr('id', function(d, i) { return pre_id('clip_path_' + i + '_path'); })
-      .attr('d', function(d, i) { return d.invert ? _invert_area(d.data) : _area(d.data); });
+      .attr('d', function(d) { return d.invert ? _invert_area(d.data) : _area(d.data); });
     svg_defs.append('clipPath')
       .attr('id', pre_id('clip_intersection'))
       .attr('clip-path', 'url(#' + pre_id('clip_path_0') + ')')
@@ -861,7 +862,6 @@ var RPSGraph = function() {
      RPSGraph
      ...
      */
-    var style_prop = _lines ? 'stroke' : 'fill';
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
       .attr('d', function(d) { return d.invert ? _invert_area(d.data) : _chart_f(d.data); })

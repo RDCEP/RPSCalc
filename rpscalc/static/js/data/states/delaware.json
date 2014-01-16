@@ -1,13 +1,5 @@
 {
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.01,
         0.02,
         0.03,
@@ -32,6 +24,7 @@
         0.22,
         0.22
     ],
+    "start_year": 2008,
     "machine_name": "delaware",
     "name": "Delaware",
     "abbr": "DE"

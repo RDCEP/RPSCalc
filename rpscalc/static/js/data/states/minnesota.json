@@ -1,15 +1,5 @@
 {
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.03,
         0.03,
         0.03,
@@ -32,6 +22,7 @@
         0.05,
         0.05
     ],
+    "start_year": 2010,
     "machine_name": "minnesota",
     "name": "Minnesota",
     "abbr": "MN"

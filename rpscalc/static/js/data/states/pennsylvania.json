@@ -1,12 +1,5 @@
 {
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.01,
         0.01,
         0.02,
@@ -32,6 +25,7 @@
         0.08,
         0.08
     ],
+    "start_year": 2007,
     "machine_name": "pennsylvania",
     "name": "Pennsylvania",
     "abbr": "PA"

@@ -1,13 +1,8 @@
 {
+    "start_year": 2006,
     "machine_name": "nevada",
     "name": "Nevada",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.06,
         0.09,
         0.09,
@@ -67,40 +62,34 @@
     },
     "carveouts": [
         {
+            "type": "solar",
             "data": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
                 0.0,
                 0.0,
                 0.0,
-                0.001,
-                0.001,
-                0.001,
-                0.001,
-                0.002,
-                0.002,
-                0.002,
-                0.002,
-                0.002,
-                0.002,
-                0.002,
-                0.003,
-                0.003,
-                0.003,
-                0.003,
-                0.003,
-                0.004,
-                0.004,
-                0.004,
-                0.004,
-                0.004,
-                0.004
-            ],
-            "type": "solar"
+                0.008,
+                0.008,
+                0.007,
+                0.007,
+                0.011,
+                0.011,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.014,
+                0.014,
+                0.014,
+                0.014,
+                0.014,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016
+            ]
         }
     ],
     "snapshot": {
@@ -110,30 +99,16 @@
             "No explicit cost cap"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Nevada's pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": ".15",
-        "summary": "Nevada's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Nevada."
+        "summary": "Nevada's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Nevada.",
+        "rps_progress": ".15"
     },
     "abbr": "NV",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 101
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:\n",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=NV",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies"
-                }
-            ]
-        },
-        "grid_mix": {
-            "text": "This overview from Energy Information Administration (EIA) demonstrates Nevada's current sources for electricity",
-            "data": []
-        },
         "tools": {
             "text": "The links below may provide more technical details to the interested user:",
             "links": [
@@ -158,11 +133,25 @@
                     "description": "Access your state\u2019s EERE page, and find information on renewable resources maps, energy statistics, and news"
                 }
             ]
+        },
+        "grid_mix": {
+            "text": "This overview from Energy Information Administration (EIA) demonstrates Nevada's current sources for electricity",
+            "data": []
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:\n",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=NV",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies"
+                }
+            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 101
     }
 }

@@ -1,89 +1,159 @@
 {
-  "machine_name": "north_carolina",
-  "abbr": "NC",
-  "name": "North Carolina",
-  "trajectory": [0,0,0,0,0,0,0,0,0,0,0.02,0.02,0.03,0.03,0.03,0.06,0.06,0.06,0.10, 0.10, 0.10, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125, 0.125],
-  "carveouts": [
-    {
-      "type": "solar",
-      "data": [0,0,0,0,0,0,0,0,0,0,0.02, 0.02, 0.07, 0.07, 0.07, 0.14, 0.14, 0.14, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20]
+    "start_year": 2010,
+    "machine_name": "north_carolina",
+    "name": "North Carolina",
+    "trajectory": [
+        0.02,
+        0.02,
+        0.03,
+        0.03,
+        0.03,
+        0.06,
+        0.06,
+        0.06,
+        0.1,
+        0.1,
+        0.1,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125,
+        0.125
+    ],
+    "legislation": {
+        "statute": "The RPS was established in 2007 with Senate Bill 3, which required all investor-owned utilities to supply 12.5% of the state's retail electricity sales with qualifying renewable energy sources by 2021. The bill also sets out that municipal utilities and electric cooperatives supply 10% of their sales with renewable sources by 2018. The North Carolina Utilities Commission enforces the requirements, which serve the purpose of developing electricity procurement plans for renewable power for the state. Renewable energy may be bundled with RECs.",
+        "rps_tech_details": [
+            {
+                "name": "Eligible Technologies",
+                "description": "Solar Water Heat, Solar Space Heat, Solar Thermal Electric, Solar Thermal Process Heat, Photovoltaics, Landfill Gas, Wind, Biomass, Geothermal Electric, CHP/Cogeneration, Hydrogen, Anaerobic Digestion, Small Hydroelectric, Tidal Energy, Wave Energy"
+            },
+            {
+                "name": "Geographic Eligibility",
+                "description": "According to Chapter 8 of the NCUC's Current Rules, North Carolina utilities are allowed to request a review for an application of construction of a renewables facility in a state outside of North Carolina if it is intended to serve customers in North Carolina. Electric public utilities are required to file an application supported by relevant testimony after the issuance of a license to operate by the other state."
+            },
+            {
+                "name": "Percent of Total Load",
+                "description": "Primary RPS: 75.2%"
+            },
+            {
+                "name": "Technology Requirements",
+                "description": "0.2% Solar by 2018; 0.2% Swine Waste by 2018; 900,000 MWh Poultry Waste by 2015."
+            },
+            {
+                "name": "Sectors",
+                "description": "Municipal Utility, Investor-Owned Utility, Rural Electric Cooperative"
+            },
+            {
+                "name": "Non-compliance Penalty",
+                "description": "Alternative compliance payments (ACPs) for the renewable portion of the legislation are $100/MWh. A utility may recover the cost of the RPS and up to $1 million in related energy research from customers up to the following capped amounts per customer: $12 (Residential), $150 (Commercial), $1000(Industrial) in 2012 and $34 (Residential), $150(Commercial), $1000(Industrial) in 2015 and beyond."
+            }
+        ],
+        "carveouts": "The RPS includes a requirement for 0.2% of the RPS source from solar by 2018, and 0.2% from swine waste also by 2018. Another 9,000 MWh of electricity is required to be sources from poultry waste by 2014.",
+        "cost_cap_details": "There is not explicit cap on a change in retail electricity pricing"
     },
-    {
-      "type": "Swine Waste",
-      "data": [0,0,0,0,0,0,0,0,0,0,0.0, 0.0, 0.07, 0.07, 0.07, 0.14, 0.14, 0.14, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20]
-    }
-  ],
-	"snapshot": {
-    "summary": "North Carolina's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in North Carolina.",
-    "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. North Carolina's pathway is red. Click on another state to learn more about their RPS.",
-    "overview": [
-      "<strong>12.5%</strong> of the state's electricity supplied from Investor-Owned Utilities must be from renewable sources by <strong>2021</strong> and <strong>10%<strong/> of the state's electricity supplied from electric cooperatives and municipal utilities must come from renewable sources by <strong>2018<strong/>.",
-      "Carve-outs for <strong>solar, swine waste, and poultry waste</strong>.",
-      "There is not explicit cap on a change in retail electricity pricing."
-    ],
-    "rps_progress": 0.0
-  },
-  "legislation": {
-    "statute": "The RPS was established in 2007 with Senate Bill 3, which required all investor-owned utilities to supply 12.5% of the state's retail electricity sales with qualifying renewable energy sources by 2021. The bill also sets out that municipal utilities and electric cooperatives supply 10% of their sales with renewable sources by 2018. The North Carolina Utilities Commission enforces the requirements, which serve the purpose of developing electricity procurement plans for renewable power for the state. Renewable energy may be bundled with RECs.",
-    "rps_tech_details": [
-      {
-        "name": "Eligible Technologies",
-        "description": "Solar Water Heat, Solar Space Heat, Solar Thermal Electric, Solar Thermal Process Heat, Photovoltaics, Landfill Gas, Wind, Biomass, Geothermal Electric, CHP/Cogeneration, Hydrogen, Anaerobic Digestion, Small Hydroelectric, Tidal Energy, Wave Energy"
-      },
-      {
-        "name": "Geographic Eligibility",
-        "description": "According to Chapter 8 of the NCUC's Current Rules, North Carolina utilities are allowed to request a review for an application of construction of a renewables facility in a state outside of North Carolina if it is intended to serve customers in North Carolina. Electric public utilities are required to file an application supported by relevant testimony after the issuance of a license to operate by the other state."
-      },
-      {
-        "name": "Percent of Total Load",
-        "description": "Primary RPS: 75.2%"
-      },
-      {
-        "name": "Technology Requirements",
-        "description": "0.2% Solar by 2018; 0.2% Swine Waste by 2018; 900,000 MWh Poultry Waste by 2015."
-      },
-      {
-        "name": "Sectors",
-        "description": "Municipal Utility, Investor-Owned Utility, Rural Electric Cooperative"
-      },
-      {
-        "name": "Non-compliance Penalty",
-        "description": "Alternative compliance payments (ACPs) for the renewable portion of the legislation are $100/MWh. A utility may recover the cost of the RPS and up to $1 million in related energy research from customers up to the following capped amounts per customer: $12 (Residential), $150 (Commercial), $1000(Industrial) in 2012 and $34 (Residential), $150(Commercial), $1000(Industrial) in 2015 and beyond."
-      }
-    ],
-    "cost_cap_details": "There is not explicit cap on a change in retail electricity pricing",
-    "carveouts": "The RPS includes a requirement for 0.2% of the RPS source from solar by 2018, and 0.2% from swine waste also by 2018. Another 9,000 MWh of electricity is required to be sources from poultry waste by 2014."
-  },
-  "resources": {
-    "tools": {
-      "text": "The links below may provide more technical details to the interested user:",
-      "links": [
+    "carveouts": [
         {
-          "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-          "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-          "description": "Datasets available for download in .xlsx format"
+            "type": "solar",
+            "data": [
+                0.01,
+                0.01,
+                0.02333,
+                0.02333,
+                0.02333,
+                0.02333,
+                0.02333,
+                0.02333,
+                0.02,
+                0.02,
+                0.02,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016
+            ]
         },
         {
-          "name": "MJBeck RPS EDGE",
-          "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-          "description": "Advanced search tool for comparing RPS program data"
+            "type": "Swine Waste",
+            "data": [
+                0.0,
+                0.0,
+                0.02333,
+                0.02333,
+                0.02333,
+                0.02333,
+                0.02333,
+                0.02333,
+                0.02,
+                0.02,
+                0.02,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016,
+                0.016
+            ]
         }
-      ]
+    ],
+    "snapshot": {
+        "overview": [
+            "<strong>12.5%</strong> of the state's electricity supplied from Investor-Owned Utilities must be from renewable sources by <strong>2021</strong> and <strong>10%<strong/> of the state's electricity supplied from electric cooperatives and municipal utilities must come from renewable sources by <strong>2018<strong/>.",
+            "Carve-outs for <strong>solar, swine waste, and poultry waste</strong>.",
+            "There is not explicit cap on a change in retail electricity pricing."
+        ],
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. North Carolina's pathway is red. Click on another state to learn more about their RPS.",
+        "summary": "North Carolina's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in North Carolina.",
+        "rps_progress": 0.0
     },
-    "references": {
-      "text": "The resources below proved invaluable in the creation of this page:",
-      "links": [
-        {
-          "name": "DSIRE State Page",
-          "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=NC09R",
-          "description": "Visit for more complete information on RPS details and legislation"
+    "abbr": "NC",
+    "policy_and_price": {
+        "policy_retail": 96
+    },
+    "resources": {
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
+                }
+            ]
         },
-        {
-          "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-          "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-          "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=NC09R",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
         }
-      ]
     }
-  }
 }

@@ -1,16 +1,5 @@
 {
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.02,
         0.02,
         0.02,
@@ -32,6 +21,7 @@
         0.15,
         0.15
     ],
+    "start_year": 2011,
     "machine_name": "missouri",
     "name": "Missouri",
     "abbr": "MO"

@@ -1,39 +1,8 @@
 {
+    "start_year": 2031,
     "machine_name": "iowa",
     "name": "Iowa",
-    "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-    ],
+    "trajectory": [],
     "legislation": {
         "statute": "The Iowa Renewable Energy Law is a capacity-based standard, which requires its investor-owned utilities to own or contract a total of 105 MW of renewable energy. It is split between MidAmerican Energy (55.2 MW, 52.57% of demand) and Alliant Energy Interstate Power and Light (49.8 MW., 47.43% of demand). There are no mandated increases, and the target has already been achieved.",
         "rps_tech_details": [
@@ -74,26 +43,16 @@
             "<strong>Two</strong> separate state RPS schedules (primary and secondary)"
         ],
         "policy_trajectory": "Iowa's REL does not define a 'ramp-up', because the nature of the goal is a specific capacity to be achieved.\n",
-        "rps_progress": "0",
-        "summary": "Iowa's Alternative Energy Law (REL) establishes a minimum amount of renewable energy that must be purchased by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Iowa."
+        "summary": "Iowa's Alternative Energy Law (REL) establishes a minimum amount of renewable energy that must be purchased by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Iowa.",
+        "rps_progress": "0"
     },
     "abbr": "IA",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 90
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IA01R&re=1&ee=1",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        },
         "tools": {
             "text": "The links below may provide more technical details to the interested user:",
             "links": [
@@ -108,11 +67,21 @@
                     "description": "Advanced search tool for comparing RPS program data"
                 }
             ]
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IA01R&re=1&ee=1",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 90
     }
 }

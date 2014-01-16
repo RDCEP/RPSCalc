@@ -1,19 +1,8 @@
 {
+    "start_year": 2012,
     "machine_name": "michigan",
     "name": "Michigan",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.04664,
         0.0553,
         0.0666,
@@ -73,11 +62,31 @@
             "Cost cap for residential customers at <strong>$3.00<strong> per month"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Maryland's pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": "1.0",
-        "summary": "Michigan's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Michigan."
+        "summary": "Michigan's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Michigan.",
+        "rps_progress": "1.0"
     },
     "abbr": "MI",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 114
+    },
     "resources": {
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page",
+                    "description": "<i>Datasets available for download in .xlsx format<i>"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
+                }
+            ]
+        },
         "references": {
             "text": "The resources below proved invaluable in the creation of this page:",
             "links": [
@@ -97,26 +106,6 @@
                     "description": "Moyer et al. 2012"
                 }
             ]
-        },
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page",
-                    "description": "<i>Datasets available for download in .xlsx format<i>"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
-                }
-            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 114
     }
 }

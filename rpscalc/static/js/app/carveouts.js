@@ -25,9 +25,9 @@
       carveout.forEach(function(d, ii) {
         var _t = _data.trajectory[ii];
         if (_stored && !Options.data.update_state) {
-          carveout_data.data[ii]= {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : d.y, type: carveout_type};
+          carveout_data.data[ii]= {x: parse_date(String(ii + _data.start_year)), y: _t === 0 ? 0 : d.y, type: carveout_type};
         } else {
-          carveout_data.data[ii]= {x: parse_date(String(ii + 2000)), y: _t === 0 ? 0 : d / _t * 100, type: carveout_type};
+          carveout_data.data[ii]= {x: parse_date(String(ii + _data.start_year)), y: _t === 0 ? 0 : d * 100, type: carveout_type};
         }
       });
       Options.data[carveout_type] = carveout_data;

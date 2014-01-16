@@ -1,11 +1,5 @@
 {
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.02,
         0.04,
         0.05,
@@ -32,6 +26,7 @@
         0.2,
         0.2
     ],
+    "start_year": 2006,
     "machine_name": "connecticut",
     "name": "Connecticut",
     "abbr": "CT"

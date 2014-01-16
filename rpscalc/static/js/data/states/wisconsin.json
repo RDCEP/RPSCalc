@@ -1,13 +1,8 @@
 {
+    "start_year": 2006,
     "machine_name": "wisconsin",
     "name": "Wisconsin",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.0356,
         0.0356,
         0.0356,
@@ -73,26 +68,16 @@
             "No explicit cost cap"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart shows Colorado's policy pathway.\n",
-        "rps_progress": "0",
-        "summary": "Wisconsin's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Wisconsin."
+        "summary": "Wisconsin's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Wisconsin.",
+        "rps_progress": "0"
     },
     "abbr": "WI",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 106
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=WI05R&re=0&ee=0",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        },
         "tools": {
             "text": "The links below may provide more technical details to the interested user:",
             "links": [
@@ -107,11 +92,21 @@
                     "description": "Advanced search tool for comparing RPS program data"
                 }
             ]
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=WI05R&re=0&ee=0",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 106
     }
 }

@@ -1,11 +1,5 @@
 {
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.05,
         0.06,
         0.06,
@@ -32,6 +26,7 @@
         0.09,
         0.09
     ],
+    "start_year": 2006,
     "machine_name": "new_mexico",
     "name": "New Mexico",
     "abbr": "NM"

@@ -1,12 +1,5 @@
 {
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.01,
         0.02,
         0.02,
@@ -32,6 +25,7 @@
         0.2,
         0.2
     ],
+    "start_year": 2007,
     "machine_name": "district_of_columbia",
     "name": "District of Columbia",
     "abbr": "DC"

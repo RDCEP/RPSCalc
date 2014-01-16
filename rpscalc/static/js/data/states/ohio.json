@@ -1,16 +1,8 @@
 {
+    "start_year": 2009,
     "machine_name": "ohio",
     "name": "Ohio",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.0025,
         0.005,
         0.01,
@@ -67,40 +59,31 @@
     },
     "carveouts": [
         {
+            "type": "Solar",
             "data": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                4e-05,
-                0.0001,
-                0.0003,
-                0.0006,
-                0.0009,
-                0.0012,
-                0.0015,
-                0.0018,
-                0.0022,
-                0.0026,
-                0.003,
-                0.0034,
-                0.0038,
-                0.0042,
-                0.0046,
-                0.005,
-                0.005,
-                0.005,
-                0.005,
-                0.005,
-                0.005,
-                0.005
-            ],
-            "type": "Solar"
+                0.016,
+                0.02,
+                0.03,
+                0.04,
+                0.045,
+                0.048,
+                0.043,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04,
+                0.04
+            ]
         }
     ],
     "snapshot": {
@@ -110,26 +93,16 @@
             "Cost-cap at 3% of projected cost"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Ohio's pathway is red. Click on another state to learn more about their AEPS.",
-        "rps_progress": "0.0",
-        "summary": "Ohio's Renewable Portfolio Standard (actually called Alternative Energy Portfolio Standard or AEPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. Ohio's AEPS also establishes a minimum amount of 'alternative energy' required to be used in the state. This analysis will not consider the 'alternative' portion of the statute. Rather, this page will identify and describe only the features of the AEPS that set a standard for renewable energy."
+        "summary": "Ohio's Renewable Portfolio Standard (actually called Alternative Energy Portfolio Standard or AEPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. Ohio's AEPS also establishes a minimum amount of 'alternative energy' required to be used in the state. This analysis will not consider the 'alternative' portion of the statute. Rather, this page will identify and describe only the features of the AEPS that set a standard for renewable energy.",
+        "rps_progress": "0.0"
     },
     "abbr": "OH",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 95
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.puco.ohio.gov/puco/index.cfm/industry-information/industry-topics/ohioe28099s-renewable-and-advanced-energy-portfolio-standard/",
-                    "name": "PUCO's Renewable and Advanced Energy Portoflio Website",
-                    "description": "Links and information on Ohio's AEPS"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        },
         "tools": {
             "text": "The links below may provide more technical details to the interested user:",
             "links": [
@@ -144,11 +117,21 @@
                     "description": "<i>Advanced search tool for comparing RPS program data<i>"
                 }
             ]
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.puco.ohio.gov/puco/index.cfm/industry-information/industry-topics/ohioe28099s-renewable-and-advanced-energy-portfolio-standard/",
+                    "name": "PUCO's Renewable and Advanced Energy Portoflio Website",
+                    "description": "Links and information on Ohio's AEPS"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 95
     }
 }

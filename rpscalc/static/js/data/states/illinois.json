@@ -1,16 +1,8 @@
 {
+    "start_year": 2009,
     "machine_name": "illinois",
     "name": "Illinois",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.02,
         0.04,
         0.05,
@@ -67,112 +59,85 @@
     },
     "carveouts": [
         {
+            "type": "wind",
             "data": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
+                0.75,
+                0.75,
+                0.76,
+                0.75,
+                0.757,
+                0.75,
+                0.756,
+                0.75,
+                0.748,
+                0.754,
+                0.752,
+                0.75,
+                0.749,
+                0.753,
+                0.751,
+                0.75,
+                0.749,
+                0.752,
+                0.752,
+                0.752,
+                0.752,
+                0.752
+            ]
+        },
+        {
+            "type": "solar",
+            "data": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.006,
                 0.015,
                 0.03,
-                0.038,
-                0.045,
-                0.053,
                 0.06,
-                0.068,
-                0.075,
-                0.086,
-                0.098,
-                0.109,
-                0.12,
-                0.131,
-                0.143,
-                0.154,
-                0.165,
-                0.176,
-                0.188,
-                0.188,
-                0.188,
-                0.188,
-                0.188
-            ],
-            "type": "wind"
+                0.061,
+                0.062,
+                0.062,
+                0.063,
+                0.063,
+                0.058,
+                0.059,
+                0.059,
+                0.06,
+                0.06,
+                0.06,
+                0.06,
+                0.06,
+                0.06
+            ]
         },
         {
+            "type": "DG",
             "data": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0.0004,
-                0.0012,
-                0.0027,
-                0.006,
-                0.007,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.005,
                 0.008,
-                0.009,
                 0.01,
-                0.011,
-                0.011,
-                0.012,
-                0.013,
-                0.014,
-                0.015,
-                0.015,
-                0.015,
-                0.015,
-                0.015
-            ],
-            "type": "solar"
-        },
-        {
-            "data": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0.0004,
-                0.0007,
-                0.001,
-                0.0012,
-                0.0013,
-                0.0015,
-                0.0016,
-                0.0018,
-                0.0019,
-                0.0021,
-                0.0022,
-                0.0024,
-                0.0025,
-                0.0025,
-                0.0025,
-                0.0025,
-                0.0025
-            ],
-            "type": "DG"
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01,
+                0.01
+            ]
         }
     ],
     "snapshot": {
@@ -183,30 +148,16 @@
             "<strong>Two</strong> separate state RPS schedules (primary and secondary)"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. California's pathway is red. Click on another state to learn more about their RPS.\n",
-        "rps_progress": ".06",
-        "summary": "Illinois's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Illinois."
+        "summary": "Illinois's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Illinois.",
+        "rps_progress": ".06"
     },
     "abbr": "IL",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 81
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IL04R&re=1&ee=0",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<e>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</em>"
-                }
-            ]
-        },
-        "grid_mix": {
-            "text": "This overview from Energy Information Administration (EIA) demonstrates Illinois's current sources for electricity",
-            "data": []
-        },
         "tools": {
             "text": "The links below may provide more technical details to the interested user:",
             "links": [
@@ -221,11 +172,25 @@
                     "description": "Advanced search tool for comparing RPS program data"
                 }
             ]
+        },
+        "grid_mix": {
+            "text": "This overview from Energy Information Administration (EIA) demonstrates Illinois's current sources for electricity",
+            "data": []
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IL04R&re=1&ee=0",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<e>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</em>"
+                }
+            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 81
     }
 }

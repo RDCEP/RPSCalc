@@ -84,7 +84,7 @@ def state_gridmix(state):
         })
     div = 25. if m <= 100. else 100. if m <= 1000. else 500.
     m = ceil(m / div) * div
-    with open('static/js/data/gridmix/{}.json'.format(STATES[state][1]), 'w') as f:
+    with open(os.path.join(BASE_DIR, 'static/js/data/gridmix/{}.json'.format(STATES[state][1])), 'w') as f:
         f.write(
             json.dumps(
                 {'data': d, 'maximum': m,

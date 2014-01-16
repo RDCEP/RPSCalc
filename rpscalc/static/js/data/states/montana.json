@@ -1,15 +1,8 @@
 {
+    "start_year": 2008,
     "machine_name": "montana",
     "name": "Montana",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.05,
         0.05,
         0.1,
@@ -73,26 +66,16 @@
             "Cost cap at 15% of alternative source price"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Montana's pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": "0.0",
-        "summary": "Montana's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Montana."
+        "summary": "Montana's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Montana.",
+        "rps_progress": "0.0"
     },
     "abbr": "MT",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 86
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://leg.mt.gov/content/Committees/Interim/2013-2014/Energy-and-Telecommunications/Meetings/June-2013/Overview.pdf",
-                    "name": "An Introduction to the Montana Renewable Portfolio Standard",
-                    "description": "Overview of RPS prepared for Montana state representatives"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        },
         "tools": {
             "text": "The links below may provide more technical details to the interested user:",
             "links": [
@@ -107,11 +90,21 @@
                     "description": "<i>Advanced search tool for comparing RPS program data<i>"
                 }
             ]
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://leg.mt.gov/content/Committees/Interim/2013-2014/Energy-and-Telecommunications/Meetings/June-2013/Overview.pdf",
+                    "name": "An Introduction to the Montana Renewable Portfolio Standard",
+                    "description": "Overview of RPS prepared for Montana state representatives"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 86
     }
 }

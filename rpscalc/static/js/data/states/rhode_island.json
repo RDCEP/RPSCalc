@@ -1,14 +1,8 @@
 {
+    "start_year": 2007,
     "machine_name": "rhode_island",
     "name": "Rhode Island",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.03,
         0.035,
         0.04,
@@ -73,11 +67,35 @@
             "No cost cap included in RES"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Rhode Island's pathway is red. Click on another state to learn more about their RES.",
-        "rps_progress": ".19",
-        "summary": "Rhode Island's Renewable Portfolio Standard (actually called Renewable Energy Standard or RES) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RES and how they work together to define the minimum amount of renewable energy that will be sold in Rhode Island."
+        "summary": "Rhode Island's Renewable Portfolio Standard (actually called Renewable Energy Standard or RES) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RES and how they work together to define the minimum amount of renewable energy that will be sold in Rhode Island.",
+        "rps_progress": ".19"
     },
     "abbr": "RI",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 131
+    },
     "resources": {
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "<i>Datasets available for download in .xlsx format<i>"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
+                }
+            ]
+        },
+        "grid_mix": {
+            "text": "This overview from Energy Information Administration (EIA) demonstrates Illinois's current sources for electricity",
+            "data": []
+        },
         "references": {
             "text": "The resources below proved invaluable in the creation of this page:",
             "links": [
@@ -97,30 +115,6 @@
                     "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
                 }
             ]
-        },
-        "grid_mix": {
-            "text": "This overview from Energy Information Administration (EIA) demonstrates Illinois's current sources for electricity",
-            "data": []
-        },
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "<i>Datasets available for download in .xlsx format<i>"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
-                }
-            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 131
     }
 }

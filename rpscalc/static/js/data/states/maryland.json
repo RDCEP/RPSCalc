@@ -1,13 +1,8 @@
 {
+    "start_year": 2006,
     "machine_name": "maryland",
     "name": "Maryland",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.035,
         0.035,
         0.0405,
@@ -67,40 +62,34 @@
     },
     "carveouts": [
         {
+            "type": "solar",
             "data": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                5e-05,
-                0.0001,
-                0.00025,
-                0.0005,
+                0.0,
+                0.0,
                 0.001,
-                0.0025,
-                0.0035,
+                0.002,
                 0.005,
                 0.007,
-                0.0095,
-                0.014,
-                0.0175,
-                0.02,
-                0.02,
-                0.02,
-                0.02,
-                0.02,
-                0.02,
-                0.02,
-                0.02,
-                0.02,
-                0.02,
-                0.02
-            ],
-            "type": "solar"
+                0.011,
+                0.023,
+                0.027,
+                0.038,
+                0.046,
+                0.061,
+                0.077,
+                0.101,
+                0.111,
+                0.107,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1
+            ]
         }
     ],
     "snapshot": {
@@ -110,26 +99,16 @@
             "Cost cap at $1.50 over current average monthly bill or 1.5% over total electric bills"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Maryland's pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": "0",
-        "summary": "Maryland's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Maryland."
+        "summary": "Maryland's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Maryland.",
+        "rps_progress": "0"
     },
     "abbr": "MD",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 115
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://webapp.psc.state.md.us/intranet/ElectricInfo/FAQ_new.cfm",
-                    "name": "Maryland RPS FAQs",
-                    "description": "<i>Maryland's PSC guide to the RPS<i>"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        },
         "tools": {
             "text": "The links below may provide more technical details to the interested user:",
             "links": [
@@ -144,11 +123,21 @@
                     "description": "<i>Advanced search tool for comparing RPS program data<i>"
                 }
             ]
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://webapp.psc.state.md.us/intranet/ElectricInfo/FAQ_new.cfm",
+                    "name": "Maryland RPS FAQs",
+                    "description": "<i>Maryland's PSC guide to the RPS<i>"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 115
     }
 }

@@ -16,6 +16,7 @@ var FactsPage = function() {
      ...
      */
     //TODO: _wd is set for a wide module (_wd = width for a narrow module)
+    //TODO: Remove static domains, and get current year dynamically
     var _wd = width * 2 + 10,
       domain_x = [2000, 2030],
       domain_y = [0, 50],
@@ -250,30 +251,30 @@ var FactsPage = function() {
       seal = d3.select('#main_content img'),
       parse_date = d3.time.format('%Y').parse;
 
+    if (_data.trajectory.length > 0) {
+      // Parse trajectory data
+      _data.trajectory.forEach(function(d, i) {
+        data[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
+      });
+      // Parse default trajectory
+      _data.trajectory.forEach(function(d, i) {
+        def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
+      });
+    } else {
+      for (var i = 0; i < 31; ++i) {
+        data[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
+        def_line[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
+      }
+    }
+
     if (_data.carveouts) {
       _data.carveouts.forEach(function(d) {
         var carveout = {type: d.type, data: []};
         d.data.forEach(function(_d, i) {
-          carveout.data.push({'y': _d * 100, 'y0': 0, 'x': parse_date(String(i + 2000))});
+          carveout.data.push({'y': _d * data[0].data[i].y, 'y0': 0, 'x': parse_date(String(i + _data.start_year))});
         });
         data.push(carveout);
       });
-    }
-
-    if (_data.trajectory.length > 0) {
-      // Parse trajectory data
-      _data.trajectory.forEach(function(d, i) {
-        data[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
-      });
-      // Parse default trajectory
-      _data.trajectory.forEach(function(d, i) {
-        def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
-      });
-    } else {
-      for (var i = 0; i < 31; ++i) {
-        data[0].data[i] = {y: 0, x: parse_date(String(i + 2000)), y0: 0};
-        def_line[0].data[i] = {y: 0, x: parse_date(String(i + 2000)), y0: 0};
-      }
     }
 
     d3.select('#summary')

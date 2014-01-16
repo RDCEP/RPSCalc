@@ -14,22 +14,22 @@
         data[0].data[i] = {y: d.y, x: new Date(d.x), y0: 0};
       });
       _data.trajectory.forEach(function(d, i) {
-        def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
+        def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
       });
     } else if (_data.trajectory.length > 0) {
       empty = false;
       // Parse trajectory data
       _data.trajectory.forEach(function(d, i) {
-        data[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
+        data[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
       });
       // Parse default trajectory
       _data.trajectory.forEach(function(d, i) {
-        def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + 2000)), y0: 0};
+        def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
       });
     } else {
       for (var i = 0; i < 31; ++i) {
-        data[0].data[i] = {y: 0, x: parse_date(String(i + 2000)), y0: 0};
-        def_line[0].data[i] = {y: 0, x: parse_date(String(i + 2000)), y0: 0};
+        data[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
+        def_line[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
       }
     }
     Options.data['trajectory'] = data[0];

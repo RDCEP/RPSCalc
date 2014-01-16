@@ -1,11 +1,8 @@
 {
+    "start_year": 2004,
     "machine_name": "california",
     "name": "California",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
         0.14,
         0.15,
         0.16,
@@ -74,28 +71,28 @@
             "Enacted 2002&mdash;one of the <strong>first</strong> and most aggresive in the country"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. California's pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": ".2",
-        "summary": "California's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in California."
+        "summary": "California's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in California.",
+        "rps_progress": ".2"
     },
     "abbr": "CA",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 159
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:\n",
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
             "links": [
                 {
-                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=CA",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
                 },
                 {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                },
-                {
-                    "href": "http://www.wecc.biz/WREGIS/Pages/default.aspx",
-                    "name": "Western Renewable Generation Information System",
-                    "description": "REC tracking system for WECC"
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
                 }
             ]
         },
@@ -156,25 +153,25 @@
                 }
             ]
         },
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:\n",
             "links": [
                 {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
+                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=CA",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
                 },
                 {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                },
+                {
+                    "href": "http://www.wecc.biz/WREGIS/Pages/default.aspx",
+                    "name": "Western Renewable Generation Information System",
+                    "description": "REC tracking system for WECC"
                 }
             ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 159
     }
 }

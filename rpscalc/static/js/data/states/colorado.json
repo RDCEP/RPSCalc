@@ -1,91 +1,143 @@
 {
-  "name": "Colorado",
-  "machine_name": "colorado",
-  "abbr": "CO",
-  "trajectory": [0,0,0,0,0,0,0,0.03,0.05,0.05,0.05,0.12,0.12,0.12,0.12,0.20,0.20,0.20,0.20,0.20,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30,0.30],
-  "carveouts": [
-    {
-      "type": "DG",
-      "data": [0,0,0,0,0,0,0,0,0,0,0,0.01,0.01,0.0125,0.0125,0.0175,0.0175,0.02,0.02,0.02,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03]
-    }
-  ],
-  "snapshot": {
-    "summary": "Colorado's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Colorado.",
-    "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart shows Colorado's policy pathway.\n",
-    "overview": [
-      "<strong>30%</strong> of the state's energy consumption must be from renewable sources by <strong>2020</strong>",
-      "Carve-outs for <strong>distributed generation</strong>",
-      "Explicit cost cap at 2 percent of electric bill annually",
-      "<strong>Two</strong> separate state RPS schedules (primary and secondary)"
+    "start_year": 2007,
+    "machine_name": "colorado",
+    "name": "Colorado",
+    "trajectory": [
+        0.03,
+        0.05,
+        0.05,
+        0.05,
+        0.12,
+        0.12,
+        0.12,
+        0.12,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.2,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3,
+        0.3
     ],
-    "rps_progress": "0"
-  },
-  "legislation": {
-    "statute": "Colorado is the first state to create a RPS through ballot initiative. In 2004, voters approved Amendment 37 requiring utilities serving 40,000 or more customers to generate or purchase enough renewable energy to comprise 10% of retail electric sales. It would be increased and modified two subsequent times to its current 20%. In 2013, a distributed generation carve-out was added, and coal methane gas and municipal solid waste became eligible technologies (subject to Public Utilities Commission's approval). The same bill--S.B. 252--created a separate RPS schedule for coops, requiring 20% of sales from renewables by 2020 and thereafter.",
-    "rps_tech_details": [
-      {
-        "name": "Eligible Technologies",
-        "description": "Solar-electric, Wind, Geothermal-electric, Biomass facilities that burn nontoxic plants, Landfill gas, Animal waste, Hydropower, Recycled energy, Fuel cells using renewables-sourced hydrogen"
-      },
-      {
-        "name": "Geographic Eligibility",
-        "description": "No Restrictions; tradable RECs can be used to satisfy requirement, but have a life of 5 years from the calendar year it was generated."
-      },
-      {
-        "name": "Percent of Total Load",
-        "description": "Primary RPS: 58.7%, Secondary RPS: 35.6%"
-      },
-      {
-        "name": "Technology Requirements",
-        "description": "At least 3% of the annual requirement for IOUs must be from distributed generation; 0.75% for cooperatives"
-      },
-      {
-        "name": "Sectors",
-        "description": "Investor-Owned Utilities, Cooperatives and Municipal electric companies"
-      },
-      {
-        "name": "Non-compliance Penalty",
-        "description": "None: regulators may impose but amounts not specified"
-      }
-    ],
-    "cost_cap_details": "Electric Resource Standards in <a href=\"http://www.leg.state.co.us/clics/clics2013a/csl.nsf/fsbillcont3/D1B329AEB8681D4D87257B3900716761?Open&file=252_enr.pdf\">Senate Bill 13-252</a> specify the cost of using renewable sources cannot exceed 2% of customer's electricity bill annually. This rate impact rule applies to both IOUs and coops, and requires the RPS energy obligations to be reduced to the amount necessary to comply with the rule's limitation.",
-    "carveouts": "Colorado's RPS has a technology minimum of 3% of the total RPS requirement by 2020, ramping up from a starting requirement of 1%."
-  },
-  "resources": {
-    "tools": {
-      "text": "The links below may provide more technical details to the interested user:",
-      "links": [
-        {
-          "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-          "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-          "description": "Datasets available for download in .xlsx format"
-        },
-        {
-          "name": "MJBeck RPS EDGE",
-          "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-          "description": "Advanced search tool for comparing RPS program data"
-        }
-      ]
+    "legislation": {
+        "statute": "Colorado is the first state to create a RPS through ballot initiative. In 2004, voters approved Amendment 37 requiring utilities serving 40,000 or more customers to generate or purchase enough renewable energy to comprise 10% of retail electric sales. It would be increased and modified two subsequent times to its current 20%. In 2013, a distributed generation carve-out was added, and coal methane gas and municipal solid waste became eligible technologies (subject to Public Utilities Commission's approval). The same bill--S.B. 252--created a separate RPS schedule for coops, requiring 20% of sales from renewables by 2020 and thereafter.",
+        "rps_tech_details": [
+            {
+                "name": "Eligible Technologies",
+                "description": "Solar-electric, Wind, Geothermal-electric, Biomass facilities that burn nontoxic plants, Landfill gas, Animal waste, Hydropower, Recycled energy, Fuel cells using renewables-sourced hydrogen"
+            },
+            {
+                "name": "Geographic Eligibility",
+                "description": "No Restrictions; tradable RECs can be used to satisfy requirement, but have a life of 5 years from the calendar year it was generated."
+            },
+            {
+                "name": "Percent of Total Load",
+                "description": "Primary RPS: 58.7%, Secondary RPS: 35.6%"
+            },
+            {
+                "name": "Technology Requirements",
+                "description": "At least 3% of the annual requirement for IOUs must be from distributed generation; 0.75% for cooperatives"
+            },
+            {
+                "name": "Sectors",
+                "description": "Investor-Owned Utilities, Cooperatives and Municipal electric companies"
+            },
+            {
+                "name": "Non-compliance Penalty",
+                "description": "None: regulators may impose but amounts not specified"
+            }
+        ],
+        "carveouts": "Colorado's RPS has a technology minimum of 3% of the total RPS requirement by 2020, ramping up from a starting requirement of 1%.",
+        "cost_cap_details": "Electric Resource Standards in <a href=\"http://www.leg.state.co.us/clics/clics2013a/csl.nsf/fsbillcont3/D1B329AEB8681D4D87257B3900716761?Open&file=252_enr.pdf\">Senate Bill 13-252</a> specify the cost of using renewable sources cannot exceed 2% of customer's electricity bill annually. This rate impact rule applies to both IOUs and coops, and requires the RPS energy obligations to be reduced to the amount necessary to comply with the rule's limitation."
     },
-    "references": {
-      "text": "The resources below proved invaluable in the creation of this page:",
-      "links": [
+    "carveouts": [
         {
-          "name": "DSIRE State Page",
-          "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=CO24R&re=1&ee=1",
-          "description": "Visit for more complete information on RPS details and legislation"
-        },
-        {
-          "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-          "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-          "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+            "data": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.083,
+                0.083,
+                0.104,
+                0.104,
+                0.088,
+                0.088,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1,
+                0.1
+            ],
+            "type": "DG"
         }
-      ]
+    ],
+    "snapshot": {
+        "overview": [
+            "<strong>30%</strong> of the state's energy consumption must be from renewable sources by <strong>2020</strong>",
+            "Carve-outs for <strong>distributed generation</strong>",
+            "Explicit cost cap at 2 percent of electric bill annually",
+            "<strong>Two</strong> separate state RPS schedules (primary and secondary)"
+        ],
+        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart shows Colorado's policy pathway.\n",
+        "rps_progress": "0",
+        "summary": "Colorado's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Colorado."
+    },
+    "abbr": "CO",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 104
+    },
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=CO24R&re=1&ee=1",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
+                }
+            ]
+        }
     }
-  },
-  "price_and_policy": {
-    "wind_capacity": 0.4,
-    "solar_capacity": 0.15,
-    "policy_retail": 104
-  }
 }

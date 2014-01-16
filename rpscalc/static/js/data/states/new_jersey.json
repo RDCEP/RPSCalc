@@ -1,13 +1,8 @@
 {
+    "start_year": 2006,
     "machine_name": "new_jersey",
     "name": "New Jersey",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.035,
         0.046,
         0.055,
@@ -67,13 +62,8 @@
     },
     "carveouts": [
         {
+            "type": "solar",
             "data": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
                 0.0,
                 0.0,
                 0.0,
@@ -99,80 +89,67 @@
                 0.0,
                 0.0,
                 0.0
-            ],
-            "type": "solar"
+            ]
         },
         {
+            "type": "tier 1",
             "data": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
                 0.0,
-                0.001,
-                0.002,
-                0.002,
-                0.003,
-                0.005,
-                0.006,
-                0.007,
-                0.009,
-                0.011,
-                0.013,
-                0.015,
-                0.02,
-                0.026,
-                0.033,
-                0.04,
-                0.04,
-                0.04,
-                0.04,
-                0.04,
-                0.04,
-                0.04,
-                0.04,
-                0.04,
-                0.04
-            ],
-            "type": "tier 1"
+                0.022,
+                0.036,
+                0.031,
+                0.041,
+                0.06,
+                0.065,
+                0.069,
+                0.081,
+                0.091,
+                0.099,
+                0.106,
+                0.123,
+                0.142,
+                0.162,
+                0.178,
+                0.178,
+                0.178,
+                0.178,
+                0.178,
+                0.178,
+                0.178,
+                0.178,
+                0.178,
+                0.178
+            ]
         },
         {
+            "type": "tier 2",
             "data": [
-                0,
-                0,
-                0,
-                0,
-                0,
-                0,
-                0.001,
-                0.001,
-                0.001,
-                0.002,
-                0.002,
-                0.002,
-                0.002,
-                0.003,
-                0.003,
-                0.003,
-                0.003,
-                0.004,
-                0.004,
-                0.005,
-                0.005,
-                0.006,
-                0.006,
-                0.006,
-                0.006,
-                0.006,
-                0.006,
-                0.006,
-                0.006,
-                0.006,
-                0.006
-            ],
-            "type": "tier 2"
+                0.029,
+                0.022,
+                0.018,
+                0.031,
+                0.027,
+                0.024,
+                0.022,
+                0.03,
+                0.027,
+                0.025,
+                0.023,
+                0.028,
+                0.025,
+                0.027,
+                0.025,
+                0.027,
+                0.027,
+                0.027,
+                0.027,
+                0.027,
+                0.027,
+                0.027,
+                0.027,
+                0.027,
+                0.027
+            ]
         }
     ],
     "snapshot": {
@@ -182,35 +159,16 @@
             "Purchase of alternative compliance payments (ACPs) if goal is not met"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. New Jersey's pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": ".083",
-        "summary": "New Jersey's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in New Jersey."
+        "summary": "New Jersey's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in New Jersey.",
+        "rps_progress": ".083"
     },
     "abbr": "NJ",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 146
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:\n",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=NJ",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies"
-                },
-                {
-                    "href": "http://www.njcleanenergy.com/renewable-energy/program-activity-and-background-information/rps-background-info",
-                    "name": "New Jersey's Clean Energy Program",
-                    "description": "RPS Regulations"
-                }
-            ]
-        },
-        "grid_mix": {
-            "text": "This overview from Energy Information Administration (EIA) demonstrates New Jersey's current sources for electricity",
-            "data": []
-        },
         "tools": {
             "text": "The links below may provide more technical details to the interested user:",
             "links": [
@@ -230,11 +188,30 @@
                     "description": "Access your state\u2019s EERE page, and find information on renewable resources maps, energy statistics, and news"
                 }
             ]
+        },
+        "grid_mix": {
+            "text": "This overview from Energy Information Administration (EIA) demonstrates New Jersey's current sources for electricity",
+            "data": []
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:\n",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=NJ",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies"
+                },
+                {
+                    "href": "http://www.njcleanenergy.com/renewable-energy/program-activity-and-background-information/rps-background-info",
+                    "name": "New Jersey's Clean Energy Program",
+                    "description": "RPS Regulations"
+                }
+            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 146
     }
 }

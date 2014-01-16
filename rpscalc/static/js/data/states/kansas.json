@@ -1,18 +1,8 @@
 {
+    "start_year": 2011,
     "machine_name": "kansas",
     "name": "Kansas",
     "trajectory": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
         0.1,
         0.1,
         0.1,
@@ -73,26 +63,16 @@
             "Cost-cap at 1% increase in retail rate"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Kansas' pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": "0.0",
-        "summary": "Kansas' Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Kansas."
+        "summary": "Kansas' Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Kansas.",
+        "rps_progress": "0.0"
     },
     "abbr": "KS",
+    "price_and_policy": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 100
+    },
     "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.kcc.state.ks.us/energy/index.htm",
-                    "name": "Kansas Corporation Commission Energy Division",
-                    "description": "Links and descriptions of energy programs in Kansas"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        },
         "tools": {
             "text": "The links below may provide more technical details to the interested user:",
             "links": [
@@ -107,11 +87,21 @@
                     "description": "<i>Advanced search tool for comparing RPS program data<i>"
                 }
             ]
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.kcc.state.ks.us/energy/index.htm",
+                    "name": "Kansas Corporation Commission Energy Division",
+                    "description": "Links and descriptions of energy programs in Kansas"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
         }
-    },
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 100
     }
 }
