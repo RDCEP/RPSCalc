@@ -21,7 +21,13 @@
         carveout = _data.carveouts.filter(function(d) { return d.type === carveout_type; })[0];
         carveout = _stored ? stored[carveout_type].data : carveout ? carveout.data : [];
       empty = empty ? carveout.length === 0 : d3.sum(carveout, function(d) { return d.y; }) === 0;
-      carveout = carveout.length > 0 ? carveout : [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      if (carveout.length == 0) {
+        carveout = new Array(2030 - _data.start_year);
+        for (var ctr = 0; ctr < carveout.length; ++ctr) {
+          carveout[ctr] = 0;
+        }
+      }
+//      carveout = carveout.length > 0 ? carveout : new Array(2030 - _data.start_year);
       carveout.forEach(function(d, ii) {
         var _t = _data.trajectory[ii];
         if (_stored && !Options.data.update_state) {
