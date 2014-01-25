@@ -74,7 +74,7 @@
 {% endblock %}
 {% block bodyjs %}
 {{ super() }}
-  <script src="{{ url_for('static', filename='js/app/state_facts.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app/state_facts.js') }}?56"></script>
   <script>
     d3.xhr('/calculator/clear')
       .mimeType('application/json')

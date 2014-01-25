@@ -114,7 +114,8 @@ var RPSGraph = function() {
       });
       if (graph_data.intersection) {
         graph_data.intersection
-          .attr('d', function(d) { return d.invert ? _invert_area(d.data) : _area(d.data); });
+          .attr('d', function(d) {
+            return d.invert ? _invert_area(d.data) : _area(d.data); });
       }
       if (_outlines) {
         graph_data.outlines
@@ -162,10 +163,10 @@ var RPSGraph = function() {
       /*
        Attach mouse events to <rect>s with hoverable handles (toggle .active)
        */
-      handles.each(function(d) {
+      handles.each(function() {
         var handle = d3.select(this);
         handle.select('.segment-rect')
-          .on('mouseover', function() {
+          .on('mouseover', function(d) {
             update_legend(d.values);
             tool_tip.classed('hidden', !_hoverable);
             handle.selectAll('.data-point.tight')
@@ -815,6 +816,31 @@ var RPSGraph = function() {
 //      .attr('clip-path', 'url(#clip_intersection)');
     return this;
   };
+  this.manual_update_intersection = function(a, b) {
+    graph_data.intersection.data([a, b]);
+    return this;
+  };
+  this.manual_update_handles = function() {
+    handles.data(graph_data.nested)
+      .each(function(_d) {
+        var _this = d3.select(this);
+        _this.select('.segment-rect')
+          .data(_d);
+        _this.selectAll('.data-point')
+          .data(_d.values)
+          .attr('cy', function(d) { return _y(d.y + d.y0); });
+        _this.select('.segment-label-bkgd')
+          .data(_d.values)
+          .attr('y', function(d) { return _y(d.values[0].y + d.values[0].y0) - 40; });
+        _this.selectAll('.segment-label-text')
+          .data(_d.values)
+          .text(function(d) {
+            return (d.x > _x.invert(0)) ? d3.format('.1f')(d.y) : null;
+          })
+          .attr('y', function(d) { return _y(d.y + d.y0) - 22; });
+      });
+    return this;
+  };
   this.lines = function(bool) {
     if (bool === undefined) { return _lines; }
     _lines = bool;
@@ -883,5 +909,6 @@ var RPSGraph = function() {
   };
   this.redraw = function() {
     redraw();
+    return this;
   };
 };

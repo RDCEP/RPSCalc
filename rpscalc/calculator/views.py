@@ -32,7 +32,6 @@ def update():
 
 @mod.route('/trajectory')
 def trajectory():
-    print(2, session['state'])
     return render_template(
         'calculator/trajectory.html',
         state=session['state'],
@@ -41,7 +40,6 @@ def trajectory():
 
 @mod.route('/carveouts')
 def carveouts():
-    print(2, session['state'])
     if 'trajectory' not in session.keys():
         return redirect(url_for('calculator.trajectory'))
     return render_template(
@@ -76,8 +74,12 @@ def cost():
 
 @mod.route('/advanced')
 def advanced():
-    if 'trajectory' not in session.keys():
-        return redirect('/%s/trajectory' % state)
+    if not session['trajectory']:
+        return redirect(url_for('calculator.trajectory'))
+    if not session['wind'] or not session['solar']:
+        return redirect(url_for('calculator.carveouts'))
+    if not session['price_and_policy']:
+        return redirect(url_for('calculator.pricing'))
     return render_template(
         'calculator/advanced.html',
         state=session['state'],
