@@ -1,5 +1,6 @@
 from datetime import datetime
 from flask import Flask, render_template, session
+from flask.ext.assets import Environment, Bundle
 from rpscalc.filters import session_json, session_cleared
 # from flask.ext.sqlalchemy import SQLAlchemy
 
@@ -36,3 +37,29 @@ app.register_blueprint(state_pages_module)
 app.register_blueprint(calculator_module)
 app.register_blueprint(rpscalc_module)
 app.register_blueprint(eia_module)
+
+assets = Environment(app)
+css = Bundle('css/main.css', filters='cssmin', output='gen/main.css')
+assets.register('css_main', css)
+js = Bundle(
+    'js/app/session.js',  'js/app/stacked_chart.js',
+    filters='jsmin', output='gen/main.js')
+assets.register('js_main', js)
+js = Bundle(
+    'calculator/js/trajectory.js', filters='jsmin', output='gen/trajectory.js')
+assets.register('js_trajectory', js)
+js = Bundle(
+    'state_pages/js/state_facts.js', filters='jsmin', output='gen/state_facts.js')
+assets.register('js_state_facts', js)
+js = Bundle(
+    'calculator/js/carveouts.js', filters='jsmin', output='gen/carveouts.js')
+assets.register('js_carveouts', js)
+js = Bundle(
+    'calculator/js/pricing.js', filters='jsmin', output='gen/pricing.js')
+assets.register('js_pricing', js)
+js = Bundle(
+    'calculator/js/cost.js', filters='jsmin', output='gen/cost.js')
+assets.register('js_cost', js)
+js = Bundle(
+    'calculator/js/advanced.js', filters='jsmin', output='gen/advanced.js')
+assets.register('js_advanced', js)

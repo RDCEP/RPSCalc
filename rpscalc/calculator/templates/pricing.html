@@ -10,10 +10,15 @@
   {{ super() }}
   <section class="clearfix">
     <h2>Cost cap and pricing</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et metus vitae neque molestie hendrerit
-      eget eget dolor. Sed felis diam, imperdiet eget nulla ornare, semper viverra ante. Pellentesque in risus
-      sem. In nisl velit, pellentesque in elit at, adipiscing sodales metus. Vestibulum faucibus placerat
-      lectus at aliquam.</p>
+    <p>The level of success the RPS policy you have just created will not
+      only depend on the trajectory and technologies selected, but the cost
+      of renewable energy and the RPS <a target="_blank" class="glossary_link" href="/glossary#cost_cap">cost cap</a>.
+      Many states include cost caps in their RPS policies to protect electricity customers from
+      large rate increases.</p>
+    <p>For some states, this cost cap will limit the
+      amount of renewable power purchased under the RPS. On this page you
+      can establish your own cost cap as well as adjust the default
+      assumptions about the cost of renewable power.</p>
     <div id="pricing" class="module clearfix chart-outer-wrap">
       <form id="pricing_form">
         <fieldset id="wind_costs" class="narrow">
@@ -86,11 +91,10 @@
         </fieldset>
       </form>
     </div>
-    <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-      Donec sodales semper erat. Suspendisse molestie turpis tempor leo dictum, commodo lacinia tellus laoreet.
-      Sed consequat felis eget nulla vulputate, placerat pulvinar sapien rhoncus. Nam mollis est neque, faucibus
-      consequat arcu hendrerit id. Sed feugiat ultrices volutpat. Nam volutpat aliquam ultricies. Phasellus
-      orci erat, pretium eget velit ut, congue sodales massa. Aliquam erat volutpat.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean et metus vitae neque molestie hendrerit
+      eget eget dolor. Sed felis diam, imperdiet eget nulla ornare, semper viverra ante. Pellentesque in risus
+      sem. In nisl velit, pellentesque in elit at, adipiscing sodales metus. Vestibulum faucibus placerat
+      lectus at aliquam.</p>
     <ul id="crumbs">
       <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory') }}">Trajectory</a>
       <li id="crumb_carveouts"><a href="{{ url_for('calculator.carveouts') }}">Carveouts</a></li>
@@ -100,8 +104,6 @@
   </section>
 {% endblock %}
 {% block bodyjs %}
-{{ super() }}
-<script src="{{ url_for('static', filename='js/app/stacked_chart.js') }}?{{ now }}"></script>
-<script src="{{ url_for('static', filename='js/app/session.js') }}?{{ now }}"></script>
-<script src="{{ url_for('static', filename='js/app/pricing.js') }}?{{ now }}"></script>
+  {{ super() }}
+  {% assets 'js_pricing' %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
 {% endblock %}

@@ -6,14 +6,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>RDCEP | RPS Calculator{% block title %}{% endblock %}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-
+  <title>RDCEP | RPS Calculator{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}?{{ now }}">
-  {% block headcss %}<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}?{{ now }}">{% endblock %}
+  {% block headcss %}
+    {% assets 'css_main' %}<link rel="stylesheet" href="{{ ASSET_URL }}">{% endassets %}
+  {% endblock %}
   <script src="{{ url_for('static', filename='js/vendor/modernizr.min.js') }}"></script>
 </head>
 <body>

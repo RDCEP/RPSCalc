@@ -2,7 +2,8 @@ from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, abort
 
 
-mod = Blueprint('calculator', __name__, url_prefix='/calculator')
+mod = Blueprint('calculator', __name__, url_prefix='/calculator',
+                static_folder='static', template_folder='templates')
 
 
 @mod.route('/clear', methods=['POST',])
@@ -33,7 +34,7 @@ def update():
 @mod.route('/trajectory')
 def trajectory():
     return render_template(
-        'calculator/trajectory.html',
+        'trajectory.html',
         state=session['state'],
     )
 
@@ -43,7 +44,7 @@ def carveouts():
     if 'trajectory' not in session.keys():
         return redirect(url_for('calculator.trajectory'))
     return render_template(
-        'calculator/carveouts.html',
+        'carveouts.html',
         state=session['state'],
     )
 
@@ -55,7 +56,7 @@ def pricing():
     if not session['wind'] or not session['solar']:
         return redirect(url_for('calculator.carveouts'))
     return render_template(
-        'calculator/pricing.html',
+        'pricing.html',
         state=session['state'],
     )
 
@@ -68,7 +69,7 @@ def cost():
     if not session['price_and_policy']:
         return redirect(url_for('calculator.pricing'))
     return render_template(
-        'calculator/cost.html',
+        'cost.html',
         state=session['state'],
     )
 
@@ -81,6 +82,6 @@ def advanced():
     if not session['price_and_policy']:
         return redirect(url_for('calculator.pricing'))
     return render_template(
-        'calculator/advanced.html',
+        'advanced.html',
         state=session['state'],
     )

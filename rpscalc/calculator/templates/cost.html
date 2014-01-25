@@ -1,0 +1,37 @@
+{% extends 'state.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block left_nav %}
+<li><a href="{{ url_for('calculator.trajectory') }}" data-name="trajectory">Set RPS trajectory</a></li>
+<li><a href="{{ url_for('calculator.carveouts') }}" data-name="carveouts">Set carveouts</a></li>
+<li><a href="{{ url_for('calculator.pricing') }}" data-name="pricing">Set cost cap &amp; pricing</a></li>
+<li class="active"><a href data-name="cost">Projected cost</a></li>
+{% endblock %}
+{% block content %}
+  {{ super() }}
+  <section class="clearfix">
+    <h2>Cost cap</h2>
+    <p>You have now established the fundamental design of your RPS. On
+      this page you will test the efficacy of your policy. The blue region
+      represents the cost of the mean Renewable Energy Credit
+      (<a class="glossary_link" target="_blank" href="/glossary#rec">REC</a>),
+      in dollars per megawatt-hour, calculated based on the trajectories and
+      assumptions you made. The orange region represents the REC costs, in
+      dollars per megawatt-hour, prohibited by the cost cap you imposed. Any
+      cross-hatched region that appears represents time periods in which
+      you have ‘broken’ your cost cap.</p>
+    <div id="cost_cap" class="module clearfix chart-outer-wrap">
+    </div>
+    <p><a href="{{ url_for('calculator.advanced') }}">Enter the magical wonderland</a>,
+      also temporarily called the ‘advanced view’.</p>
+    <ul id="crumbs">
+      <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory') }}">Trajectory</a>
+      <li id="crumb_carveouts"><a href="{{ url_for('calculator.carveouts') }}">Carveouts</a></li>
+      <li id="crumb_pricing"><a href="{{ url_for('calculator.pricing') }}">Cost cap &amp; Pricing</a></li>
+      <li id="crumb_cost" class="active"><a href="{{ url_for('calculator.cost') }}">Projected Cost</a></li>
+    </ul>
+  </section>
+{% endblock %}
+{% block bodyjs %}
+  {{ super() }}
+  {% assets 'js_cost' %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+{% endblock %}

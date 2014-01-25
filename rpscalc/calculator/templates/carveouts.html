@@ -1,0 +1,46 @@
+{% extends 'state.html' %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block left_nav %}
+<li><a href="{{ url_for('calculator.trajectory') }}" data-name="trajectory">Set RPS trajectory</a></li>
+<li class="active"><a href data-name="carveouts">Set carveouts</a></li>
+<li><a href="{{ url_for('calculator.pricing') }}" data-name="pricing">Set cost cap &amp; pricing</a></li>
+<li><a href="{{ url_for('calculator.cost') }}" data-name="cost">Projected cost</a></li>
+{% endblock %}
+{% block content %}
+  {{ super() }}
+  <section class="clearfix">
+    <h2>Carveouts</h2>
+    <p>Now that you have chosen your state’s <strong>RPS trajectory</strong>,
+      you have the opportunity to define which technologies your state
+      will use to meet its requirements. Some states establish these
+      <strong>technology requirements</strong> by establishing a trajectory,
+      or carve-out, for each technology they wish to promote. The RPS
+      Calculator only allows you to set minimum requirements for wind
+      and solar power as a percentage of each years RPS requirement
+      (i.e. a percentage of the requirement you set on the previous screen).
+      The graph below illustrates your state’s minimum technology
+      requirements for wind and solar power. Keep in mind that the
+      technologies you require will affect the cost of the policy.</p>
+    <div id="carveouts" class="module clearfix chart-outer-wrap">
+    </div>
+    <p>Your state’s current carve-outs are displayed in the default view.
+      To adjust or create your own minimum technology requirements, click
+      and drag the blue area and yellow areas. Yellow represents the
+      percentage of your RPS that must be fulfilled with solar energy, while
+      blue represents wind power. If you would rather type in your values,
+      toggle-on the user input boxes by clicking “type” on top of the graph.
+      If you would like to require your state to procure more than 50% of
+      its energy from renewable sources, change the graph’s scale from 50%
+      to 100% by clicking “100” on top of the graph. </p>
+    <ul id="crumbs">
+      <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory') }}">Trajectory</a>
+      <li id="crumb_carveouts" class="active"><a href="{{ url_for('calculator.carveouts') }}">Carveouts</a></li>
+      <li id="crumb_pricing"><a href="{{ url_for('calculator.pricing') }}">Cost cap &amp; Pricing</a></li>
+      <li id="crumb_cost"><a href="{{ url_for('calculator.cost') }}">Projected Cost</a></li>
+    </ul>
+  </section>
+{% endblock %}
+{% block bodyjs %}
+  {{ super() }}
+  {% assets 'js_carveouts' %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+{% endblock %}

@@ -19,15 +19,16 @@
         carveout_data = data.filter(function(e) { return e.type === carveout_type })[0],
         _stored = stored[carveout_type] !== false,
         carveout = _data.carveouts.filter(function(d) { return d.type === carveout_type; })[0];
-        carveout = _stored ? stored[carveout_type].data : carveout ? carveout.data : [];
+      carveout = _stored ? stored[carveout_type].data : carveout ? carveout.data : [];
       empty = empty ? carveout.length === 0 : d3.sum(carveout, function(d) { return d.y; }) === 0;
       if (carveout.length == 0) {
-        carveout = new Array(2030 - _data.start_year);
+        carveout = new Array(2030 - _data.start_year + 1);
         for (var ctr = 0; ctr < carveout.length; ++ctr) {
           carveout[ctr] = 0;
         }
+      } else {
+        empty = false;
       }
-//      carveout = carveout.length > 0 ? carveout : new Array(2030 - _data.start_year);
       carveout.forEach(function(d, ii) {
         var _t = _data.trajectory[ii];
         if (_stored && !Options.data.update_state) {
@@ -38,6 +39,7 @@
       });
       Options.data[carveout_type] = carveout_data;
     });
+
     data.sort(function(a, b) { return a.data[a.data.length-1].y < b.data[b.data.length-1].y ? -1 : a.data[a.data.length-1].y > b.data[b.data.length-1].y ? 1 : 0 });
     var carveouts = new RPSGraph()
       .padding(30)
