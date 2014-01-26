@@ -6,7 +6,8 @@ DEBUG = True
 ADMINS = frozenset(['matteson@obstructures.org'])
 SECRET_KEY = 'REPLACEME'
 
-# SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'rpscalc.db')
+SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(_basedir, 'rpscalc.db')
+# SQLALCHEMY_DATABASE_URI = 'postgresql://rpscalc:rpscalc@localhost/rpscalc_001D'
 # SQLALCHEMY_MIGRATE_REPO = os.path.join(_basedir, 'db_repository')
 # DATABASE_CONNECT_OPTIONS = {}
 

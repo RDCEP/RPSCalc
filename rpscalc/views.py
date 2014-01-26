@@ -20,11 +20,3 @@ def pinwheel():
     return render_template(
         'pinwheel.html'
     )
-
-@mod.route('/glossary')
-def glossary():
-    return render_template(
-        'glossary.html',
-        now=datetime.now().microsecond,
-        title='Glossary'
-    )
