@@ -77,18 +77,18 @@
                 0.017,
                 0.014,
                 0.025,
-                0.022,
-                0.03,
-                0.036,
-                0.033,
-                0.038,
-                0.043,
-                0.047,
-                0.047,
-                0.047,
-                0.047,
-                0.047,
-                0.047
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045,
+                0.045
             ]
         }
     ],
@@ -142,7 +142,7 @@
             "text": "The resources below proved invaluable in the creation of this page:",
             "links": [
                 {
-                    "href": "",
+                    "href": "http://www.dsireusa.org/incentives/index.cfm??Incentive_Code=AZ03R",
                     "name": "DSIRE State Page",
                     "description": "Visit for more complete information on RPS details and legislation"
                 },
