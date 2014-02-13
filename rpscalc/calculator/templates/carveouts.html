@@ -10,15 +10,15 @@
   {{ super() }}
   <section class="clearfix">
     <h2>Carveouts</h2>
-    <p>Now that you have chosen your state’s <strong>RPS trajectory</strong>,
+    <p>Now that you have chosen your state’s RPS trajectory,
       you have the opportunity to define which technologies your state
       will use to meet its requirements. Some states establish these
-      <strong>technology requirements</strong> by establishing a trajectory,
-      or carve-out, for each technology they wish to promote. The RPS
-      Calculator only allows you to set minimum requirements for wind
-      and solar power as a percentage of each years RPS requirement
-      (i.e. a percentage of the requirement you set on the previous screen).
-      The graph below illustrates your state’s minimum technology
+      <a href="{{ url_for('glossary.glossary') }}#tech_req" target="_blank">technology requirements</a>
+      by establishing a trajectory, or carve-out, for each technology they
+      wish to promote. The RPS Calculator only allows you to set minimum
+      requirements for wind and solar power as a percentage of each years
+      RPS requirement (i.e. a percentage of the requirement you set on the
+      previous screen). The graph below illustrates your state’s minimum technology
       requirements for wind and solar power. Keep in mind that the
       technologies you require will affect the cost of the policy.</p>
     <div id="carveouts" class="module clearfix chart-outer-wrap">
