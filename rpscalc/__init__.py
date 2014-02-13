@@ -1,9 +1,4 @@
-import re
 from datetime import datetime
-from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
-from sqlalchemy.orm import scoped_session, sessionmaker, relationship, backref
-from sqlalchemy.ext.declarative import declarative_base, declared_attr
 from flask import Flask, render_template, session, g
 from flask.ext.assets import Environment, Bundle
 from rpscalc.filters import session_json, session_cleared
@@ -14,48 +9,6 @@ app.config.from_object('config')
 app.url_map.strict_slashes = False
 app.jinja_env.filters['session_json'] = session_json
 app.jinja_env.filters['session_cleared'] = session_cleared
-
-
-engine = create_engine(
-    app.config['SQLALCHEMY_DATABASE_URI'],
-    convert_unicode=True,
-    # pool_size=10,
-)
-db_session = scoped_session(
-    sessionmaker(autocommit=False, autoflush=False, bind=engine))
-
-
-class RpsBase(object):
-    id = Column(Integer, primary_key=True)
-
-    @declared_attr
-    def __tablename__(cls):
-        return re.sub(r'(.)([A-Z])', r'\1_\2', cls.__name__).lower()
-
-
-Base = declarative_base(cls=RpsBase)
-Base.query = db_session.query_property()
-
-
-@app.before_request
-def before_request():
-    g.db = engine.dispose()
-    # db_session.dispose()
-
-
-@app.teardown_request
-@app.teardown_appcontext
-def shutdown_session(exception=None):
-    try:
-        g.db.close()
-        db_session.remove()
-    except:
-        try:
-            db_session.rollback()
-            db_session.remove()
-            g.db.close()
-        except:
-            pass
 
 
 @app.errorhandler(404)
