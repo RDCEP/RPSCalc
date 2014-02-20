@@ -377,7 +377,7 @@ var FactsPage = function() {
   });
 
   // Left menu navigation
-  d3.selectAll('#left_nav a')
+  d3.selectAll('#left_nav .onpage-link')
     .on('click', function() {
       d3.event.preventDefault();
       var start_y = window.pageYOffset
