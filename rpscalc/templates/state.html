@@ -5,7 +5,8 @@
   <li><a href data-name="energy" class="onpage-link">Energy Details</a></li>
   <li><a href data-name="legislation" class="onpage-link">Legislation</a></li>
   <li><a href data-name="resources" class="onpage-link">Resources</a></li>
-  <li><a href="/calculator/trajectory" class="left-nav-calc-link">Cost Calculator</a></li>
+  <li id="left_nav_calculator_link"><a href="{{ url_for('calculator.trajectory', state=state) }}" class="offpage-link">Cost Calculator</a></li>
+  <li id="left_nav_comparison_link"><a href="{{ url_for('rpscalc.pinwheel') }}" class="offpage-link">State Comparisons</a></li>
 {% endblock %}
 {% block header %}
   <section>

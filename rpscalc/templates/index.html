@@ -7,15 +7,49 @@
     width: 960px;
     margin: 0;
   }
+  #map {
+    position: relative;
+  }
+
+  .state-options {
+    height: 16px;
+    width: 44px;
+    padding: 3px 1px 6px 3px!important;
+    background-color: black;
+    position: absolute;
+    display: none;
+  }
+  .option-icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin: 2px;
+  }
+  .state-overview-icon {
+    background: url('/static/images/gui/rps_overview_16.png');
+  }
+  .state-calculator-icon {
+    background: url('/static/images/gui/rps_calculator_16.png');
+  }
 </style>{% endblock %}
 {% block content %}
 {% block header %}
   <section>
     <header>
-      <h1 style="">{{ title|replace('_', ' ')|title }}</h1>
+      <h1 style="">{{ title|replace('_', ' ') }}</h1>
     </header>
   </section>
 {% endblock %}
+  <section>
+    <h2>Cras ac lorem et velit tincidunt porta</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor
+      tempor fringilla. Morbi in blandit eros, nec egestas libero. Ut ultrices
+      arcu ac accumsan placerat. Etiam condimentum turpis nec massa elementum,
+      in tincidunt tortor mattis. Donec nec lectus laoreet, porttitor lacus
+      non, sodales tortor. Nullam vitae sagittis lacus. Nullam a tempus
+      metus.</p>
+  </section>
 <div id="map"></div>
 {% endblock %}
 {% block bodyjs %}
