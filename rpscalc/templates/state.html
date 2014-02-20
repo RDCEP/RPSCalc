@@ -1,5 +1,12 @@
-{% extends 'index.html' %}
+{% extends 'base_page.html' %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
+{% block left_nav %}
+  <li><a href data-name="snapshot" class="onpage-link">Snapshot</a></li>
+  <li><a href data-name="energy" class="onpage-link">Energy Details</a></li>
+  <li><a href data-name="legislation" class="onpage-link">Legislation</a></li>
+  <li><a href data-name="resources" class="onpage-link">Resources</a></li>
+  <li><a href="/calculator/trajectory" class="left-nav-calc-link">Cost Calculator</a></li>
+{% endblock %}
 {% block header %}
   <section>
     <header>

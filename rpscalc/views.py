@@ -20,3 +20,10 @@ def pinwheel():
     return render_template(
         'pinwheel.html'
     )
+
+@mod.route('/')
+def index():
+    return render_template(
+        'index.html',
+        title='RPS Overview & Calculator'
+    )
