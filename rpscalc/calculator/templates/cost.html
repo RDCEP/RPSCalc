@@ -1,9 +1,9 @@
 {% extends 'state.html' %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-<li><a href="{{ url_for('calculator.trajectory') }}" data-name="trajectory">Set RPS trajectory</a></li>
-<li><a href="{{ url_for('calculator.carveouts') }}" data-name="carveouts">Set carveouts</a></li>
-<li><a href="{{ url_for('calculator.pricing') }}" data-name="pricing">Set cost cap &amp; pricing</a></li>
+<li><a href="{{ url_for('calculator.trajectory', state=state) }}" data-name="trajectory">Set RPS trajectory</a></li>
+<li><a href="{{ url_for('calculator.carveouts', state=state) }}" data-name="carveouts">Set carveouts</a></li>
+<li><a href="{{ url_for('calculator.pricing', state=state) }}" data-name="pricing">Set cost cap &amp; pricing</a></li>
 <li class="active"><a href data-name="cost">Projected cost</a></li>
 {% endblock %}
 {% block content %}
@@ -21,13 +21,13 @@
       you have ‘broken’ your cost cap.</p>
     <div id="cost_cap" class="module clearfix chart-outer-wrap">
     </div>
-    <p><a href="{{ url_for('calculator.advanced') }}">Enter the magical wonderland</a>,
+    <p><a href="{{ url_for('calculator.advanced', state=state) }}">Enter the magical wonderland</a>,
       also temporarily called the ‘advanced view’.</p>
     <ul id="crumbs">
-      <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory') }}">Trajectory</a>
-      <li id="crumb_carveouts"><a href="{{ url_for('calculator.carveouts') }}">Carveouts</a></li>
-      <li id="crumb_pricing"><a href="{{ url_for('calculator.pricing') }}">Cost cap &amp; Pricing</a></li>
-      <li id="crumb_cost" class="active"><a href="{{ url_for('calculator.cost') }}">Projected Cost</a></li>
+      <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory', state=state) }}">Trajectory</a>
+      <li id="crumb_carveouts"><a href="{{ url_for('calculator.carveouts', state=state) }}">Carveouts</a></li>
+      <li id="crumb_pricing"><a href="{{ url_for('calculator.pricing', state=state) }}">Cost cap &amp; Pricing</a></li>
+      <li id="crumb_cost" class="active"><a href="{{ url_for('calculator.cost', state=state) }}">Projected Cost</a></li>
     </ul>
   </section>
 {% endblock %}

@@ -6,6 +6,14 @@ mod = Blueprint('calculator', __name__, url_prefix='/calculator',
                 static_folder='static', template_folder='templates')
 
 
+def update_calc_state(state):
+    print session['state']
+    for k in ['trajectory', 'wind', 'solar', 'rps', 'price_and_policy']:
+        session[k] = False
+    if state != session['state']:
+        session['state'] = state
+
+
 @mod.route('/clear', methods=['POST',])
 def clear():
     try:
@@ -31,57 +39,60 @@ def update():
         abort(500)
 
 
-@mod.route('/trajectory')
-def trajectory():
+@mod.route('/<state>/trajectory')
+def trajectory(state):
+    # if state != session['state']:
+    #     update_calc_state(state)
     return render_template(
         'trajectory.html',
-        state=session['state'],
+        state=state,
+        session_clear=False if state == session['state'] else True,
     )
 
 
-@mod.route('/carveouts')
-def carveouts():
+@mod.route('/<state>/carveouts')
+def carveouts(state):
     if 'trajectory' not in session.keys():
-        return redirect(url_for('calculator.trajectory'))
+        return redirect(url_for('calculator.trajectory', state=state))
     return render_template(
         'carveouts.html',
-        state=session['state'],
+        state=session['state'] or state,
     )
 
 
-@mod.route('/pricing')
-def pricing():
+@mod.route('/<state>/pricing')
+def pricing(state):
     if not session['trajectory']:
-        return redirect(url_for('calculator.trajectory'))
+        return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
-        return redirect(url_for('calculator.carveouts'))
+        return redirect(url_for('calculator.carveouts', state=state))
     return render_template(
         'pricing.html',
-        state=session['state'],
+        state=session['state'] or state,
     )
 
-@mod.route('/cost')
-def cost():
+@mod.route('/<state>/cost')
+def cost(state):
     if not session['trajectory']:
-        return redirect(url_for('calculator.trajectory'))
+        return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
-        return redirect(url_for('calculator.carveouts'))
+        return redirect(url_for('calculator.carveouts', state=state))
     if not session['price_and_policy']:
-        return redirect(url_for('calculator.pricing'))
+        return redirect(url_for('calculator.pricing', state=state))
     return render_template(
         'cost.html',
-        state=session['state'],
+        state=session['state'] or state,
     )
 
-@mod.route('/advanced')
-def advanced():
+@mod.route('/<state>/advanced')
+def advanced(state):
     if not session['trajectory']:
-        return redirect(url_for('calculator.trajectory'))
+        return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
-        return redirect(url_for('calculator.carveouts'))
+        return redirect(url_for('calculator.carveouts', state=state))
     if not session['price_and_policy']:
-        return redirect(url_for('calculator.pricing'))
+        return redirect(url_for('calculator.pricing', state=state))
     return render_template(
         'advanced.html',
-        state=session['state'],
+        state=session['state'] or state,
     )

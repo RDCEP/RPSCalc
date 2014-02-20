@@ -1,10 +1,10 @@
 {% extends 'state.html' %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-<li><a href="{{ url_for('calculator.trajectory') }}" data-name="trajectory">Set RPS trajectory</a></li>
-<li><a href="{{ url_for('calculator.carveouts') }}" data-name="carveouts">Set carveouts</a></li>
-<li><a href="{{ url_for('calculator.pricing') }}" data-name="pricing">Set cost cap &amp; pricing</a></li>
-<li><a href="{{ url_for('calculator.cost') }}" data-name="cost">Projected cost</a></li>
+<li><a href="{{ url_for('calculator.trajectory', state=state) }}" data-name="trajectory">Set RPS trajectory</a></li>
+<li><a href="{{ url_for('calculator.carveouts', state=state) }}" data-name="carveouts">Set carveouts</a></li>
+<li><a href="{{ url_for('calculator.pricing', state=state) }}" data-name="pricing">Set cost cap &amp; pricing</a></li>
+<li><a href="{{ url_for('calculator.cost', state=state) }}" data-name="cost">Projected cost</a></li>
 {% endblock %}
 {% block content %}
   {{ super() }}
