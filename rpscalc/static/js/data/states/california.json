@@ -32,7 +32,7 @@
         0.33
     ],
     "legislation": {
-        "statute": "Established in 2002, California's Renewable Portfolio Standard (RPS) was last updated in April 2011. <a href=\"http://info.sen.ca.gov/pub/11-12/bill/sen/sb_0001-0050/sbx1_2_bill_20110412_chaptered.html\">This law</a> requires all electricity retailers in the state acheive the goal of 33% of retail sales from renewables by 2020. The RPS program is administered in tandem by the <a href=\"http://www.energy.ca.gov/portfolio/index.html\">California Energy Commission</a> and the <a href=\"http://www.cpuc.ca.gov/PUC/energy/Renewables/overview\">California Public Utilities Commission</a>.",
+        "statute": "Established in 2002, California's Renewable Portfolio Standard (RPS) was last updated in April 2011. <a href=\"http://info.sen.ca.gov/pub/11-12/bill/sen/sb_0001-0050/sbx1_2_bill_20110412_chaptered.html\">This law</a> requires all electricity retailers in the state acheive the goal of 33% of retail sales from renewables by 2020. The RPS program is administered in tandem by the <a href=\"http://www.energy.ca.gov/portfolio/base_page.html\">California Energy Commission</a> and the <a href=\"http://www.cpuc.ca.gov/PUC/energy/Renewables/overview\">California Public Utilities Commission</a>.",
         "rps_tech_details": [
             {
                 "name": "Eligible Technologies",
