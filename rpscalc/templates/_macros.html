@@ -1,0 +1,16 @@
+{% macro calc_left_nav(page, state) %}
+  {% for p in [('trajectory', 'Set RPS trajectory'), ('carveouts', 'Set carveouts'), ('pricing', 'Set cost cap &amp; pricing'), ('cost', 'Projected cost'), ] %}
+  <li{% if page==p[0] %} class="active"{% endif %}>
+    <a href="{{ url_for('calculator.%s' % p[0], state=state) }}" data-name="{{ p[0] }}">
+      {{ p[1]|safe }}
+    </a></li>
+  {% endfor %}
+  <li id="left_nav_calculator_link">
+    <a href="{{ url_for('state_pages.overview', state=state) }}" class="offpage-link">
+      State Overview
+    </a></li>
+  <li id="left_nav_comparison_link">
+    <a href="{{ url_for('rpscalc.pinwheel') }}" class="offpage-link">
+      State Comparisons
+    </a></li>
+{% endmacro %}

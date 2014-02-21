@@ -106,8 +106,8 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 #left_nav li.active { font-weight: bold; }
 #left_nav a:hover, #left_nav a.selected { color: black !important; }
 
-#left_nav_calculator_link, #left_nav_comparison_link { padding: 8px 15px; width: 170px; background-color: #666666; position: relative; left: -15px; margin-top: 1em !important; }
-#left_nav_calculator_link a, #left_nav_comparison_link a { color: #eeeeee; font-weight: bold; }
+#left_nav_calculator_link, #left_nav_comparison_link { padding: 8px 15px; width: 170px; background-color: #fafafa; position: relative; left: -15px; margin-top: 1em !important; }
+#left_nav_calculator_link a, #left_nav_comparison_link a { color: #bbbbbb; font-weight: bold; }
 
 #main_content { width: 960px; margin: 3.5em auto; padding-bottom: 2em; }
 #main_content section { margin-left: 230px; width: 730px; padding: 0; border-top: 1px solid #999999; }

@@ -1,10 +1,8 @@
 {% extends 'state.html' %}
+{% import '_macros.html' as macros %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-<li><a href="{{ url_for('calculator.trajectory', state=state) }}" data-name="trajectory">Set RPS trajectory</a></li>
-<li><a href="{{ url_for('calculator.carveouts', state=state) }}" data-name="carveouts">Set carveouts</a></li>
-<li class="active"><a href data-name="pricing">Set cost cap &amp; pricing</a></li>
-<li><a href="{{ url_for('calculator.cost', state=state) }}" data-name="cost">Projected cost</a></li>
+  {{ macros.calc_left_nav(state, 'pricing') }}
 {% endblock %}
 {% block content %}
   {{ super() }}
@@ -21,6 +19,32 @@
       assumptions about the cost of renewable power.</p>
     <div id="pricing" class="module clearfix chart-outer-wrap">
       <form id="pricing_form">
+        <fieldset id="policy_parameters" class="narrow" style="clear:left;">
+          <h4>Policy parameters</h4>
+          <div class="clearfix">
+            <label for="policy_costcap">Cost cap (%)</label>
+            <input type="text" id="policy_costcap" name="policy_costcap" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="policy_ptc">PTC</label>
+            <input type="checkbox" id="policy_ptc" name="policy_ptc" checked>
+          </div>
+        </fieldset>
+        <fieldset id="policy_costs" class="narrow">
+          <h4>Pricing parameters</h4>
+          <div class="clearfix visuallyhidden">
+            <label for="policy_retail">Retail ($/MWh)</label>
+            <input type="text" id="policy_retail" name="policy_retail" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="policy_wholesale">Wholesale ($/MWh)</label>
+            <input type="text" id="policy_wholesale" name="policy_wholesale" pattern="[0-9]*\.*[0-9]+">
+          </div>
+          <div class="clearfix">
+            <label for="policy_annualgrowth">Annual growth (%)</label>
+            <input type="text" id="policy_annualgrowth" name="policy_annualgrowth" pattern="[0-9]*\.*[0-9]+">
+          </div>
+        </fieldset>
         <fieldset id="wind_costs" class="narrow">
           <h4>Wind parameters</h4>
           <div class="clearfix">
@@ -61,32 +85,6 @@
           <div class="clearfix">
             <label for="solar_amortization">Amortization (%)</label>
             <input type="text" id="solar_amortization" name="solar_amortization" pattern="[0-9]*\.*[0-9]+">
-          </div>
-        </fieldset>
-        <fieldset id="policy_parameters" class="narrow" style="clear:left;">
-          <h4>Policy parameters</h4>
-          <div class="clearfix">
-            <label for="policy_costcap">Cost cap (%)</label>
-            <input type="text" id="policy_costcap" name="policy_costcap" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="policy_ptc">PTC</label>
-            <input type="checkbox" id="policy_ptc" name="policy_ptc" checked>
-          </div>
-        </fieldset>
-        <fieldset id="policy_costs" class="narrow">
-          <h4>Pricing parameters</h4>
-          <div class="clearfix">
-            <label for="policy_retail">Retail ($/MWh)</label>
-            <input type="text" id="policy_retail" name="policy_retail" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="policy_wholesale">Wholesale ($/MWh)</label>
-            <input type="text" id="policy_wholesale" name="policy_wholesale" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="policy_annualgrowth">Annual growth (%)</label>
-            <input type="text" id="policy_annualgrowth" name="policy_annualgrowth" pattern="[0-9]*\.*[0-9]+">
           </div>
         </fieldset>
       </form>
