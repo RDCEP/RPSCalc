@@ -279,7 +279,7 @@ var FactsPage = function() {
 
     d3.select('#summary')
       .append('p')
-      .html(_data.snapshot.summary);
+      .text(_data.snapshot.summary);
     d3.select('#overview').selectAll('li')
       .data(_data.snapshot.overview)
       .enter()
