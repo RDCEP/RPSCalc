@@ -1,4 +1,8 @@
 (function() {
+  /*
+   Retrieve state data from JSON. Set region for pricing and policies.
+   Prefer session data if it exists, else state data, else regional.
+   */
   var retail,
     region,
     state_pp,
@@ -10,7 +14,6 @@
     region = state_pp.region || 'default';
     d3.json('/static/js/data/pricing2.json', function(_defaults) {
       default_pp = _defaults[region];
-      console.log(_defaults);
       d3.selectAll('input')
         .property('value', function() {
           var input = d3.select(this),
@@ -27,8 +30,13 @@
           } else {
             var val = (session_pp[name]) ? session_pp[name] : (state_pp[name]) ? state_pp[name] : default_pp[name];
             Options.data.price_and_policy[name] = val;
+            if (name == 'cost_cap') {
+              //TODO: set unit (% or $)
+
+            }
             return val;
           }
+
         })
         .on('change', function() {
           var input = d3.select(this),
