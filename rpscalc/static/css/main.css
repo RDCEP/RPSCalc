@@ -137,10 +137,9 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 .switch a { color: #bbbbbb; font-weight: bold; }
 .switch.active a { color: #d55e00; }
 
-line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width: 1; }
-
 .x.axis text { text-anchor: end !important; }
 
+.axis { fill: none; }
 .axis line { stroke-width: 1; stroke: #999999; }
 
 .chart-line { stroke-width: 2; }
@@ -155,7 +154,7 @@ line, rect, path { stroke-linecap: round; fill: none; stroke: none; stroke-width
 
 path.domain { stroke: #999999; stroke-width: 1; }
 
-.default_line { stroke: black; stroke-width: 2; stroke-dasharray: 1, 8; }
+.default_line { fill: none; stroke: black; stroke-width: 2; stroke-dasharray: 1, 8; }
 
 .data-point { stroke-width: 3; cursor: ns-resize; stroke: transparent; fill: transparent; pointer-events: none; }
 .data-point .loose { stroke-width: 5; pointer-events: all; }
@@ -207,6 +206,10 @@ path.domain { stroke: #999999; stroke-width: 1; }
 .carveout-text { line-height: 1.2em; font-size: 0.8em; margin-right: 5px; }
 
 .price-line { stroke: #56b4e9; stroke-width: 2; }
+
+#cost_chart_clip_pattern rect, #cost_cap_clip_pattern rect { fill: none; }
+
+#retail_price .chart-line { fill: none; }
 
 td, th { text-align: left; padding: 3px 15px 3px 0; width: 200px; }
 

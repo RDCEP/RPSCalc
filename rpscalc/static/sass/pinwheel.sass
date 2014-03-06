@@ -1,0 +1,109 @@
+ul ul, li
+  padding-left: 15px
+  padding-top: .25em
+  margin-top: .5em
+  margin-bottom: 1em
+  border-left: 1px solid #999
+  border-top: 1px solid #999
+ul ul
+  margin-top: .25em
+li li
+  padding: 0
+  margin: 0
+  border: none
+
+#graph-wrap
+  width: 950px
+  position: relative
+#legend
+  position: absolute
+  width: 320px
+  top: 0
+  right: 0
+  height: 100%
+  display: none
+#graph
+  width: 700px
+  height: 700px
+  position: relative
+.regdiv
+  stroke: black
+  stroke-width: 2
+  pointer-events: none
+.segdiv
+  stroke: #eeeeee
+  stroke-width: 1
+  fill: none
+  pointer-events: none
+.state-border
+  stroke: #eeeeee
+  stroke-width: 1
+  fill: none
+  pointer-events: visible
+.state-border.active
+  stroke: #eeeeee
+  stroke-width: 3
+.state-label-disc
+  fill: black
+  stroke: black
+  stroke-width: 0
+  visibility: hidden
+.state-label-disc.active
+  visibility: visible
+.state-label-text
+  font-weight: normal
+  text-anchor: middle
+  dominant-baseline: central
+.state-label-text.active
+  font-weight: bold
+  fill: #eeeeee
+  
+/* legend */
+#legend h2
+  margin: 10px 0
+  padding: 0
+#legend h3
+  width: 260px
+  display: inline
+  font-weight: bold
+  padding: 0
+#legend li
+  position: relative
+  padding: 5px 5px 10px
+  min-height: 20px
+  clear: both
+  
+#legend p
+  padding-left: 30px
+  width: 260px
+  
+#legend .dot
+  float: left
+  height: 20px
+  width: 20px
+  margin-right: 10px
+  
+.rps .dot
+  background-color: rgb(0, 0, 0)
+  
+.tech_req .dot
+  background-color: rgb(230, 159, 0)
+  
+.penalties .dot
+  background-color: rgb(86, 180, 233)
+  
+.geo_eligible .dot
+  background-color: rgb(0, 158, 115)
+  
+.net_meter .dot
+  background-color: rgb(240, 228, 66)
+  
+.renew_interconnect .dot
+  background-color: rgb(0, 114, 178)
+  
+.perform_incentive .dot
+  background-color: rgb(213, 94, 0)
+  
+.reside_rebate .dot
+  background-color: rgb(204, 121, 167)
+  

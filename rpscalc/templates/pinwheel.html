@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Pinwheel/Sunburst Work</title>
+{% extends 'base_page.html' %}
+{% block title %}Pinwheel/Sunburst Work{% endblock %}
+{% block headcss %}
+  {{ super() }}
   <link rel=stylesheet href={{ url_for('static', filename='css/pinwheel.css') }} media=all>
-</head>
-<body>
+{% endblock %}
+{% block content %}
+{% block header %}
+  <section>
+    <header>
+      <h1 style="">{{ title|replace('_', ' ') }}</h1>
+    </header>
+  </section>
+{% endblock %}
 <article id=graph-wrap>
   <div id=graph>
   </div>
@@ -22,7 +29,9 @@
     </ul>
   </div>
 </article>
-<script src={{ url_for('static', filename='js/vendor/d3.v3.min.js') }} charset=utf-8></script>
-<script src={{ url_for('static', filename='js/app/pinwheel.js') }}></script>
-</body>
-</html>
+{% endblock %}
+{% block bodyjs %}
+{{ super() }}
+{#  <script src={{ url_for('static', filename='js/vendor/d3.v3.min.js') }} charset=utf-8></script>#}
+  <script src={{ url_for('static', filename='js/app/pinwheel.js') }}></script>
+{% endblock %}

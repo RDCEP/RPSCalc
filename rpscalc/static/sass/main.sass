@@ -1,5 +1,7 @@
 @import globals
 @import colors
+//@import svg_reset
+
 
 $crumb: 20px
 
@@ -321,17 +323,14 @@ input
   &.active a
     color: $red
 // GRAPHS
-line, rect, path
-  stroke-linecap: round
-  fill: none
-  stroke: none
-  stroke-width: 1
 .x.axis
   text
     text-anchor: end!important
-.axis line
-  stroke-width: 1
-  stroke: #999999
+.axis
+  fill: none
+  line
+    stroke-width: 1
+    stroke: #999999
 .chart-line
   stroke-width: 2
 .chart-outline
@@ -348,6 +347,7 @@ path.domain
   stroke: #999
   stroke-width: 1
 .default_line
+  fill: none
   stroke: black
   stroke-width: 2
   stroke-dasharray: 1, 8
@@ -451,6 +451,15 @@ path.domain
 .price-line
   stroke: $sky-blue
   stroke-width: 2
+
+#cost_chart_clip_pattern, #cost_cap_clip_pattern
+  rect
+    fill: none
+
+#retail_price
+  .chart-line
+    fill: none
+
 
 td, th
   text-align: left
