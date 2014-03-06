@@ -50,6 +50,10 @@ js = Bundle(
     filters='jsmin', output='gen/main.js')
 assets.register('js_main', js)
 js = Bundle(
+    'js/vendor/topojson.v1.min.js',  'js/vendor/d3.geo.projection.v0.min.js',
+    filters='jsmin', output='gen/map_extras.js')
+assets.register('js_map_extras', js)
+js = Bundle(
     'calculator/js/trajectory.js', filters='jsmin', output='gen/trajectory.js')
 assets.register('js_trajectory', js)
 js = Bundle(
