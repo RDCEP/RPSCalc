@@ -90,8 +90,6 @@
     window.JSON || document.write('<script src="{{ url_for('static', filename='js/vendor/json2.js') }}"><\/script>')
   </script>
   {% assets 'js_main' %}
-<script src="{{ url_for('static', filename='js/vendor/d3.geo.projection.v0.min.js') }}?2"></script>
-<script src="{{ url_for('static', filename='js/vendor/topojson.v1.min.js') }}?2"></script>
     <script src="{{ ASSET_URL }}"></script>
   {% endassets %}
   {% endblock %}

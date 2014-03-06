@@ -58,5 +58,7 @@
 {% endblock %}
 {% block bodyjs %}
 {{ super() }}
+<script src="{{ url_for('static', filename='js/vendor/d3.geo.projection.v0.min.js') }}?2"></script>
+<script src="{{ url_for('static', filename='js/vendor/topojson.v1.min.js') }}?2"></script>
 <script src="{{ url_for('static', filename='js/home_map.js') }}"></script>
 {% endblock %}

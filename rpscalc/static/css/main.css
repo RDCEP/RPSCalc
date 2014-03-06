@@ -144,7 +144,7 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 
 .chart-line { stroke-width: 2; }
 
-.chart-outline { stroke: #eeeeee; }
+.chart-outline { stroke: #eeeeee; fill: none; }
 
 .chart-area { stroke-width: 0; }
 
@@ -210,6 +210,8 @@ path.domain { stroke: #999999; stroke-width: 1; }
 #cost_chart_clip_pattern rect, #cost_cap_clip_pattern rect { fill: none; }
 
 #retail_price .chart-line { fill: none; }
+
+.state-boundary { fill: #cccccc; }
 
 td, th { text-align: left; padding: 3px 15px 3px 0; width: 200px; }
 

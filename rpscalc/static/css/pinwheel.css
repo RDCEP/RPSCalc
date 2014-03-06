@@ -1,3 +1,7 @@
+#main_content li { list-style-type: none !important; }
+
+#legend { font-size: 0.8em; }
+
 ul ul, li { padding-left: 15px; padding-top: 0.25em; margin-top: 0.5em; margin-bottom: 1em; border-left: 1px solid #999999; border-top: 1px solid #999999; }
 
 ul ul { margin-top: 0.25em; }
@@ -6,7 +10,7 @@ li li { padding: 0; margin: 0; border: none; }
 
 #graph-wrap { width: 950px; position: relative; }
 
-#legend { position: absolute; width: 320px; top: 0; right: 0; height: 100%; display: none; }
+#legend { position: absolute; width: 320px; top: 0; right: 0; height: 100%; display: none; font-size: 0.8em; }
 
 #graph { width: 700px; height: 700px; position: relative; }
 

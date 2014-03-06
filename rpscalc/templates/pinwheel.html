@@ -2,13 +2,13 @@
 {% block title %}Pinwheel/Sunburst Work{% endblock %}
 {% block headcss %}
   {{ super() }}
-  <link rel=stylesheet href={{ url_for('static', filename='css/pinwheel.css') }} media=all>
+  <link rel=stylesheet href={{ url_for('static', filename='css/pinwheel.css') }}?2 media=all>
 {% endblock %}
 {% block content %}
 {% block header %}
   <section>
     <header>
-      <h1 style="">{{ title|replace('_', ' ') }}</h1>
+      <h1 style="">State comparisons</h1>
     </header>
   </section>
 {% endblock %}
