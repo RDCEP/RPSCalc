@@ -1,4 +1,4 @@
-{% extends 'state.html' %}
+{% extends 'base_state.html' %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
   <li><a href="{{ url_for('calculator.trajectory', state=state) }}" data-name="trajectory">Set RPS trajectory</a></li>
