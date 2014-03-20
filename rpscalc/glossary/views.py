@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template
 
 
-mod = Blueprint('glossary', __name__, static_folder='static',
-                template_folder='templates')
+mod = Blueprint('glossary', __name__, url_prefix='/glossary',
+                static_folder='static', template_folder='templates')
 
 
-@mod.route('/glossary/')
+@mod.route('/')
 def glossary(definition=None):
     return render_template(
         'glossary.html',

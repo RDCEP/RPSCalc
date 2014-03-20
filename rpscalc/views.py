@@ -15,11 +15,6 @@ def update():
     except:
         abort(500)
 
-@mod.route('/pinwheel')
-def pinwheel():
-    return render_template(
-        'pinwheel.html'
-    )
 
 @mod.route('/')
 def index():

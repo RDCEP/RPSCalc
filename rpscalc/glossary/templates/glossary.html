@@ -8,7 +8,7 @@
 {% block bodyjs %}
   {{ super() }}
   <script>
-  d3.json('/static/js/data/glossary.json', function(_data) {
+  d3.json('/glossary/static/glossary.json', function(_data) {
     var left_nav = d3.select('#left_nav'),
       glossary = d3.select('#glossary').append('dl'),
       defs = glossary.selectAll('.definition')

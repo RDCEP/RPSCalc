@@ -148,7 +148,7 @@ function Pinwheel() {
    End variables
    */
 
-  d3.json('/static/js/data/pinwheel_data.json', function(data) {
+  d3.json('/comparison/static/json/pinwheel_data.json', function(data) {
     num_states = data.states.length;
     legend = data.legend;
     default_legend = data.default_legend;
