@@ -23,6 +23,43 @@
         0.1,
         0.1
     ],
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.michigan.gov/mpsc/0,4639,7-159-16393_53570---,00.html",
+                    "name": "Michigan Public Service Commission",
+                    "description": "<i>RPS compliance information<i>"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                },
+                {
+                    "href": "http://closup.umich.edu/files/closup-wp-32-moyer-rps.pdf",
+                    "name": "Feasibility and Implications of the Michigan 2012 Proposal 3 for a 25% State Renewable Portfolio Standard",
+                    "description": "Moyer et al. 2012"
+                }
+            ]
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page",
+                    "description": "<i>Datasets available for download in .xlsx format<i>"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
+                }
+            ]
+        }
+    },
     "legislation": {
         "statute": "Michigan's RPS was enacted by <a href='http://www.legislature.mi.gov/documents/2007-2008/publicact/pdf/2008-PA-0295.pdf'>Public Act 295</a> in October 2008. In total, this act will require that electric providers in Michigan produce 10% of their energy from renewable sources by 2015. The first compliance period began in 2012. The annual requirements are determined for each utility based on statutorily defined increments between 2007 baseline and the 2015 goal. In addition to these percentage requirements (which can be fulfilled through REC purchases), large utilities have additional capacity requirements.",
         "rps_tech_details": [
@@ -62,50 +99,18 @@
             "Cost cap for residential customers at <strong>$3.00<strong> per month"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Maryland's pathway is red. Click on another state to learn more about their RPS.",
-        "summary": "Michigan's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Michigan.",
-        "rps_progress": "1.0"
+        "rps_progress": "1.0",
+        "summary": "Michigan's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Michigan."
     },
     "abbr": "MI",
+    "policy_and_price": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 110
+    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,
-        "policy_retail": 114
-    },
-    "resources": {
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page",
-                    "description": "<i>Datasets available for download in .xlsx format<i>"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
-                }
-            ]
-        },
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.michigan.gov/mpsc/0,4639,7-159-16393_53570---,00.html",
-                    "name": "Michigan Public Service Commission",
-                    "description": "<i>RPS compliance information<i>"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                },
-                {
-                    "href": "http://closup.umich.edu/files/closup-wp-32-moyer-rps.pdf",
-                    "name": "Feasibility and Implications of the Michigan 2012 Proposal 3 for a 25% State Renewable Portfolio Standard",
-                    "description": "Moyer et al. 2012"
-                }
-            ]
-        }
+        "policy_retail": 110
     }
 }

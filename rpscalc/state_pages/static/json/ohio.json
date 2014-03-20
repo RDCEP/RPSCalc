@@ -26,6 +26,38 @@
         0.125,
         0.125
     ],
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.puco.ohio.gov/puco/index.cfm/industry-information/industry-topics/ohioe28099s-renewable-and-advanced-energy-portfolio-standard/",
+                    "name": "PUCO's Renewable and Advanced Energy Portoflio Website",
+                    "description": "Links and information on Ohio's AEPS"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "<i>Datasets available for download in .xlsx format<i>"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
+                }
+            ]
+        }
+    },
     "legislation": {
         "statute": "Originally enacted in 2008, Ohio's AEPS sets a standard for both renewable energy and alternative energy. Given the broad definition of 'alternative energy' established by the state, this page only considers the renewable portion of the legislation. This half of the statute requires that 15% of the state's retail electric sales come from renewable sources by 2024. Ohio's AEPS is administered by the Public Utilities Commission of Ohio.",
         "rps_tech_details": [
@@ -59,7 +91,6 @@
     },
     "carveouts": [
         {
-            "type": "Solar",
             "data": [
                 0.016,
                 0.02,
@@ -83,7 +114,8 @@
                 0.04,
                 0.04,
                 0.04
-            ]
+            ],
+            "type": "Solar"
         }
     ],
     "snapshot": {
@@ -93,45 +125,18 @@
             "Cost-cap at 3% of projected cost"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Ohio's pathway is red. Click on another state to learn more about their AEPS.",
-        "summary": "Ohio's Renewable Portfolio Standard (actually called Alternative Energy Portfolio Standard or AEPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. Ohio's AEPS also establishes a minimum amount of 'alternative energy' required to be used in the state. This analysis will not consider the 'alternative' portion of the statute. Rather, this page will identify and describe only the features of the AEPS that set a standard for renewable energy.",
-        "rps_progress": "0.0"
+        "rps_progress": "0.0",
+        "summary": "Ohio's Renewable Portfolio Standard (actually called Alternative Energy Portfolio Standard or AEPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. Ohio's AEPS also establishes a minimum amount of 'alternative energy' required to be used in the state. This analysis will not consider the 'alternative' portion of the statute. Rather, this page will identify and describe only the features of the AEPS that set a standard for renewable energy."
     },
     "abbr": "OH",
+    "policy_and_price": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 91
+    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,
-        "policy_retail": 95
-    },
-    "resources": {
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "<i>Datasets available for download in .xlsx format<i>"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "<i>Advanced search tool for comparing RPS program data<i>"
-                }
-            ]
-        },
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.puco.ohio.gov/puco/index.cfm/industry-information/industry-topics/ohioe28099s-renewable-and-advanced-energy-portfolio-standard/",
-                    "name": "PUCO's Renewable and Advanced Energy Portoflio Website",
-                    "description": "Links and information on Ohio's AEPS"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        }
+        "policy_retail": 91
     }
 }

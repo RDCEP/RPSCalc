@@ -25,6 +25,38 @@
         0.25,
         0.4
     ],
+    "resources": {
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://files.hawaii.gov/dbedt/annuals/2012/2012-erc.pdf",
+                    "name": "State of Hawaii Energy Resources Coordinator's Annual Report (2012)",
+                    "description": "Review Hawaii's progress on RPS and EEPS"
+                }
+            ]
+        },
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=HI06R&re=1&ee=1",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
+        }
+    },
     "legislation": {
         "statute": "Hawaii is the only state to create Energy Efficiency Portfolio Standards (EEPS) to complement the RPS, calling for a 30% decrease in consumption, or 4,300 GWh. The RPS itself calls for 40% of electricity from renewable energy by 2030, the highest RPS goal in the country. The Public Utilities Commission (PUC) can designate specific portions of the goal to each utility, and sometimes may specify a renewable technology to meet the goal. Until 2015, energy efficiency measures will count toward the total RPS requirements; after 2015, 100% of the requirements must be met through renewable electricity.",
         "rps_tech_details": [
@@ -65,45 +97,18 @@
             "<strong>Separate</strong> Energy Efficiency Portfolio Standards (EEPS) of <strong>4,300 GWh reduction by 2030</strong>"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart shows Colorado's policy pathway.\n",
-        "rps_progress": "0",
-        "summary": "Hawaii's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Colorado."
+        "summary": "Hawaii's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Colorado.",
+        "rps_progress": "0"
     },
     "abbr": "HI",
+    "policy_and_price": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 335
+    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,
-        "policy_retail": 325
-    },
-    "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=HI06R&re=1&ee=1",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        },
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://files.hawaii.gov/dbedt/annuals/2012/2012-erc.pdf",
-                    "name": "State of Hawaii Energy Resources Coordinator's Annual Report (2012)",
-                    "description": "Review Hawaii's progress on RPS and EEPS"
-                }
-            ]
-        }
+        "policy_retail": 335
     }
 }

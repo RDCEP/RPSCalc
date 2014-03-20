@@ -26,6 +26,42 @@
         0.25,
         0.25
     ],
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IL04R&re=1&ee=0",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<e>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</em>"
+                }
+            ]
+        },
+        "grid_mix": {
+            "text": "This overview from Energy Information Administration (EIA) demonstrates Illinois's current sources for electricity",
+            "data": []
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
+                }
+            ]
+        }
+    },
     "legislation": {
         "statute": "The current RPS was enacted in 2007 through creation of Illinois Power Agency (IPA). The IPA's purpose was to develop electricity procurement plans for renewable power. The legislation more specifically: 75% (equal to 18.75% total power sales in 2025) wind power annually for IOUs, and 60% for ARES by 2020; The 6% (equating to 1.5% of total retail sales) annual solar carve out ramps up for IOUs in 2013, and in 2016 for ARES., 1% carve out for distributed generation. Renewable generation limited to \u201ccost-effective\u201d resources. Renewable energy may be bundled with RECs. In 2011, anaerobic digestion was added to eligible resources. A second efficiency portfolio standard exists.",
         "rps_tech_details": [
@@ -59,7 +95,6 @@
     },
     "carveouts": [
         {
-            "type": "wind",
             "data": [
                 0.75,
                 0.75,
@@ -83,10 +118,10 @@
                 0.752,
                 0.752,
                 0.752
-            ]
+            ],
+            "type": "wind"
         },
         {
-            "type": "solar",
             "data": [
                 0.0,
                 0.0,
@@ -110,10 +145,10 @@
                 0.06,
                 0.06,
                 0.06
-            ]
+            ],
+            "type": "solar"
         },
         {
-            "type": "DG",
             "data": [
                 0.0,
                 0.0,
@@ -137,7 +172,8 @@
                 0.01,
                 0.01,
                 0.01
-            ]
+            ],
+            "type": "DG"
         }
     ],
     "snapshot": {
@@ -148,49 +184,18 @@
             "<strong>Two</strong> separate state RPS schedules (primary and secondary)"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. California's pathway is red. Click on another state to learn more about their RPS.\n",
-        "summary": "Illinois's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Illinois.",
-        "rps_progress": ".06"
+        "rps_progress": ".06",
+        "summary": "Illinois's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Illinois."
     },
     "abbr": "IL",
+    "policy_and_price": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 78
+    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,
-        "policy_retail": 81
-    },
-    "resources": {
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
-                }
-            ]
-        },
-        "grid_mix": {
-            "text": "This overview from Energy Information Administration (EIA) demonstrates Illinois's current sources for electricity",
-            "data": []
-        },
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IL04R&re=1&ee=0",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<e>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</em>"
-                }
-            ]
-        }
+        "policy_retail": 78
     }
 }

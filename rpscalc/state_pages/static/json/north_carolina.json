@@ -25,6 +25,38 @@
         0.125,
         0.125
     ],
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=NC09R",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
+                }
+            ]
+        }
+    },
     "legislation": {
         "statute": "The RPS was established in 2007 with Senate Bill 3, which required all investor-owned utilities to supply 12.5% of the state's retail electricity sales with qualifying renewable energy sources by 2021. The bill also sets out that municipal utilities and electric cooperatives supply 10% of their sales with renewable sources by 2018. The North Carolina Utilities Commission enforces the requirements, which serve the purpose of developing electricity procurement plans for renewable power for the state. Renewable energy may be bundled with RECs.",
         "rps_tech_details": [
@@ -58,7 +90,6 @@
     },
     "carveouts": [
         {
-            "type": "solar",
             "data": [
                 0.01,
                 0.01,
@@ -81,10 +112,10 @@
                 0.016,
                 0.016,
                 0.016
-            ]
+            ],
+            "type": "solar"
         },
         {
-            "type": "Swine Waste",
             "data": [
                 0.0,
                 0.0,
@@ -107,7 +138,8 @@
                 0.016,
                 0.016,
                 0.016
-            ]
+            ],
+            "type": "Swine Waste"
         }
     ],
     "snapshot": {
@@ -117,43 +149,11 @@
             "There is not explicit cap on a change in retail electricity pricing."
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. North Carolina's pathway is red. Click on another state to learn more about their RPS.",
-        "summary": "North Carolina's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in North Carolina.",
-        "rps_progress": 0.0
+        "rps_progress": 0.0,
+        "summary": "North Carolina's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in North Carolina."
     },
     "abbr": "NC",
     "policy_and_price": {
-        "policy_retail": 96
-    },
-    "resources": {
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
-                }
-            ]
-        },
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=NC09R",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        }
+        "policy_retail": 92
     }
 }

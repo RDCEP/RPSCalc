@@ -35,6 +35,38 @@
         0.4,
         0.4
     ],
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=ME01R",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
+                }
+            ]
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
+                }
+            ]
+        }
+    },
     "legislation": {
         "statute": "Maine's RPS was enacted in 1999 and required 30% of each electricity provider's supply to come from renewable energy. Updates since 1999 have amended the original RPS mandate. At the time of the 1999 mandate, renewable capacity exceeded the 30% requirement. The purpose of the later revisions to the requirement have been to develop electricity procurement plans for renewable power beyond the existing capacity. The current legislation more specifically: an additional 10% of capacity to total 40% of renewable power annually by 2017. Renewable energy may be bundled with GIS certificates, which are similar to RECs, to meet Class I requirements, but not Class II requirements.",
         "rps_tech_details": [
@@ -67,7 +99,6 @@
     },
     "carveouts": [
         {
-            "type": "Maine requires new renewable capacity, in addition to the existing 30% of renewable capacity, to increase to 10%.",
             "data": [
                 0.0,
                 0.0,
@@ -100,7 +131,8 @@
                 0.256,
                 0.256,
                 0.256
-            ]
+            ],
+            "type": "Maine requires new renewable capacity, in addition to the existing 30% of renewable capacity, to increase to 10%."
         }
     ],
     "snapshot": {
@@ -110,43 +142,11 @@
             "Cost cap for percent of sales"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Maine's pathway is red. Click on another state to learn more about their RPS.",
-        "summary": "Maine's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers, in addition to the existing 30% of capacity in Maine. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Maine.",
-        "rps_progress": 0.36
+        "rps_progress": 0.36,
+        "summary": "Maine's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers, in addition to the existing 30% of capacity in Maine. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Maine."
     },
     "abbr": "ME",
     "policy_and_price": {
-        "policy_retail": 116
-    },
-    "resources": {
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
-                }
-            ]
-        },
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=ME01R",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        }
+        "policy_retail": 119
     }
 }

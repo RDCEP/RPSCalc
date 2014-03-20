@@ -29,6 +29,52 @@
         0.25,
         0.25
     ],
+    "resources": {
+        "references": {
+            "text": "The resources below proved invaluable in the creation of this page:\n",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=NV",
+                    "name": "DSIRE State Page",
+                    "description": "Visit for more complete information on RPS details and legislation"
+                },
+                {
+                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
+                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
+                    "description": "Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies"
+                }
+            ]
+        },
+        "grid_mix": {
+            "text": "This overview from Energy Information Administration (EIA) demonstrates Nevada's current sources for electricity",
+            "data": []
+        },
+        "tools": {
+            "text": "The links below may provide more technical details to the interested user:",
+            "links": [
+                {
+                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
+                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
+                    "description": "Datasets available for download in .xlsx format"
+                },
+                {
+                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
+                    "name": "MJBeck RPS EDGE",
+                    "description": "Advanced search tool for comparing RPS program data"
+                },
+                {
+                    "href": "http://www.nrdc.org/energy/renewables/nevada.asp",
+                    "name": "Natural Resources Defense Council (NRDC) State Profile",
+                    "description": "Your state has a NRDC renewable energy resources profile; find state resources and learn about the technology"
+                },
+                {
+                    "href": "http://apps1.eere.energy.gov/states/state_home.cfm/state=NV",
+                    "name": "U.S. Department of Energy Office of Energy Efficiency and Renewable Energy (EERE) -- State Profile",
+                    "description": "Access your state\u2019s EERE page, and find information on renewable resources maps, energy statistics, and news"
+                }
+            ]
+        }
+    },
     "legislation": {
         "statute": "Nevada's original RPS was established in 1997. Most recently updated in 2009, investor-owned utilities and  retail suppliers will be required to acheive 25% of retail sales from renewable sources by 2025.  New energy efficiency measures count toward the goal. Nevada statute also requires the retirement of 800 MW of coal plants,  to be replaced with cleaner sources (including at minimum 350 MW from renewable sources). The RPS is administered by the  Public Utilities Commission of Nevada.",
         "rps_tech_details": [
@@ -62,7 +108,6 @@
     },
     "carveouts": [
         {
-            "type": "solar",
             "data": [
                 0.0,
                 0.0,
@@ -89,7 +134,8 @@
                 0.016,
                 0.016,
                 0.016
-            ]
+            ],
+            "type": "solar"
         }
     ],
     "snapshot": {
@@ -99,59 +145,18 @@
             "No explicit cost cap"
         ],
         "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Nevada's pathway is red. Click on another state to learn more about their RPS.",
-        "summary": "Nevada's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Nevada.",
-        "rps_progress": ".15"
+        "rps_progress": ".15",
+        "summary": "Nevada's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Nevada."
     },
     "abbr": "NV",
+    "policy_and_price": {
+        "wind_capacity": 0.4,
+        "solar_capacity": 0.15,
+        "policy_retail": 88
+    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,
-        "policy_retail": 101
-    },
-    "resources": {
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
-                },
-                {
-                    "href": "http://www.nrdc.org/energy/renewables/nevada.asp",
-                    "name": "Natural Resources Defense Council (NRDC) State Profile",
-                    "description": "Your state has a NRDC renewable energy resources profile; find state resources and learn about the technology"
-                },
-                {
-                    "href": "http://apps1.eere.energy.gov/states/state_home.cfm/state=NV",
-                    "name": "U.S. Department of Energy Office of Energy Efficiency and Renewable Energy (EERE) -- State Profile",
-                    "description": "Access your state\u2019s EERE page, and find information on renewable resources maps, energy statistics, and news"
-                }
-            ]
-        },
-        "grid_mix": {
-            "text": "This overview from Energy Information Administration (EIA) demonstrates Nevada's current sources for electricity",
-            "data": []
-        },
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:\n",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=NV",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies"
-                }
-            ]
-        }
+        "policy_retail": 88
     }
 }
