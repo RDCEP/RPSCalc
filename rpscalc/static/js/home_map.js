@@ -38,45 +38,26 @@ d3.json('/static/js/maps/topojson/us-named.json', function(error, us) {
     .data(topojson.feature(us, us.objects.states).features)
     .enter()
     .append('a')
+    .attr('xlink:href', function(d) {
+      if (states_w_rps.indexOf(d.properties.name) > -1) {
+        return '/state/' + d.properties.name.toLowerCase().replace(' ', '_');
+      }
+      return null;
+    })
     .append('path')
     .attr({
       class: 'state-boundary',
       d: path,
       'data-id': function(d) { return d.id; }
     })
-    .on('mouseover', function(d, i) {
-      var c = path.centroid(d);
-      pop_ups.selectAll('li').style('display', 'none');
-      var p = pop_ups.select('[data-id="'+ d.id+'"]');
-      p.style({
-        left: (c[0] - 24)+'px',
-        top: (c[1] - 10)+'px',
-        display: 'block'
-      });
-
+    .on('mouseover', function() {
+      d3.select(this).classed('active', true);
+    })
+    .on('mouseout', function() {
+      d3.select(this).classed('active', false);
     })
     .classed('rps', function(d) {
-      var is_rps_state = states_w_rps.indexOf(d.properties.name) > -1;
-      if (is_rps_state) {
-        var pop_up = pop_ups.append('li')
-          .attr({
-            class: 'state-options',
-            'data-id': d.id
-          });
-        var overview_icon = pop_up
-          .append('a')
-          .attr({class: 'option-icon state-overview-icon'})
-          .on('click', function(e) {
-            console.log(e);
-            window.location = e.attr('href');
-          });
-        var calculator_icon = pop_up
-          .append('a')
-          .attr({class: 'option-icon state-calculator-icon'});
-        overview_icon.attr('href', '/state/'+d.properties.name.toLowerCase().replace(' ', '_'));
-        calculator_icon.attr('href', '/calculator/'+d.properties.name.toLowerCase().replace(' ', '_')+'/trajectory');
-      }
-      return is_rps_state;
+      return states_w_rps.indexOf(d.properties.name) > -1;
     });
 });
 

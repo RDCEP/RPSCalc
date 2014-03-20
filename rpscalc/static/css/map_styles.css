@@ -3,3 +3,4 @@ line, path { stroke-width: 2px; }
 .land { fill: #aaaaaa; }
 
 .state-boundary.rps { fill: #56b4e9; stroke: #eeeeee; }
+.state-boundary.rps.active { fill: #d55e00; }
