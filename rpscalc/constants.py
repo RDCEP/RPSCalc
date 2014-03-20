@@ -63,3 +63,20 @@ STATES = {
     'WV': ['West Virginia', 'west_virginia'],
     'WY': ['Wyoming', 'wyoming'],
 }
+
+CARBON_INTENSITY = {
+    'Biomass': 1,
+    'Coal': 890,
+    'Distillate Fuel Oil': 670,
+    'Geothermal': 1,
+    'Hydroelectricity': 1,
+    'Kerosene': 650,
+    'LPG': 500,
+    'Natural Gas as Lease and Plant Fuel': 400,
+    'Nuclear Electricity': 1,
+    'Residual Fuel Oil': 670,
+    'Solar': 1,
+    'Supplemental Gaseous Fuels': 9999,
+    'Wind': 1,
+    'Wood and Waste': 9999,
+}
