@@ -27,6 +27,32 @@ def template_now():
     return dict(now=datetime.now().microsecond)
 
 
+@app.context_processor
+def all_rps_states():
+    s = [
+        ('arizona', 'Arizona'), 
+        ('california', 'California'),
+        ('colorado', 'Colorado'),
+        ('hawaii', 'Hawai&lsquo;i'),
+        ('illinois', 'Illinois'), 
+        ('iowa', 'Iowa'), 
+        ('kansas', 'Kansas'), 
+        ('maryland', 'Maryland'), 
+        ('michigan', 'Michigan'), 
+        ('maine', 'Maine'), 
+        ('montana', 'Montana'), 
+        ('nevada', 'Nevada'), 
+        ('new_jersey', 'New Jersey'), 
+        ('north_carolina', 'North Carolina'), 
+        ('ohio', 'Ohio'), 
+        ('oregon', 'Oregon'), 
+        ('rhode_island', 'Rhode Island'), 
+        ('washington', 'Washington'), 
+        ('wisconsin', 'Wisconsin'), 
+    ]
+    return dict(all_rps_states=s)
+
+
 # Load and register Blueprints
 from rpscalc.state_pages.views import mod as state_pages_module
 from rpscalc.calculator.views import mod as calculator_module
