@@ -2,6 +2,7 @@ from datetime import datetime
 from flask import Flask, render_template, session, g
 from flask.ext.assets import Environment, Bundle
 from rpscalc.filters import session_json, session_cleared
+from rpscalc.constants import RPS_STATES
 
 
 app = Flask(__name__)
@@ -29,28 +30,7 @@ def template_now():
 
 @app.context_processor
 def all_rps_states():
-    s = [
-        ('arizona', 'Arizona'), 
-        ('california', 'California'),
-        ('colorado', 'Colorado'),
-        ('hawaii', 'Hawai&lsquo;i'),
-        ('illinois', 'Illinois'), 
-        ('iowa', 'Iowa'), 
-        ('kansas', 'Kansas'), 
-        ('maryland', 'Maryland'), 
-        ('michigan', 'Michigan'), 
-        ('maine', 'Maine'), 
-        ('montana', 'Montana'), 
-        ('nevada', 'Nevada'), 
-        ('new_jersey', 'New Jersey'), 
-        ('north_carolina', 'North Carolina'), 
-        ('ohio', 'Ohio'), 
-        ('oregon', 'Oregon'), 
-        ('rhode_island', 'Rhode Island'), 
-        ('washington', 'Washington'), 
-        ('wisconsin', 'Wisconsin'), 
-    ]
-    return dict(all_rps_states=s)
+    return dict(all_rps_states=RPS_STATES)
 
 
 # Load and register Blueprints

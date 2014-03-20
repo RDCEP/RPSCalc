@@ -64,6 +64,28 @@ STATES = {
     'WY': ['Wyoming', 'wyoming'],
 }
 
+RPS_STATES = [
+    ('arizona', 'Arizona', 'AZ'),
+    ('california', 'California', 'CA'),
+    ('colorado', 'Colorado', 'CO'),
+    ('hawaii', 'Hawai&lsquo;i', 'HI'),
+    ('illinois', 'Illinois', 'IL'),
+    ('iowa', 'Iowa', 'IA'),
+    ('kansas', 'Kansas', 'KS'),
+    ('maryland', 'Maryland', 'MD'),
+    ('michigan', 'Michigan', 'MI'),
+    ('maine', 'Maine', 'ME'),
+    ('montana', 'Montana', 'MT'),
+    ('nevada', 'Nevada', 'NV'),
+    ('new_jersey', 'New Jersey', 'NJ'),
+    ('north_carolina', 'North Carolina', 'NC'),
+    ('ohio', 'Ohio', 'OH'),
+    ('oregon', 'Oregon', 'OR'),
+    ('rhode_island', 'Rhode Island', 'RI'),
+    ('washington', 'Washington', 'WA'),
+    ('wisconsin', 'Wisconsin', 'WI'),
+]
+
 CARBON_INTENSITY = {
     'Biomass': 1,
     'Coal': 890,
