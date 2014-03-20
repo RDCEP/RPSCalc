@@ -9,7 +9,7 @@
     default_pp,
     session_pp = Options.data.price_and_policy;
   Options.data.price_and_policy = session_pp || {};
-  d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
+  d3.json('/state/static/json/' + Options.state + '.json', function(_data) {
     state_pp = _data.price_and_policy || false;
     region = state_pp.region || 'default';
     d3.json('/static/js/data/pricing2.json', function(_defaults) {

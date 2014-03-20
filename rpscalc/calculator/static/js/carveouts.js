@@ -7,7 +7,7 @@
     container = '#carveouts',
     carveout_types = ['wind', 'solar'],
     parse_date = d3.time.format('%Y').parse;
-  d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
+  d3.json('/state/static/json/' + Options.state + '.json', function(_data) {
     var def_line = [{data: []}],
       data = [{type: 'wind', data: []}, {type: 'solar', data: []}],
       stored = {wind: Options.data.wind || false, solar: Options.data.solar || false};

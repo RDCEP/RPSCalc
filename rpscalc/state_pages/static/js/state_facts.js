@@ -132,7 +132,7 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
-    d3.json('/static/js/data/gridmix/' + Options.state + '.json', function(data) {
+    d3.json('/eia_api/static/json/gridmix/' + Options.state + '.json', function(data) {
       var _max = data.maximum,
         _th = 0, // height of title
         _rh = 20, //row height
@@ -239,7 +239,7 @@ var FactsPage = function() {
     });
   }
 
-  d3.json('/static/js/data/states/' + Options.state + '.json', function(_data) {
+  d3.json('/state/static/json/' + Options.state + '.json', function(_data) {
 
     var def_line = [{data: []}],
       data = [{type: 'RPS', data: []}],
@@ -350,7 +350,7 @@ var FactsPage = function() {
 
     grid_mix_bars(_data);
 
-    d3.json('/static/js/data/retail/' + _data.machine_name + '.json', function(_data) {
+    d3.json('/eia_api/static/json/retail/' + _data.machine_name + '.json', function(_data) {
       data = [{type: 'retail', data: []}];
       parse_date = d3.time.format('%m-%Y').parse;
 
