@@ -8,28 +8,11 @@
   {{ super() }}
   <section class="clearfix">
     <h2>Carveouts</h2>
-    <p>Now that you have chosen your state’s RPS trajectory,
-      you have the opportunity to define which technologies your state
-      will use to meet its requirements. Some states establish these
-      <a href="{{ url_for('glossary.glossary') }}#tech_req" target="_blank">technology requirements</a>
-      by establishing a trajectory, or carve-out, for each technology they
-      wish to promote. The RPS Calculator only allows you to set minimum
-      requirements for wind and solar power as a percentage of each years
-      RPS requirement (i.e. a percentage of the requirement you set on the
-      previous screen). The graph below illustrates your state’s minimum technology
-      requirements for wind and solar power. Keep in mind that the
-      technologies you require will affect the cost of the policy.</p>
+    <p>Now that you have chosen your state’s RPS trajectory, you have the opportunity to define which technologies your state will use to fulfill its goals. Some states establish these technology requirements by establishing individual ‘sub-trajectories’, or carve-outs, for each renewable source they wish to promote. The RPS Calculator allows you to set minimum requirements for wind and solar power as a percentage of the total RPS goal that was set on the previous screen). [Arizona’s RPS does not have a carve-out for wind or solar power; however, you can add your own requirements by typing in the boxes and adjusting the graph below.] It is important to keep in mind that requiring specific technologies can impact the overall cost of your policy.</p>
     <div id="carveouts" class="module clearfix chart-outer-wrap">
     </div>
-    <p>Your state’s current carve-outs are displayed in the default view.
-      To adjust or create your own minimum technology requirements, click
-      and drag the blue area and yellow areas. Yellow represents the
-      percentage of your RPS that must be fulfilled with solar energy, while
-      blue represents wind power. If you would rather type in your values,
-      toggle-on the user input boxes by clicking “type” on top of the graph.
-      If you would like to require your state to procure more than 50% of
-      its energy from renewable sources, change the graph’s scale from 50%
-      to 100% by clicking “100” on top of the graph. </p>
+    <p>To edit or create new minimum technology requirements for your state, click and drag the blue and yellow areas. Blue represents the portion of the RPS goal that must be fulfilled with solar energy, while yellow represents wind power. You can only create carve-outs that sum to 100% of your RPS, so in a given year, you may need to decrease the amount of one technology before you can increase the amount of the other.</p>
+    <p>If you would rather type in your values, toggle-on the user input boxes by clicking “type” on top of the graph. If you would like to require your state to satisfy more than 50% of its requirement using wind or solar, change the graph’s scale from 50% to 100% by clicking “100” on top of the graph.</p>
     <ul id="crumbs">
       <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory', state=state) }}">Trajectory</a>
       <li id="crumb_carveouts" class="active"><a href="{{ url_for('calculator.carveouts', state=state) }}">Carveouts</a></li>
