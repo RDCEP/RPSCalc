@@ -140,11 +140,10 @@ var FactsPage = function() {
         _mt = 5, //margin top
         _mb = 5, //margin bottom
         _h = _rh * data.data.length + _th,
-        _wt = 200, // width of titles
-        _wd = 500, // width of data
+        _wt = 140, // width of titles
+        _wd = 440, // width of data
         color_co2 = d3.scale.linear()
-          .domain([0, 500])
-//          .range(['#56b4e9', '#d55e00']),
+          .domain([0, 1000])
           .range(['#dddddd', '#d55e00']),
         svg = d3.select('#grid_mix')
           .append('svg')
@@ -205,8 +204,8 @@ var FactsPage = function() {
       var grad = svg.append('defs').append('linearGradient')
         .attr('id', 'grad_intensity')
         .attr('x1', '0%')
-        .attr('x2', '100%')
-        .attr('y1', '0%')
+        .attr('x2', '0%')
+        .attr('y1', '100%')
         .attr('y2', '0%');
       grad.append('stop')
         .attr('offset', '0%')
@@ -217,25 +216,33 @@ var FactsPage = function() {
         .style('stop-color', '#d55e00')
         .style('stop-opacity', 1);
       grid_mix.append('rect')
-        .attr('width', 500)
-        .attr('height', 10)
-        .attr('transform', 'translate(' + _wt + ',' + (_h + _mt + _mb + 25) + ')')
+        .attr('width', 10)
+        .attr('height', _h + 10)
+//        .attr('transform', 'translate(' + _wt + ',' + (_h + _mt + _mb + 25) + ')')
+        .attr('transform', 'translate(' + (_wt + _wd + 20) + ',' + 0 + ')')
         .style('fill', 'url(#grad_intensity)');
-      grid_mix.append('text')
-        .text('0 unit')
-        .attr('transform', 'translate(' + _wt + ',' + (_h + _mt + _mb + _lh - 3) + ')')
+      var ci_min = grid_mix.append('text')
+//        .text('0 gCO2/kWh')
+        .attr('transform', 'translate(' + (_wt + _wd + 40) + ',' + (_h) + ')')
         .attr('class', 'grid-axis-text')
         .style('text-anchor', 'start');
-      grid_mix.append('text')
-        .text('500 unit')
-        .attr('transform', 'translate(' + (_wt + _wd) + ',' + (_h + _mt + _mb + _lh - 3) + ')')
+      ci_min.append('tspan').attr({x: 0, dy: 0})
+        .text('0');
+      ci_min.append('tspan').attr({x: 0, dy: '1em'})
+        .text('gCO2/kWh');
+      var ci_max = grid_mix.append('text')
+        .attr('transform', 'translate(' + (_wt + _wd + 40) + ',' + (10) + ')')
         .attr('class', 'grid-axis-text')
-        .style('text-anchor', 'end');
+        .style('text-anchor', 'start');
+      ci_max.append('tspan').attr({x: 0, dy: 0})
+        .text('1000');
+      ci_max.append('tspan').attr({x: 0, dy: '1em'})
+        .text('gCO2/kWh');
       grid_mix.append('text')
         .text('Carbon intensity')
-        .attr('transform', 'translate(' + (_wt - 10) + ',' + (_h + _mt + _mb + 35) + ')')
+        .attr('transform', 'translate(' + (_wt + _wd + 20) + ',' + (_h + _mt + _mb + 15) + ')')
         .attr('class', 'grid-axis-text')
-        .style('text-anchor', 'end');
+        .style('text-anchor', 'start');
     });
   }
 
