@@ -32,7 +32,7 @@ var FactsPage = function() {
         .attr('height', rpsp_height + 50)
         .attr('width', _wd),
       final = trajectory[trajectory.length - 6].y,
-      current = trajectory.filter(function(d) { return d.x.getFullYear() === 2013; })[0].y,
+      current = trajectory.filter(function(d) { return d.x.getFullYear() === 2011; })[0].y,
       actual = progress * 100,
       diff = Math.abs(actual - current);
     if (current > 0) {
@@ -99,7 +99,7 @@ var FactsPage = function() {
     rps_hashes.each(function(d, i) {
       rpsp.append('text')
         .text(function() {
-          return (i === 0) ? '' : (i === 1) ? '2013' : '2030';
+          return (i === 0) ? '' : (i === 1) ? Math.round(current) + '% by 2011' : Math.round(final) + '% in 2030';
         })
         .attr('class', 'rps-text')
         .attr('text-anchor', 'end')
@@ -110,8 +110,7 @@ var FactsPage = function() {
         });
       rpsp.append('text')
         .text(function() {
-//          return (i == 0) ? (actual == current) ? '' : Math.round(actual * 100) + '%' : (i == 1) ? Math.round(current * 100) + '%' : Math.round(final * 100) + '%';
-          return (i === 0) ? '' : (i === 1) ? Math.round(current) + '%' : Math.round(final) + '%';
+          return (i === 0) ? '' : (i === 1) ? '' : '';
         })
         .attr('class', 'rps-text')
         .attr('text-anchor', function() {return (i === 0) ? 'start' : 'end'; })
