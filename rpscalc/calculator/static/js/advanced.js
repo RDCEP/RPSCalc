@@ -14,6 +14,29 @@
       Options.data.wind,
       Options.data.solar
     ]},
+    pp = Options.data.price_and_policy,
+    pp_data = [
+      {name: 'Policy', inputs: [
+        {name: 'Cost cap', 'data-type': 'policy_costcap', unit: '%'},
+        {name: 'PTC', 'data-type': 'policy_ptc'}
+      ]},
+      {name: 'Financing', inputs: [
+        {name: 'Contract term', 'data-type': 'finance_contractterm', unit: 'yr'},
+        {name: 'Interest rate', 'data-type': 'finance_interestrate', unit: '%'}
+      ]},
+      {name: 'Price', inputs: [
+        {name: 'Wholesale price', 'data-type': 'pricing_wholesale', unit: '$'},
+        {name: 'Annual growth', 'data-type': 'pricing_annualgrowth', unit: '%'}
+      ]}
+    ],
+//    pp_data = [
+//        {name: 'Cost cap', data: pp['policy_costcap'], 'type': 'text', 'unit': '%'},
+//        {name: 'PTC', data: pp['policy_ptc'], 'type': 'checkbox'},
+//        {name: 'Contract term', data: pp['finance_contractterm']},
+//        {name: 'Interest rate', data: pp['finance_interestrate']},
+//        {name: 'Annual growth', data: pp['pricing_annualgrowth'], 'type': 'text', 'unit': '%'},
+//        {name: 'Wholesale price', data: pp['pricing_wholesale'], 'type': 'text', 'unit': '$'}
+//    ],
     _x = d3.time.scale().domain([new Date(2013, 0, 1), new Date(2030, 0, 1)]).range([0, (width - 2 * padding)]),
     segment_width = _x(graph_data.data[0].data[1].x) - _x(graph_data.data[0].data[0].x),
     chart_inputs = d3.select('#chart_wrap')
@@ -22,23 +45,44 @@
         'id': 'chart_inputs' })
       .style('padding-left', padding + 'px')
       .classed('hidden', false),
-    input_rows = chart_inputs.selectAll('div')
+    input_series = chart_inputs.selectAll('.chart-input-series')
       .data(graph_data.data)
-//      .data(graph_data.data.reverse())
       .enter()
       .append('div')
-      .attr({ 'class': 'clearfix chart-input-row',
+      .attr({ 'class': 'clearfix chart-input-row chart-input-series',
         'data-type': function(d) { return d.type; } }),
-    pp = Options.data.price_and_policy,
+    input_pp = chart_inputs.append('div').attr('class', 'chart-input-row')
+      .selectAll('.chart-input-pp-wrap')
+      .data(pp_data)
+      .enter()
+      .append('div')
+      .attr('class', 'chart-input-pp-wrap')
+      .style({
+        width: (segment_width * 4 + 2) + 'px',
+        float: 'left'
+      }),
+    amortization = function(t, r) {
+      return (r / 100 * Math.pow((1 + r / 100), t)) / (Math.pow((1 + r / 100), t) - 1);
+    },
     wind_cost = function() {
+      console.log(pp.policy_ptc);
       var ptc = pp.policy_ptc ? 0.7 : 1.0,
         decrease = 1;
-      return (((pp.wind_installation * 1000000) * ptc * (pp.wind_amortization / 100)) / (8765 * pp.wind_capacity) + pp.wind_om + pp.wind_integration) * decrease - pp.policy_wholesale;
+      return (
+        (
+          (pp.wind_installation * 1000000) * ptc * amortization(pp.finance_contractterm, pp.finance_interestrate)
+        ) / (8765 * pp.wind_capacity) + pp.wind_om + pp.wind_integration
+      ) * decrease - pp.pricing_wholesale;
     },
     solar_cost = function() {
       var ptc = pp.ptc === 'on' ? 0.7 : 1.0,
         decrease = 1;
-      return (((pp.solar_installation * 1000000) * (pp.solar_amortization / 100) + pp.solar_om)) * ptc / (8765 * pp.solar_capacity) * decrease - pp.policy_wholesale;
+      return (
+        (
+          (pp.solar_installation * 1000000) * (
+            amortization(pp.finance_contractterm, pp.finance_interestrate)) + pp.solar_om
+        )
+      ) * ptc / (8765 * pp.solar_capacity) * decrease - pp.pricing_wholesale;
     },
     get_cap_and_rec = function() {
       var _rec = {type: 'REC', data: []},
@@ -62,7 +106,7 @@
   var foo = new RPSGraph(),
     cap_rec = get_cap_and_rec();
 
-  input_rows.each(function(d) {
+  input_series.each(function(d) {
     var t = d3.select(this);
     if (d.type != 'solar') {
       t.append('h5').text(function() {
@@ -71,9 +115,54 @@
     }
     t.append('h6').text(function(d) { return (d.type == 'rps') ? null : d.type; });
   });
-//  graph_data.data.reverse();
 
-  graph_data.inputs = input_rows.selectAll('input')
+  input_pp.each(function(d) {
+    var t = d3.select(this);
+    t.append('h5')
+      .text(function(d) { return d.name; });
+    var divs = t.selectAll('.chart-input-pp')
+      .data(d.inputs)
+      .enter()
+      .append('div')
+      .attr({ 'class': 'clearfix chart-input-row chart-input-pp'});
+    divs.each(function(d) {
+      var t = d3.select(this);
+      var l = t.append('label');
+      l.append('input')
+        .attr({
+          'class': 'chart-input',
+          'type': function(d) { return (typeof(pp[d['data-type']]) == 'boolean') ? 'checkbox' : 'text'; },
+          'data-type': function(d) { return d.name; }
+        })
+        .style({ 'width': (segment_width - 14) + 'px' })
+        .property('value', function(d) { return (typeof(pp[d['data-type']]) == 'boolean') ? null : d3.format('.1f')(pp[d['data-type']]); })
+        .property('checked', function(d) {
+          return (typeof(pp[d['data-type']]) == 'boolean') ? pp[d['data-type']] : null;
+        })
+      .on('change', function(d) {
+      //TODO: Clean all this up
+      //TODO: Use same event for all inputs (pricing and policy)?
+        var t = d3.select(this),
+          _v = (typeof(pp[d['data-type']]) == 'boolean') ? t.property('checked') : t.property('value');
+        pp[d['data-type']] = _v;
+        t.property('value', function(d) { return (typeof(_v) == 'boolean') ? null : +_v; });
+        t.property('checked', function(d) { return (typeof(_v) == 'boolean') ? _v : null; });
+        cap_rec = get_cap_and_rec();
+        foo.data(cap_rec)
+          .manual_update_intersection(cap_rec[0], cap_rec[1])
+          .manual_update_handles()
+          .redraw();
+        });
+        l.append('div')
+          .style({
+            'width': (segment_width * 3 - 10) + 'px',
+            'float': 'left'
+          })
+          .text(function(d) { return d.name; });
+    });
+  });
+
+  graph_data.inputs = input_series.selectAll('input')
     .data(function(d) { return d.data; })
     .enter()
     .append('input')
@@ -111,8 +200,6 @@
         .manual_update_handles()
         .redraw();
     });
-
-
 
   foo.padding(30)
     .width(width).height(height)

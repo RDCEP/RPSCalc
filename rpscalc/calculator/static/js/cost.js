@@ -3,12 +3,12 @@
   var wind_cost = function() {
     var ptc = pp.policy_ptc ? 0.7 : 1.0,
       decrease = 1;
-    return (((pp.wind_installation * 1000000) * ptc * (pp.wind_amortization / 100)) / (8765 * pp.wind_capacity) + pp.wind_om + pp.wind_integration) * decrease - pp.policy_wholesale;
+    return (((pp.wind_installation * 1000000) * ptc * (pp.wind_amortization / 100)) / (8765 * pp.wind_capacity) + pp.wind_om + pp.wind_integration) * decrease - pp.pricing_wholesale;
   };
   var solar_cost = function() {
     var ptc = pp.ptc === 'on' ? 0.7 : 1.0,
       decrease = 1;
-    return (((pp.solar_installation * 1000000) * (pp.solar_amortization / 100) + pp.solar_om)) * ptc / (8765 * pp.solar_capacity) * decrease - pp.policy_wholesale;
+    return (((pp.solar_installation * 1000000) * (pp.solar_amortization / 100) + pp.solar_om)) * ptc / (8765 * pp.solar_capacity) * decrease - pp.pricing_wholesale;
   };
   var get_cap_and_rec = function() {
     var _rec = {type: 'REC', data: []},
