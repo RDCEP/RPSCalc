@@ -11,74 +11,96 @@
     <p>The success of your RPS will not only depend on the trajectory and carve-outs you have just selected, but also on renewable technology costs, electricity costs, federal energy policy and the RPS cost cap.   While you can adjust several parameters that impact cost on this page, the cost cap is the only policy instrument implemented by the state. Lawmakers use this device in their RPS  to protect electricity customers from potential rate increases as a result of using more expensive renewable electricity sources. For some states, this cost cap could limit the total amount of renewable power that will be purchased to fulfill the RPS goals. [Arizona does not have an explicit cost cap, rather the Arizona Corporation Commission allows the recovery of those costs which it deems reasonable.] On this page you can establish your own cost cap, as well as adjust the default assumptions about retail electricity rates and the cost of renewable power.</p>
     <div id="pricing" class="module clearfix chart-outer-wrap">
       <form id="pricing_form">
-        <fieldset id="policy_parameters" class="narrow" style="clear:left;">
-          <h4>Policy parameters</h4>
-          <div class="clearfix">
-            <label for="policy_costcap">Cost cap (%)</label>
-            <input type="text" id="policy_costcap" name="policy_costcap" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="policy_ptc">PTC</label>
-            <input type="checkbox" id="policy_ptc" name="policy_ptc" checked>
-          </div>
-        </fieldset>
-        <fieldset id="policy_costs" class="narrow">
-          <h4>Pricing parameters</h4>
-          <div class="clearfix visuallyhidden">
-            <label for="policy_retail">Retail ($/MWh)</label>
-            <input type="text" id="policy_retail" name="policy_retail" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="policy_wholesale">Wholesale ($/MWh)</label>
-            <input type="text" id="policy_wholesale" name="policy_wholesale" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="policy_annualgrowth">Annual growth (%)</label>
-            <input type="text" id="policy_annualgrowth" name="policy_annualgrowth" pattern="[0-9]*\.*[0-9]+">
-          </div>
-        </fieldset>
-        <fieldset id="wind_costs" class="narrow">
-          <h4>Wind parameters</h4>
-          <div class="clearfix">
-            <label for="wind_capacity">Capacity factor</label>
-            <input type="text" id="wind_capacity" name="wind_capacity" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="wind_installation">Installation ($/W)</label>
-            <input type="text" id="wind_installation" name="wind_installation" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="wind_om">O &amp; M ($/MWh)</label>
-            <input type="text" id="wind_om" name="wind_om" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="wind_integration">Integration ($/MWh)</label>
-            <input type="text" id="wind_integration" name="wind_integration" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="wind_amortization">Amortization (%)</label>
-            <input type="text" id="wind_amortization" name="wind_amortization" pattern="[0-9]*\.*[0-9]+">
-          </div>
-        </fieldset>
-        <fieldset id="solar_costs" class="narrow">
-          <h4>Solar parameters</h4>
-          <div class="clearfix">
-            <label for="solar_capacity">Capacity factor</label>
-            <input type="text" id="solar_capacity" name="solar_capacity" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="solar_installation">Installation ($/W)</label>
-            <input type="text" id="solar_installation" name="solar_installation" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="solar_om">O &amp; M ($/MWh)</label>
-            <input type="text" id="solar_om" name="solar_om" pattern="[0-9]*\.*[0-9]+">
-          </div>
-          <div class="clearfix">
-            <label for="solar_amortization">Amortization (%)</label>
-            <input type="text" id="solar_amortization" name="solar_amortization" pattern="[0-9]*\.*[0-9]+">
-          </div>
-        </fieldset>
+        <div class="narrow module">
+
+          <fieldset id="policy_parameters" class="narrow" style="clear:left;">
+            <h4>Policy parameters</h4>
+            <div class="clearfix">
+              <label for="policy_costcap">Cost cap (%)</label>
+              <input type="text" id="policy_costcap" name="policy_costcap" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <div class="clearfix">
+              <label for="policy_ptc">PTC</label>
+              <input type="checkbox" id="policy_ptc" name="policy_ptc" checked>
+            </div>
+          </fieldset>
+
+          <fieldset id="policy_costs" class="narrow">
+            <h4>Pricing parameters</h4>
+            <div class="clearfix visuallyhidden">
+              <label for="policy_retail">Retail ($/MWh)</label>
+              <input type="text" id="policy_retail" name="policy_retail" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <div class="clearfix">
+              <label for="pricing_wholesale">Wholesale ($/MWh)</label>
+              <input type="text" id="pricing_wholesale" name="pricing_wholesale" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <div class="clearfix">
+              <label for="pricing_annualgrowth">Annual growth (%)</label>
+              <input type="text" id="pricing_annualgrowth" name="pricing_annualgrowth" pattern="[0-9]*\.*[0-9]+">
+            </div>
+          </fieldset>
+
+          <fieldset id="policy_financing" class="narrow">
+            <h4>Financing parameters</h4>
+            <div class="clearfix">
+              <label for="finance_contractterm">Contract Term (yrs)</label>
+              <input type="text" id="finance_contractterm" name="finance_contractterm" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <div class="clearfix">
+              <label for="finance_interestrate">Interest Rate (%)</label>
+              <input type="text" id="finance_interestrate" name="finance_interestrate" pattern="[0-9]*\.*[0-9]+">
+            </div>
+          </fieldset>
+
+        </div>
+        <div class="narrow module">
+
+          <fieldset id="wind_costs" class="narrow">
+            <h4>Wind parameters</h4>
+            <div class="clearfix">
+              <label for="wind_capacity">Capacity factor</label>
+              <input type="text" id="wind_capacity" name="wind_capacity" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <div class="clearfix">
+              <label for="wind_installation">Installation ($/W)</label>
+              <input type="text" id="wind_installation" name="wind_installation" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <div class="clearfix">
+              <label for="wind_om">O &amp; M ($/MWh)</label>
+              <input type="text" id="wind_om" name="wind_om" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <div class="clearfix">
+              <label for="wind_integration">Integration ($/MWh)</label>
+              <input type="text" id="wind_integration" name="wind_integration" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <!--<div class="clearfix">
+              <label for="wind_amortization">Amortization (%)</label>
+              <input type="text" id="wind_amortization" name="wind_amortization" pattern="[0-9]*\.*[0-9]+">
+            </div>-->
+          </fieldset>
+
+          <fieldset id="solar_costs" class="narrow">
+            <h4>Solar parameters</h4>
+            <div class="clearfix">
+              <label for="solar_capacity">Capacity factor</label>
+              <input type="text" id="solar_capacity" name="solar_capacity" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <div class="clearfix">
+              <label for="solar_installation">Installation ($/W)</label>
+              <input type="text" id="solar_installation" name="solar_installation" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <div class="clearfix">
+              <label for="solar_om">O &amp; M ($/MWh)</label>
+              <input type="text" id="solar_om" name="solar_om" pattern="[0-9]*\.*[0-9]+">
+            </div>
+            <!--<div class="clearfix">
+              <label for="solar_amortization">Amortization (%)</label>
+              <input type="text" id="solar_amortization" name="solar_amortization" pattern="[0-9]*\.*[0-9]+">
+            </div>-->
+          </fieldset>
+
+        </div>
       </form>
     </div>
     <p>The default values entered in the boxes are based on conservative estimates from reliable sources. Wind and solar costs are national values and do not vary across regions, while capacity factors are state-specific. You may choose to deselect the Production Tax Credit policy to create a scenario in which renewable technologies are unsubsidized. The cost cap parameter default value is that of your state; if your state does not have a cost cap, 3% may be a good starting point. </p>
