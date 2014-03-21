@@ -1,12 +1,8 @@
 {% extends 'base_state.html' %}
+{% import '_macros.html' as macros %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-  <li><a href="{{ url_for('calculator.trajectory', state=state) }}" data-name="trajectory">Set RPS trajectory</a></li>
-  <li><a href="{{ url_for('calculator.carveouts', state=state) }}" data-name="carveouts">Set carveouts</a></li>
-  <li><a href="{{ url_for('calculator.pricing', state=state) }}" data-name="pricing">Set cost cap &amp; pricing</a></li>
-  <li><a href="{{ url_for('calculator.cost', state=state) }}" data-name="cost">Projected cost</a></li>
-  <li id="left_nav_calculator_link"><a href="{{ url_for('state_pages.overview', state=state) }}" class="offpage-link">State Overview</a></li>
-  <li id="left_nav_comparison_link"><a href="{{ url_for('state_comparison.comparison') }}" class="offpage-link">State Comparisons</a></li>
+  {{ macros.calc_left_nav(state, 'advanced') }}
 {% endblock %}
 {% block content %}
   {{ super() }}
@@ -22,5 +18,6 @@
 {% endblock %}
 {% block bodyjs %}
   {{ super() }}
+{#  <script src="{{ url_for('calculator.static', filename='js/advanced.js') }}"></script>#}
   {% assets 'js_advanced' %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
 {% endblock %}
