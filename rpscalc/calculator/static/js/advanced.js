@@ -77,8 +77,21 @@
       }
     })
     .on('change', function(d) {
-      var _v = (d3.select(this).property('value'));
-      _v = (_v > 100) ? 100 : _v;
+      //TODO: Clean all this up
+      var _v = (d3.select(this).property('value')),
+        other_type = (d.type == 'solar') ? 'wind' : (d.type == 'wind') ? 'solar': false,
+        max_val = 100;
+      if (other_type) {
+        var other_val = graph_data
+          .data.filter(function(_d) {
+            return _d.type === other_type;
+          })[0]
+          .data.filter(function(_d) {
+            return _d.x.getFullYear() === d.x.getFullYear();
+          })[0].y;
+        max_val = 100 - other_val;
+      }
+      _v = (_v > max_val) ? max_val : _v;
       graph_data.data.filter(function(_d) { return _d.type === d.type; })[0].data.filter(function(_d) { return _d.x === d.x; })[0].y = +_v;
       d3.select(this).property('value', +_v);
       cap_rec = get_cap_and_rec();
