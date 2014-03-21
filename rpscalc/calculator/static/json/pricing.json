@@ -9,9 +9,11 @@
     "solar_installation": 3.5,
     "solar_om": 0.012,
     "solar_amortization": 9,
+    "pricing_wholesale": 35,
+    "pricing_annualgrowth": 1,
+    "finance_contractterm": 20,
+    "finance_interestrate": 6,
     "policy_costcap": 2,
-    "policy_wholesale": 35,
-    "policy_annualgrowth": 1,
     "policy_ptc": true
   }
 }

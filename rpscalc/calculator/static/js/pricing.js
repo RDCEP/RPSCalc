@@ -12,7 +12,7 @@
   d3.json('/state/static/json/' + Options.state + '.json', function(_data) {
     state_pp = _data.price_and_policy || false;
     region = state_pp.region || 'default';
-    d3.json('/static/js/data/pricing2.json', function(_defaults) {
+    d3.json('/calculator/static/json/pricing.json', function(_defaults) {
       default_pp = _defaults[region];
       d3.selectAll('input')
         .property('value', function() {
