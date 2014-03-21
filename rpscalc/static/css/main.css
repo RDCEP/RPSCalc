@@ -174,6 +174,7 @@ path.domain { stroke: #999999; stroke-width: 1; }
 .switch.active { color: #d55e00; }
 
 .chart-input-row { width: 101%; margin-bottom: 2px; position: relative; }
+.chart-input-row h5 { font-size: 0.8em; font-weight: bold; margin-top: 0.5em; }
 .chart-input-row h6 { position: absolute; right: 100%; bottom: 1px; font-size: 0.7em; }
 
 .chart-input { float: left; text-align: right; margin-left: 2px; border: 1px solid #999999; display: block; padding: 2px 5px; font-size: 0.7em; }

@@ -23,7 +23,8 @@
       .style('padding-left', padding + 'px')
       .classed('hidden', false),
     input_rows = chart_inputs.selectAll('div')
-      .data(graph_data.data.reverse())
+      .data(graph_data.data)
+//      .data(graph_data.data.reverse())
       .enter()
       .append('div')
       .attr({ 'class': 'clearfix chart-input-row',
@@ -61,8 +62,17 @@
   var foo = new RPSGraph(),
     cap_rec = get_cap_and_rec();
 
-  input_rows.append('h6').text(function(d) { return d.type; });
-  graph_data.data.reverse();
+  input_rows.each(function(d) {
+    var t = d3.select(this);
+    if (d.type != 'solar') {
+      t.append('h5').text(function() {
+        return (d.type == 'rps') ? 'RPS' : 'Carveouts (as a % of the RPS)';
+      });
+    }
+    t.append('h6').text(function(d) { return (d.type == 'rps') ? null : d.type; });
+  });
+//  graph_data.data.reverse();
+
   graph_data.inputs = input_rows.selectAll('input')
     .data(function(d) { return d.data; })
     .enter()
@@ -78,6 +88,7 @@
     })
     .on('change', function(d) {
       //TODO: Clean all this up
+      //TODO: Use same event for all inputs (pricing and policy)?
       var _v = (d3.select(this).property('value')),
         other_type = (d.type == 'solar') ? 'wind' : (d.type == 'wind') ? 'solar': false,
         max_val = 100;
