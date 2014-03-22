@@ -5,14 +5,15 @@
   Options.data.wind = Options.data.wind || false;
   Options.data.price_and_policy = Options.data.price_and_policy || false;
   Options.data.state = Options.state || false;
+
   var update_session = function() {
     d3.event.preventDefault();
-    var clicked = d3.select(this);
+    var t = d3.select(this);
     d3.xhr('/calculator/update')
       .mimeType('application/json')
       .post(JSON.stringify(Options.data))
       .on('load', function() {
-        window.location.assign(clicked.attr('href'));
+        window.location.assign(t.attr('href'));
       });
   };
 
