@@ -15,8 +15,6 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
-    //TODO: _wd is set for a wide module (_wd = width for a narrow module)
-    //TODO: Remove static domains, and get current year dynamically
     var _wd = width * 2 + 10,
       domain_x = [2000, 2030],
       domain_y = [0, 50],
@@ -96,29 +94,33 @@ var FactsPage = function() {
       .attr('y1', function(d, i) { return (i === 0) ? rpsp_margin : 0; })
       .attr('y2', function(d, i) { return (i === 0) ? rpsp_height + rpsp_margin : rpsp_height + 2 * rpsp_margin; })
       .attr('class', function(d, i) { return (i === 0) ? 'rps-hash-actual' : 'rps-hash'; });
+
     rps_hashes.each(function(d, i) {
-      rpsp.append('text')
-        .text(function() {
-          return (i === 0) ? '' : (i === 1) ? Math.round(current) + '% by 2011' : Math.round(final) + '% in 2030';
-        })
-        .attr('class', 'rps-text')
-        .attr('text-anchor', 'end')
-        .attr('transform', function() {
-          var v_offset = (rpsp_height + 2 * (rpsp_margin - 2));
-          var h_offset = d / final * _wd - i - 5;
-          return 'translate(' + h_offset + ',' + v_offset + ')';
-        });
-      rpsp.append('text')
-        .text(function() {
-          return (i === 0) ? '' : (i === 1) ? '' : '';
-        })
-        .attr('class', 'rps-text')
-        .attr('text-anchor', function() {return (i === 0) ? 'start' : 'end'; })
-        .attr('transform', function() {
-          var v_offset = (i === 0) ? (rpsp_margin - 2) : (rpsp_margin - 4);
-          var h_offset = (i === 0) ? 0 : d / final * _wd - i - 5;
-          return 'translate(' + h_offset + ',' + v_offset + ')';
-        });
+      if (i > 0) {
+        rpsp.append('text')
+          .text(function() {
+            return (i === 1) ? Math.round(current) + '% by 2011' : Math.round(final) + '% in 2030';
+          })
+          .attr('class', 'rps-text')
+          .attr('text-anchor', 'end')
+          .attr('transform', function() {
+            var v_offset = (rpsp_height + 2 * (rpsp_margin - 2));
+            var h_offset = d / final * _wd - i - 5;
+            return 'translate(' + h_offset + ',' + v_offset + ')';
+          });
+      } else {
+        rpsp.append('text')
+          .text(function() {
+            return ''
+          })
+          .attr('class', 'rps-text')
+          .attr('text-anchor', function() {return (i === 0) ? 'start' : 'end'; })
+          .attr('transform', function() {
+            var v_offset = (i === 0) ? (rpsp_margin - 2) : (rpsp_margin - 4);
+            var h_offset = (i === 0) ? 0 : d / final * _wd - i - 5;
+            return 'translate(' + h_offset + ',' + v_offset + ')';
+          });
+      }
     });
   }
 

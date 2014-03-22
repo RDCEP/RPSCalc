@@ -18,7 +18,7 @@
   <section>
     <header>
       <h1>{{ state|replace('_', ' ')|title }}</h1>
-      <img src="{{ url_for('static', filename='images/state_seals/' + state + '.png') }}" alt="State seal of {{ state|capitalize }}">
+      <img src="{{ url_for('state_pages.static', filename='images/state_seals/' + state + '.png') }}" alt="State seal of {{ state|capitalize }}">
     </header>
   </section>
 {% endblock %}
