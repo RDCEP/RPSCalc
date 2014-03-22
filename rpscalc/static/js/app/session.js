@@ -1,5 +1,9 @@
 (function() {
 
+  if (Options.state != Options.data.state) {
+    Options.data = {};
+  }
+
   Options.data.trajectory = Options.data.trajectory || false;
   Options.data.solar = Options.data.solar || false;
   Options.data.wind = Options.data.wind || false;
