@@ -1,7 +1,9 @@
 (function() {
+
   Options.data.trajectory.data.forEach(function(d) { d.x = new Date(d.x); });
   Options.data.wind.data.forEach(function(d) { d.x = new Date(d.x); });
   Options.data.solar.data.forEach(function(d) { d.x = new Date(d.x); });
+
   var width = 760,
     height = 400,
     padding = 30,
@@ -26,28 +28,25 @@
         {name: 'Annual growth', 'data-type': 'pricing_annualgrowth', unit: '%'}
       ]}
     ],
-//    pp_data = [
-//        {name: 'Cost cap', data: pp['policy_costcap'], 'type': 'text', 'unit': '%'},
-//        {name: 'PTC', data: pp['policy_ptc'], 'type': 'checkbox'},
-//        {name: 'Contract term', data: pp['finance_contractterm']},
-//        {name: 'Interest rate', data: pp['finance_interestrate']},
-//        {name: 'Annual growth', data: pp['pricing_annualgrowth'], 'type': 'text', 'unit': '%'},
-//        {name: 'Wholesale price', data: pp['pricing_wholesale'], 'type': 'text', 'unit': '$'}
-//    ],
-    _x = d3.time.scale().domain([new Date(2013, 0, 1), new Date(2030, 0, 1)]).range([0, (width - 2 * padding)]),
+    _x = d3.time.scale()
+      .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)])
+      .range([0, (width - 2 * padding)]),
     segment_width = _x(graph_data.data[0].data[1].x) - _x(graph_data.data[0].data[0].x),
+
     chart_inputs = d3.select('#chart_wrap')
       .append('form')
       .attr({ 'class': 'clearfix',
         'id': 'chart_inputs' })
       .style('padding-left', padding + 'px')
       .classed('hidden', false),
+
     input_series = chart_inputs.selectAll('.chart-input-series')
       .data(graph_data.data)
       .enter()
       .append('div')
       .attr({ 'class': 'clearfix chart-input-row chart-input-series',
         'data-type': function(d) { return d.type; } }),
+
     input_pp = chart_inputs.append('div').attr('class', 'chart-input-row')
       .selectAll('.chart-input-pp-wrap')
       .data(pp_data)
@@ -58,34 +57,41 @@
         width: (segment_width * 4 + 2) + 'px',
         float: 'left'
       }),
+
     amortization = function(t, r) {
       return (r / 100 * Math.pow((1 + r / 100), t)) / (Math.pow((1 + r / 100), t) - 1);
     },
+
     wind_cost = function() {
-      console.log(pp.policy_ptc);
       var ptc = pp.policy_ptc ? 0.7 : 1.0,
         decrease = 1;
       return (
         (
-          (pp.wind_installation * 1000000) * ptc * amortization(pp.finance_contractterm, pp.finance_interestrate)
+          pp.wind_installation * 1000000 * (
+            amortization(pp.finance_contractterm, pp.finance_interestrate)
+          ) * ptc
         ) / (8765 * pp.wind_capacity) + pp.wind_om + pp.wind_integration
       ) * decrease - pp.pricing_wholesale;
     },
+
     solar_cost = function() {
-      var ptc = pp.ptc === 'on' ? 0.7 : 1.0,
+      var ptc = pp.policy_ptc ? 0.7 : 1.0,
         decrease = 1;
       return (
         (
-          (pp.solar_installation * 1000000) * (
-            amortization(pp.finance_contractterm, pp.finance_interestrate)) + pp.solar_om
-        )
-      ) * ptc / (8765 * pp.solar_capacity) * decrease - pp.pricing_wholesale;
+          pp.solar_installation * 1000000 * (
+            amortization(pp.finance_contractterm, pp.finance_interestrate)
+          ) + pp.solar_om
+        ) * ptc
+      ) / (8765 * pp.solar_capacity) * decrease - pp.pricing_wholesale;
     },
+
     get_cap_and_rec = function() {
       var _rec = {type: 'REC', data: []},
         _cap = {type: 'Cost Cap', data: [], invert: true},
         wind = wind_cost(),
         solar = solar_cost();
+      console.log(wind, solar);
       Options.data.wind.data.forEach(function(d, i) {
         d.x = new Date(d.x);
         var wind_rec = d.y / 100 * wind,
@@ -94,13 +100,23 @@
           //TODO: Get current year dynamically
           other_rec = (100 - Options.data.solar.data[i].y - d.y) / 100 * wind * .65,
           year = d.x.getFullYear();
-        _cap.data[i] = {x: new Date(d.x), y0: 0, y: year >= 2013 ? (pp.policy_costcap * Math.pow(1.01, year - 2013)) / Options.data.trajectory.data[i].y * 100 : 0};
-        _rec.data[i] = {x: new Date(d.x), y0: 0, y: (wind_rec + solar_rec + other_rec)};
+//        console.log(wind_rec, solar_rec);
+        _cap.data[i] = {
+          x: new Date(d.x),
+          y0: 0,
+          y: year >= 2013
+//            ? (pp.policy_costcap * Math.pow(1.01, year - 2013)) / Options.data.trajectory.data[i].y * 100
+            ? (pp.policy_costcap * Math.pow(1.01, year - 2013)) / Options.data.trajectory.data[i].y * 100
+            : 0};
+        _rec.data[i] = {
+          x: new Date(d.x),
+          y0: 0,
+          y: wind_rec + solar_rec + other_rec };
       });
       return [_cap, _rec];
     };
 
-  var foo = new RPSGraph(),
+  var cost_graph = new RPSGraph(),
     cap_rec = get_cap_and_rec();
 
   input_series.each(function(d) {
@@ -132,7 +148,9 @@
           'data-type': function(d) { return d.name; }
         })
         .style({ 'width': (segment_width - 14) + 'px' })
-        .property('value', function(d) { return (typeof(pp[d['data-type']]) == 'boolean') ? null : d3.format('.1f')(pp[d['data-type']]); })
+        .property('value', function(d) {
+          return (typeof(pp[d['data-type']]) == 'boolean')
+            ? null : d3.format('.1f')(pp[d['data-type']]); })
         .property('checked', function(d) {
           return (typeof(pp[d['data-type']]) == 'boolean') ? pp[d['data-type']] : null;
         })
@@ -143,7 +161,7 @@
         t.property('value', function() { return (typeof(_v) == 'boolean') ? null : +_v; });
         t.property('checked', function() { return (typeof(_v) == 'boolean') ? _v : null; });
         cap_rec = get_cap_and_rec();
-        foo.data(cap_rec)
+        cost_graph.data(cap_rec)
           .manual_update_intersection(cap_rec[0], cap_rec[1])
           .manual_update_handles()
           .redraw();
@@ -175,26 +193,28 @@
         other_type = (d.type == 'solar') ? 'wind' : (d.type == 'wind') ? 'solar': false,
         max_val = 100;
       if (other_type) {
-        var other_val = graph_data
-          .data.filter(function(_d) {
+        var other_val = graph_data.data
+          .filter(function(_d) {
             return _d.type === other_type;
-          })[0]
-          .data.filter(function(_d) {
+          })[0].data
+          .filter(function(_d) {
             return _d.x.getFullYear() === d.x.getFullYear();
           })[0].y;
         max_val = 100 - other_val;
       }
       _v = (_v > max_val) ? max_val : _v;
-      graph_data.data.filter(function(_d) { return _d.type === d.type; })[0].data.filter(function(_d) { return _d.x === d.x; })[0].y = +_v;
+      graph_data.data
+        .filter(function(_d) { return _d.type === d.type; })[0].data
+        .filter(function(_d) { return _d.x === d.x; })[0].y = +_v;
       d3.select(this).property('value', +_v);
       cap_rec = get_cap_and_rec();
-      foo.data(cap_rec)
+      cost_graph.data(cap_rec)
         .manual_update_intersection(cap_rec[0], cap_rec[1])
         .manual_update_handles()
         .redraw();
     });
 
-  foo.padding(30)
+  cost_graph.padding(30)
     .width(width).height(height)
     .select(container)
     .title('Will we break the cap?')
