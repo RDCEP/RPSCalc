@@ -73,7 +73,7 @@ def state_gridmix(state):
             {'sector': 'Nuclear Electricity', 'code': 'NUETB', 'intensity': 1},
             {'sector': 'Residual Fuel Oil', 'code': 'RFTCB', 'intensity': 670},
             {'sector': 'Solar', 'code': 'SOTCB', 'intensity': 1},
-            {'sector': 'Supplemental Gaseous Fuels', 'code': 'SFTCB',
+            {'sector': 'Supp. Gaseous Fuels', 'code': 'SFTCB',
              'intensity': 9999},
             {'sector': 'Wind', 'code': 'WYTCB', 'intensity': 1},
             {'sector': 'Wood and Waste', 'code': 'WWTCB', 'intensity': 9999},
