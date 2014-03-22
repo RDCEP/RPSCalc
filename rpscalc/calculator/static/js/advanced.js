@@ -5,10 +5,7 @@
   var width = 760,
     height = 400,
     padding = 30,
-    empty = true,
     container = '#cost_chart',
-    input_types = ['rps', 'wind', 'solar'],
-    parse_date = d3.time.format('%Y').parse,
     graph_data = {data: [
       Options.data.trajectory,
       Options.data.wind,
@@ -125,7 +122,7 @@
       .enter()
       .append('div')
       .attr({ 'class': 'clearfix chart-input-row chart-input-pp'});
-    divs.each(function(d) {
+    divs.each(function() {
       var t = d3.select(this);
       var l = t.append('label');
       l.append('input')
@@ -140,13 +137,11 @@
           return (typeof(pp[d['data-type']]) == 'boolean') ? pp[d['data-type']] : null;
         })
       .on('change', function(d) {
-      //TODO: Clean all this up
-      //TODO: Use same event for all inputs (pricing and policy)?
         var t = d3.select(this),
           _v = (typeof(pp[d['data-type']]) == 'boolean') ? t.property('checked') : t.property('value');
         pp[d['data-type']] = _v;
-        t.property('value', function(d) { return (typeof(_v) == 'boolean') ? null : +_v; });
-        t.property('checked', function(d) { return (typeof(_v) == 'boolean') ? _v : null; });
+        t.property('value', function() { return (typeof(_v) == 'boolean') ? null : +_v; });
+        t.property('checked', function() { return (typeof(_v) == 'boolean') ? _v : null; });
         cap_rec = get_cap_and_rec();
         foo.data(cap_rec)
           .manual_update_intersection(cap_rec[0], cap_rec[1])
@@ -176,8 +171,6 @@
       }
     })
     .on('change', function(d) {
-      //TODO: Clean all this up
-      //TODO: Use same event for all inputs (pricing and policy)?
       var _v = (d3.select(this).property('value')),
         other_type = (d.type == 'solar') ? 'wind' : (d.type == 'wind') ? 'solar': false,
         max_val = 100;
