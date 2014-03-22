@@ -4,6 +4,23 @@
   {{ super() }}
   <link rel=stylesheet href={{ url_for('static', filename='css/pinwheel.css') }} media=all>
 {% endblock %}
+{% block left_nav %}
+  {% if state %}
+<li class="left_nav_feature_link">
+  <a href="{{ url_for('state_pages.overview', state=state) }}" class="offpage-link">
+    Back to your state’s legislative overview
+  </a></li>
+<li class="left_nav_feature_link">
+  <a href="{{ url_for('calculator.trajectory', state=state) }}" class="offpage-link">
+    Design the future of renewables in your state
+  </a></li>
+  {% else %}
+<li class="left_nav_feature_link">
+  <a href="{{ url_for('rpscalc.index') }}" class="offpage-link">
+    Choose a state with an RPS
+  </a></li>
+{% endif %}
+{% endblock %}
 {% block content %}
 {% block header %}
   <section>
