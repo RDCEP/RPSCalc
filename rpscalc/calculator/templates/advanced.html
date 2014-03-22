@@ -13,7 +13,12 @@
       <div id="cost_chart" class="module clearfix"></div>
       <div id="chart_wrap" class="module clearfix" style="width:730px; left:-30px; position: relative;"></div>
     </div>
-    <p>This graph is identical to the previous slide; however, here you have the ability to edit your RPS trajectory and carve-outs, seeing the impact in real-time. The values you chose at the beginning of this calculator are entered in the boxes. Try adjusting column values individually to see the effect on the overlapping region. Refer back to the Cost Cap & Pricing slide to review or adjust assumptions about the cost of wind and solar power, and the other parameters that play into the success of your RPS.</p>
+    <ul id="crumbs">
+      <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory', state=state) }}">Trajectory</a>
+      <li id="crumb_carveouts"><a href="{{ url_for('calculator.carveouts', state=state) }}">Carveouts</a></li>
+      <li id="crumb_pricing"><a href="{{ url_for('calculator.pricing', state=state) }}">Cost cap &amp; Pricing</a></li>
+      <li id="crumb_cost" class="active"><a href="{{ url_for('calculator.cost', state=state) }}">Projected Cost</a></li>
+    </ul>
   </section>
 {% endblock %}
 {% block bodyjs %}
