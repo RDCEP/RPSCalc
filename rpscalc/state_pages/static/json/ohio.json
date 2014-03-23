@@ -129,11 +129,6 @@
         "summary": "Ohio's Renewable Portfolio Standard (actually called Alternative Energy Portfolio Standard or AEPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. Ohio's AEPS also establishes a minimum amount of 'alternative energy' required to be used in the state. This analysis will not consider the 'alternative' portion of the statute. Rather, this page will identify and describe only the features of the AEPS that set a standard for renewable energy."
     },
     "abbr": "OH",
-    "policy_and_price": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 91
-    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,

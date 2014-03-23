@@ -99,11 +99,6 @@
         "rps_progress": "N/A (Not in LBNL, compliance doesn't commence until 2012 and dates are from 2011)"
     },
     "abbr": "WA",
-    "policy_and_price": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 72
-    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,

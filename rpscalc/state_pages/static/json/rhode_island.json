@@ -112,11 +112,6 @@
         "summary": "Rhode Island's Renewable Portfolio Standard (actually called Renewable Energy Standard or RES) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RES and how they work together to define the minimum amount of renewable energy that will be sold in Rhode Island."
     },
     "abbr": "RI",
-    "policy_and_price": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 151
-    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,

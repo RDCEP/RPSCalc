@@ -209,11 +209,6 @@
         "summary": "New Jersey's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in New Jersey."
     },
     "abbr": "NJ",
-    "policy_and_price": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 132
-    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,
