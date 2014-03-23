@@ -91,7 +91,7 @@
         _cap = {type: 'Cost Cap', data: [], invert: true},
         wind = wind_cost(),
         solar = solar_cost();
-      console.log(wind, solar);
+
       Options.data.wind.data.forEach(function(d, i) {
         d.x = new Date(d.x);
         var wind_rec = d.y / 100 * wind,

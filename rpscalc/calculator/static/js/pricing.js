@@ -22,7 +22,6 @@
           if (type === 'checkbox') {
             input.property('checked', function() {
               var val = session_pp[name] ? session_pp[name] : state_pp[name] ? state_pp[name] : default_pp[name];
-              console.log(name, val, default_pp);
               Options.data.price_and_policy[name] = val;
               return val;
             });

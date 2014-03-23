@@ -338,7 +338,6 @@ var FactsPage = function() {
       .html(function(d) {
         return '<a href="'+ d.href + '">'+d.name+'</a>&nbsp;&mdash;&nbsp;'+ d.description;
       });
-    console.log(data);
     var trajectory = new RPSGraph()
       .padding(30)
       .width(760).height(height)
