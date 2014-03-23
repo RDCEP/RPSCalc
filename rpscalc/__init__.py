@@ -42,11 +42,13 @@ from rpscalc.calculator.views import mod as calculator_module
 from rpscalc.glossary.views import mod as glossary_module
 from rpscalc.views import mod as rpscalc_module
 from rpscalc.state_comparison.views import mod as comparison_mod
+from rpscalc.eia_api.views import mod as eia_api_mod
 app.register_blueprint(state_pages_module)
 app.register_blueprint(calculator_module)
 app.register_blueprint(glossary_module)
 app.register_blueprint(rpscalc_module)
 app.register_blueprint(comparison_mod)
+app.register_blueprint(eia_api_mod)
 
 # Set up asset bundles
 assets = Environment(app)

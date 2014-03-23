@@ -1,8 +1,13 @@
 import json
 import os
 import urllib2
+from flask import Blueprint
 from rpscalc.constants import EIA_API_KEY, BASE_DIR, RPS_STATES, \
     EIA_FUEL_SECTORS
+
+
+mod = Blueprint('eia_api', __name__, url_prefix='/eia_api',
+                static_folder='static')
 
 
 def state_retail(state):
