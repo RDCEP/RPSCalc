@@ -190,6 +190,7 @@ var FactsPage = function() {
       grid_bars.append('text')
         .text(function(d) { return d.sector; })
         .attr('class', 'grid-data-text')
+        .classed('green', function(d) { return d.green; })
         .attr('text-anchor', 'end')
         .attr('transform', function() {
           return 'translate(' + (_wt - 10) + ',10)';

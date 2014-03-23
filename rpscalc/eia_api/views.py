@@ -3,7 +3,8 @@ import os
 import urllib2
 from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, abort
-from rpscalc.constants import EIA_API_KEY, STATES, BASE_DIR
+from rpscalc.constants import EIA_API_KEY, STATES, BASE_DIR, RPS_STATES
+from rpscalc.eia_api.constants import EIA_FUEL_SECTORS as EFS
 
 
 mod = Blueprint('eia_api', __name__, url_prefix='/eia_api',
@@ -59,25 +60,15 @@ def state_gridmix(state):
         'api_key': EIA_API_KEY,
         'url': 'http://api.eia.gov/series?api_key{{}}&series_id={{}}',
         'series_id': 'SEDS.{code}TCB.{state}.A',
-        'series_list': [
-            {'sector': 'Biomass', 'code': 'BMTCB', 'intensity': 1},
-            {'sector': 'Coal', 'code': 'CLTCB', 'intensity': 890},
-            {'sector': 'Distillate Fuel Oil', 'code': 'DFTCB',
-             'intensity': 670},
-            {'sector': 'Geothermal', 'code': 'GETCB', 'intensity': 1},
-            {'sector': 'Hydroelectricity', 'code': 'HYTCB', 'intensity': 1},
-            {'sector': 'Kerosene', 'code': 'KSTCB', 'intensity': 650},
-            {'sector': 'LPG', 'code': 'LGTCB', 'intensity': 500},
-            {'sector': 'Natural Gas', 'code': 'NNTCB',
-             'intensity': 400},
-            {'sector': 'Nuclear Electricity', 'code': 'NUETB', 'intensity': 1},
-            {'sector': 'Residual Fuel Oil', 'code': 'RFTCB', 'intensity': 670},
-            {'sector': 'Solar', 'code': 'SOTCB', 'intensity': 1},
-            {'sector': 'Supp. Gaseous Fuels', 'code': 'SFTCB',
-             'intensity': 9999},
-            {'sector': 'Wind', 'code': 'WYTCB', 'intensity': 1},
-            {'sector': 'Wood and Waste', 'code': 'WWTCB', 'intensity': 9999},
-        ]
+        'series_list': sorted(
+            [l for l in EFS
+             if l['code'] in RPS_STATES[state]['green_energy']],
+            key=lambda k: k['sector']
+        ) + sorted(
+            [l for l in EFS
+             if l['code'] not in RPS_STATES[state]['green_energy']],
+            key=lambda k: k['sector']
+        )
     }
     eia_url = 'http://api.eia.gov/series/?api_key=D82A092DA301308805ECAB18A123BB4A&series_id='
     for s in eia['series_list']:
@@ -95,6 +86,7 @@ def state_gridmix(state):
             'data': data,
             'code': eia['series_list'][i]['code'],
             'intensity': eia['series_list'][i]['intensity'],
+            'green': eia['series_list'][i]['code'] in RPS_STATES[state]['green_energy']
         })
     div = 25. if m <= 100. else 100. if m <= 1000. else 500.
     m = ceil(m / div) * div

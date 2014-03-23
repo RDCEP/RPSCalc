@@ -203,6 +203,8 @@ path.domain { stroke: #999999; stroke-width: 1; }
 
 .grid-data-slice { stroke: white; }
 
+.grid-data-text.green { font-weight: bold; }
+
 .grid-axis { stroke: white; }
 
 .carveout-line { stroke: #eeeeee; stroke-width: 1; }
