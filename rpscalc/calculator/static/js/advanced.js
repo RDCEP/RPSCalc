@@ -100,7 +100,6 @@
           //TODO: Get current year dynamically
           other_rec = (100 - Options.data.solar.data[i].y - d.y) / 100 * wind * .65,
           year = d.x.getFullYear();
-//        console.log(wind_rec, solar_rec);
         _cap.data[i] = {
           x: new Date(d.x),
           y0: 0,
@@ -133,11 +132,13 @@
     var t = d3.select(this);
     t.append('h5')
       .text(function(d) { return d.name; });
+
     var divs = t.selectAll('.chart-input-pp')
       .data(d.inputs)
       .enter()
       .append('div')
       .attr({ 'class': 'clearfix chart-input-row chart-input-pp'});
+
     divs.each(function() {
       var t = d3.select(this);
       var l = t.append('label');
@@ -171,7 +172,8 @@
             'width': (segment_width * 3 - 10) + 'px',
             'float': 'left'
           })
-          .text(function(d) { return d.name; });
+          .text(function(d) { return (typeof(d.unit) == 'undefined') ? d.name :
+            d.name + ' (' + d.unit + ')'; });
     });
   });
 
