@@ -1,22 +1,15 @@
 import json
 import os
 import urllib2
-from flask import Blueprint, request, render_template, flash, g, session, \
-    redirect, url_for, abort
-from rpscalc.constants import EIA_API_KEY, STATES, BASE_DIR, RPS_STATES
-from rpscalc.eia_api.constants import EIA_FUEL_SECTORS as EFS
+from rpscalc.constants import EIA_API_KEY, BASE_DIR, RPS_STATES, \
+    EIA_FUEL_SECTORS
 
 
-mod = Blueprint('eia_api', __name__, url_prefix='/eia_api',
-                static_folder='static')
-
-
-@mod.route('/<state>/retail')
 def state_retail(state):
     api_key = EIA_API_KEY
-    # json_file = os.path.join(BASE_DIR, 'static/js/data/retail/{}.json'.\
-    json_file = os.path.join(BASE_DIR, 'eia_api/static/json/retail/{}.json'.\
-                             format(STATES[state][1]))
+    json_file = os.path.join(
+        BASE_DIR, 'eia_api', 'static', 'json', 'retail',
+        '{}.json'.format(RPS_STATES[state]['names'][0]))
     series_id = 'ELEC.PRICE.{}-ALL.Q'.format(state)
     eia_url = 'http://api.eia.gov/series/?api_key={}&series_id={}'.\
         format(api_key, series_id)
@@ -36,9 +29,9 @@ def state_retail(state):
             {'data': data, 'divs': range(0, int(m + 1), int(div))},
             indent=4, separators=(',', ': ')
         ))
-    # state_json_file = os.path.join(BASE_DIR, 'static/js/data/states/{}.json'.\
-    state_json_file = os.path.join(BASE_DIR, 'state_pages/static/json/{}.json'.\
-                                   format(STATES[state][1]))
+    state_json_file = os.path.join(
+        BASE_DIR, 'state_pages', 'static', 'json',
+        '{}.json'.format(RPS_STATES[state]['names'][0]))
     with open(state_json_file, 'r') as f:
         state_json = json.load(f)
         state_json['policy_and_price'] = state_json.get('price_and_policy', {})
@@ -51,27 +44,20 @@ def state_retail(state):
         ))
 
 
-@mod.route('/<state>/gridmix')
 def state_gridmix(state):
-    #TODO: this should be run as a cron every month or so. Should not be a public URL.
     from math import ceil
-    from numpy import linspace
-    eia = {
-        'api_key': EIA_API_KEY,
-        'url': 'http://api.eia.gov/series?api_key{{}}&series_id={{}}',
-        'series_id': 'SEDS.{code}TCB.{state}.A',
-        'series_list': sorted(
-            [l for l in EFS
-             if l['code'] in RPS_STATES[state]['green_energy']],
-            key=lambda k: k['sector']
-        ) + sorted(
-            [l for l in EFS
-             if l['code'] not in RPS_STATES[state]['green_energy']],
-            key=lambda k: k['sector']
-        )
-    }
-    eia_url = 'http://api.eia.gov/series/?api_key=D82A092DA301308805ECAB18A123BB4A&series_id='
-    for s in eia['series_list']:
+    series_list = sorted(
+        [l for l in EIA_FUEL_SECTORS
+         if l['code'] in RPS_STATES[state]['green_energy']],
+        key=lambda k: k['sector']
+    ) + sorted(
+        [l for l in EIA_FUEL_SECTORS
+         if l['code'] not in RPS_STATES[state]['green_energy']],
+        key=lambda k: k['sector']
+    )
+    eia_url = 'http://api.eia.gov/series/?api_key={}&series_id='.\
+        format(EIA_API_KEY)
+    for s in series_list:
         eia_url += 'SEDS.'+s['code']+'.'+state+'.A;'
     eia_url = eia_url[0:-1]
     eia_url += '&num=1'
@@ -82,20 +68,18 @@ def state_gridmix(state):
         data = float(j['series'][i]['data'][0][1]) / 1000.
         m = data if data > m else m
         if data > 0: d.append({
-            'sector': eia['series_list'][i]['sector'],
+            'sector': series_list[i]['sector'],
             'data': data,
-            'code': eia['series_list'][i]['code'],
-            'intensity': eia['series_list'][i]['intensity'],
-            'green': eia['series_list'][i]['code'] in RPS_STATES[state]['green_energy']
+            'code': series_list[i]['code'],
+            'intensity': series_list[i]['intensity'],
+            'green': series_list[i]['code'] in RPS_STATES[state]['green_energy']
         })
     div = 25. if m <= 100. else 100. if m <= 1000. else 500.
     m = ceil(m / div) * div
-    # with open(os.path.join(BASE_DIR, 'static/js/data/gridmix/{}.json'.format(STATES[state][1])), 'w') as f:
-    with open(os.path.join(BASE_DIR, 'eia_api/static/json/gridmix/{}.json'.format(STATES[state][1])), 'w') as f:
+    with open(os.path.join(
+            BASE_DIR, 'eia_api', 'static', 'json', 'gridmix',
+            '{}.json'.format(RPS_STATES[state]['names'][0])), 'w') as f:
         f.write(
-            json.dumps(
-                {'data': d, 'maximum': m,
-                 'divs': range(0, int(m + 1), int(div)),
-                 }
-            )
+            json.dumps({'data': d, 'maximum': m,
+                        'divs': range(0, int(m + 1), int(div)), })
         )

@@ -30,21 +30,22 @@ def template_now():
 
 @app.context_processor
 def all_rps_states():
-    return dict(all_rps_states=RPS_STATES)
+    s = sorted([(v['names'][0], v['names'][1])
+                for k, v in RPS_STATES.iteritems()
+                if v['rps']], key=lambda i: i[1])
+    return dict(all_rps_states=s)
 
 
 # Load and register Blueprints
 from rpscalc.state_pages.views import mod as state_pages_module
 from rpscalc.calculator.views import mod as calculator_module
 from rpscalc.glossary.views import mod as glossary_module
-from rpscalc.eia_api.views import mod as eia_module
 from rpscalc.views import mod as rpscalc_module
 from rpscalc.state_comparison.views import mod as comparison_mod
 app.register_blueprint(state_pages_module)
 app.register_blueprint(calculator_module)
 app.register_blueprint(glossary_module)
 app.register_blueprint(rpscalc_module)
-app.register_blueprint(eia_module)
 app.register_blueprint(comparison_mod)
 
 # Set up asset bundles
