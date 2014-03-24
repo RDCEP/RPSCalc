@@ -1,7 +1,8 @@
 from datetime import datetime
 from flask import Flask, render_template, session, g
 from flask.ext.assets import Environment, Bundle
-from rpscalc.filters import session_json, session_cleared, deslugify
+from rpscalc.filters import session_json, session_cleared, deslugify, \
+    state_abbr
 from rpscalc.constants import RPS_STATES
 
 
@@ -11,6 +12,7 @@ app.url_map.strict_slashes = False
 app.jinja_env.filters['session_json'] = session_json
 app.jinja_env.filters['session_cleared'] = session_cleared
 app.jinja_env.filters['deslugify'] = deslugify
+app.jinja_env.filters['state_abbr'] = state_abbr
 
 
 @app.errorhandler(404)

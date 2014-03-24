@@ -22,6 +22,7 @@
 
         <li><a href="/glossary">Glossary</a></li>
         <li><a href>Documentation</a></li>
+        {% if state %}<li id="menu_state_abbr">{{ state|state_abbr }}</li>{% endif %}
         <li><ul id="left_nav">
           {% block left_nav %}
           {% endblock %}

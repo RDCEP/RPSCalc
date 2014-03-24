@@ -1,4 +1,5 @@
 import json
+from rpscalc.constants import RPS_STATES
 
 
 def session_json(_session):
@@ -15,3 +16,7 @@ def session_cleared(_session):
 
 def deslugify(v):
     return v.replace('_', ' ').capitalize()
+
+
+def state_abbr(state):
+    return [k for k, v in RPS_STATES.iteritems() if v['names'][0] == state][0]
