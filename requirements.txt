@@ -1,0 +1,17 @@
+Beaker==1.6.4
+Flask==0.10.1
+Flask-Assets==0.8
+Flask-Beaker==0.2.0
+Jinja2==2.7.1
+MarkupSafe==0.18
+SQLAlchemy==0.9.1
+Werkzeug==0.9.4
+cssmin==0.2.0
+itsdangerous==0.23
+jsmin==2.0.8
+numpy==1.8.0
+psycopg2==2.5.2
+pylibmc==1.2.3
+slugify==0.0.1
+webassets==0.8
+wsgiref==0.1.2
