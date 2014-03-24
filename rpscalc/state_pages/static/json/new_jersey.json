@@ -122,7 +122,7 @@
         }
     ],
     "abbr": "NJ",
-    "rps_progress": .083,
+    "rps_progress": 0.083,
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,
