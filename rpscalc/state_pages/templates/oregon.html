@@ -1,0 +1,44 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>Oregon's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's large electricity providers. Small utilities, defined as those with less than 3% of the state's load, are subject to less strict standards. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Oregon.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><strong>25%</strong> of the state's energy consumption must be from renewable sources by <strong>2025</strong></li>
+  <li>RPS requires a total of 20 MW-AC of solar PV by 2020</li>
+  <li>Utilities costs are capped at 4% of the utility's annual revenue requirement</li>
+{% endblock %}
+{% block state_carveouts %}
+  <p>Utilites must develop 20 MW solar PV by 2025. This requirement does not correspond to the ramp-up schedule in its existing structure in the Oregon RPS. The solar capacity requirement is allocated among 3 utilities in Oregon as follows: PGE (10.9MW), Pacific Power (8.7MW), Idaho Power (0.5MW).</p>
+{% endblock %}
+{% block state_costcap %}
+  <p>Oregon utilities are not required to comply with the RPS when compliance costs for the utilities exceed 4% of the utility's annual revenue requirement for that compliance year</p>
+{% endblock %}
+{% block state_statute %}
+  <p>The RPS was established in 2007 as part of the Oregon Renewable Energy Act of 2007, Senate Bill 838. The purpose was to develop electricity procurement plans for renewable power. HB 3039, enacted in 2009, subsequently created requirements for utilities to develop a total of 20 MW of solar PV by 2020. Renewable energy may be bundled with RECs.</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Municipal Solid Waste, Hydrogen, Anaerobic Digestion, Tidal Energy, Wave Energy, Ocean Thermal
+{% endblock %}
+{% block state_geo_eligible %}
+  Oregon does not specify geographic eligibilities in its RPS.
+{% endblock %}
+{% block state_total_load %}
+  Primary RPS (for large utilities): 74.6%
+{% endblock %}
+{% block state_tech_req %}
+  20 MW sized 500 kW to 5 MW Solar PV by 2020.
+{% endblock %}
+{% block state_sectors %}
+  Municipal Utility, Investor-Owned Utility, Rural Electric Cooperative, Retail Supplier
+{% endblock %}
+{% block state_penalty %}
+  $50/MWh for 2011, to be re-established by October 1 each subsequent even-numbered year.
+{% endblock %}
+{% block state_tools %}
+  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
+  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=OR22R">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
+  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+{% endblock %}

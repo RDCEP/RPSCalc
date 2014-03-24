@@ -29,83 +29,6 @@
         0.25,
         0.25
     ],
-    "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:\n",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=NV",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies"
-                }
-            ]
-        },
-        "grid_mix": {
-            "text": "This overview from Energy Information Administration (EIA) demonstrates Nevada's current sources for electricity",
-            "data": []
-        },
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
-                },
-                {
-                    "href": "http://www.nrdc.org/energy/renewables/nevada.asp",
-                    "name": "Natural Resources Defense Council (NRDC) State Profile",
-                    "description": "Your state has a NRDC renewable energy resources profile; find state resources and learn about the technology"
-                },
-                {
-                    "href": "http://apps1.eere.energy.gov/states/state_home.cfm/state=NV",
-                    "name": "U.S. Department of Energy Office of Energy Efficiency and Renewable Energy (EERE) -- State Profile",
-                    "description": "Access your state\u2019s EERE page, and find information on renewable resources maps, energy statistics, and news"
-                }
-            ]
-        }
-    },
-    "legislation": {
-        "statute": "Nevada's original RPS was established in 1997. Most recently updated in 2009, investor-owned utilities and  retail suppliers will be required to acheive 25% of retail sales from renewable sources by 2025.  New energy efficiency measures count toward the goal. Nevada statute also requires the retirement of 800 MW of coal plants,  to be replaced with cleaner sources (including at minimum 350 MW from renewable sources). The RPS is administered by the  Public Utilities Commission of Nevada.",
-        "rps_tech_details": [
-            {
-                "name": "Eligible Technologies",
-                "description": "Solar Water Heat, Solar Space Heat, Solar Thermal Electric, Solar Thermal Process Heat, Photovoltaics,  Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Municipal Solid Waste, Waste Tires  (using microwave reduction), Energy Recovery Processes, Solar Pool Heating, Anaerobic Digestion, Biodiesel,  Geothermal Direct-Use"
-            },
-            {
-                "name": "Geographic Eligibility",
-                "description": "Only energy produced in Nevada or delivered to Nevada applies toward the RPS goal"
-            },
-            {
-                "name": "Percent of Total Load",
-                "description": "88.6%"
-            },
-            {
-                "name": "Technology Requirements",
-                "description": "Through 2015, 5% of the annual RPS requirement (1.2% of sales in 2015) must be fulfilled through solar. For the period 2016 to 2025, it rises to 6% of generation (1.5% of sales in 2025)"
-            },
-            {
-                "name": "Sectors",
-                "description": "Investor-Owned Utilities, Retail Suppliers"
-            },
-            {
-                "name": "Penalty",
-                "description": "According to the legislation, state regulators may impose penalties, but none have been specified to date."
-            }
-        ],
-        "carveouts": "",
-        "cost_cap_details": "No explicit cost cap exists. All new contracts must be approved by the PUC. If insufficient supply is available at  just and reasonable terms (as determined by the PUC), then the PUC may choose to exempt the provider  from remaining RPS requirements \nEstimate how Nevada's cost cap can effect their RPS's efficacy"
-    },
     "carveouts": [
         {
             "data": [
@@ -138,17 +61,8 @@
             "type": "solar"
         }
     ],
-    "snapshot": {
-        "overview": [
-            "25% of the state's energy consumption must be from renewable sources by 2025",
-            "Solar carve out",
-            "No explicit cost cap"
-        ],
-        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Nevada's pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": ".15",
-        "summary": "Nevada's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Nevada."
-    },
     "abbr": "NV",
+    "rps_progress": 0.15,
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,

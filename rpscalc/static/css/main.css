@@ -124,7 +124,7 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 .chart-outer-wrap { padding: 2em 0 2em; }
 .chart-outer-wrap h3 { margin-bottom: 0; }
 
-#rps_progress { margin-top: 1em; }
+#rps_progress, #grid_mix, #retail_price { margin-top: 1em; }
 
 #state_trajectory_inputs { width: 760px; }
 

@@ -3,6 +3,7 @@
 {% block content %}
     {{ super() }}
   <section id="summary" class="clearfix">
+    {% block state_summary %}{% endblock %}
   </section>
   <section id="snapshot" class="clearfix">
     <h2>RPS Snapshot</h2>
@@ -12,10 +13,13 @@
     </div>
     <div class="wide module clearfix">
       <h3 class="narrow">Overview</h3>
-      <ul id="overview"></ul>
+      <ul id="overview">
+        {% block state_overview %}{% endblock %}
+      </ul>
     </div>
     <div id="carveouts" class="wide module clearfix">
       <h3>Carveouts</h3>
+      {% block state_carveouts %}{% endblock %}
     </div>
     <div class="wide module clearfix">
       <h3>Current RPS Progress</h3>
@@ -27,14 +31,26 @@
     <h2>Energy Details</h2>
     <div class="wide module clearfix">
       <h3>Grid Mix</h3>
+      <p>The following chart compares the variety of sources currently
+        used to generate {{ state|deslugify }}’s electricity. The color
+        of each bar is indicative of the <a href="">carbon
+        intensity</a> of each source.</p>
       <div id="grid_mix"></div>
     </div>
     <div id="cost_cap_wrap" class="wide module clearfix">
       <h3>Cost Cap Details</h3>
-      <div id="cost_cap_details"></div>
+      <div id="cost_cap_details">
+        {% block state_costcap %}{% endblock %}
+      </div>
     </div>
     <div class="wide module clearfix">
       <h3>Historic retail prices <span>(&cent; / kWh)</span></h3>
+      <p>The following chart presents historical data from the
+        <a href="">Energy Information Administration (EIA)</a>
+        on the price at which residential customers can purchase
+        electricity. Typically, states set explicit cost caps relative
+        to the retail price presented below (as opposed to the
+        lower wholesale price).</p>
       <div id="retail_price" class="chart-wrap"></div>
     </div>
   </section>
@@ -42,11 +58,41 @@
     <h2>Legislation</h2>
     <div class="wide module clearfix">
       <h3>Statute</h3>
-      <div id="statute"></div>
+      <div id="statute">
+        {% block state_statute %}{% endblock %}
+      </div>
     </div>
     <div class="wide module clearfix">
       <h3>RPS Technical Details</h3>
-      <div id="tech_req"></div>
+      <div id="tech_req">
+        <table>
+          <tr><th>Policy</th><th>Description</th></tr>
+          <tr class="row">
+            <td>Eligible Technologies</td>
+            <td>{% block state_eligible_tech %}{% endblock %}</td>
+          </tr>
+          <tr class="row">
+            <td>Geographic Eligibility</td>
+            <td>{% block state_geo_eligible %}{% endblock %}</td>
+          </tr>
+          <tr class="row">
+            <td>Percent of Total Load</td>
+            <td>{% block state_total_load %}{% endblock %}</td>
+          </tr>
+          <tr class="row">
+            <td>Technology Requirements</td>
+            <td>{% block state_tech_req %}{% endblock %}</td>
+          </tr>
+          <tr class="row">
+            <td>Sectors</td>
+            <td>{% block state_sectors %}{% endblock %}</td>
+          </tr>
+          <tr class="row">
+            <td>Penalty</td>
+            <td>{% block state_penalty %}{% endblock %}</td>
+          </tr>
+        </table>
+      </div>
     </div>
   </section>
   <section id="resources" class="clearfix">
@@ -55,13 +101,21 @@
         <div class="narrow module">
           <h3>Tools and other links</h3>
           <div id="tools">
-            <ul></ul>
+            <ul>
+              {% block state_tools %}
+
+              {% endblock %}
+            </ul>
           </div>
         </div>
         <div class="narrow module clearfix">
           <h3>References</h3>
           <div id="references">
-            <ul></ul>
+            <ul>
+              {% block state_references %}
+
+              {% endblock %}
+            </ul>
           </div>
         </div>
       </div>

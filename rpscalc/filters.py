@@ -11,3 +11,7 @@ def session_cleared(_session):
         if k in _s.keys():
             _s[k] = False
     return json.dumps(_s)
+
+
+def deslugify(v):
+    return v.replace('_', ' ').capitalize()

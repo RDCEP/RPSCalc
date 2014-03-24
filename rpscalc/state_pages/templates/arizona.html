@@ -1,0 +1,98 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>Arizona’s Renewable Energy Standard and Tariff (REST)—also known as a
+    <a href="">Renewable Portfolio Standard (RPS)</a>—is
+    intended to increase use of renewable resources in the state by
+    establishing the minimum amount of renewable energy that the
+    state's electricity providers must sell in a given year. This
+    legally-established renewable energy procurement goal gradually
+    increases over time to meet the overall target of 15% renewable
+    power by 2025.</p>
+  <p>The state profile below explores the design of this policy,
+    highlighting the factors that influence the success of Arizona’s
+    RPS goals and the tradeoffs inherent to it. Once you’re comfortable
+    with the information on this page, you can evaluate the policy’s
+    expected viability with the <a href="">Arizona RPS Feasibility Calculator</a>.
+    You can also use the calculator to change the policy requirements,
+    trajectory, cost cap, and more, to see how altering Arizona’s policy
+    design affects its success.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><strong>15%</strong> of the state’s load from must be from renewable sources by <strong>2025</strong>, subject to the cost cap</li>
+  <li>Carve-out for <strong>distributed generation</strong></li>
+  <li>No explicit cost cap</li>
+{% endblock %}
+{% block state_carveouts %}
+  <p><a href="">Carve-outs</a> can create economic
+    opportunities in the state by introducing new or promising
+    technologies into the market. However, these standards limit
+    the utilities’ ability to substitute between renewable energy
+    sources, potentially increasing the cost of the policy.
+    Arizona’s REST requires that 30% of the renewable obligation
+    in each year be fulfilled through <a href="">distributed
+    generation</a>. This amounts to 4.5% of total annual retail
+    electric sales in 2025.</p>
+{% endblock %}
+{% block state_costcap %}
+  <p>Unlike some states, Arizona does not have an explicit ‘cost cap’
+    or limit on the potential increase in electricity costs as a
+    result of this policy. Rather, the <a href="">Arizona
+    Corporation Commission (ACC)</a> is responsible for managing these
+    costs by approving utility-proposed ‘<a href="">tariffs</a>’.
+    Each utility can recover any additional costs imposed by the
+    REST by filing a ‘tariff’, or rate adjustment, with the Arizona
+    Corporation Commission (ACC). By statute, the ACC must deem the
+    tariff to be “reasonable and prudent”. The ACC’s decision on what
+    is a “reasonable and prudent” premium on renewable energy acts
+    as an implicit cost cap on Arizona’s REST. In other words,
+    utilities will not spend more money on renewable energy attributes
+    than they are allowed to recover. It is also of note that the ACC
+    may waive compliance with the RPS program for good cause. Using
+    the <a href="">RPS Feasibility Calculator</a>
+    you can act as the ACC, determining what level of costs will
+    lead to a viable RPS.</p>
+{% endblock %}
+{% block state_statute %}
+  <p>The Arizona Corporation Commission increased the state's REST
+    in 2007. These rules require that investor-owned utilities and
+    electric power cooperatives serving retail customers purchase 15%
+    of their power (or purchase RECs equivalent to that amount) from
+    renewable sources by 2025. The program is administered by the
+    Arizona Corporation Commission. In June 2012, a waste-to-energy
+    (municipal solid waste incinerator) pilot was approved as an
+    eligible source.</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  Solar Water Heat, Solar Space Heat, Solar Thermal Electric, Solar Thermal
+  Process Heat, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric,
+  Geothermal Electric, Geothermal Heat Pumps, CHP/Cogeneration, Solar Pool
+  Heating (commercial only), Daylighting (non-residential only), Solar Space
+  Cooling, Solar HVAC, Additional technologies upon approval*, CHP only
+  counts when the source fuel is an eligible renewable energy resource,
+  Anaerobic Digestion, Fuel Cells using Renewable Fuels, Geothermal Direct-Use
+{% endblock %}
+{% block state_geo_eligible %}
+  Only renewable energy delivered to Arizona counts toward the standard. There is also a credit multiplier to incentivize in-state generation.
+{% endblock %}
+{% block state_total_load %}
+  58.6%
+{% endblock %}
+{% block state_tech_req %}
+  For 2012 and after, 30% of the annual requirement must be met through distributed energy resources (4.5% of sales in 2025); half of the distributed energy or customer–owned requirement must be met by systems among residential customers and the other half from business customers.
+{% endblock %}
+{% block state_sectors %}
+  Investor-Owned Utility, Rural Electric Cooperative, Retail Supplier
+{% endblock %}
+{% block state_penalty %}
+  By statute, state regulators may impose unspecified penalties for non-compliance.
+{% endblock %}
+{% block state_tools %}
+  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
+  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
+  <li><a href="http://www.cc.state.az.us/divisions/utilities/electric/res.pdf">Arizona's REST Rules</a>&nbsp;—&nbsp;Complete legislation in PDF format</li>
+  <li><a href="http://apps1.eere.energy.gov/states/state_home.cfm/state=AZ">U.S. Department of Energy Office of Energy Efficiency and Renewable Energy (EERE) -- State Profile</a>&nbsp;—&nbsp;Access your state’s EERE page, and find information on renewable resources maps, energy statistics, and news</li>
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/index.cfm??Incentive_Code=AZ03R">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
+  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+{% endblock %}

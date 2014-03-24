@@ -29,83 +29,6 @@
         0.15,
         0.15
     ],
-    "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/index.cfm??Incentive_Code=AZ03R",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        },
-        "grid_mix": {
-            "text": "This overview from Energy Information Administration (EIA) demonstrates Arizona's current sources for electricity",
-            "data": []
-        },
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
-                },
-                {
-                    "href": "http://www.cc.state.az.us/divisions/utilities/electric/res.pdf",
-                    "name": "Arizona's REST Rules",
-                    "description": "Complete legislation in PDF format"
-                },
-                {
-                    "href": "http://apps1.eere.energy.gov/states/state_home.cfm/state=AZ",
-                    "name": "U.S. Department of Energy Office of Energy Efficiency and Renewable Energy (EERE) -- State Profile",
-                    "description": "Access your state\u2019s EERE page, and find information on renewable resources maps, energy statistics, and news"
-                }
-            ]
-        }
-    },
-    "legislation": {
-        "statute": "The Arizona Corporation Commission increased the state's REST in 2007. These rules require that investor-owned utilities and electric power cooperatives serving retail costumers purchase 15% of their power (or purchase RECs equivalent to that amount) from renewable sources by 2025. The program is administered by the Arizona Corporation Commission. In June 2012, a waste-to-energy (municipal solid waste incinerator) pilot was approved as an eligible source.",
-        "rps_tech_details": [
-            {
-                "name": "Eligible Technologies",
-                "description": "Solar Water Heat, Solar Space Heat, Solar Thermal Electric, Solar Thermal Process Heat, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Geothermal Heat Pumps, CHP/Cogeneration, Solar Pool Heating (commercial only), Daylighting (non-residential only), Solar Space Cooling, Solar HVAC, CHP only counts when the source fuel is an eligible renewable energy resource, Anaerobic Digestion, Fuel Cells using Renewable Fuels, Geothermal Direct-Use"
-            },
-            {
-                "name": "Geographic Eligibility",
-                "description": "Only energy generated in Arizona and delivered to Arizona can count toward the standard. All REC attributes must be delivered to Arizona customers. There is also a credit multiplier to incentivize in-state generation."
-            },
-            {
-                "name": "Percent of Total Load",
-                "description": "58.6%"
-            },
-            {
-                "name": "Technology Requirements",
-                "description": "For 2012 and after, 30% of the annual requirement must be met through distributed energy resources (4.5% of sales in 2025); half of the distributed energy or customer\u2013owned requirement must be met by systems among residential customers and the other half from business customers."
-            },
-            {
-                "name": "Sectors",
-                "description": "Investor-Owned Utility, Rural Electric Cooperative, Retail Supplier"
-            },
-            {
-                "name": "Penalty",
-                "description": "State regulators may impose (according to legislation), but none have been specified to date"
-            }
-        ],
-        "carveouts": "",
-        "cost_cap_details": "Arizona does not have an explicit cost cap. Each utility is required to file with the ACC a tariff that proposes methods for recovering the reasonable and prudent  costs of complying with the RPS (e.g. systems benefits charge). The ACC may waive compliance with the RPS program for good cause. Estimate how Arizona's cost cap can effect their RPS's efficacy"
-    },
     "carveouts": [
         {
             "data": [
@@ -138,17 +61,8 @@
             "type": "DG"
         }
     ],
-    "snapshot": {
-        "overview": [
-            "15% of the state's load from must be from renewable sources by 2025, subject to the cost cap",
-            "Distributed generation technology minimum",
-            "No explicit cost cap"
-        ],
-        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. Arizona's pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": ".03",
-        "summary": "Arizona's Renewable Energy Standard and Tariff (REST) establishes a minimum amount of renewable energy that must be generated by the state's electricity providers.Unlike many other states, Arizona's renewable requirement  is a product of rulemaking by the Arizona Corporation Commission (ACC). This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Arizona."
-    },
     "abbr": "AZ",
+    "rps_progress": 0.03,
     "policy_and_price": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,

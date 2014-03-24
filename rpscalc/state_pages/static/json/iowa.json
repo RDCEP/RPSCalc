@@ -3,82 +3,9 @@
     "machine_name": "iowa",
     "name": "Iowa",
     "trajectory": [],
-    "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IA01R&re=1&ee=1",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        },
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
-                }
-            ]
-        }
-    },
-    "legislation": {
-        "statute": "The Iowa Renewable Energy Law is a capacity-based standard, which requires its investor-owned utilities to own or contract a total of 105 MW of renewable energy. It is split between MidAmerican Energy (55.2 MW, 52.57% of demand) and Alliant Energy Interstate Power and Light (49.8 MW., 47.43% of demand). There are no mandated increases, and the target has already been achieved.",
-        "rps_tech_details": [
-            {
-                "name": "Eligible Technologies",
-                "description": "Solar, Wind, Waste management, Resource recovery, Refuse-derived fuel, Agricultural crops or residues, Wood-burning facilities, or Small hydropower facilities"
-            },
-            {
-                "name": "Geographic Eligibility",
-                "description": "In-state"
-            },
-            {
-                "name": "Percent of Total Load",
-                "description": "75.7%"
-            },
-            {
-                "name": "Technology Requirements",
-                "description": "None (voluntary goal of 1,000 MW wind by 2010)"
-            },
-            {
-                "name": "Sectors",
-                "description": "Investor-Owned Utilities"
-            },
-            {
-                "name": "Non-compliance Penalty",
-                "description": "None"
-            }
-        ],
-        "carveouts": "N/A",
-        "cost_cap_details": "N/A"
-    },
     "carveouts": [],
-    "snapshot": {
-        "overview": [
-            "<strong>105 MW</strong> of renewable sources",
-            "<strong>No</strong> Carve-outs",
-            "No explicit cost cap",
-            "<strong>Two</strong> separate state RPS schedules (primary and secondary)"
-        ],
-        "policy_trajectory": "Iowa's REL does not define a 'ramp-up', because the nature of the goal is a specific capacity to be achieved.\n",
-        "rps_progress": "0",
-        "summary": "Iowa's Alternative Energy Law (REL) establishes a minimum amount of renewable energy that must be purchased by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Iowa."
-    },
     "abbr": "IA",
+    "rps_progress": 0.0,
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,

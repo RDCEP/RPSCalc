@@ -24,81 +24,9 @@
         0.15,
         0.15
     ],
-    "resources": {
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
-                }
-            ]
-        },
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=WA15R&re=1&ee=1",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i>"
-                }
-            ]
-        }
-    },
-    "legislation": {
-        "statute": "Washington's RPS was enacted in 2006, and required any utility serving more than 25,000 to obtain 15% of its electricity from renewable sources by 2020. In addition, the state requires utilities subject to the RPS to pursue all conservation that is cost-effective by January 2010. They must identify achievable potential through 2019, with reviews and updates every two years for ten years.",
-        "rps_tech_details": [
-            {
-                "name": "Eligible Technologies",
-                "description": "Solar Thermal Electric, Photovoltaics, Wind, Biomass, Biodiesel, Landfill Gas, Anaerobic Digestion, Hydroelectric, Tidal Energy, Ocean Thermal, Geothermal Electric"
-            },
-            {
-                "name": "Geographic Eligibility",
-                "description": "For utilities serving out-of-state customers, a qualifying facility must be located in the state in which it services the customers (as found in <a href=\"http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.030\">RCW 19.285.030(12)(d)</a>)."
-            },
-            {
-                "name": "Percent of Total Load",
-                "description": "84.7%"
-            },
-            {
-                "name": "Technology Requirements",
-                "description": "None"
-            },
-            {
-                "name": "Sectors",
-                "description": "Investor-Owned Utilities, Municipal Utilities, Public Utility Districts, Rural Electric Cooperatives"
-            },
-            {
-                "name": "Non-compliance Penalty",
-                "description": "A qualifying utility that fails to comply with the conservation or energy targets must pay an administrative penalty of $50/MWh of shortfall. Starting in 2007, the amount is adjusted annually according to rate of change of the U.S. inflation indicator. Collections are deposited into the <a href=\"http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.060\">energy independence act special account</a>. Exceptions include utilities in compliance with <a href=\"http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.040\">RCW 19.285.040 (d)</a> and <a href=\"http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.050\">19.285.050(1)</a>."
-            }
-        ],
-        "carveouts": "Washington's RPS does not have any technology requirements.",
-        "cost_cap_details": "Investor-Owned Utilities are entitled to recover incurred costs associated with <a href=\"http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.050\">incremental renewable resource costs</a>"
-    },
     "carveouts": [],
-    "snapshot": {
-        "overview": [
-            "<strong>15%</strong> of the state's energy consumption must be from renewable sources by <strong>2020</strong>",
-            "No technology carve-outs",
-            "No explicit cost cap"
-        ],
-        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart shows Colorado's policy pathway.\n",
-        "summary": "Washington's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Washington.",
-        "rps_progress": "N/A (Not in LBNL, compliance doesn't commence until 2012 and dates are from 2011)"
-    },
     "abbr": "WA",
+    "rps_progress": "N/A (Not in LBNL, compliance doesn't commence until 2012 and dates are from 2011)",
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,

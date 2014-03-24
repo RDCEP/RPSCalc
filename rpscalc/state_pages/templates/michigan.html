@@ -1,0 +1,45 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>Michigan's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Michigan.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><strong>10%</strong> of the state's energy consumption must be from renewable sources by <strong>2015</strong></li>
+  <li>No technology requirements</li>
+  <li>Cost cap for residential customers at <strong>$3.00<strong> per month</strong></strong></li>
+{% endblock %}
+{% block state_carveouts %}
+  <p>Michigan's RPS does not have any technology requirements.</p>
+{% endblock %}
+{% block state_costcap %}
+  <p>Monthly rate impact is capped at $3.00 for residential customers, $16.58 for secondary commercial customers and $187.50 for primary commercial/industrial customers.</p>
+{% endblock %}
+{% block state_statute %}
+  <p>Michigan's RPS was enacted by <a href="http://www.legislature.mi.gov/documents/2007-2008/publicact/pdf/2008-PA-0295.pdf">Public Act 295</a> in October 2008. In total, this act will require that electric providers in Michigan produce 10% of their energy from renewable sources by 2015. The first compliance period began in 2012. The annual requirements are determined for each utility based on statutorily defined increments between 2007 baseline and the 2015 goal. In addition to these percentage requirements (which can be fulfilled through REC purchases), large utilities have additional capacity requirements.</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Municipal Solid Waste, CHP/Cogeneration, Coal-Fired w/CCS, Gasification, Anaerobic Digestion, Tidal Energy, Wave Energy
+{% endblock %}
+{% block state_geo_eligible %}
+  If out of state, RECs must be generated with the 'retail electric customer service territory of any provider that is not an alternative electric supplier' (<a href="http://www.legislature.mi.gov/documents/2007-2008/publicact/pdf/2008-PA-0295.pdf">PA 295</a> §29(1))
+{% endblock %}
+{% block state_total_load %}
+  100%
+{% endblock %}
+{% block state_tech_req %}
+  None
+{% endblock %}
+{% block state_sectors %}
+  Municipal Utility, Investor-Owned Utility, Rural Electric Cooperative, Retail Supplier
+{% endblock %}
+{% block state_penalty %}
+  Utilities who fail to comply with annual targets may not be allowed to recover the cost of any RECs purchased from ratepayer. The attorney general may file suit against uncooperative utilities. (§ 53)
+{% endblock %}
+{% block state_tools %}
+  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;<i>Datasets available for download in .xlsx format<i></i></i></li>
+  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;<i>Advanced search tool for comparing RPS program data<i></i></i></li>
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.michigan.gov/mpsc/0,4639,7-159-16393_53570---,00.html">Michigan Public Service Commission</a>&nbsp;—&nbsp;<i>RPS compliance information<i></i></i></li>
+  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <li><a href="http://closup.umich.edu/files/closup-wp-32-moyer-rps.pdf">Feasibility and Implications of the Michigan 2012 Proposal 3 for a 25% State Renewable Portfolio Standard</a>&nbsp;—&nbsp;Moyer et al. 2012</li>
+{% endblock %}

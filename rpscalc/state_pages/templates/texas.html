@@ -1,0 +1,44 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>Texas's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Texas.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><strong>10,000 MW</strong> of the state's energy consumption must be from renewable sources by <strong>2025</strong></li>
+  <li>Carve-outs for <strong>non-wind</strong></li>
+  <li>Currently No Explicit cost cap for percent of sales</li>
+{% endblock %}
+{% block state_carveouts %}
+  <p>Texas' non-wind technology requirement comprises the majority of its RPS goals. The chart below is a breakdown for the primary RPS for IOUs. It remains consistent at 75% of the standard each year.</p>
+{% endblock %}
+{% block state_costcap %}
+  <p>Renewable energy procurement is limited to cost-effective resources. The cost cap is set at 'the greater of an additional 0.5% of the amount paid per kWh during the year ending in 2010, or 2% of the amount paid per kWh during the year ending May, 2007.' If exceeded, RPS requirements are placed under a 'freeze.' In addition, a second cost-effectiveness test: cost of procurement of renewable energy must not exceed benchmarks based on market prices for renewable energy in the region (determined by the IPA).</p>
+{% endblock %}
+{% block state_statute %}
+  <p>The current RPS was enacted in 2005 by S.B 20, which revised the original RPS mandate for Texas created by the Public Utility Commission of Texas (PUCT) in 1999. In both cases, the purpose was to develop electricity procurement plans for renewable power. The current S.B 20 legislation more specifically: 5,880 MW (roughly 5% of Texas' electricity demand) of renewable power annually by 2015 and 10,000 MW by 2025. Since wind power accounts for nearly all of the current renewable energy generation in Texas, S.B 20 created a target of 500 MW of renewable-energy generation from resources other than wind. Renewable energy may be bundled with RECs.</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  Solar Water Heat, Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Geothermal Heat Pumps, Tidal Energy, Wave Energy, Ocean Thermal
+{% endblock %}
+{% block state_geo_eligible %}
+  Texas meets 100% of its requirements through to 2025 with in-state wind power at present.
+{% endblock %}
+{% block state_total_load %}
+  Primary RPS: 75.9%
+{% endblock %}
+{% block state_tech_req %}
+  Non-Wind 500 MW annual Req.
+{% endblock %}
+{% block state_sectors %}
+  Investor-Owned Utilities and Retail Suppliers. Municipal Utilities and Coops May Opt-in.
+{% endblock %}
+{% block state_penalty %}
+  For Com-Ed: $0.946/MWh (for hourly customer loads). For Ameren: $0.973/MWh
+{% endblock %}
+{% block state_tools %}
+  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
+  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IL04R&re=1&ee=0">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
+  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+{% endblock %}

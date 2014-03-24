@@ -220,11 +220,9 @@ var FactsPage = function() {
       grid_mix.append('rect')
         .attr('width', 10)
         .attr('height', _h + 10)
-//        .attr('transform', 'translate(' + _wt + ',' + (_h + _mt + _mb + 25) + ')')
         .attr('transform', 'translate(' + (_wt + _wd + 20) + ',' + 0 + ')')
         .style('fill', 'url(#grad_intensity)');
       var ci_min = grid_mix.append('text')
-//        .text('0 gCO2/kWh')
         .attr('transform', 'translate(' + (_wt + _wd + 40) + ',' + (_h) + ')')
         .attr('class', 'grid-axis-text')
         .style('text-anchor', 'start');
@@ -285,59 +283,6 @@ var FactsPage = function() {
         data.push(carveout);
       });
     }
-
-    d3.select('#summary')
-      .append('p')
-      .text(_data.snapshot.summary);
-    d3.select('#overview').selectAll('li')
-      .data(_data.snapshot.overview)
-      .enter()
-      .append('li')
-      .html(function(d) { return d; });
-    statute.append('p')
-      .html(_data.legislation.statute);
-    var tbl = tech_req.append('table');
-    tbl.append('tr')
-      .selectAll('th')
-      .data(['Policy', 'Description'])
-      .enter()
-      .append('th')
-      .text(function(d) { return d; });
-    tbl.selectAll('.row')
-      .data(_data.legislation.rps_tech_details)
-      .enter()
-      .append('tr')
-      .attr('class', 'row')
-      .html(function(d) {
-        return '<td>' + d.name + '</td><td>' + d.description + '</td>';
-      });
-    tech_req.selectAll('tr')
-      .data(_data.legislation.rps_tech_details)
-      .enter();
-    d3.select('#cost_cap_details')
-      .append('p')
-      .html(_data.legislation.cost_cap_details);
-    d3.select('#carveouts')
-      .append('p')
-      .html(_data.legislation.carveouts);
-    tools.insert('p', 'ul')
-      .html(_data.resources.tools.text);
-    tools.select('ul').selectAll('li')
-      .data(_data.resources.tools.links)
-      .enter()
-      .append('li')
-      .html(function(d) {
-        return '<a href="' + d.href + '">' + d.name + '</a>&nbsp;&mdash;&nbsp;' + d.description;
-      });
-    references.insert('p', 'ul')
-      .html(_data.resources.references.text);
-    references.select('ul').selectAll('li')
-      .data(_data.resources.references.links)
-      .enter()
-      .append('li')
-      .html(function(d) {
-        return '<a href="'+ d.href + '">'+d.name+'</a>&nbsp;&mdash;&nbsp;'+ d.description;
-      });
     var trajectory = new RPSGraph()
       .padding(30)
       .width(760).height(height)
@@ -354,7 +299,7 @@ var FactsPage = function() {
       .outlines(true)
       .draw();
 
-    rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.snapshot.rps_progress);
+    rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress);
 
     grid_mix_bars(_data);
 
@@ -397,7 +342,6 @@ var FactsPage = function() {
         , html = document.documentElement
         , height = Math.max( body.scrollHeight, body.offsetHeight,
             html.clientHeight, html.scrollHeight, html.offsetHeight );
-      console.log(start_y, pane_y, buffer_y, window.innerHeight, height);
       d3.select('body').style('padding-bottom', function() {
         return ((height - (start_y + pane_y)) < window.innerHeight) ? (window.innerHeight - pane_h - buffer_y)+'px' : 0;
       });

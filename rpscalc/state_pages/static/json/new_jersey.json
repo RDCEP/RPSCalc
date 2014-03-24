@@ -29,83 +29,6 @@
         0.225,
         0.225
     ],
-    "resources": {
-        "references": {
-            "text": "The resources below proved invaluable in the creation of this page:\n",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/incentives/index.cfm?re=0&ee=0&srp=1&state=NJ",
-                    "name": "DSIRE State Page",
-                    "description": "Visit for more complete information on RPS details and legislation"
-                },
-                {
-                    "href": "http://www.nrel.gov/analysis/pdfs/41409.pdf",
-                    "name": "National Renewable Energy Laboratory (NREL) RPS technical report",
-                    "description": "Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies"
-                },
-                {
-                    "href": "http://www.njcleanenergy.com/renewable-energy/program-activity-and-background-information/rps-background-info",
-                    "name": "New Jersey's Clean Energy Program",
-                    "description": "RPS Regulations"
-                }
-            ]
-        },
-        "grid_mix": {
-            "text": "This overview from Energy Information Administration (EIA) demonstrates New Jersey's current sources for electricity",
-            "data": []
-        },
-        "tools": {
-            "text": "The links below may provide more technical details to the interested user:",
-            "links": [
-                {
-                    "href": "http://www.dsireusa.org/rpsdata/index.cfm",
-                    "name": "Database of State Incentives for Renewables & Efficiency (DSIRE) RPS data page",
-                    "description": "Datasets available for download in .xlsx format"
-                },
-                {
-                    "href": "http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards",
-                    "name": "MJBeck RPS EDGE",
-                    "description": "Advanced search tool for comparing RPS program data"
-                },
-                {
-                    "href": "http://apps1.eere.energy.gov/states/state_home.cfm/state=NJ",
-                    "name": "U.S. Department of Energy Office of Energy Efficiency and Renewable Energy (EERE) -- State Profile",
-                    "description": "Access your state\u2019s EERE page, and find information on renewable resources maps, energy statistics, and news"
-                }
-            ]
-        }
-    },
-    "legislation": {
-        "statute": "Established in 1999, New Jersey's Renewable Portfolio Standard (RPS) was last updated  in July 2012. This law requires all investor-owned utilities and retail suppliers in the  state acheive the goal of 20.38% of retail sales from renewables by 2020. This goal is divided into  two portions: Class I (including solar, wind, tidal and geothermal) and Class II (including  hydroelectricity) renewable energy. 17.88% of retail sales must come from Class I by 2020/21  and 2.5% from Class II. The RPS program is administered by the New Jersey Board of Public Utilities (BPU).\n",
-        "rps_tech_details": [
-            {
-                "name": "Eligible Technologies",
-                "description": "Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric,  Geothermal Electric, Municipal Solid Waste, Anaerobic Digestion, Tidal Energy, Wave Energy,  Fuel Cells using Renewable Fuels\n"
-            },
-            {
-                "name": "Geographic Eligibility",
-                "description": "RECs and SRECs may be used as long as the energy was generated wihin or delivered into the  PJM region. For energy generated outside of the PJM region but delivered into it, the generation  facility must have been constructed after 2002.\n"
-            },
-            {
-                "name": "Percent of Total Load",
-                "description": "98.3%"
-            },
-            {
-                "name": "Technology Requirements",
-                "description": "By 2021 17.88% of renewable generation must come from Class I sources and 2.5% must come from Class II  sources. 4.1% of retail sales in NJ must come from solar electric generation by 2027/28 (included in Class I).  A schedule of the solar carve out is included in statute. 1,100 MW of offshore wind is also included, although  there is not currently a schedule for its inclusion. The offshore provision will count towards Class I generation  and will not add to the total RPS goal.\n"
-            },
-            {
-                "name": "Sectors",
-                "description": "Investor-Owned Utilities, Retail Suppliers\n"
-            },
-            {
-                "name": "Penalty",
-                "description": "ACPs/SACPs must be purchased for any portion of the unfulfilled requirement - $0.05/kWh, $0.30/kWh for solar\n"
-            }
-        ],
-        "carveouts": "",
-        "cost_cap_details": "If a electricity provider is not in compliance for a given year, they must submit an alternative compliance payment  (ACP) or solar alternative compliance payment (SACP) equivalent to the total number of RECs and/or SRECs required.  The BPU set the price of ACPs at $50/MWh in 2004, where it still remains. The Board also set a schedule of SACP prices  from FY2014-FY2028 (FY2013 was $641/MWh). This established 'penalty' acts as a cost cap. A more conventional cost cap exists  for the solar carve-out. This technology requirement is frozen if the price of solar exceeds a 2% increase over the retail rate. \nEstimate how New Jersey's cost cap can effect their RPS's efficacy\n"
-    },
     "carveouts": [
         {
             "data": [
@@ -198,17 +121,8 @@
             "type": "tier 2"
         }
     ],
-    "snapshot": {
-        "overview": [
-            "20.38% of the state's energy consumption must be from renewable sources by 2020-2021 subject to the cost cap",
-            "Solar carve out, with additional offshore wind (no timeline)",
-            "Purchase of alternative compliance payments (ACPs) if goal is not met"
-        ],
-        "policy_trajectory": "Most states define a pathway to 'ramp-up' the amount of renewable energy that must be sold. This chart allows you to compare your state's policy pathway to its neighbors. New Jersey's pathway is red. Click on another state to learn more about their RPS.",
-        "rps_progress": ".083",
-        "summary": "New Jersey's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in New Jersey."
-    },
     "abbr": "NJ",
+    "rps_progress": .083,
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,
