@@ -126,15 +126,17 @@ input
     width: 100%
     border: none
     color: #eeeeee
+    &:hover
+      background-color: transparent
   li
     float: left
     position: relative
     height: $crumb * 1.375
-    width: 89px
+    width: 81px
     font-size: 15px
     line-height: 15px
     list-style-type: none!important
-    margin: 0 2px 0 0!important
+    margin: 0 6px 0 0!important
     padding: $crumb*.625 $crumb 0 $crumb*2
     background-color: $mid-gray
     &#crumb_pricing
@@ -333,12 +335,6 @@ input
       margin-top: 2em
 //section
 //  margin-top: 1em
-.switch
-  a
-    color: #bbbbbb
-    font-weight: bold
-  &.active a
-    color: $red
 // GRAPHS
 .x.axis
   text
@@ -397,6 +393,7 @@ path.domain
   cursor: pointer
   color: #bbbbbb
   font-weight: bold
+  border: none
   &.active
     color: $red
 #chart_inputs
