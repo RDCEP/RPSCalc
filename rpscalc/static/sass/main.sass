@@ -49,8 +49,11 @@ h3
 a
   text-decoration: none
   color: $blue
+  border-bottom: 1px solid $blue
+  &.calc-link
+    font-weight: bold
   &:hover
-    color: #ccc !important
+    background-color: white
 .right-align
   text-align: right
 text
@@ -192,6 +195,8 @@ input
   -webkit-transform: translateZ(0)
   a
     display:  inline-block
+    &:hover
+      background-color: transparent
 #top_nav
   width: 960px
   margin: 0 auto
@@ -202,7 +207,12 @@ input
     display: inline-block
     padding: 0 0 0 15px
     margin: 0
-#menu_states
+  a
+    color: #666666
+    border: none
+    &:hover
+      color: #cccccc
+.menu-states
   position: relative
   ul
     @include columns(2, 2em)
@@ -212,7 +222,7 @@ input
     left: 0
     background-color: black
     z-index: 1000
-    padding: .75em 1em .5em
+    padding: .75em 1em 1em
     display: none
     margin: 0
   li
@@ -240,7 +250,7 @@ input
   left: -25px
   margin-top: 1em!important
   a
-    color: $sky-blue
+    color: $sky-blue!important
     font-weight: bold
     &:hover
       color: $blue!important
