@@ -32,7 +32,7 @@
     ],
     "abbr": "TX",
     "rps_progress": 1.0,
-    "policy_and_price": {
+    "price_and_policy": {
         "policy_retail": 90
     }
 }

@@ -94,18 +94,16 @@
 
       Options.data.wind.data.forEach(function(d, i) {
         d.x = new Date(d.x);
+        console.log(Options.data);
         var wind_rec = d.y / 100 * wind,
           solar_rec = Options.data.solar.data[i].y / 100 * solar,
-          //TODO: This .65 is crap now. It comes from the IL/IA code from the original paper
-          //TODO: Get current year dynamically
           other_rec = (100 - Options.data.solar.data[i].y - d.y) / 100 * wind * .65,
           year = d.x.getFullYear();
         _cap.data[i] = {
           x: new Date(d.x),
           y0: 0,
           y: year >= 2013
-//            ? (pp.policy_costcap * Math.pow(1.01, year - 2013)) / Options.data.trajectory.data[i].y * 100
-            ? (pp.policy_costcap * Math.pow(1.01, year - 2013)) / Options.data.trajectory.data[i].y * 100
+            ? (pp.policy_costcap * Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013)) / Options.data.trajectory.data[i].y * Options.data.retail_price
             : 0};
         _rec.data[i] = {
           x: new Date(d.x),

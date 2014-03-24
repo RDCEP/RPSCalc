@@ -111,7 +111,7 @@
     ],
     "abbr": "IL",
     "rps_progress": 0.06,
-    "policy_and_price": {
+    "price_and_policy": {
         "wind_capacity": 0.33,
         "solar_capacity": 0.15,
         "policy_retail": 78
