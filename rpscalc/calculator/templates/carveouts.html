@@ -2,7 +2,7 @@
 {% import '_macros.html' as macros %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-  {{ macros.calc_left_nav(state, 'carveout_states') }}
+  {{ macros.calc_left_nav(state, 'carveouts') }}
 {% endblock %}
 {% block content %}
   {{ super() }}

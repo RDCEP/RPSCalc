@@ -88,6 +88,3 @@ assets.register('js_pricing', js)
 js = Bundle(
     'calculator/js/cost.js', filters='jsmin', output='gen/cost.js')
 assets.register('js_cost', js)
-js = Bundle(
-    'calculator/js/advanced.js', filters='jsmin', output='gen/advanced.js')
-assets.register('js_advanced', js)

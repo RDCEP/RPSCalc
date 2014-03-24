@@ -2,7 +2,7 @@
 {% import '_macros.html' as macros %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-  {{ macros.calc_left_nav(state, 'cost_states') }}
+  {{ macros.calc_left_nav(state, 'cost') }}
 {% endblock %}
 {% block content %}
   {{ super() }}
@@ -50,5 +50,5 @@
 {% block bodyjs %}
   {{ super() }}
 {#  <script src="{{ url_for('calculator.static', filename='js/advanced.js') }}"></script>#}
-  {% assets 'js_advanced' %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+  {% assets 'js_cost' %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
 {% endblock %}
