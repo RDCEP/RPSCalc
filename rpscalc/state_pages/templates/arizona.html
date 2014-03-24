@@ -1,7 +1,7 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
   <p>Arizona’s Renewable Energy Standard and Tariff (REST)—also known as a
-    <a href="">Renewable Portfolio Standard (RPS)</a>—is
+    <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio Standard (RPS)</a>—is
     intended to increase use of renewable resources in the state by
     establishing the minimum amount of renewable energy that the
     state's electricity providers must sell in a given year. This
@@ -12,43 +12,45 @@
     highlighting the factors that influence the success of Arizona’s
     RPS goals and the tradeoffs inherent to it. Once you’re comfortable
     with the information on this page, you can evaluate the policy’s
-    expected viability with the <a href="">Arizona RPS Feasibility Calculator</a>.
+    expected viability with the <a href="{{ url_for('calculator.trajectory', state=state) }}">Arizona RPS Feasibility Calculator</a>.
     You can also use the calculator to change the policy requirements,
     trajectory, cost cap, and more, to see how altering Arizona’s policy
     design affects its success.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><strong>15%</strong> of the state’s load from must be from renewable sources by <strong>2025</strong>, subject to the cost cap</li>
+  <li><strong>15%</strong> of the state’s load from must be from renewable
+    sources by <strong>2025</strong>, subject to the cost cap</li>
   <li>Carve-out for <strong>distributed generation</strong></li>
   <li>No explicit cost cap</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p><a href="">Carve-outs</a> can create economic
+  <p><a href="{{ url_for('glossary.glossary') }}#carveout">Carve-outs</a> can create economic
     opportunities in the state by introducing new or promising
     technologies into the market. However, these standards limit
     the utilities’ ability to substitute between renewable energy
     sources, potentially increasing the cost of the policy.
     Arizona’s REST requires that 30% of the renewable obligation
-    in each year be fulfilled through <a href="">distributed
+    in each year be fulfilled through
+    <a href="{{ url_for('glossary.glossary') }}#distributed_generation">distributed
     generation</a>. This amounts to 4.5% of total annual retail
     electric sales in 2025.</p>
 {% endblock %}
 {% block state_costcap %}
   <p>Unlike some states, Arizona does not have an explicit ‘cost cap’
     or limit on the potential increase in electricity costs as a
-    result of this policy. Rather, the <a href="">Arizona
+    result of this policy. Rather, the <a href="https://www.azcc.gov/">Arizona
     Corporation Commission (ACC)</a> is responsible for managing these
-    costs by approving utility-proposed ‘<a href="">tariffs</a>’.
+    costs by approving utility-proposed ‘<a href="{{ url_for('glossary.glossary') }}#tariffs">tariffs</a>’.
     Each utility can recover any additional costs imposed by the
     REST by filing a ‘tariff’, or rate adjustment, with the Arizona
     Corporation Commission (ACC). By statute, the ACC must deem the
-    tariff to be “reasonable and prudent”. The ACC’s decision on what
-    is a “reasonable and prudent” premium on renewable energy acts
+    tariff to be ‘reasonable and prudent’. The ACC’s decision on what
+    is a ‘reasonable and prudent’ premium on renewable energy acts
     as an implicit cost cap on Arizona’s REST. In other words,
     utilities will not spend more money on renewable energy attributes
     than they are allowed to recover. It is also of note that the ACC
     may waive compliance with the RPS program for good cause. Using
-    the <a href="">RPS Feasibility Calculator</a>
+    the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS Feasibility Calculator</a>
     you can act as the ACC, determining what level of costs will
     lead to a viable RPS.</p>
 {% endblock %}
@@ -72,13 +74,17 @@
   Anaerobic Digestion, Fuel Cells using Renewable Fuels, Geothermal Direct-Use
 {% endblock %}
 {% block state_geo_eligible %}
-  Only renewable energy delivered to Arizona counts toward the standard. There is also a credit multiplier to incentivize in-state generation.
+  Only renewable energy delivered to Arizona counts toward the standard.
+  There is also a credit multiplier to incentivize in-state generation.
 {% endblock %}
 {% block state_total_load %}
   58.6%
 {% endblock %}
 {% block state_tech_req %}
-  For 2012 and after, 30% of the annual requirement must be met through distributed energy resources (4.5% of sales in 2025); half of the distributed energy or customer–owned requirement must be met by systems among residential customers and the other half from business customers.
+  For 2012 and after, 30% of the annual requirement must be met through
+  distributed energy resources (4.5% of sales in 2025); half of the
+  distributed energy or customer–owned requirement must be met by systems
+  among residential customers and the other half from business customers.
 {% endblock %}
 {% block state_sectors %}
   Investor-Owned Utility, Rural Electric Cooperative, Retail Supplier
@@ -87,8 +93,7 @@
   By statute, state regulators may impose unspecified penalties for non-compliance.
 {% endblock %}
 {% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
+  {{ super() }}
   <li><a href="http://www.cc.state.az.us/divisions/utilities/electric/res.pdf">Arizona's REST Rules</a>&nbsp;—&nbsp;Complete legislation in PDF format</li>
   <li><a href="http://apps1.eere.energy.gov/states/state_home.cfm/state=AZ">U.S. Department of Energy Office of Energy Efficiency and Renewable Energy (EERE) -- State Profile</a>&nbsp;—&nbsp;Access your state’s EERE page, and find information on renewable resources maps, energy statistics, and news</li>
 {% endblock %}

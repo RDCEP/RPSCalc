@@ -1,15 +1,15 @@
 [
-  { "term": "RPS",
-    "id": "rps",
-    "def": "This state has either: a regulation requiring procurement of electricity from renewable resources; a goal suggesting guidelines; or no policy."
+  { "id": "carbon_intensity",
+    "term": "Carbon Intensity",
+    "def": "TKTK"
   },
-  { "id": "tech_req",
-    "term": "Technology requirements",
-    "def": "For states that have RPS requirements, specific renewable technologies can be 'carved out' or set aside as a required contribution to the total procurement amount."
+  { "id": "carveout",
+    "term": "Carveout",
+    "def": "TKTK"
   },
-  { "id": "penalties",
-    "term": "Penalties",
-    "def": "States with RPS requirements can impose either penalties or a system of 'alternative compliance payments (ACPs)' to reinforce the standards. ACP structures allow for entities to still be 'in compliance' with the RPS even if they are not meeting the procurement goal."
+  { "id": "distributed_generation",
+    "term": "Distributed Generation",
+    "def": "TKTK"
   },
   { "id": "geo_eligible",
     "term": "Geographic eligibility policies",
@@ -19,16 +19,33 @@
     "term": "Net metering",
     "def": "States that require net metering allow individual electric consumers to receive credit for any electricity they produce. Electric providers pay either the rate at which they buy electricity (wholesale price) or the rate at which they sell electricity (retail rate). Some states also limit the availability of net metering by system capacity or percent of total load."
   },
-  { "id": "renew_interconnect",
-    "term": "Renewable interconnection",
-    "def": "These rules determine which renewable producers can connect to the grid and how they do so. Different states mandate electric providers connect to renewable sources at different capacity thresholds."
+  { "id": "penalties",
+    "term": "Penalties",
+    "def": "States with RPS requirements can impose either penalties or a system of 'alternative compliance payments (ACPs)' to reinforce the standards. ACP structures allow for entities to still be 'in compliance' with the RPS even if they are not meeting the procurement goal."
   },
   { "id": "perf_incent",
     "term": "Performance-based incentives (including FiT)",
     "def": "These policies allow for or require payment by electric providers for the purchase of renewable energy produced. The most well-known of these policies is a Feed-in Tariff."
   },
-  { "id": "Reside_rebate",
+  { "id": "renew_interconnect",
+    "term": "Renewable interconnection",
+    "def": "These rules determine which renewable producers can connect to the grid and how they do so. Different states mandate electric providers connect to renewable sources at different capacity thresholds."
+  },
+  { "term": "Renewable portfolio standard",
+    "id": "rps",
+    "def": "This state has either: a regulation requiring procurement of electricity from renewable resources; a goal suggesting guidelines; or no policy."
+  },
+  { "id": "reside_rebate",
     "term": "Residential rebates (RE)",
     "def": "State residential rebate programs assist home-owners in financing the up-front cost of installing renewable energy systems."
+  },
+  { "id": "tariffs",
+    "term": "Tariffs",
+    "def": "TKTK"
+  },
+  { "id": "tech_req",
+    "term": "Technology requirements",
+    "def": "For states that have RPS requirements, specific renewable technologies can be 'carved out' or set aside as a required contribution to the total procurement amount."
   }
+
 ]
