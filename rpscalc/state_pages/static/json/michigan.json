@@ -1,8 +1,9 @@
 {
-    "start_year": 2012,
+    "start_year": 2011,
     "machine_name": "michigan",
     "name": "Michigan",
     "trajectory": [
+        0,
         0.04664,
         0.0553,
         0.0666,
@@ -24,7 +25,7 @@
         0.1
     ],
     "carveouts": [],
-    "rps_progress": 1.0,
+    "rps_progress": 0.10,
     "abbr": "MI",
     "price_and_policy": {
         "wind_capacity": 0.4,

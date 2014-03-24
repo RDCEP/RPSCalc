@@ -1,8 +1,9 @@
 {
-    "start_year": 2012,
+    "start_year": 2011,
     "machine_name": "washington",
     "name": "Washington",
     "trajectory": [
+        0.0,
         0.03,
         0.03,
         0.03,
