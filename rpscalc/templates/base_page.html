@@ -47,7 +47,7 @@
     Options.data = {{ session|session_json|safe }};
     {%- endblock -%}
     Options.state = '{{ state }}';
-    Options.state_abbr = '{{ state|state_abbr }}';
+    {% if state %}Options.state_abbr = '{{ state|state_abbr }}';{% endif %}
     Options.graph_type = '{{ graph_type }}';
   </script>
   {% block bodyjs %}
