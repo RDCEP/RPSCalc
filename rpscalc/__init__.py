@@ -72,7 +72,7 @@ js = Bundle(
     'state_pages/js/state_facts.js', filters='jsmin', output='gen/state_facts.js')
 assets.register('js_state_facts', js)
 js = Bundle(
-    'calculator/js/carveout.js', filters='jsmin', output='gen/carveout.js')
+    'calculator/js/carveouts.js', filters='jsmin', output='gen/carveouts.js')
 assets.register('js_carveouts', js)
 js = Bundle(
     'calculator/js/pricing.js', filters='jsmin', output='gen/pricing.js')
