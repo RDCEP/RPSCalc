@@ -94,7 +94,6 @@
 
       Options.data.wind.data.forEach(function(d, i) {
         d.x = new Date(d.x);
-        console.log(Options.data);
         var wind_rec = d.y / 100 * wind,
           solar_rec = Options.data.solar.data[i].y / 100 * solar,
           other_rec = (100 - Options.data.solar.data[i].y - d.y) / 100 * wind * .65,
