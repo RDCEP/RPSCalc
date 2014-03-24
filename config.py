@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Configuration options for RPS Calculator.
+"""
+
 import os
 _basedir = os.path.abspath(os.path.dirname(__file__))
 

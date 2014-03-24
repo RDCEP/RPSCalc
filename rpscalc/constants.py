@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Constants for RPC Calculator
+"""
+
 import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -23,7 +29,7 @@ RPS_STATES = {
     'FL': {'names': ['florida', 'Florida'], 'rps': False, },
     'GA': {'names': ['georgia', 'Georgia'], 'rps': False, },
     'GU': {'names': ['guam', 'Guam'], 'rps': False, },
-    'HI': {'names': ['hawaii', 'Hawai&lsquo;i', ], 'rps': True,
+    'HI': {'names': ['hawaii', u'Hawai‘i', ], 'rps': True,
            'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
     'ID': {'names': ['idaho', 'Idaho', ], 'rps': False, },
     'IN': {'names': ['indiana', 'Indiana', ], 'rps': False, },

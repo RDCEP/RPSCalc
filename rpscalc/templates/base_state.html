@@ -1,5 +1,5 @@
 {% extends 'base_page.html' %}
-{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block title %} | {{ state|state_typo|safe }}{% endblock %}
 {% block left_nav %}
   <li><a href data-name="snapshot" class="onpage-link">Snapshot</a></li>
   <li><a href data-name="energy" class="onpage-link">Energy Details</a></li>
@@ -17,7 +17,7 @@
 {% block header %}
   <section>
     <header>
-      <h1>{{ state|replace('_', ' ')|title }}</h1>
+      <h1>{{ state|state_typo|safe }}</h1>
       <img src="{{ url_for('state_pages.static', filename='images/state_seals/' + state + '.png') }}" alt="State seal of {{ state|capitalize }}">
     </header>
   </section>

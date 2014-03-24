@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+EIA API methods for RPS Calculator. Not accessible through browser.
+"""
+
 import json
 import os
 import urllib2

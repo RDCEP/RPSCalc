@@ -1,8 +1,15 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Base module for RPS Calculator. Register filters, context processors,
+blueprints, assets.
+"""
+
 from datetime import datetime
 from flask import Flask, render_template, session, g
 from flask.ext.assets import Environment, Bundle
 from rpscalc.filters import session_json, session_cleared, deslugify, \
-    state_abbr
+    state_abbr, state_typo
 from rpscalc.constants import RPS_STATES
 
 
@@ -13,6 +20,7 @@ app.jinja_env.filters['session_json'] = session_json
 app.jinja_env.filters['session_cleared'] = session_cleared
 app.jinja_env.filters['deslugify'] = deslugify
 app.jinja_env.filters['state_abbr'] = state_abbr
+app.jinja_env.filters['state_typo'] = state_typo
 
 
 @app.errorhandler(404)

@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Base views for RPS Calculator. Index, and session update.
+"""
+
 from datetime import datetime
 from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, abort

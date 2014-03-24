@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Glossary views for RPS Calculator.
+"""
+
 from flask import Blueprint, render_template
 
 

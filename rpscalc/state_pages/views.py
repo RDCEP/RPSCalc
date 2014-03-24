@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+State page overviews for RPS Calculator.
+"""
+
 from flask import Blueprint, render_template, session, abort
 
 

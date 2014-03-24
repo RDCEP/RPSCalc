@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Calculator views for RPS Calculator.
+"""
+
 from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, abort
 
