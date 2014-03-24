@@ -221,6 +221,10 @@ function Pinwheel() {
         .attr('cx', state_label_x(i))
         .attr('cy', state_label_y(i))
         .attr('r', 12)
+        .style({
+          fill: function() { return d.abbr == Options.state_abbr ? d3.rgb(213, 94, 0) : null; }
+        })
+        .classed('current', function() { return d.abbr == Options.state_abbr; })
       ;
       states_layer.append('text')
         .attr('class', 'state state-label state-label-text')
@@ -228,6 +232,7 @@ function Pinwheel() {
         .text(d.abbr)
         .attr('x', state_label_x(i))
         .attr('y', state_label_y(i))
+        .classed('current', function() { return d.abbr == Options.state_abbr; })
       ;
     });
 
