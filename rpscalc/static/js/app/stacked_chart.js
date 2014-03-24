@@ -147,15 +147,18 @@ var RPSGraph = function() {
         })));
     },
     update_legend = function(_d) {
-      var _h = '';
-      _d.reverse().forEach(function(d) {
+      var _h = '', _m = 0;
+      _d.slice().sort(function(a, b) {
+        return d3.descending(a.y, b.y);
+      }).forEach(function(d) {
         var current_x = _d.length > 1 ? d.type : format_x(d.x);
         _h += current_x + ':&nbsp;' + format_y(d.y) + '<br>';
+        _m = d.y > _m ? d.y : _m;
       });
       tool_tip
         .html(_h)
         .style('left', (_x(_d[0].x) + padding.left + 10) + 'px')
-        .style('top', (_y(_d[0].y) + padding.top) + 'px')
+        .style('top', (_y(_m) + padding.top) + 'px')
         .classed('active', true);
       _d.reverse();
     },

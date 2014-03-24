@@ -32,6 +32,7 @@
       .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)])
       .range([0, (width - 2 * padding)]),
     segment_width = _x(graph_data.data[0].data[1].x) - _x(graph_data.data[0].data[0].x),
+    _max_y = 0,
 
     chart_inputs = d3.select('#chart_wrap')
       .append('form')
@@ -97,17 +98,18 @@
         var wind_rec = d.y / 100 * wind,
           solar_rec = Options.data.solar.data[i].y / 100 * solar,
           other_rec = (100 - Options.data.solar.data[i].y - d.y) / 100 * wind * .65,
-          year = d.x.getFullYear();
+          year = d.x.getFullYear(),
+          total_rec = wind_rec + solar_rec + other_rec,
+          cost_cap = (pp.policy_costcap * Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013)) / Options.data.trajectory.data[i].y * Options.data.retail_price;
+        _max_y = year >= 2013 ? Math.max(_max_y, total_rec, cost_cap) : _max_y;
         _cap.data[i] = {
           x: new Date(d.x),
           y0: 0,
-          y: year >= 2013
-            ? (pp.policy_costcap * Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013)) / Options.data.trajectory.data[i].y * Options.data.retail_price
-            : 0};
+          y: year >= 2013 ? cost_cap : 0};
         _rec.data[i] = {
           x: new Date(d.x),
           y0: 0,
-          y: wind_rec + solar_rec + other_rec };
+          y: total_rec };
       });
       return [_cap, _rec];
     };
@@ -208,6 +210,7 @@
       d3.select(this).property('value', +_v);
       cap_rec = get_cap_and_rec();
       cost_graph.data(cap_rec)
+        .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, Math.ceil(_max_y * 1.25)])
         .manual_update_intersection(cap_rec[0], cap_rec[1])
         .manual_update_handles()
         .redraw();
@@ -219,10 +222,10 @@
     .title('Will we break the cap?')
     .x(d3.time.scale())
     .y(d3.scale.linear())
-    .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, 50])
+    .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, Math.ceil(_max_y * 1.25)])
     .max_domains([50,100])
     .format_x(function(x) { return x.getFullYear(); })
-    .format_y(function(y) { return d3.format('.1f')(y); })
+    .format_y(function(y) { return '$'+d3.format('.2f')(y); })
     .data(cap_rec)
     .stacked(false)
     .hoverable(true)
