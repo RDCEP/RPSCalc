@@ -2,13 +2,30 @@
 {% import '_macros.html' as macros %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-  {{ macros.calc_left_nav(state, 'pricing') }}
+  {{ macros.calc_left_nav(state, 'pricing_states') }}
 {% endblock %}
 {% block content %}
   {{ super() }}
   <section class="clearfix">
+
     <h2>Cost cap and pricing</h2>
-    <p>The success of your RPS will not only depend on the trajectory and carve-outs you have just selected, but also on renewable technology costs, electricity costs, federal energy policy and the RPS cost cap.   While you can adjust several parameters that impact cost on this page, the cost cap is the only policy instrument implemented by the state. Lawmakers use this device in their RPS  to protect electricity customers from potential rate increases as a result of using more expensive renewable electricity sources. For some states, this cost cap could limit the total amount of renewable power that will be purchased to fulfill the RPS goals. [Arizona does not have an explicit cost cap, rather the Arizona Corporation Commission allows the recovery of those costs which it deems reasonable.] On this page you can establish your own cost cap, as well as adjust the default assumptions about retail electricity rates and the cost of renewable power.</p>
+
+    <p>The success of your RPS will not only depend on the trajectory
+      and carve-outs you have just selected, but also on renewable
+      technology costs, electricity costs, federal energy policy
+      and the RPS <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost cap</a>.
+      While you can adjust several parameters
+      that impact cost on this page, the cost cap is the only policy
+      instrument implemented by the state. Lawmakers use this device
+      in their RPS  to protect electricity customers from potential rate
+      increases as a result of using more expensive renewable electricity
+      sources. For some states, this cost cap could limit the total
+      amount of renewable power that will be purchased to fulfill the
+      RPS goals. {% block state_specific %}{% endblock %}
+      On this page you can establish your own cost cap, as well as
+      adjust the default assumptions about retail electricity rates and
+      the cost of renewable power.</p>
+
     <div id="pricing" class="module clearfix chart-outer-wrap">
       <form id="pricing_form">
         <div class="narrow module">
@@ -52,7 +69,6 @@
               <input type="text" id="finance_interestrate" name="finance_interestrate" pattern="[0-9]*\.*[0-9]+">
             </div>
           </fieldset>
-
         </div>
         <div class="narrow module">
 
@@ -74,10 +90,6 @@
               <label for="wind_integration">Integration ($/MWh)</label>
               <input type="text" id="wind_integration" name="wind_integration" pattern="[0-9]*\.*[0-9]+">
             </div>
-            <!--<div class="clearfix">
-              <label for="wind_amortization">Amortization (%)</label>
-              <input type="text" id="wind_amortization" name="wind_amortization" pattern="[0-9]*\.*[0-9]+">
-            </div>-->
           </fieldset>
 
           <fieldset id="solar_costs" class="narrow">
@@ -94,21 +106,27 @@
               <label for="solar_om">O &amp; M ($/MWh)</label>
               <input type="text" id="solar_om" name="solar_om" pattern="[0-9]*\.*[0-9]+">
             </div>
-            <!--<div class="clearfix">
-              <label for="solar_amortization">Amortization (%)</label>
-              <input type="text" id="solar_amortization" name="solar_amortization" pattern="[0-9]*\.*[0-9]+">
-            </div>-->
           </fieldset>
-
         </div>
       </form>
     </div>
-    <p>The default values entered in the boxes are based on conservative estimates from reliable sources. Wind and solar costs are national values and do not vary across regions, while capacity factors are state-specific. You may choose to deselect the Production Tax Credit policy to create a scenario in which renewable technologies are unsubsidized. The cost cap parameter default value is that of your state; if your state does not have a cost cap, 3% may be a good starting point. </p>
+
+    <p>The default values entered in the boxes are based on conservative
+      estimates from reliable sources. Wind and solar costs are national
+      values and do not vary across regions, while
+      <a href="{{ url_for('glossary.glossary') }}#capacity_factor">capacity
+      factors</a> are state-specific. You may choose to deselect the
+      <a href="{{ url_for('glossary.glossary') }}#ptc">Production Tax
+      Credit</a> policy to create a scenario in which renewable technologies
+      are unsubsidized. The cost cap parameter default value is that of
+      your state; if your state does not have a cost cap, 3% may be a
+      good starting point.</p>
+
     <ul id="crumbs">
       <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory', state=state) }}">Trajectory</a>
       <li id="crumb_carveouts"><a href="{{ url_for('calculator.carveouts', state=state) }}">Carveouts</a></li>
       <li id="crumb_pricing" class="active"><a href="{{ url_for('calculator.pricing', state=state) }}">Cost cap &amp; Pricing</a></li>
-      <li id="crumb_cost"><a href="{{ url_for('calculator.advanced', state=state) }}">Projected Cost</a></li>
+      <li id="crumb_cost"><a href="{{ url_for('calculator.cost', state=state) }}">Projected Cost</a></li>
     </ul>
   </section>
 {% endblock %}

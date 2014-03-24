@@ -2,22 +2,49 @@
 {% import '_macros.html' as macros %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-  {{ macros.calc_left_nav(state, 'carveouts') }}
+  {{ macros.calc_left_nav(state, 'carveout_states') }}
 {% endblock %}
 {% block content %}
   {{ super() }}
   <section class="clearfix">
+
     <h2>Carveouts</h2>
-    <p>Now that you have chosen your state’s RPS trajectory, you have the opportunity to define which technologies your state will use to fulfill its goals. Some states establish these technology requirements by establishing individual ‘sub-trajectories’, or carve-outs, for each renewable source they wish to promote. The RPS Calculator allows you to set minimum requirements for wind and solar power as a percentage of the total RPS goal that was set on the previous screen). [Arizona’s RPS does not have a carve-out for wind or solar power; however, you can add your own requirements by typing in the boxes and adjusting the graph below.] It is important to keep in mind that requiring specific technologies can impact the overall cost of your policy.</p>
+
+    <p>Now that you have chosen your state’s
+      <a href="{{ url_for('glossary.glossary') }}#rps_trajectory">RPS trajectory</a>,
+      you have the opportunity to define which technologies your state will
+      use to fulfill its goals. Some states establish these
+      <a href="{{ url_for('glossary.glossary') }}#technology_requirement">technology
+      requirements</a> by establishing individual ‘sub-trajectories’, or
+      <a href="{{ url_for('glossary.glossary') }}#technology_requirement">carve-outs</a>,
+      for each renewable source they wish to promote. The
+      RPS Calculator allows you to set minimum requirements for wind
+      and solar power as a percentage of the total RPS goal that was
+      set on the previous screen). {% block state_specific %}{% endblock %}
+      It is important to keep in mind that requiring specific technologies
+      can impact the overall cost of your policy.</p>
+
     <div id="carveouts" class="module clearfix chart-outer-wrap">
     </div>
-    <p>To edit or create new minimum technology requirements for your state, click and drag the blue and yellow areas. Blue represents the portion of the RPS goal that must be fulfilled with solar energy, while yellow represents wind power. You can only create carve-outs that sum to 100% of your RPS, so in a given year, you may need to decrease the amount of one technology before you can increase the amount of the other.</p>
-    <p>If you would rather type in your values, toggle-on the user input boxes by clicking “type” on top of the graph. If you would like to require your state to satisfy more than 50% of its requirement using wind or solar, change the graph’s scale from 50% to 100% by clicking “100” on top of the graph.</p>
+
+    <p>To edit or create new minimum technology requirements for your
+      state, click and drag the blue and yellow areas. Blue represents
+      the portion of the RPS goal that must be fulfilled with solar
+      energy, while yellow represents wind power. You can only create
+      carve-outs that sum to 100% of your RPS, so in a given year, you
+      may need to decrease the amount of one technology before you can
+      increase the amount of the other.</p>
+    <p>If you would rather type in your values, toggle-on the user
+      input boxes by clicking ‘type’ on top of the graph. If you would
+      like to require your state to satisfy more than 50% of its
+      requirement using wind or solar, change the graph’s scale from
+      50% to 100% by clicking ‘100’ on top of the graph.</p>
+
     <ul id="crumbs">
       <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory', state=state) }}">Trajectory</a>
       <li id="crumb_carveouts" class="active"><a href="{{ url_for('calculator.carveouts', state=state) }}">Carveouts</a></li>
       <li id="crumb_pricing"><a href="{{ url_for('calculator.pricing', state=state) }}">Cost cap &amp; Pricing</a></li>
-      <li id="crumb_cost"><a href="{{ url_for('calculator.advanced', state=state) }}">Projected Cost</a></li>
+      <li id="crumb_cost"><a href="{{ url_for('calculator.cost', state=state) }}">Projected Cost</a></li>
     </ul>
   </section>
 {% endblock %}

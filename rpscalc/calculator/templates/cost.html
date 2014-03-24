@@ -2,24 +2,43 @@
 {% import '_macros.html' as macros %}
 {% block title %} | {{ state|capitalize }}{% endblock %}
 {% block left_nav %}
-  {{ macros.calc_left_nav(state, 'cost') }}
+  {{ macros.calc_left_nav(state, 'cost_states') }}
 {% endblock %}
 {% block content %}
   {{ super() }}
   <section class="clearfix">
-    <h2>Cost cap</h2>
-    <p>You have now established the fundamental design of your RPS. On
-      this page you will test the efficacy of your policy. The blue region
-      represents the cost of the mean Renewable Energy Credit
-      (<a target="_blank" href="{{ url_for('glossary.glossary') }}#rec">REC</a>),
-      in dollars per megawatt-hour, calculated based on the trajectories and
-      assumptions you made. The orange region represents the REC costs, in
-      dollars per megawatt-hour, prohibited by the cost cap you imposed. Any
-      cross-hatched region that appears represents time periods in which
-      you have ‘broken’ your cost cap.</p>
-    <div id="cost_cap" class="module clearfix chart-outer-wrap">
+
+    <h2>Cost cap and pricing</h2>
+
+    <p>You have now established the fundamental design of your RPS.
+      On this page you will test the efficacy of your policy by estimating
+      how much renewable energy will be provided in your state before you
+      hit the cost cap. The blue region represents the cost of the mean
+      <a href="{{ url_for('glossary.glossary') }}#rec">Renewable Energy
+      Credit (REC)</a>, in dollars per megawatt-hour, calculated based on
+      your state’s policy or the policy you created. The orange region
+      represents REC values, in dollars per megawatt-hour, prohibited by
+      the cost cap you imposed. Any cross-hatched region that appears
+      represents time periods in which you have ‘broken’ your cost cap,
+      at which point your RPS requirements are placed on a ‘freeze.’</p>
+    <p>Was your policy successful for its entire duration? If not, don’t
+      worry! On this page, you can explore the interactions of the major
+      components of an RPS. Try changing some of your policy’s
+      characteristics, like its trajectory or carve-outs, to see how
+      they affect the overall goal and the cost of meeting this goal.</p>
+
+    <div class="chart-outer-wrap">
+      <div id="cost_chart" class="module clearfix"></div>
+      <div id="chart_wrap" class="module clearfix" style="width:730px; left:-30px; position: relative;"></div>
     </div>
-    <p>Was your policy successful for its entire duration? If not, don’t worry! <a href="{{ url_for('calculator.advanced', state=state) }}">On the next page</a>, you will have the option to adjust both your RPS trajectory and individual carve-outs beneath this graph by typing in new values.</p>
+
+    <p>The values you chose at the beginning of this calculator are
+      entered in the boxes. Try adjusting column values individually
+      to see the effect on the overlapping region. Refer back to the Cost
+      Cap &amp; Pricing slide to review or adjust assumptions about the
+      cost of wind and solar power, and the other parameters that play
+      into the success of your RPS.</p>
+
     <ul id="crumbs">
       <li id="crumb_trajectory"><a href="{{ url_for('calculator.trajectory', state=state) }}">Trajectory</a>
       <li id="crumb_carveouts"><a href="{{ url_for('calculator.carveouts', state=state) }}">Carveouts</a></li>
@@ -30,5 +49,6 @@
 {% endblock %}
 {% block bodyjs %}
   {{ super() }}
-  {% assets 'js_cost' %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
+{#  <script src="{{ url_for('calculator.static', filename='js/advanced.js') }}"></script>#}
+  {% assets 'js_advanced' %}<script src="{{ ASSET_URL }}"></script>{% endassets %}
 {% endblock %}

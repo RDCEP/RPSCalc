@@ -7,16 +7,40 @@
 {% block content %}
   {{ super() }}
   <section class="clearfix">
+
     <h2>Trajectory</h2>
-    <p>Welcome RDCEP’s RPS feasibility calculator. This tool will allow you to test the efficacy of your state’s current renewable energy policy, edit its policy or develop a new program for your state. After viewing or editing each major component of your state’s RPS, the calculator will estimate the amount of renewable energy your policy will produce and at what cost.</p>
-    <p>The first major component of an RPS is the Trajectory or the proportion of renewable energy your state will require its utilities to procure in each year. [Arizona’s goal increases in each year, yielding the trajectory illustrated by the blue area in the chart below.] You are free to adjust this policy, keeping in mind the choices you make about the trajectory will affect the overall cost of your policy.</p>
+
+    <p>Welcome RDCEP’s RPS feasibility calculator. This tool will allow
+      you to test the efficacy of your state’s current renewable energy
+      policy, edit its policy or develop a new program for your state.
+      After viewing or editing each major component of your state’s RPS,
+      the calculator will estimate the amount of renewable energy your
+      policy will produce and at what cost.</p>
+
+    <p>The first major component of an RPS is the
+      <a href="{{ url_for('glossary.glossary') }}#rps_trajectory">Trajectory</a> or
+      the proportion of renewable energy your state will require its utilities
+      to procure in each year. {% block state_specific %}{% endblock %}
+      You are free to adjust this policy, keeping in mind the choices
+      you make about the trajectory will affect the overall cost of
+      your policy.</p>
+
     <div id="trajectory" class="module clearfix chart-outer-wrap"></div>
-    <p>To edit your state’s RPS schedule, click and drag the line to adjust the blue area. If you would rather type in your values, toggle-on the user input boxes by clicking “type” on top of the graph. If you would like to set an RPS goal of more than 50%, change the graph’s scale from 50% to 100% by clicking  “100” on top of the graph. Once you have set your trajectory, click on the “arrow bar” below to choose the carbon-free technologies your policy will promote.</p>
+
+    <p>To edit your state’s RPS schedule, click and drag the line to
+      adjust the blue area. If you would rather type in your values,
+      toggle-on the user input boxes by clicking ‘type’ on top of the
+      graph. If you would like to set an RPS goal of more than 50%,
+      change the graph’s scale from 50% to 100% by clicking  ‘100’ on
+      top of the graph. Once you have set your trajectory, click on
+      the ‘arrow bar’ below to choose the carbon-free technologies your
+      policy will promote.</p>
+
     <ul id="crumbs">
       <li id="crumb_trajectory" class="active"><a href="{{ url_for('calculator.trajectory', state=state) }}">Trajectory</a>
       <li id="crumb_carveouts"><a href="{{ url_for('calculator.carveouts', state=state) }}">Carveouts</a></li>
       <li id="crumb_pricing"><a href="{{ url_for('calculator.pricing', state=state) }}">Cost cap &amp; Pricing</a></li>
-      <li id="crumb_cost"><a href="{{ url_for('calculator.advanced', state=state) }}">Projected Cost</a></li>
+      <li id="crumb_cost"><a href="{{ url_for('calculator.cost', state=state) }}">Projected Cost</a></li>
     </ul>
   </section>
 {% endblock %}

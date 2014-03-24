@@ -236,7 +236,7 @@ tr { border-top: 1px solid #cccccc; }
 th { font-weight: bold; }
 
 #glossary dt, #glossary dd { float: left; margin-bottom: 1em; }
-#glossary dt { width: 200px; margin-right: 20px; font-weight: bold; }
+#glossary dt { width: 200px; margin-right: 20px; font-weight: bold; clear: left; }
 #glossary dd { width: 480px; }
 
 .ir { background-color: transparent; border: 0; overflow: hidden; /* IE 6/7 fallback */*text-indent: -9999px */ }

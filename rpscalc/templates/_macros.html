@@ -3,7 +3,7 @@
     ('trajectory', 'Set RPS trajectory'),
     ('carveouts', 'Set carveouts'),
     ('pricing', 'Set cost cap &amp; pricing'),
-    ('advanced', 'Projected cost'),
+    ('cost', 'Projected cost'),
   ] %}
   <li{% if page==p[0] %} class="active"{% endif %}>
     <a href="{{ url_for('calculator.%s' % p[0], state=state) }}" data-name="{{ p[0] }}">

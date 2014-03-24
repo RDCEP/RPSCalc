@@ -11,7 +11,7 @@ def overview(state):
     if state == 'favicon.ico': abort(404)
     session['state'] = state
     return render_template(
-        '{}.html'.format(state),
+        'overview_states/{}.html'.format(state),
         state=state,
         session_clear='true',
     )

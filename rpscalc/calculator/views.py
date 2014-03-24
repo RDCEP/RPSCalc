@@ -41,21 +41,19 @@ def update():
 
 @mod.route('/<state>/trajectory')
 def trajectory(state):
-    # if state != session['state']:
-    #     update_calc_state(state)
     return render_template(
-        'trajectory.html',
+        'trajectory_states/{}.html'.format(state),
         state=state,
         session_clear=False if state == session['state'] else True,
     )
 
 
-@mod.route('/<state>/carveouts')
+@mod.route('/<state>/carveout')
 def carveouts(state):
     if 'trajectory' not in session.keys():
         return redirect(url_for('calculator.trajectory', state=state))
     return render_template(
-        'carveouts.html',
+        'carveout_states/{}.html'.format(state),
         state=session['state'] or state,
     )
 
@@ -65,9 +63,9 @@ def pricing(state):
     if not session['trajectory']:
         return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
-        return redirect(url_for('calculator.carveouts', state=state))
+        return redirect(url_for('calculator.carveout', state=state))
     return render_template(
-        'pricing.html',
+        'pricing_states/{}.html'.format(state),
         state=session['state'] or state,
     )
 
@@ -76,11 +74,11 @@ def cost(state):
     if not session['trajectory']:
         return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
-        return redirect(url_for('calculator.carveouts', state=state))
+        return redirect(url_for('calculator.carveout', state=state))
     if not session['price_and_policy']:
         return redirect(url_for('calculator.pricing', state=state))
     return render_template(
-        'cost.html',
+        'cost_states/{}.html'.format(state),
         state=session['state'] or state,
     )
 
@@ -89,7 +87,7 @@ def advanced(state):
     if not session['trajectory']:
         return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
-        return redirect(url_for('calculator.carveouts', state=state))
+        return redirect(url_for('calculator.carveout', state=state))
     if not session['price_and_policy']:
         return redirect(url_for('calculator.pricing', state=state))
     return render_template(
