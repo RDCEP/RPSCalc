@@ -6,7 +6,7 @@ var FactsPage = function() {
     projection,
     handles;
 
-  function rps_progress(trajectory, progress, unit) {
+  function rps_progress(trajectory, rps_progress, state, unit) {
     /*
      Draw bar chart for current RPS progress.
      ...
@@ -31,8 +31,9 @@ var FactsPage = function() {
         .attr('height', rpsp_height + 50)
         .attr('width', _wd),
       final = trajectory[trajectory.length - 6].y,
-      current = trajectory.filter(function(d) { return d.x.getFullYear() === 2011; })[0].y,
-      actual = unit == '%' ? progress * 100 : progress,
+//      current = trajectory.filter(function(d) { return d.x.getFullYear() === 2011; })[0].y,
+      current = trajectory.filter(function(d) { return d.x.getFullYear() === +rps_progress.year; })[0].y,
+      actual = current * +rps_progress.progress,
       diff = Math.abs(actual - current);
     if (current > 0) {
       legend_row = rpsp_legend.append('span')
@@ -100,7 +101,7 @@ var FactsPage = function() {
       if (i > 0) {
         rpsp.append('text')
           .text(function() {
-            return (i === 1) ? Math.round(current) + unit + ' by 2011'
+            return (i === 1) ? Math.round(current) + unit + ' by ' + rps_progress.year
               : Math.round(final) + unit + ' by 2030';
           })
           .attr('class', 'rps-text')
@@ -123,7 +124,14 @@ var FactsPage = function() {
             return 'translate(' + h_offset + ',' + v_offset + ')';
           });
       }
+
     });
+
+    var p = d3.select('#rps_progress_wrap').select('p');
+    p.text(p.text() + ' As of ' + rps_progress.year + ', ' + state +
+      ' was ' + (rps_progress.progress * 100) + '% compliant with its goal of ' +
+      current + '% capacity in that year. The most current information available is from ' +
+      rps_progress.year + '.');
   }
 
   function grid_mix_bars(_s) {
@@ -311,9 +319,9 @@ var FactsPage = function() {
         .draw();
 
       if (_data.abbr == 'TX') {
-        rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, 'MW');
+        rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, _data.name, 'MW');
       } else {
-        rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress);
+        rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, _data.name);
       }
 
 
