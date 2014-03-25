@@ -5,11 +5,12 @@
     empty = true,
     container = '#trajectory',
     parse_date = d3.time.format('%Y').parse;
-  d3.json('/state/static/json/' + Options.state + '.json', function(_data) {
+  d3.json('/state/static/json/' + Options.state + '.json?1', function(_data) {
     var def_line = [{data: []}],
       data = [{type: 'rps', data: []}],
       trajectory = Options.data.trajectory;
     if (trajectory && trajectory.data.length > 0) {
+      console.log(1);
       empty = false;
       trajectory.data.forEach(function(d, i) {
         data[0].data[i] = {y: d.y, x: new Date(d.x), y0: 0};
@@ -18,6 +19,7 @@
         def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
       });
     } else if (_data.trajectory.length > 0 && _data.abbr != 'TX') {
+      console.log(2);
       empty = false;
       // Parse trajectory data
       _data.trajectory.forEach(function(d, i) {
@@ -28,6 +30,7 @@
         def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
       });
     } else {
+      console.log(3);
       for (var i = 0; i < 31; ++i) {
         data[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
         def_line[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
@@ -52,8 +55,8 @@
       .default_line(def_line)
       .h_grid(true)
       .draw()
-      .switch_input()
-      .zeroes(empty)
+//      .switch_input()
+      .zeroes(true)
       ;
   });
 
