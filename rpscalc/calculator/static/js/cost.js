@@ -223,7 +223,6 @@
     .x(d3.time.scale())
     .y(d3.scale.linear())
     .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, Math.ceil(_max_y * 1.25)])
-    .max_domains([50,100])
     .format_x(function(x) { return x.getFullYear(); })
     .format_y(function(y) { return '$'+d3.format('.2f')(y); })
     .data(cap_rec)

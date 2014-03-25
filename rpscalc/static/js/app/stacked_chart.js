@@ -147,18 +147,15 @@ var RPSGraph = function() {
         })));
     },
     update_legend = function(_d) {
-      var _h = '', _m = 0;
-      _d.slice().sort(function(a, b) {
-        return d3.descending(a.y, b.y);
-      }).forEach(function(d) {
+      var _h = '';
+      _d.reverse().forEach(function(d) {
         var current_x = _d.length > 1 ? d.type : format_x(d.x);
         _h += current_x + ':&nbsp;' + format_y(d.y) + '<br>';
-        _m = d.y > _m ? d.y : _m;
       });
       tool_tip
         .html(_h)
         .style('left', (_x(_d[0].x) + padding.left + 10) + 'px')
-        .style('top', (_y(_m) + padding.top) + 'px')
+        .style('top', (_y(_d[0].y) + padding.top) + 'px')
         .classed('active', true);
       _d.reverse();
     },
@@ -561,17 +558,18 @@ var RPSGraph = function() {
     // Add toggle switch
     var edit_switch = title.append('span').attr('class', 'switch-group');
     edit_switch.append('span').html('&nbsp;[&nbsp;');
-    edit_switch.append('a').attr('class', 'switch')
+    edit_switch.append('a').attr('class', 'input-switch switch active')
       .attr('data-layer-toggle', pre_id('handle_layer')).text('drag').on('click', edit_switch_click);
     edit_switch.append('span').text(' | ');
-    edit_switch.append('a').attr('class', 'switch active')
+    edit_switch.append('a').attr('class', 'input-switch switch')
       .attr('data-layer-toggle', pre_id('chart_inputs')).text('type').on('click', edit_switch_click);
     edit_switch.append('span').html('&nbsp;]');
+
     chart_inputs = d3.select('.chart-wrap').append('form')
       .attr({ 'class': 'clearfix',
         'id': pre_id('chart_inputs') })
       .style('padding-left', padding.left + 'px')
-      .classed('hidden', false);
+      .classed('hidden', true);
     // Add inputs
     var input_rows = chart_inputs.selectAll('div')
       .data(graph_data.data.reverse()).enter()
@@ -877,6 +875,14 @@ var RPSGraph = function() {
       });
     }
     return this;
+  };
+  this.switch_input = function() {
+    d3.selectAll('.input-switch').each(function() {
+      var current_switch = d3.select(this),
+        layer_toggle = d3.select('#' + current_switch.attr('data-layer-toggle'));
+      layer_toggle.classed('hidden', !layer_toggle.classed('hidden'));
+      current_switch.classed('active', !current_switch.classed('active'));
+    });
   };
   this.draw = function() {
     /*

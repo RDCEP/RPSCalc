@@ -58,7 +58,8 @@
       .draggable(true, false)
       .h_grid(true)
       .legend(true)
-      .draw();
+      .draw()
+      .switch_input();
     carveouts.zeroes(empty);
   });
 }());

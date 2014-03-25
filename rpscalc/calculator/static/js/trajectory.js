@@ -52,7 +52,9 @@
       .default_line(def_line)
       .h_grid(true)
       .draw()
-      .zeroes(empty);
+      .switch_input()
+      .zeroes(empty)
+      ;
   });
 
 }());
