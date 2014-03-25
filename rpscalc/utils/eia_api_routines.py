@@ -12,11 +12,23 @@ def get_all_retail():
         state_retail(s)
 
 
+def get_state_gridmix(s):
+    state_gridmix(s)
+
+
+def get_state_retail(s):
+    state_retail(s)
+
+
 def get_all_data():
     for s in RPS_STATES.keys():
         state_retail(s)
         state_gridmix(s)
 
 
+
+
 if __name__ == '__main__':
-    get_all_gridmix()
+    # get_all_gridmix()
+    get_state_gridmix('TX')
+    get_state_retail('TX')
