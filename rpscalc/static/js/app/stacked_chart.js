@@ -883,6 +883,7 @@ var RPSGraph = function() {
       layer_toggle.classed('hidden', !layer_toggle.classed('hidden'));
       current_switch.classed('active', !current_switch.classed('active'));
     });
+    return this;
   };
   this.draw = function() {
     /*
