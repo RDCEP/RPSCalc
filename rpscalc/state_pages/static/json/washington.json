@@ -1,36 +1,39 @@
 {
-    "start_year": 2011,
-    "machine_name": "washington",
-    "name": "Washington",
-    "trajectory": [
-        0.0,
-        0.03,
-        0.03,
-        0.03,
-        0.03,
-        0.09,
-        0.09,
-        0.09,
-        0.09,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15
-    ],
-    "carveouts": [],
-    "abbr": "WA",
-    "rps_progress": "N/A (Not in LBNL, compliance doesn't commence until 2012 and dates are from 2011)",
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 72
-    }
+  "start_year": 2011,
+  "machine_name": "washington",
+  "name": "Washington",
+  "trajectory": [
+    0.0,
+    0.03,
+    0.03,
+    0.03,
+    0.03,
+    0.09,
+    0.09,
+    0.09,
+    0.09,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15
+  ],
+  "carveouts": [],
+  "abbr": "WA",
+  "rps_progress": {
+    "progress": 1,
+    "year": 2011
+  },
+  "price_and_policy": {
+    "wind_capacity": 0.4,
+    "solar_capacity": 0.15,
+    "policy_retail": 72
+  }
 }

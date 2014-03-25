@@ -1,42 +1,45 @@
 {
-    "start_year": 2005,
-    "machine_name": "texas",
-    "name": "Texas",
-    "trajectory": [
-        2280,
-        2280,
-        2280,
-        2280,
-        3272,
-        3272,
-        4264,
-        4264,
-        5256,
-        5256,
-        5880,
-        5880,
-        5880,
-        5880,
-        5880,
-        5880,
-        5880,
-        5880,
-        5880,
-        5880,
-        10000,
-        10000,
-        10000,
-        10000,
-        10000,
-        10000
-    ],
-    "carveouts": [],
-    "abbr": "TX",
-    "rps_progress": 1.0,
-    "policy_and_price": {
-        "policy_retail": 87
-    },
-    "price_and_policy": {
-        "policy_retail": 87
-    }
+  "start_year": 2005,
+  "machine_name": "texas",
+  "name": "Texas",
+  "trajectory": [
+    2280,
+    2280,
+    2280,
+    2280,
+    3272,
+    3272,
+    4264,
+    4264,
+    5256,
+    5256,
+    5880,
+    5880,
+    5880,
+    5880,
+    5880,
+    5880,
+    5880,
+    5880,
+    5880,
+    5880,
+    10000,
+    10000,
+    10000,
+    10000,
+    10000,
+    10000
+  ],
+  "carveouts": [],
+  "abbr": "TX",
+  "rps_progress": {
+    "progress": 1,
+    "year": 2011
+  },
+  "policy_and_price": {
+    "policy_retail": 87
+  },
+  "price_and_policy": {
+    "policy_retail": 87
+  }
 }

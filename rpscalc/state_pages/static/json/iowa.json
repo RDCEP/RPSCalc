@@ -1,14 +1,17 @@
 {
-    "start_year": 2011,
-    "machine_name": "iowa",
-    "name": "Iowa",
-    "trajectory": [],
-    "carveouts": [],
-    "abbr": "IA",
-    "rps_progress": 0.0,
-    "price_and_policy": {
-        "wind_capacity": 0.4,
-        "solar_capacity": 0.15,
-        "policy_retail": 78
-    }
+  "start_year": 2011,
+  "machine_name": "iowa",
+  "name": "Iowa",
+  "trajectory": [],
+  "carveouts": [],
+  "abbr": "IA",
+  "rps_progress": {
+    "progress": 1,
+    "year": 2011
+  },
+  "price_and_policy": {
+    "wind_capacity": 0.4,
+    "solar_capacity": 0.15,
+    "policy_retail": 78
+  }
 }
