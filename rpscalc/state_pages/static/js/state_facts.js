@@ -6,7 +6,7 @@ var FactsPage = function() {
     projection,
     handles;
 
-  function rps_progress(trajectory, progress) {
+  function rps_progress(trajectory, progress, unit) {
     /*
      Draw bar chart for current RPS progress.
      ...
@@ -15,6 +15,7 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
+    unit = typeof(unit) != 'string' ? '%' : unit;
     var _wd = width * 2 + 10,
       domain_x = [2000, 2030],
       domain_y = [0, 50],
@@ -31,7 +32,7 @@ var FactsPage = function() {
         .attr('width', _wd),
       final = trajectory[trajectory.length - 6].y,
       current = trajectory.filter(function(d) { return d.x.getFullYear() === 2011; })[0].y,
-      actual = progress * 100,
+      actual = unit == '%' ? progress * 100 : progress,
       diff = Math.abs(actual - current);
     if (current > 0) {
       legend_row = rpsp_legend.append('span')
@@ -99,7 +100,8 @@ var FactsPage = function() {
       if (i > 0) {
         rpsp.append('text')
           .text(function() {
-            return (i === 1) ? Math.round(current) + '% by 2011' : Math.round(final) + '% in 2030';
+            return (i === 1) ? Math.round(current) + unit + ' by 2011'
+              : Math.round(final) + unit + ' by 2030';
           })
           .attr('class', 'rps-text')
           .attr('text-anchor', 'end')
@@ -133,7 +135,7 @@ var FactsPage = function() {
      _s: Object representing active state
      ...
      */
-    d3.json('/eia_api/static/json/gridmix/' + Options.state + '.json', function(data) {
+    d3.json('/eia_api/static/json/gridmix/' + Options.state + '.json?1', function(data) {
       var _max = data.maximum,
         _th = 0, // height of title
         _rh = 20, //row height
@@ -263,11 +265,15 @@ var FactsPage = function() {
       if (_data.trajectory.length > 0) {
         // Parse trajectory data
         _data.trajectory.forEach(function(d, i) {
-          data[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
+          _data.abbr == 'TX'
+            ? data[0].data[i] = {y: d, x: parse_date(String(i + _data.start_year)), y0: 0}
+            : data[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
         });
         // Parse default trajectory
         _data.trajectory.forEach(function(d, i) {
-          def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
+          _data.abbr == 'TX'
+            ? def_line[0].data[i] = {y: d, x: parse_date(String(i + _data.start_year)), y0: 0}
+            : def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
         });
       } else {
         for (var i = 0; i < 31; ++i) {
@@ -275,6 +281,8 @@ var FactsPage = function() {
           def_line[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
         }
       }
+
+      console.log(data);
 
       if (_data.carveouts) {
         _data.carveouts.forEach(function(d) {
@@ -287,7 +295,7 @@ var FactsPage = function() {
       }
 
       var trajectory = new RPSGraph()
-        .padding(30)
+        .padding(30, 30, 30, 100)
         .width(760).height(height)
         .select('carveout_graph')
         .x(d3.time.scale())
@@ -302,13 +310,18 @@ var FactsPage = function() {
         .outlines(true)
         .draw();
 
-      rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress);
+      if (_data.abbr == 'TX') {
+        rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, 'MW');
+      } else {
+        rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress);
+      }
+
 
     }
 
     grid_mix_bars(_data);
 
-    d3.json('/eia_api/static/json/retail/' + _data.machine_name + '.json', function(_data) {
+    d3.json('/eia_api/static/json/retail/' + _data.machine_name + '.json?1', function(_data) {
       data = [{type: 'retail', data: []}];
       parse_date = d3.time.format('%m-%Y').parse;
 
