@@ -17,7 +17,7 @@
       _data.trajectory.forEach(function(d, i) {
         def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
       });
-    } else if (_data.trajectory.length > 0) {
+    } else if (_data.trajectory.length > 0 && _data.abbr != 'TX') {
       empty = false;
       // Parse trajectory data
       _data.trajectory.forEach(function(d, i) {

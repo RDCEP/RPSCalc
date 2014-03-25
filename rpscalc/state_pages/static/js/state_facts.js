@@ -248,58 +248,63 @@ var FactsPage = function() {
 
   d3.json('/state/static/json/' + Options.state + '.json', function(_data) {
 
-    var def_line = [{data: []}],
-      data = [{type: 'RPS', data: []}],
-      legend = d3.select('#carveout_graph_legend'),
-      statute = d3.select('#statute'),
-      tools = d3.select('#tools'),
-      references = d3.select('#references'),
-      tech_req = d3.select('#tech_req'),
-      seal = d3.select('#main_content img'),
-      parse_date = d3.time.format('%Y').parse;
+    if (_data.abbr != 'IA') {
 
-    if (_data.trajectory.length > 0) {
-      // Parse trajectory data
-      _data.trajectory.forEach(function(d, i) {
-        data[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
-      });
-      // Parse default trajectory
-      _data.trajectory.forEach(function(d, i) {
-        def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
-      });
-    } else {
-      for (var i = 0; i < 31; ++i) {
-        data[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
-        def_line[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
-      }
-    }
+      var def_line = [{data: []}],
+        data = [{type: 'RPS', data: []}],
+        legend = d3.select('#carveout_graph_legend'),
+        statute = d3.select('#statute'),
+        tools = d3.select('#tools'),
+        references = d3.select('#references'),
+        tech_req = d3.select('#tech_req'),
+        seal = d3.select('#main_content img'),
+        parse_date = d3.time.format('%Y').parse;
 
-    if (_data.carveouts) {
-      _data.carveouts.forEach(function(d) {
-        var carveout = {type: d.type, data: []};
-        d.data.forEach(function(_d, i) {
-          carveout.data.push({'y': _d * data[0].data[i].y, 'y0': 0, 'x': parse_date(String(i + _data.start_year))});
+      if (_data.trajectory.length > 0) {
+        // Parse trajectory data
+        _data.trajectory.forEach(function(d, i) {
+          data[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
         });
-        data.push(carveout);
-      });
-    }
-    var trajectory = new RPSGraph()
-      .padding(30)
-      .width(760).height(height)
-      .select('carveout_graph')
-      .x(d3.time.scale())
-      .y(d3.scale.linear())
-      .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, d3.extent(data[0].data, function(d) { return d.y; })[1]])
-      .format_x(function(x) { return x.getFullYear(); })
-      .format_y(function(y) { return d3.format('.1f')(y); })
-      .data(data)
-      .title('Policy Trajectory')
-      .h_grid(true)
-      .legend(true)
-      .outlines(true)
-      .draw();
+        // Parse default trajectory
+        _data.trajectory.forEach(function(d, i) {
+          def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
+        });
+      } else {
+        for (var i = 0; i < 31; ++i) {
+          data[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
+          def_line[0].data[i] = {y: 0, x: parse_date(String(i + _data.start_year)), y0: 0};
+        }
+      }
 
-    rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress);
+      if (_data.carveouts) {
+        _data.carveouts.forEach(function(d) {
+          var carveout = {type: d.type, data: []};
+          d.data.forEach(function(_d, i) {
+            carveout.data.push({'y': _d * data[0].data[i].y, 'y0': 0, 'x': parse_date(String(i + _data.start_year))});
+          });
+          data.push(carveout);
+        });
+      }
+
+      var trajectory = new RPSGraph()
+        .padding(30)
+        .width(760).height(height)
+        .select('carveout_graph')
+        .x(d3.time.scale())
+        .y(d3.scale.linear())
+        .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, d3.extent(data[0].data, function(d) { return d.y; })[1]])
+        .format_x(function(x) { return x.getFullYear(); })
+        .format_y(function(y) { return d3.format('.1f')(y); })
+        .data(data)
+        .title('Policy Trajectory')
+        .h_grid(true)
+        .legend(true)
+        .outlines(true)
+        .draw();
+
+      rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress);
+
+    }
 
     grid_mix_bars(_data);
 
