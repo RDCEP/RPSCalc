@@ -33,7 +33,10 @@
     "carveouts": [],
     "abbr": "TX",
     "rps_progress": 1.0,
+    "policy_and_price": {
+        "policy_retail": 87
+    },
     "price_and_policy": {
-        "policy_retail": 90
+        "policy_retail": 87
     }
 }
