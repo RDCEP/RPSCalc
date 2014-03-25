@@ -69,7 +69,7 @@ def pricing(state):
     if not session['trajectory']:
         return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
-        return redirect(url_for('calculator.carveout', state=state))
+        return redirect(url_for('calculator.carveouts', state=state))
     return render_template(
         'pricing_states/{}.html'.format(state),
         state=session['state'] or state,
@@ -80,7 +80,7 @@ def cost(state):
     if not session['trajectory']:
         return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
-        return redirect(url_for('calculator.carveout', state=state))
+        return redirect(url_for('calculator.carveouts', state=state))
     if not session['price_and_policy']:
         return redirect(url_for('calculator.pricing', state=state))
     return render_template(
@@ -93,7 +93,7 @@ def advanced(state):
     if not session['trajectory']:
         return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
-        return redirect(url_for('calculator.carveout', state=state))
+        return redirect(url_for('calculator.carveouts', state=state))
     if not session['price_and_policy']:
         return redirect(url_for('calculator.pricing', state=state))
     return render_template(
