@@ -50,7 +50,7 @@ h2 { font-weight: bold; margin: 0; font-size: 1.5em; color: #333333; position: r
 h3 { font-weight: bold; font-size: 1.2em; margin: 1em 0; }
 
 a { text-decoration: none; color: #0072b2; border-bottom: 1px solid #0072b2; }
-a.calc-link { font-weight: bold; }
+a[href*=calculator] { font-weight: bold; }
 a:hover { background-color: white; }
 
 .right-align { text-align: right; }
@@ -100,6 +100,7 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 #top_nav > li { border: none; display: inline-block; padding: 0 0 0 15px; margin: 0; }
 #top_nav a { color: #666666; border: none; }
 #top_nav a:hover { color: #cccccc; }
+#top_nav a[href*=calculator] { font-weight: normal; }
 
 #menu_state_abbr { position: absolute; right: 0; font-weight: bold; color: #666666; }
 
@@ -112,6 +113,7 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 #left_nav li { margin: 5px 0; }
 #left_nav li.active { font-weight: bold; }
 #left_nav a:hover, #left_nav a.selected { color: black !important; }
+#left_nav a[href*=calculator] { font-weight: bold; }
 
 .left_nav_feature_link { padding: 8px 15px; width: 170px; border-left: 10px solid #999999; background-color: #fafafa; position: relative; left: -25px; margin-top: 1em !important; }
 .left_nav_feature_link a { color: #56b4e9 !important; font-weight: bold; }

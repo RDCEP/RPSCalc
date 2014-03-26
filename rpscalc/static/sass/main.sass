@@ -50,7 +50,7 @@ a
   text-decoration: none
   color: $blue
   border-bottom: 1px solid $blue
-  &.calc-link
+  &[href*=calculator]
     font-weight: bold
   &:hover
     background-color: white
@@ -214,6 +214,8 @@ input
     border: none
     &:hover
       color: #cccccc
+    &[href*=calculator]
+      font-weight: normal
 #menu_state_abbr
   position: absolute
   right: 0
@@ -246,8 +248,11 @@ input
     margin: 5px 0
     &.active
       font-weight: bold
-  a:hover,a.selected
-    color: black!important
+  a
+    &:hover,&.selected
+      color: black!important
+    &[href*=calculator]
+      font-weight: bold
 .left_nav_feature_link
   padding: 8px 15px
   width: 170px
