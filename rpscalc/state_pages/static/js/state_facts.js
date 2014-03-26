@@ -1,5 +1,6 @@
 var FactsPage = function() {
   'use strict';
+
   var width = 345,
     height = 400,
     margin = 20,
@@ -102,7 +103,7 @@ var FactsPage = function() {
         rpsp.append('text')
           .text(function() {
             return (i === 1) ? Math.round(current) + unit + ' by ' + rps_progress.year
-              : Math.round(final) + unit + ' by 2030';
+              : final + unit + ' by 2030';
           })
           .attr('class', 'rps-text')
           .attr('text-anchor', 'end')
@@ -128,10 +129,10 @@ var FactsPage = function() {
     });
 
     var p = d3.select('#rps_progress_wrap').select('p');
-    p.text(p.text() + ' As of ' + rps_progress.year + ', ' + state +
-      ' was ' + (rps_progress.progress * 100) + '% compliant with its goal of ' +
-      current + '% capacity in that year. The most current information available is from ' +
-      rps_progress.year + '.');
+    p.html(p.text() + 'The most current information available is from ' +
+      rps_progress.year + '. As of ' + rps_progress.year + ' ' + state +
+      ' was <b>' + (rps_progress.progress * 100) + '% compliant</b> with its goal of ' +
+      current + '% capacity in that year, with a final goal of ' + final + '% capacity in 2030.');
   }
 
   function grid_mix_bars(_s) {
@@ -290,8 +291,6 @@ var FactsPage = function() {
         }
       }
 
-      console.log(data);
-
       if (_data.carveouts) {
         _data.carveouts.forEach(function(d) {
           var carveout = {type: d.type, data: []};
@@ -308,7 +307,8 @@ var FactsPage = function() {
         .select('carveout_graph')
         .x(d3.time.scale())
         .y(d3.scale.linear())
-        .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, d3.extent(data[0].data, function(d) { return d.y; })[1]])
+        .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)],
+          [0, d3.extent(data[0].data, function(d) { return d.y; })[1]])
         .format_x(function(x) { return x.getFullYear(); })
         .format_y(function(y) { return d3.format('.1f')(y); })
         .data(data)
@@ -323,7 +323,6 @@ var FactsPage = function() {
       } else {
         rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, _data.name);
       }
-
 
     }
 
@@ -353,6 +352,7 @@ var FactsPage = function() {
         .interpolate('monotone')
         .draw();
     });
+
   });
 
   // Left menu navigation
