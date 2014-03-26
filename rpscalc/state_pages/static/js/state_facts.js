@@ -31,11 +31,13 @@ var FactsPage = function() {
         .append('svg')
         .attr('height', rpsp_height + 50)
         .attr('width', _wd),
-      final = trajectory[trajectory.length - 6].y,
+      final = trajectory[trajectory.length - 1].y,
 //      current = trajectory.filter(function(d) { return d.x.getFullYear() === 2011; })[0].y,
       current = trajectory.filter(function(d) { return d.x.getFullYear() === +rps_progress.year; })[0].y,
       actual = current * +rps_progress.progress,
       diff = Math.abs(actual - current);
+    final = Math.round(final * 100) / 100;
+    current = Math.round(current * 100) / 100;
     if (current > 0) {
       legend_row = rpsp_legend.append('span')
         .attr('class', 'legend-row');
