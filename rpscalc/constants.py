@@ -89,7 +89,7 @@ RPS_STATES = {
     'WA': {'names': ['washington', 'Washington', ], 'rps': True,
            'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
     'WI': {'names': ['wisconsin', 'Wisconsin', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
+           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB', 'WWTCB', ]},
     'WV': {'names': ['west_virginia', 'West Virginia', ], 'rps': False, },
     'WY': {'names': ['wyoming', 'Wyoming', ], 'rps': False, },
 }

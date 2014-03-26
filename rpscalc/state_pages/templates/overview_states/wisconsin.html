@@ -1,26 +1,58 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Wisconsin's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Wisconsin.</p>
+  <p>Wisonsin’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of renewable
+    resources in the state by establishing the minimum amount of renewable
+    energy that the state’s electricity providers must sell in a given
+    year. This legally-established renewable energy procurement goal
+    gradually increases over time to meet the overall target of 15%
+    renewable power by 2025.</p>
+  <p>The state profile below explores the design of this policy,
+    highlighting the factors that influence the success of Wisconsin’s
+    RPS goals and the tradeoffs inherent to it. Once you’re comfortable
+    with the information on this page, you can evaluate the policy’s
+    expected viability with the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+      Feasibility Calculator</a>. You can also use the calculator to
+    change the policy requirements, trajectory, cost cap, and more, to
+    see how altering Wisconsin’s policy design affects its success.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><strong>9.57%</strong> of the state's energy consumption must be from renewable sources by <strong>2015</strong></li>
-  <li><strong>No</strong> carve-outs</li>
-  <li>No explicit cost cap</li>
+  <li><b>10%</b> of the state’s retail electric sales from must be
+    from renewable sources by ,<b>2015</b>, subject to the
+    <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost cap’</a></li>
+  <li>No carve-outs</li>
+  <li>No legally defined <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost cap’</a></li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>The chart below is a carve-out breakdown for the RPS, also demonstrating overall ramp-up.</p>
+  <p><a href="{{ url_for('glossary.glossary') }}#carveout">Carve-outs</a>
+    can create economic opportunities in the state by introducing new or
+    promising technologies into the market. However, these standards
+    limit the utilities’ ability to substitute between renewable
+    energy sources, potentially increasing the cost of the policy.
+    Wisconsin’s RPS does not require specific technologies to meet
+    its annual renewable obligations.</p>
 {% endblock %}
 {% block state_costcap %}
-  <p>Wisconsin does not have an explicit cost cap</p>
+  <p></p>
 {% endblock %}
 {% block state_statute %}
-  <p>Wisconsin enacted Act 9 in 1999; the first state to introduce a RPS without having restructured its electric-utility industry. Originally the RPS required 2.2% of electricity sold to be from renewables by 2012. In 2006, the goal was increased to 10% by 2015. Providers can petition the Public Service Commission to extend the compliance deadline.</p>
+  <p>Wisconsin enacted Act 9 in 1999; the first state to introduce a
+    RPS without having restructured its electric-utility industry.
+    Originally the RPS required 2.2% of electricity sold to be from
+    renewables by 2012. In 2006, the goal was increased to 10% by 2015.
+    Providers can petition the Public Service Commission to extend the
+    compliance deadline.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Photovoltaics, Wind, Biomass, Biodiesel, Hydroelectric, Solar Water Heat, Solar Thermal Electric, Solar Thermal Process Heat, Geothermal Electric, Geothermal Heat Pumps, Landfill Gas, Municipal Solid Waste, Biogas, Anaerobic Digestion, Tidal Energy, CHP/Cogeneration, Fuel Cells using Renewable Fuels
+  Photovoltaics, Wind, Biomass, Biodiesel, Hydroelectric, Solar Water Heat,
+  Solar Thermal Electric, Solar Thermal Process Heat, Geothermal Electric,
+  Geothermal Heat Pumps, Landfill Gas, Municipal Solid Waste, Biogas,
+  Anaerobic Digestion, Tidal Energy, CHP/Cogeneration, Fuel Cells using
+  Renewable Fuels
 {% endblock %}
 {% block state_geo_eligible %}
-  Renewable energy generated outside of Wisconsin is eligible, but only if the utility delivers it to customers in-state.
+  Renewable energy generated outside of Wisconsin is eligible, but only if
+  the utility delivers it to customers in-state.
 {% endblock %}
 {% block state_total_load %}
   100%
