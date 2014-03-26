@@ -1,4 +1,9 @@
 [
+
+  { "id": "acp",
+    "term": "Alternative compliance payment",
+    "def": "TKTK"
+  },
   { "id": "capacity_factor",
     "term": "Capacity factor",
     "def": "TKTK"

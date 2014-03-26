@@ -1,4 +1,7 @@
 {
+    "start_year": 2006,
+    "machine_name": "connecticut",
+    "name": "Connecticut",
     "trajectory": [
         0.02,
         0.04,
@@ -26,8 +29,13 @@
         0.2,
         0.2
     ],
-    "start_year": 2006,
-    "machine_name": "connecticut",
-    "name": "Connecticut",
-    "abbr": "CT"
+    "carveouts": [],
+    "abbr": "CT",
+    "rps_progress": {
+        "progress": 1,
+        "year": 2009
+    },
+    "price_and_policy": {
+        "policy_retail": 159
+    }
 }
