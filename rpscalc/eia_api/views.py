@@ -45,8 +45,8 @@ def state_retail(state):
         '{}.json'.format(RPS_STATES[state]['names'][0]))
     with open(state_json_file, 'r') as f:
         state_json = json.load(f)
-        state_json['policy_and_price'] = state_json.get('price_and_policy', {})
-        state_json['policy_and_price']['policy_retail'] = \
+        state_json['price_and_policy'] = state_json.get('price_and_policy', {})
+        state_json['price_and_policy']['policy_retail'] = \
             int(round(data[-1]['data'] * 10, 0))
     with open(state_json_file, 'w') as f:
         f.write(json.dumps(
