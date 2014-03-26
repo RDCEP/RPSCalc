@@ -27,10 +27,7 @@
   ],
   "carveouts": [],
   "abbr": "WA",
-  "rps_progress": {
-    "progress": 1,
-    "year": 2011
-  },
+  "rps_progress": false,
   "price_and_policy": {
     "wind_capacity": 0.4,
     "solar_capacity": 0.15,

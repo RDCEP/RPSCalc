@@ -33,6 +33,10 @@
         0.19
     ],
     "abbr": "MA",
+    "rps_progress": {
+        "progress": 0.75,
+        "year": 2011
+    },
     "price_and_policy": {
         "wind_capacity": 0.4,
         "solar_capacity": 0.15,
