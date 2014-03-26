@@ -18,7 +18,7 @@ RPS_STATES = {
     'AR': {'names': ['arkansas', 'Arkansas'], 'rps': False, },
     'AS': {'names': ['american_samoa', 'American Samoa'], 'rps': False, },
     'AZ': {'names': ['arizona', 'Arizona', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
+           'green_energy': ['BMTCB', 'GETCB', 'SOTCB', 'WYTCB']},
     'CA': {'names': ['california', 'California', ], 'rps': True,
            'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
     'CO': {'names': ['colorado', 'Colorado', ], 'rps': True,
