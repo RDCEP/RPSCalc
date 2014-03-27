@@ -107,7 +107,7 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 #menu_state_abbr { position: absolute; right: 0; font-weight: bold; color: #666666; }
 
 .menu-states { position: relative; }
-.menu-states ul { -moz-column-count: 2; -webkit-column-count: 2; column-count: 2; -moz-column-gap: 2em; -webkit-column-gap: 2em; column-gap: 2em; border: none; position: absolute; top: 100%; left: 0; background-color: black; z-index: 1000; padding: 0.75em 1em 1em; display: none; margin: 0; }
+.menu-states ul { -moz-column-count: 2; -webkit-column-count: 2; column-count: 2; -moz-column-gap: 2em; -webkit-column-gap: 2em; column-gap: 2em; -moz-column-width: auto; -webkit-column-width: auto; column-width: auto; border: none; position: absolute; top: 100%; left: 0; background-color: black; z-index: 1000; padding: 0.75em 1em 1em; display: none; margin: 0; width: 13em; }
 .menu-states li { margin-bottom: 0.5em; }
 .menu-states:hover ul { display: block; }
 
