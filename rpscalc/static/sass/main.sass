@@ -139,6 +139,10 @@ input
     margin: 0 6px 0 0!important
     padding: $crumb*.625 $crumb 0 $crumb*2
     background-color: $mid-gray
+    &.disabled
+      background-color: #dddddd
+      &:after
+        border-left: $crumb solid #dddddd
     &#crumb_pricing
       width: 145px
     &#crumb_cost

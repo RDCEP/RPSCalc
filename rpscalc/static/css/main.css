@@ -80,6 +80,8 @@ input { font-family: Helvetica, sans-serif; font-size: 0.8em; font-color: #22222
 #main_content #crumbs li a { display: block; height: 100%; width: 100%; border: none; color: #eeeeee; }
 #main_content #crumbs li a:hover { background-color: transparent; }
 #main_content #crumbs li { float: left; position: relative; height: 27.5px; width: 81px; font-size: 15px; line-height: 15px; list-style-type: none !important; margin: 0 6px 0 0 !important; padding: 12.5px 20px 0 40px; background-color: #666666; }
+#main_content #crumbs li.disabled { background-color: #dddddd; }
+#main_content #crumbs li.disabled:after { border-left: 20px solid #dddddd; }
 #main_content #crumbs li#crumb_pricing { width: 145px; }
 #main_content #crumbs li#crumb_cost { width: 109px; }
 #main_content #crumbs li:after { content: ""; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 20px solid #666666; position: absolute; right: -20px; top: 0; z-index: 1; }
