@@ -1,38 +1,101 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Connecticut's <a href=”http://rps.obstructures.org/glossary#rps”>Renewable Portfolio Standard (RPS)</a> is intended to increase use of renewable resources in the state by establishing the minimum amount of renewable energy that the state's electricity providers must sell in a given year. This legally-established renewable energy procurement goal gradually increases over time to meet the overall target of 23% renewable power by 2020. This policy also includes requirements for energy efficiency, which are described, but not considered for calculations on this and subsequent pages.</p><p>The state profile below explores the design of this policy, highlighting the factors that influence the success of Connecticut’s RPS goals and the tradeoffs inherent to it. Once you’re comfortable with the information on this page, you can evaluate the policy’s expected viability with the <a href=”http://rps.obstructures.org/calculator/connecticut/trajectory”>RPS Feasibility Calculator</a>. You can also use the calculator to change the policy requirements, trajectory, cost cap, and more, to see how altering Connecticut’s policy design affects its success.</p>
+  <p>Connecticut's <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of renewable
+    resources in the state by establishing the minimum amount of renewable
+    energy that the state’s electricity providers must sell in a given
+    year. This legally-established renewable energy procurement goal
+    gradually increases over time to meet the overall target of 23%
+    renewable power by 2020. This policy also includes requirements for
+    energy efficiency, which are described, but not considered for
+    calculations on this and subsequent pages.</p>
+  <p>The state profile below explores the design of this policy,
+    highlighting the factors that influence the success of Connecticut’s
+    RPS goals and the tradeoffs inherent to it. Once you’re comfortable
+    with the information on this page, you can evaluate the policy’s
+    expected viability with the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a>. You can also use the calculator to change
+    the policy requirements, trajectory, cost cap, and more, to see
+    how altering Connecticut’s policy design affects its success.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><b>23%</b> of the state's retail electric sales from must be from renewable sources by <b>2020</b>, subject to the <a href=”http://rps.obstructures.org/glossary#cost_cap”>‘cost cap’</a></li>
-  <li>Allows consideration of small <b>hydroelectric</b>, <b>trash-to-energy</b> and some <b>biomass</b></li>
-  <li>Implicit <a href=”http://rps.obstructures.org/glossary#cost_cap”>‘cost cap’</a> defined by compliance payments</li>
+  <li><b>23%</b> of the state’s retail electric sales from must be from
+    renewable sources by <b>2020</b>, subject to the
+    <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost&nbsp;cap’</a></li>
+  <li>Allows consideration of small <b>hydroelectric</b>,
+    <b>trash-to-energy</b> and some <b>biomass</b></li>
+  <li>Implicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost&nbsp;cap’</a>
+    defined by compliance payments</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p><a href=”http://rps.obstructures.org/glossary#carveout”>Carve-outs</a> can create economic opportunities in the state by introducing new or promising technologies into the market. However, these standards limit the utilities’ ability to substitute between renewable energy sources, potentially increasing the cost of the policy. Connecticut’s RPS allows for utilities to meet up to 3 percentage points of the total renewable energy goal in each year with power from hydroelectric, trash-to-energy and some biomass sources.</p>
+  <p><a href="{{ url_for('glossary.glossary') }}#carveout">Carve-outs</a>
+    can create economic opportunities in the state by introducing new or
+    promising technologies into the market. However, these standards
+    limit the utilities’ ability to substitute between renewable energy
+    sources, potentially increasing the cost of the policy. Connecticut’s
+    RPS allows for utilities to meet up to 3 percentage points of the
+    total renewable energy goal in each year with power from hydroelectric,
+    trash-to-energy and some biomass sources.</p>
 {% endblock %}
 {% block state_costcap %}
-  <p>Connecticut does not have an explicit cost cap. However, by allowing <a href=”http://rps.obstructures.org/glossary#XXXXXXXXXXXX”>alternative compliance payments (ACPs)</a>, Connecticut sets an effective cap on the premium a utility will be willing to pay for renewable energy. The RPS sets this cap at $55/MWh. If the renewable energy premium exceeds this cap, the utility would prefer to meet the standard by making the lower cost alternative compliance payments. Using the <a href=”http://rps.obstructures.org/calculator/connecticut/trajectory”>RPS Feasibility Calculator</a> you can make adjustments to cost of alternative compliance, determining how this impacts the provision of renewable power and the overall viability of the RPS.</p>
+  <p>Connecticut does not have an explicit cost cap. However, by
+    allowing <a href="{{ url_for('glossary.glossary') }}#acp">alternative
+    compliance payments (ACPs)</a>, Connecticut sets an effective cap
+    on the premium a utility will be willing to pay for renewable energy.
+    The RPS sets this cap at $55/MWh. If the renewable energy premium
+    exceeds this cap, the utility would prefer to meet the standard by
+    making the lower cost alternative compliance payments. Using the
+    <a href=”{{ url_for('calculator.trajectory', state=state) }}”>RPS
+    Feasibility Calculator</a> you can make adjustments to cost of alternative
+    compliance, determining how this impacts the provision of renewable
+    power and the overall viability of the RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Connecticut’s RPS is governed primarily by <a href="http://www.cga.ct.gov/2013/ACT/PA/2013PA-00303-R00SB-01138-PA.htm">Senate Bill 1138</a>, enacted on June 5, 2013. The law was originally enacted in 1998, but subsequently has been revised into its current form. The legislation requires that each electricity wholesale supplier in the state purchase 23% of its retail load from renewable sources (of Class I and II) by January 1, 2020. The sources defined as Class I and Class II materials can be used in combination to meet the 23% RPS requirement, with a fixed portion of 3% from either Class I or II throughout the schedule, and a ramp-up to 30% from Class I by 2020. Renewable Energy Credits (RECs) can be used to satisfy requirements.</p><p>The statute also requires with an additional 4% of its retail load required to be accounted for using energy efficiency measures, combined heat and power (CHP) or waste heat systems by 2010 and thereafter. These are considered Class III sources. The feasibility calculator does not consider the costs or benefits of this program</p>
+  <p>Connecticut’s RPS is governed primarily by
+    <a href="http://www.cga.ct.gov/2013/ACT/PA/2013PA-00303-R00SB-01138-PA.htm">Senate Bill 1138</a>,
+    enacted on June 5, 2013. The law was originally enacted in 1998,
+    but subsequently has been revised into its current form. The
+    legislation requires that each electricity wholesale supplier in
+    the state purchase 23% of its retail load from renewable sources
+    (of Class I and II) by January 1, 2020. The sources defined as Class
+    I and Class II materials can be used in combination to meet the
+    23% RPS requirement, with a fixed portion of 3% from either Class I
+    or II throughout the schedule, and a ramp-up to 30% from Class I by
+    2020. Renewable Energy Credits (RECs) can be used to satisfy
+    requirements.</p>
+  <p>The statute also requires with an additional 4% of its retail load
+    required to be accounted for using energy efficiency measures,
+    combined heat and power (CHP) or waste heat systems by 2010 and
+    thereafter. These are considered Class III sources. The feasibility
+    calculator does not consider the costs or benefits of this program</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  <p>(Class I) Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Fuel Cells, Low E Renewables, Anaerobic Digestion, Tidal Energy, Wave Energy, Ocean Thermal, Fuel Cells using Renewable Fuels;</p><p>(Class II) Municipal Solid Waste, other biomass, river hydropower;</p><p>(Class III) CHP/Cogeneration, energy efficiency and conservation measures</p>
+  <p>(Class I) Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind,
+    Biomass, Hydroelectric, Geothermal Electric, Fuel Cells, Low E Renewables,
+    Anaerobic Digestion, Tidal Energy, Wave Energy, Ocean Thermal,
+    Fuel Cells using Renewable Fuels;</p><p>(Class II) Municipal Solid
+  Waste, other biomass, river hydropower;</p><p>(Class III)
+  CHP/Cogeneration, energy efficiency and conservation measures</p>
 {% endblock %}
 {% block state_geo_eligible %}
-  Providers may purchase electricity generated using Connecticut's defined Class I or Class II resources within ISO New England, the regional independent system operator, as well as from New York, Pennsylvania, New Jersey, Maryland, and Delaware.
+  Providers may purchase electricity generated using Connecticut’s
+  defined Class I or Class II resources within ISO New England,
+  the regional independent system operator, as well as from New York,
+  Pennsylvania, New Jersey, Maryland, and Delaware.
 {% endblock %}
 {% block state_total_load %}
   93.4%
 {% endblock %}
 {% block state_tech_req %}
-  Up to 3 percentage points of the total renewable obligation can come from Class II sources
+  Up to 3 percentage points of the total renewable obligation can
+  come from Class II sources
 {% endblock %}
 {% block state_sectors %}
-  Investor-Owned Utility, Retail Suppliers. (Municipal Utilities must develop own RPS)
+  Investor-Owned Utility, Retail Suppliers. (Municipal Utilities must
+  develop own RPS)
 {% endblock %}
 {% block state_penalty %}
-  <a href=”http://rps.obstructures.org/glossary#acp”>ACPs</a> of $55/MWh
+  <a href="{{ url_for('glossary.glossary') }}#acp">ACPs</a> of $55/MWh
 {% endblock %}
 {% block state_tools %}
   <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>

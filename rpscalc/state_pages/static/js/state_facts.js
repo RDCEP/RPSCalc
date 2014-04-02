@@ -134,7 +134,7 @@ var FactsPage = function() {
     p.html(p.text() + 'The most current information available is from ' +
       rps_progress.year + '. As of ' + rps_progress.year + ' ' + state +
       ' was <b>' + (rps_progress.progress * 100) + '% compliant</b> with its goal of ' +
-      current + '% capacity in that year, with a final goal of ' + final + '% capacity in 2030.');
+      current + '% capacity in that year, leading to a goal of ' + final + '% capacity in 2030.');
   }
 
   function grid_mix_bars(_s) {
@@ -301,6 +301,7 @@ var FactsPage = function() {
           });
           data.push(carveout);
         });
+
       }
 
       var trajectory = new RPSGraph()
@@ -320,12 +321,16 @@ var FactsPage = function() {
         .outlines(true)
         .draw();
 
-      if (_data.abbr == 'TX') {
-        rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, _data.name, 'MW');
-      } else {
-        rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, _data.name);
-      }
+    }
 
+    if (_data.abbr == 'TX') {
+      rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, _data.name, 'MW');
+    } else {
+      if (_data.rps_progress) {
+        rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, _data.name);
+      } else {
+        d3.select('#rps_progress_wrap').remove();
+      }
     }
 
     grid_mix_bars(_data);
