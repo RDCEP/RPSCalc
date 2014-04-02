@@ -2,75 +2,169 @@
 
   { "id": "acp",
     "term": "Alternative compliance payment",
-    "def": "TKTK"
+    "def": [
+      "RPS policies can incentivize compliance (alternative compliance payments--ACP) or penalize for noncompliance through fines; ACP requires suppliers to pay a predetermined amount per kWh if they fall short in meeting RPS, however, this system allows load-serving entities to still claim they are in compliance rather than be penalized for noncompliance; ACP funds typically are used to support new renewable energy development."
+    ]
+  },
+  { "id": "amortization",
+    "term": "Amortization rate",
+    "def": [
+      "Amortization is the process of repaying a debt over time in regular installments.",
+      "The amortization factor accounts for the cost of financing upfront expenses and is set by the interest rate and loan period. The amortization rate used here is the percentage of the loan amount (install cost) that must be paid annually. We assume here that capital expenditures on wind installations are financed by a twenty-year loan at an annual interest rate of ~6%, making the amortization rate 9%. (for details see Appendix A of RPS Study)."
+    ]
   },
   { "id": "capacity_factor",
     "term": "Capacity factor",
-    "def": "TKTK"
+    "def": [
+      "The capacity factor is the actual electricity output of a generator over a period of time divided by the output if the generator were always operating at full capacity. Capacity factors of existing facilities in the United States range from 20% to nearly 50%. The installed generation capacity costs are independent of site quality. To determine the cost per actual electricity produced, they must be multiplied by a capacity factor.",
+      "For context, the capacity factors for existing wind power facilities in the United States range from nearly 20% to nearly 50%. Excellent sites for wind power, like many locations in Iowa, have capacity factors of around 40%. A ‘good’ wind site, like one found in Illinois, may have a capacity factor of 33%. Solar power capacity factors in the United States range from 14% in Seattle to 24% in Phoenix (for fixed-tilt panels). Typically average capacity factor for the United States is 18–19%."
+    ]
   },
   { "id": "carbon_intensity",
     "term": "Carbon Intensity",
-    "def": "TKTK"
+    "def": [
+      "The amount of CO2, in grams per kWh of electricity produced for a given source."
+    ]
   },
   { "id": "carveout",
     "term": "Carveout",
-    "def": "TKTK"
+    "def": [
+      "TKTK"
+    ]
   },
   { "id": "cost_cap",
     "term": "Cost cap",
-    "def": "TKTK"
+    "def": [
+      "The cap percentage is the size of the subsidy for renewable generation allowed by the state, expressed as a percentage of retail electricity sales. For example, if the cap was 2% of retail sales (on a 25% RPS requirement), the price support available to each unit of renewable energy is no more than 2%/25% = 8% of the retail price with a 1% annual growth rate. Therefore if the retail price of electricity is $100/MWh, the subsidy would be equal to $7 per megawatt-hours of renewable electricity."
+    ]
   },
   { "id": "distributed_generation",
     "term": "Distributed Generation",
-    "def": "TKTK"
+    "def": [
+      "Generally, distributed generation (DG) is any qualified renewable technology sited on a consumer’s premises. This source should provide electricity to the consumer and have the capability to feed power back into the grid. Typically, there is a maximum size requirement that any DG source must fall below to avoid being considered a utility."
+    ]
   },
   { "id": "geographic_eligibility",
     "term": "Geographic eligibility policies",
-    "def": "An important aspect of RPS policy is the economic stimulus created by renewable technology in a state; eligibility policies reflect a desire to keep these positive impacts within state boundaries, or within a region."
+    "def": [
+      "An important aspect of RPS policy is the economic stimulus created by renewable technology in a state; eligibility policies reflect a desire to keep these positive impacts within state boundaries, or within a region."
+    ]
+  },
+  { "id": "installation",
+    "term": "Installation cost",
+    "def": [
+      "The installation cost is the total cost of the renewable power plant to the consumer. It can also be considered as the complete construction cost for generation measured in dollars per Watt.",
+      "Wind: The default value of $2 per Watt of peak capacity is estimated for the see paper for the detailed calculation. The 2011 estimate represents a 10% drop from 2010 costs.",
+      "Solar: The installed cost of solar exhibits significant economies of scale, with utility scale projects costing about half as much as residential projects. The compiled install costs from SEIA are $6.24/Wp for residential installations, $4.94/Wp for commercial, and $3.45/Wp for utility-scale projects (where Wp refers to “Watts peak”, the DC power output given illumination with a solar-like light source of intensity 1000 W/m). The mean install cost of solar therefore depends on the size breakdown of projects. For this work we assume that all projects contributing to the Illinois RPS are utility scale, see paper for detailed price calculation."
+    ]
+  },
+  { "id": "integration",
+    "term": "Integration cost",
+    "def": [
+      "Integration cost is the cost associated with integrating variable wind power into a power grid, such as the costs of forecasting, back-up power capacity ready, etc. It may be considered as the ‘wind uncertainty cost’.",
+      "This cost is a provision of backup generation capacity. Cost estimates include a contribution from integration costs, but neglect transmission costs, as these may not be borne by the renewables generators.  The (hr/yr) factor translates an annual cost in $/MW per year into $/MWh: 365 days/yr × 24 hrs/day = 8760 hrs/yr"
+    ]
   },
   { "id": "net_metering",
     "term": "Net metering",
-    "def": "States that require net metering allow individual electric consumers to receive credit for any electricity they produce. Electric providers pay either the rate at which they buy electricity (wholesale price) or the rate at which they sell electricity (retail rate). Some states also limit the availability of net metering by system capacity or percent of total load."
+    "def": [
+      "States that require net metering allow individual electric consumers to receive credit for any electricity they produce. Electric providers pay either the rate at which they buy electricity (wholesale price) or the rate at which they sell electricity (retail rate). Some states also limit the availability of net metering by system capacity or percent of total load."
+    ]
   },
+  { "id": "o_and_m",
+    "term": "Operations and maintenance",
+    "def": [
+      "Operations and Maintenance (O&M) costs are those associated with keeping a power plant running—including repair and equipment costs. O&M can be divided into fixed and marginal costs, where marginal includes all costs that vary with the level of production and other non-varying costs considered fixed. Fixed O&M costs are incurred regardless of whether or not generation occurs. Since they are typically given in the literature as annual costs per unit capacity, they are not multiplied by an amortization factor.",
+      "<b>Marginal O&M:</b>",
+      "Wind: Operations and maintenance costs as reported by new wind facilities are again collected by who estimate a mean of ~$10/MWh.",
+      "Note: Wind generation is characterized by both fixed and marginal O&M costs, but the costs in have been converted to the unit $/MWh, giving the appearance of being marginal only.",
+      "We include operations and maintenance for completeness, though these are nearly negligible at only ~$0.012 per watt of peak capacity per year. The marginal O&M cost is reported as zero (see paper)."
+    ]
+  },
+
   { "id": "penalties",
-    "term": "Penalties",
-    "def": "States with RPS requirements can impose either penalties or a system of 'alternative compliance payments (ACPs)' to reinforce the standards. ACP structures allow for entities to still be 'in compliance' with the RPS even if they are not meeting the procurement goal."
+    "term": "Noncompliance penalties",
+    "def": [
+      "See <a href=\"#acp\">Alternative compliance payment (ACP)</a>"
+    ]
   },
   { "id": "performance_incentive",
     "term": "Performance-based incentives (including FiT)",
-    "def": "These policies allow for or require payment by electric providers for the purchase of renewable energy produced. The most well-known of these policies is a Feed-in Tariff."
+    "def": [
+      "These policies allow for or require payment by electric providers for the purchase of renewable energy produced. The most well-known of these policies is a Feed-in Tariff."
+    ]
   },
   { "id": "ptc",
     "term": "Production tax credit",
-    "def": "TKTK"
+    "def": [
+      "The PTC and ITC (‘PTC’ in the paper) are federal-level subsidies that effectively reduce the cost of renewables generation by reimbursing qualifying renewable projects for up to 30% of the initial construction cost."
+    ]
   },
   { "id": "rec",
     "term": "Renewable energy credit (REC)",
-    "def": "TKTK"
+    "def": [
+      "TKTK"
+    ]
   },
   { "id": "renewable_interconnect",
     "term": "Renewable interconnection",
-    "def": "These rules determine which renewable producers can connect to the grid and how they do so. Different states mandate electric providers connect to renewable sources at different capacity thresholds."
+    "def": [
+      "These rules determine which renewable producers can connect to the grid and how they do so. Different states mandate electric providers connect to renewable sources at different capacity thresholds."
+    ]
   },
   { "term": "Renewable portfolio standard",
     "id": "rps",
-    "def": "This state has either: a regulation requiring procurement of electricity from renewable resources; a goal suggesting guidelines; or no policy."
+    "def": [
+      "Renewable portfolio standards (RPSs) are requirements, often per state, that mandate renewable energy generation from sources such as wind and solar.",
+      "RPSs require utilities to use renewable energy or renewable energy credits (RECs) to account for a certain percentage of their retail electricity sales—or a certain amount of generating capacity—according to a specified schedule. The term ‘set-aside’ or ‘carve-out’ refers to a provision within an RPS that requires utilities to use a specific renewable resource (usually solar energy) to account for a certain percentage of their retail electricity sales (or a certain amount of generating capacity) according to a set schedule. RPSs mandate significant transformation of the U.S. electricity system in coming decades. Most U.S. states have established an RPS program and requirements have been enacted by 29 states, which will collectively require that U.S. electricity generation from qualified renewables more than double by 2025."
+    ]
   },
   { "id": "rps_trajectory",
     "term": "RPS trajectory",
-    "def": "TKTK"
+    "def": [
+      "TKTK"
+    ]
   },
   { "id": "residential_rebate",
     "term": "Residential rebates (RE)",
-    "def": "State residential rebate programs assist home-owners in financing the up-front cost of installing renewable energy systems."
+    "def": [
+      "State residential rebate programs assist home-owners in financing the up-front cost of installing renewable energy systems."
+    ]
+  },
+  { "id": "retail_price",
+    "term": "Retail price",
+    "def": [
+      "The retail price is the end-use price of electricity measured in dollars per megawatt-hours ($/MWh).",
+      "This is the price that end-use customers pay electricity retailers for power. The retailers re-price the electricity from the wholesale market before taking it to the retail market. We have further assumed that all wholesale electricity price increases are passed directly into the retail prices additively. The full retail rate in Illinois is currently $100/MWh."
+    ]
+  },
+  { "id": "solar_carveout",
+    "term": "Solar carveout",
+    "def": [
+      "A solar ‘carve out’ refers to a portion of renewable generation that must come from solar energy. Some RPS states, including Illinois, restrict a portion of their requirements to particular generation types. IL, NJ, OH, AZ, and NV all have separate requirements mandating that a fraction of renewable electricity must be obtained from solar power to meet RPS standards.",
+      "Currently solar power prices are much higher than those of wind power (See Price section) so even a small solar carveout could consume a significant amount of the total available subsidy.",
+      "The cost of solar generation is somewhat uncertain at present, especially after recent declines, but in 2011 was approximately six times the national mean wholesale rate or two times the retail rate. The total cost of the current IL solar requirement would then be estimated as ~3% of retail sales, or, with the PTC providing a ~30% support, 2% of retail sales, equal to the entirety of the Illinois capped subsidy."
+    ]
   },
   { "id": "tariffs",
     "term": "Tariffs",
-    "def": "TKTK"
+    "def": [
+      "TKTK"
+    ]
   },
+
   { "id": "technology_requirement",
     "term": "Technology requirements",
-    "def": "For states that have RPS requirements, specific renewable technologies can be 'carved out' or set aside as a required contribution to the total procurement amount."
+    "def": [
+      "See <a href=\"#carveout\">Carveout</a>"
+    ]
+  },
+  { "id": "wholesale",
+    "term": "Wholesale price",
+    "def": [
+      "The wholesale rate is the output price of electricity measured in dollars per megawatt-hours ($/MWh) set by electricity generators.",
+      "Utilities pay the electricity generators the wholesale rate and then sell the electricity in the retail market to end-use consumers at retail price. In Illinois the price of wholesale rates is approximately three times less than retail rates. The Illinois wholesale electricity rate is currently $35/MWh. The price of renewable wholesale electricity is affected by the subsidy or legislation in place by the state, which in turn affects the price for retailers and end-use consumers."
+    ]
   }
 
 

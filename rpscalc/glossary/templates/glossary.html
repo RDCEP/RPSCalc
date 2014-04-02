@@ -15,7 +15,13 @@
         .data(_data).enter().append('dd')
         .attr('class', 'definition')
         .attr('id', function(d, i) { return 'definition_' + i; })
-        .text(function(d) { return d.def; });
+        .html(function(d) {
+            var h = '';
+            d.def.forEach(function(dd) {
+              h += '<p>' + dd + '</p>';
+            });
+            return h;
+          });
     defs.each(function(d, i) {
       glossary.insert('dt', '#definition_' + i)
         .attr('id', d.id)
