@@ -19,3 +19,15 @@ def comparison():
         title='State by state RPS Comparison',
         state=state
     )
+
+
+@mod.route('/trajectories')
+def trajectories():
+    state = session['state'] or False
+    return render_template(
+        'trajectories.html',
+        title='State by state RPS Comparison',
+        state=state
+    )
+
+

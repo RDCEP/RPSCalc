@@ -1,39 +1,90 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Hawaii's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Hawaii.</p>
+  <p>Hawai‘i’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of renewable
+    resources in the state by establishing the minimum amount of
+    renewable energy that the state’s electricity providers must sell
+    in a given year. This legally-established renewable energy
+    procurement goal gradually increases over time to meet the overall
+    target of 40% renewable power by 2030. The state also established
+    separate Energy Efficiency Portfolio Standards (EEPS) requiring
+    4,300 GWh reduction by 2030, but these are not considered for
+    calculations on this and subsequent pages.</p>
+  <p>The state profile below
+    explores the design of this policy, highlighting the factors that
+    influence the success of Hawaii’s RPS goals and the tradeoffs
+    inherent to it. Once you’re comfortable with the information on this
+    page, you can evaluate the policy’s expected viability with the
+    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a>. You can also use the calculator to
+    change the policy requirements, trajectory, cost cap, and more, to
+    see how altering Hawai‘i’s policy design affects its success.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><strong>30%</strong> of the state's energy consumption must be from renewable sources by <strong>2020</strong></li>
-  <li>Carve-outs for <strong>distributed generation</strong></li>
-  <li>Explicit cost cap at 2 percent of electric bill annually</li>
-  <li><strong>Two</strong> separate state RPS schedules (primary and secondary)</li>
+  <li><b>40%</b> of the state’s retail electric sales from must be from
+    renewable sources by <b>2030</b></li>
+  <li>No technology carve-outs</li>
+  <li>No legally defined <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost&nbsp;cap’</a></li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>Colorado's RPS has a technology minimum of 3% of the total RPS requirement by 2020, ramping up from a starting requirement of 1%.</p>
+  <p><a href="{{ url_for('glossary.glossary') }}#carveout">Carve-outs</a>
+    can create economic opportunities in the state by introducing new or
+    promising technologies into the market. However, these standards
+    limit the utilities’ ability to substitute between renewable energy
+    sources, potentially increasing the cost of the policy. Hawai‘i does
+    not require any technology carve-outs.</p>
 {% endblock %}
 {% block state_costcap %}
-  <p>Electric Resource Standards in <a href="http://www.leg.state.co.us/clics/clics2013a/csl.nsf/fsbillcont3/D1B329AEB8681D4D87257B3900716761?Open&amp;file=252_enr.pdf">Senate Bill 13-252</a> specify the cost of using renewable sources cannot exceed 2% of customer's electricity bill annually. This rate impact rule applies to both IOUs and coops, and requires the RPS energy obligations to be reduced to the amount necessary to comply with the rule's limitation.</p>
+  <p>Unlike some states, Hawai‘i does not have an explicit
+    <a href=”http://rps.obstructures.org/glossary#cost_cap”>‘cost cap’</a>
+    or limit on the potential increase in electricity costs as a result
+    of this policy. However, the Public Utilities Commission (PUC) may
+    waive compliance with the RPS program for good cause. A 2009
+    <a href="http://www.capitol.hawaii.gov/session2009/bills/HB1464_CD1_.htm">amendment</a>
+    states that starting in 2013, the RPS is to be evaluated every 5 years
+    for achievability. The PUC may revise standards based on best
+    information available at the time. This process also applies to the
+    EEPS. Using the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can act as the PUC and define an
+    explicit cost cap, determining what level of costs will lead to a
+    viable RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Colorado is the first state to create a RPS through ballot initiative. In 2004, voters approved Amendment 37 requiring utilities serving 40,000 or more customers to generate or purchase enough renewable energy to comprise 10% of retail electric sales. It would be increased and modified two subsequent times to its current 20%. In 2013, a distributed generation carve-out was added, and coal methane gas and municipal solid waste became eligible technologies (subject to Public Utilities Commission's approval). The same bill--S.B. 252--created a separate RPS schedule for coops, requiring 20% of sales from renewables by 2020 and thereafter.</p>
+  <p>Hawai‘i is the only state to create a complementary ‘energy efficiency
+    RPS’ called the Energy Efficiency Portfolio Standards (EEPS),
+    calling for a 30% decrease in energy consumption (or 4,300 GWh)
+    in addition to the RPS. The general
+    <a href="http://www.capitol.hawaii.gov/hrscurrent/Vol05_Ch0261-0319/HRS0269/HRS_0269-0092.htm">RPS
+    statute</a> calls for 40% of electricity from renewable energy by
+    2030, the highest RPS goal in the country. The Public Utilities
+    Commission (PUC) can designate specific portions of the goal to each
+    utility, and sometimes may specify a renewable technology to meet
+    the goal. Until 2015, energy efficiency measures will count toward
+    the total RPS requirements; after 2015, 100% of the requirements must
+    be met through renewable electricity.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Solar-electric, Wind, Geothermal-electric, Biomass facilities that burn nontoxic plants, Landfill gas, Animal waste, Hydropower, Recycled energy, Fuel cells using renewables-sourced hydrogen
+  Wind, solar, falling water, biogas (incl. landfill and sewage-based
+  digester gas), geothermal, tidal and ocean thermal energy
+  conversion, biomass (incl. biomass crops, agricultural and animal
+  residues/wastes, and municipal solid waste and other solid waste),
+  biofuels, hydrogen produced from renewable sources
 {% endblock %}
 {% block state_geo_eligible %}
-  No Restrictions; tradable RECs can be used to satisfy requirement, but have a life of 5 years from the calendar year it was generated.
+  Only In-State renewable energy can be used
 {% endblock %}
 {% block state_total_load %}
-  Primary RPS: 58.7%, Secondary RPS: 35.6%
+  100%
 {% endblock %}
 {% block state_tech_req %}
-  At least 3% of the annual requirement for IOUs must be from distributed generation; 0.75% for cooperatives
+  None
 {% endblock %}
 {% block state_sectors %}
-  Investor-Owned Utilities, Cooperatives and Municipal electric companies
+  Investor-Owned Utility, Rural Electric Cooperative
 {% endblock %}
 {% block state_penalty %}
-  None: regulators may impose but amounts not specified
+  By statute, state regulators may impose unspecified penalties for
+  non-compliance.
 {% endblock %}
 {% block state_tools %}
   <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
