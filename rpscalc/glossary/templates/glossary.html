@@ -1,4 +1,5 @@
 {% extends 'base_page.html' %}
+{% block title %} | Glossary{% endblock %}
 {% block left_nav %}{% endblock %}
 {% block content %}
     {{ super() }}
@@ -26,7 +27,8 @@
       glossary.insert('dt', '#definition_' + i)
         .attr('id', d.id)
         .text(d.term);
-      left_nav.append('li').append('a')
+      left_nav.append('li').style('margin-bottom', '.5em')
+        .append('a')
         .attr('href', '#' + d.id).text(d.term.replace(/\(.+\)/, ''))
         .attr('data-name', d.id)
         .on('click', function() {
