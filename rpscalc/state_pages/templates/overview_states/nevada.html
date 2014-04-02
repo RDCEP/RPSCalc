@@ -1,38 +1,88 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Nevada's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Nevada.</p>
+  <p>Nevada’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of renewable
+    resources in the state by establishing the minimum amount of
+    renewable energy that the state’s electricity providers must sell in
+    a given year. This legally-established renewable energy procurement
+    goal gradually increases over time to meet the overall target of 20%
+    renewable power by 2025. New energy efficiency measures also count
+    toward the goal, which are discussed but not considered for
+    calculations on this and subsequent pages.</p>
+  <p>The state profile below explores the design of this policy,
+    highlighting the factors that influence the success of
+    Nevada's RPS goals and the tradeoffs inherent to it.
+    Once you’re comfortable with the information on this page, you
+    can evaluate the policy’s expected viability with the
+    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a>. You can also use the calculator to
+    change the policy requirements, trajectory, cost cap, and more, to
+    see how altering Nevada’s policy design affects its success.</p>
 {% endblock %}
 {% block state_overview %}
-  <li>25% of the state's energy consumption must be from renewable sources by 2025</li>
-  <li>Solar carve out</li>
-  <li>No explicit cost cap</li>
+  <li><b>25%</b> of the state's energy consumption must be from renewable sources by <b>2025</b></li>
+  <li>Carve-out for <b>solar</b></li>
+  <li>No legally defined cost cap</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>N/A</p>
+  <p><a href="{{ url_for('glossary.glossary') }}#carveout">Carve-outs</a>
+    can create economic opportunities in the state by introducing new or
+    promising technologies into the market. However, these standards
+    limit the utilities’ ability to substitute between renewable energy
+    sources, potentially increasing the cost of the policy. Nevada
+    requires 5% of the annual RPS requirement must be fulfilled through
+    solar by 2015, or 1.2% of sales in that year. For the period 2016 to
+    2025, it rises to 6% of generation, 1.5% of sales in 2025.</p>
 {% endblock %}
 {% block state_costcap %}
-  <p>No explicit cost cap exists. All new contracts must be approved by the PUC. If insufficient supply is available at  just and reasonable terms (as determined by the PUC), then the PUC may choose to exempt the provider from remaining RPS requirements.</p>
+  <p>Unlike some states, Nevada does not have an explicit
+    <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost&nbsp;cap’</a>
+    or limit on the potential increase in electricity costs as a result
+    of this policy. However, all new contracts must be approved by the
+    PUC. If insufficient supply is available at just and reasonable terms
+    (as determined by the PUC), then the PUC may choose to exempt the
+    provider from remaining RPS requirements. Using the
+    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can act as the PUC and define an
+    explicit cost cap, determining what level of costs will lead to a
+    viable RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Nevada's original RPS was established in 1997. Most recently updated in 2009, investor-owned utilities and  retail suppliers will be required to acheive 25% of retail sales from renewable sources by 2025.  New energy efficiency measures count toward the goal. Nevada statute also requires the retirement of 800 MW of coal plants,  to be replaced with cleaner sources (including at minimum 350 MW from renewable sources). The RPS is administered by the  Public Utilities Commission of Nevada.</p>
+  <p>Nevada’s original RPS was established in 1997, and was most recently
+    updated in 2009 (<a href="http://www.leg.state.nv.us/Nrs/NRS-704.html#NRS704Sec7801">NRS
+    704.7801</a>). It applies to investor-owned utilities and retail
+    suppliers, requiring 25% of retail sales from renewable sources by
+    2025.  New energy efficiency measures also count toward the goal.
+    Nevada’s statute requires the retirement of 800 MW of coal plants,
+    to be replaced with cleaner sources (including at minimum 350 MW
+    from renewable sources). The RPS is administered by the Public Utilities
+    Commission of Nevada.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Solar Water Heat, Solar Space Heat, Solar Thermal Electric, Solar Thermal Process Heat, Photovoltaics,  Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Municipal Solid Waste, Waste Tires  (using microwave reduction), Energy Recovery Processes, Solar Pool Heating, Anaerobic Digestion, Biodiesel,  Geothermal Direct-Use
+  Solar Water Heat, Solar Space Heat, Solar Thermal Electric, Solar
+  Thermal Process Heat, Photovoltaics, Landfill Gas, Wind, Biomass,
+  Hydroelectric, Geothermal Electric, Municipal Solid Waste, Waste
+  Tires (using microwave reduction), Energy Recovery Processes, Solar
+  Pool Heating, Anaerobic Digestion, Biodiesel, Geothermal Direct-Use
 {% endblock %}
 {% block state_geo_eligible %}
-  Only energy produced in Nevada or delivered to Nevada applies toward the RPS goal
+  Only energy produced in Nevada or delivered to Nevada applies toward the
+  RPS goal
 {% endblock %}
 {% block state_total_load %}
-  88.6%
+  88.2%
 {% endblock %}
 {% block state_tech_req %}
-  Through 2015, 5% of the annual RPS requirement (1.2% of sales in 2015) must be fulfilled through solar. For the period 2016 to 2025, it rises to 6% of generation (1.5% of sales in 2025)
+  Through 2015, 5% of the annual RPS requirement (1.2% of sales in 2015)
+  must be fulfilled through solar. For the period 2016 to 2025, it rises
+  to 6% of generation (1.5% of sales in 2025)
 {% endblock %}
 {% block state_sectors %}
   Investor-Owned Utilities, Retail Suppliers
 {% endblock %}
 {% block state_penalty %}
-  According to the legislation, state regulators may impose penalties, but none have been specified to date.
+  By statute, state regulators may impose unspecified penalties for
+  non-compliance.
 {% endblock %}
 {% block state_tools %}
   <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
