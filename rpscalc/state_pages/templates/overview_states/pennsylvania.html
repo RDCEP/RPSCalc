@@ -1,0 +1,102 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>Pennsylvania’s Alternative Energy Portfolio Standard (AEPS)—also known as
+    a <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio
+    Standard (RPS)</a>—is intended to increase use of renewable resources
+    in the state by establishing the minimum amount of renewable energy that
+    the state’s electricity providers must sell in a given year. This
+    legally-established renewable energy procurement goal gradually increases
+    over time to meet the overall target of 18% renewable power by 2021.</p>
+  <p>The state profile below explores the design of this policy, highlighting
+    the factors that influence the success of Pennsylvania’s RPS goals and
+    the tradeoffs inherent to it. Once you’re comfortable with the information
+    on this page, you can evaluate the policy’s expected viability with
+    the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a>. You can also use the calculator to change
+    the policy requirements, trajectory, cost cap, and more, to see how
+    altering Pennsylvania’s policy design affects its success.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><b>18%</b> of the state’s retail electric sales from must be from
+    renewable sources by <b>2021</b>, subject to the cost cap</li>
+  <li>Carve-out for <b>solar</b></li>
+  <li>Implicit ‘cost cap’ defined by compliance payments</li>
+{% endblock %}
+{% block state_carveouts %}
+  Pennsylvania has a two-tiered system, requiring specific technologies
+  within each tier (see <a href="http://rps.obstructures.org/state/pennsylvania#legislation">Legislation</a>
+  for details). Tier I includes a 0.5% annual carve-out for photovoltaic power.
+{% endblock %}
+{% block state_costcap %}
+  <p>Pennsylvania does not have an explicit cost cap. However, by allowing
+    <a href="{{ url_for('glossary.glossary') }}#acp">alternative compliance
+    payments (ACPs)</a>, Pennsylvania sets an effective cap on the premium
+    a utility will be willing to pay for renewable energy. The RPS sets
+    this cap at $45/MWh for the general RPS requirement (both Tiers I and II).
+    Unlike some states, Pennsylvania does not adjust the cost of an ACP over
+    time. If the renewable energy premium exceeds this cap, the utility would
+    prefer to meet the standard by making the lower cost alternative
+    compliance payments. The solar alternative compliance payment (SACP)
+    fluctuates at a rate of 200% times the market value of Solar RECs, plus
+    the levelized value of solar rebates. Using the
+    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can make adjustments to cost of alternative
+    compliance, determining how this impacts the provision of renewable power
+    and the overall viability of the RPS.</p>
+{% endblock %}
+{% block state_statute %}
+  <p>Pennsylvania enacted an Alternative Energy Portfolio Standard in 2004
+    by S.B. 1030, which required all electric distribution companies and
+    electric generation suppliers to retail customers in the state to source
+    18% of its electricity from renewable sources by 2020. The law breaks
+    the requirements for alternative sources into two ‘Tiers’, with Tier
+    1 required to produce 8% of the total requirement and Tier 2 required
+    to produce the other 10%, by 31 May 2021. The legislation also includes
+    a solar photovoltaic carveout within Tier 1 of 0.5% by 2021. Renewable
+    energy may be bundled with alternative energy credits (AECs).</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  <p>(Tier 1) Photovoltaic Energy, Solar-Thermal Energy, Wind, Low-Impact Hydro,
+    Geothermal, Biomass, Biologically-Derived Methane Gas, Coal-Mine Methane and
+    Fuel Cells.</p>
+  <p>(Tier 2) Waste Coal, Distributed Generation (DG) Systems, Demand-Side
+    Management, Large-Scale Hydro, Municipal Solid Waste, Wood Pulping and
+    Manufacturing Byproducts, and Integrated Gasification Combined Cycle
+    (IGCC) Coal Technology."</p>
+{% endblock %}
+{% block state_geo_eligible %}
+  Resources must originate within Pennsylvania or within the PJM regional
+  transmission organization in order to be eligable to count towards the
+  requirement. The exception is for regions of the state served by a separate
+  system, MISO. For these regions of the state, out-of-state resources within
+  the MISO can be used to serve regions of Pennsylvania in the MISO.
+{% endblock %}
+{% block state_total_load %}
+  97.3%
+{% endblock %}
+{% block state_tech_req %}
+  Solar (Photovoltaic)—0.5% of the annual requirement
+{% endblock %}
+{% block state_sectors %}
+  Investor-Owned Utility, Retail Suppliers
+{% endblock %}
+{% block state_penalty %}
+  $45/MWh, with a separate rate for solar currently at $495.81
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?incentive_code=pa06r"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://www.dsireusa.org/documents/Incentives/PA06Ra.htm"
+         target="_blank">73 P.S. § 1648.1</a>—The Pennsylvania Alternative
+    Energy Portfolio Standards Act (2008)</li>
+  <li><a href="http://www.nrdc.org/energy/renewables/penn.asp" target="_blank">Natural
+    Resources Defense Council (NRDC) State Profile</a>—Your state has a
+    NRDC renewable energy resources profile; find state resources and learn
+    about the technologies being used</li>
+  <li><a href="http://apps1.eere.energy.gov/states/state_home.cfm/state=PA"
+         target="_blank">U.S. Department of Energy Office of Energy Efficiency
+    and Renewable Energy (EERE)—State Profile</a>—Access your state’s
+    EERE page, and find information on renewable resources maps, energy
+    statistics, and news</li>
+{% endblock %}
