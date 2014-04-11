@@ -5,75 +5,72 @@
     resources in the state by establishing the minimum amount of renewable
     energy that the state’s electricity providers must sell in a given year.
     This legally-established renewable energy procurement goal gradually
-    increases over time to meet the overall target of 15% renewable power by
-    2020.</p>
-  <p>The state profile below explores the design of this policy,
-    highlighting the factors that influence the success of Washington’s RPS
-    goals and the trade-offs inherent to it. Once you’re comfortable with the
-    information on this page, you can evaluate the policy’s expected
-    viability with the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
-    Feasibility Calculator</a>. You can also use the calculator to
-    change the policy requirements, trajectory, cost cap, and more, to see
-    how altering Washington’s policy design affects its success.</p>
+    increases over time to meet the overall target of 15% renewable power
+    by 2020.</p>
+  <p>The state profile below explores the design of this policy, highlighting
+    the factors that influence the success of Washington’s RPS goals and the
+    tradeoffs inherent to it. Once you’re comfortable with the information
+    on this page, you can evaluate the policy’s expected viability with the
+    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a>. You can also use the calculator to change
+    the policy requirements, trajectory, cost cap, and more, to see how
+    altering Washington’s policy design affects its success.</p>
 {% endblock %}
 {% block state_overview %}
   <li><b>15%</b> of the state’s retail electric sales from must be from
-    renewable sources by <b>2020</b>, subject to the
-    <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost&nbsp;cap’</a></li>
-  <li>No technology requirements or carve-outs</li>
-  <li>Implicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost
-    cap’</a> defined by compliance payments</li>
+    renewable sources by <b>2020</b>, subject to the cost cap</li>
+  <li>No carve-outs</li>
+  <li>Implicit ‘cost cap’ defined by compliance payments</li>
 {% endblock %}
 {% block state_carveouts %}
   <p><a href="{{ url_for('glossary.glossary') }}#carveout">Carve-outs</a>
-    can create economic opportunities in the state by introducing new
-    or promising technologies into the market. However, these standards
-    limit the utilities’ ability to substitute between renewable energy
-    sources, potentially increasing the cost of the policy. Washington’s
-    RPS does not require specific technologies to meet its annual
-    renewable obligations.</p>
+    can create economic opportunities in the state by introducing new or
+    promising technologies into the market. However, these standards limit
+    the utilities’ ability to substitute between renewable energy sources,
+    potentially increasing the cost of the policy. Washington’s RPS does
+    not require specific technologies to meet its annual renewable
+    obligations.</p>
 {% endblock %}
 {% block state_costcap %}
   <p>Washington does not have an explicit cost cap. However, by allowing
     <a href="{{ url_for('glossary.glossary') }}#acp">alternative
-    compliance payments (ACPs)</a>, Washington sets an effective cap on
-    the premium a utility will be willing to pay for renewable energy.
+    compliance payments (ACPs)</a>, Washington sets an effective cap
+    on the premium a utility will be willing to pay for renewable energy.
     The RPS set this cap in 2007 at $50/MWh, which is adjusted annually
-    for inflation (see <a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.060" target=”_blank”>RCW
-    19.285.060</a>). If the renewable energy premium exceeds this cap,
-    the utility would prefer to meet the standard by making the lower-cost
-    alternative compliance payments. Using the
-    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    for inflation (see <a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.060"
+                          target=”_blank”>RCW 19.285.060</a>).
+    If the renewable energy premium exceeds this cap, the utility would
+    prefer to meet the standard by making the lower-cost alternative
+    compliance payments. Using the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
     Feasibility Calculator</a> you can make adjustments to cost of
-    alternative compliance, determining how this impacts the provision of
-    renewable power and the overall viability of the RPS.</p>
+    alternative compliance, determining how this impacts the provision
+    of renewable power and the overall viability of the RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Washington's RPS was enacted in 2006, and required any utility
+  <p>Washington’s RPS was enacted in 2006, and required any utility
     serving more than 25,000 to obtain 15% of its electricity from
-    renewable sources by 2020
-    (<a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.040" target=”_blank”>RCW
-    19.285.040</a>) or spend at least four percent of its annual retail
-    revenue on renewable energy premiums
-    (<a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.050" target=”_blank”>RCW
-    19.285.050</a>). Utilities can recover all ‘prudent’ costs from
-    rate-payers (this includes spending beyond 4% of revenue, which is
-    why it does not affect the cost cap). In addition, the state requires
-    utilities subject to the RPS to pursue all energy conservation that
-    is cost-effective by January 2010. They must identify achievable
-    potential through 2019, with reviews and updates every two
-    years for ten years.</p>
+    renewable sources by 2020 (<a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.040"
+                                  target=”_blank”>RCW 19.285.040</a>)
+    or spend at least four percent of its annual retail revenue on
+    renewable energy premiums(<a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.050"
+                                 target=”_blank”>RCW 19.285.050</a>).
+    Utilities can recover all “prudent” costs from ratepayers (this
+    includes spending beyond 4% of revenue, which is why it does not
+    affect the cost cap). In addition, the state requires utilities subject
+    to the RPS to pursue all energy conservation that is cost-effective
+    by January 2010. They must identify achievable potential through 2019,
+    with reviews and updates every two years for ten years.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Solar Thermal Electric, Photovoltaics, Wind, Biomass, Biodiesel, Landfill
-  Gas, Anaerobic Digestion, Hydroelectric, Tidal Energy, Ocean Thermal,
-  Geothermal Electric
+  Solar Thermal Electric, Photovoltaics, Wind, Biomass, Biodiesel,
+  Landfill Gas, Anaerobic Digestion, Hydroelectric, Tidal Energy,
+  Ocean Thermal, Geothermal Electric
 {% endblock %}
 {% block state_geo_eligible %}
   For utilities serving out-of-state customers, a qualifying facility
-  must be located in the state in which it services the customers (as
-  found in <a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.030" target=”_blank”>RCW
-  19.285.030(12)(d)</a>
+  must be located in the state in which it services the customers
+  (as found in <a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.030"
+                  target=”_blank”>RCW 19.285.030(12)(d)</a>
 {% endblock %}
 {% block state_total_load %}
   84.7%
@@ -90,14 +87,11 @@
   energy targets must pay an administrative penalty of $50/MWh of
   shortfall. Starting in 2007, the amount is adjusted annually according
   to rate of change of the U.S. inflation indicator. Collections are
-  deposited into the <a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.060" target="_blank">energy
-  independence act special account</a>.
-{% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
+  deposited into the <a href="http://apps.leg.wa.gov/RCW/default.aspx?cite=19.285.060"
+                        target="_blank">energy independence act special account</a>.
 {% endblock %}
 {% block state_references %}
-  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=WA15R&amp;re=1&amp;ee=1">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=WA15R&re=1&ee=1"
+     target="_blank">DSIRE State RPS Page</a>—Visit for detailed information
+  on RPS and complete legislation
 {% endblock %}
