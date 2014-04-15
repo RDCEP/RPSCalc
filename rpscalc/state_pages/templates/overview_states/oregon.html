@@ -1,44 +1,89 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Oregon's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's large electricity providers. Small utilities, defined as those with less than 3% of the state's load, are subject to less strict standards. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Oregon.</p>
+  <p>Oregon’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of renewable
+    resources in the state by establishing the minimum amount of renewable
+    energy that the state’s electricity providers must sell in a given year.
+    This legally-established renewable energy procurement goal gradually
+    increases over time to meet the overall target of 25% renewable power
+    (from the state’s largest utilities) by 2025.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><strong>25%</strong> of the state's energy consumption must be from renewable sources by <strong>2025</strong></li>
-  <li>RPS requires a total of 20 MW-AC of solar PV by 2020</li>
-  <li>Utilities costs are capped at 4% of the utility's annual revenue requirement</li>
+  <li><b>25%</b> of the state’s retail electric sales from ‘large utilities’
+    must be from renewable sources by <b>2025</b>, subject to the cost cap</li>
+  <li>Carve-out for <b>solar</b></li>
+  <li>Explicit cost cap at <b>15%</b> of utilities electricity-related revenue,
+    and implicit ‘cost cap’ defined by compliance payments</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>Utilites must develop 20 MW solar PV by 2025. This requirement does not correspond to the ramp-up schedule in its existing structure in the Oregon RPS. The solar capacity requirement is allocated among 3 utilities in Oregon as follows: PGE (10.9MW), Pacific Power (8.7MW), Idaho Power (0.5MW).</p>
+  Oregon’s <a href="http://www.oregon.gov/energy/RENEW/RPS/Pages/RPS-Solar-Capacity-Standard.aspx"
+              target="_blank">Solar Photovoltaic Capacity Standard</a>
+  requires utilities to develop at least 20 MW of solar capacity by 2025.
+  This requirement does not correspond to the ramp-up schedule in its
+  existing structure in the Oregon RPS. The solar capacity requirement is
+  allocated among 3 utilities in Oregon as follows: PGE (10.9MW),
+  Pacific Power (8.7MW), Idaho Power (0.5MW). In order to count towards
+  this requirement, the solar facility must be between 500 kW and
+  5 MW in capacity.
 {% endblock %}
 {% block state_costcap %}
-  <p>Oregon utilities are not required to comply with the RPS when compliance costs for the utilities exceed 4% of the utility's annual revenue requirement for that compliance year</p>
+  <p>Oregon has an explicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost
+    cap</a> at 4% of a utilities electricity-related revenue. Utilities are
+    not obligated to purchase renewable power that will cause expenditures
+    to exceed this cost cap. Additionally, by allowing
+    <a href="{{ url_for('glossary.glossary') }}#acp">alternative compliance
+    payments (ACPs)</a>, Oregon sets an effective cap on the premium
+    a utility will be willing to pay for renewable energy. If the
+    renewable energy premium exceeds this cap, but is less than the
+    explicit cost cap, the utility would prefer to meet the standard
+    by making the lower-cost alternative compliance payments.
+    Oregon’s RPS set these compliance payments to $50/MWh for 2011,
+    and required this value be re-established by October 1 of each
+    subsequent even-numbered year. Using the
+    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can make adjustments to the cost cap,
+    determining how this impacts the provision of renewable power and
+    the overall viability of the RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>The RPS was established in 2007 as part of the Oregon Renewable Energy Act of 2007, Senate Bill 838. The purpose was to develop electricity procurement plans for renewable power. HB 3039, enacted in 2009, subsequently created requirements for utilities to develop a total of 20 MW of solar PV by 2020. Renewable energy may be bundled with RECs.</p>
+  <p><a href="https://www.oregonlegislature.gov/bills_laws/lawsstatutes/2013ors469A.html"
+        target="_blank">Oregon’s RPS</a> was established in 2007 as part of
+    the Oregon Renewable Energy Act of 2007, Senate Bill 838. The purpose
+    was to develop electricity procurement plans for renewable power. HB 3039,
+    enacted in 2009, subsequently created requirements for utilities to
+    develop a total of 20 MW of solar PV by 2020. Renewable energy may be
+    bundled with RECs.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Municipal Solid Waste, Hydrogen, Anaerobic Digestion, Tidal Energy, Wave Energy, Ocean Thermal
+  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass,
+  Hydroelectric, Geothermal Electric, Municipal Solid Waste, Hydrogen,
+  Anaerobic Digestion, Tidal Energy, Wave Energy, Ocean Thermal
 {% endblock %}
 {% block state_geo_eligible %}
-  Oregon does not specify geographic eligibilities in its RPS.
+  Variable by source. Please see
+  <a href="http://www.oregon.gov/energy/RENEW/docs/RPS_Long_Summary_July%202012.pdf"
+     target="_blank">Table 2</a> of Oregon’s RPS Summary
 {% endblock %}
 {% block state_total_load %}
-  Primary RPS (for large utilities): 74.6%
+  <a href="http://www.oregon.gov/energy/RENEW/RPS/docs/2011%20MWh%20Sales%20OR%20Customers.pdf"
+     target="_blank">72.13%</a>
 {% endblock %}
 {% block state_tech_req %}
-  20 MW sized 500 kW to 5 MW Solar PV by 2020.
+  20 MW sized 500 kW to 5 MW Solar PV by 2020
 {% endblock %}
 {% block state_sectors %}
-  Municipal Utility, Investor-Owned Utility, Rural Electric Cooperative, Retail Supplier
+  Municipal Utility, Investor-Owned Utility, Rural Electric Cooperative,
+  Retail Supplier
 {% endblock %}
 {% block state_penalty %}
-  $50/MWh for 2011, to be re-established by October 1 each subsequent even-numbered year.
-{% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
+  $50/MWh <a href="{{ url_for('glossary.glossary') }}#acp">ACPs</a> for
+  2011, to be re-established by October 1 each subsequent even-numbered year.
 {% endblock %}
 {% block state_references %}
-  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=OR22R">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=OR22R"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://www.oregon.gov/energy/RENEW/Pages/RPS_home.aspx"
+         target="_blank">Oregon’s State RPS Page</a>—A comprehensive registry
+    of statute, rules and reports related to Oregon’s RPS</li>
 {% endblock %}

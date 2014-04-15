@@ -1,26 +1,57 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Kansas' Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Kansas.</p>
+  <p>Kansas’s Renewable Energy Standard (RES)—also known as a
+    <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio
+    Standard (RPS)</a>—is intended to increase use of renewable resources
+    in the state by establishing the minimum level of renewable capacity
+    that the state’s electricity providers must own or lease. This
+    legally-established renewable energy capacity goal gradually increases
+    over time to meet the overall target of 20% of peak demand met with
+    renewable power by 2025.</p>
 {% endblock %}
 {% block state_overview %}
-  <li>Capacity at least <strong>20%</strong> of peak demand capacity by <strong>2020</strong></li>
-  <li><strong>No</strong> technology requirements</li>
-  <li>Cost-cap at 1% increase in retail rate</li>
+  <li><b>20%</b> of the state’s peak demand capacity from must be met
+    with renewable sources by <b>2020</b>, subject to the cost cap</li>
+  <li>No carve-outs</li>
+  <li>Explicit cost cap at <b>1%</b> of retail rate</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>Kansas does not have any technology requirements.</p>
+  Kansas does not have any technology requirements.
 {% endblock %}
 {% block state_costcap %}
-  <p>Retail rate impact cannot exceed 1% (persuant to recovery mechanism described in K.A.R. 82-16-4)</p>
+  <p>Kansas has an explicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost
+    cap</a> at a 1% increase in the retail rate (see
+    <a href="http://www.kssos.org/pubs/register%5C2010%5CVol_29_No_44_November_4_2010_p_1577-1616.pdf"
+       target="_blank">K.A.R. 82-16-3(c)</a>). Utilities are not required
+    to meet the RES goal if compliance will cause them to exceed this cap.
+    Unlike other states, Kansas’s penalties for non-compliance will not act
+    as a cost cap, as they are explicitly tied to the REC cost
+    (ACP price = 2&times;REC cost). Using the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can make adjustments to the cost cap,
+    determining how this impacts the provision of renewable power and
+    the overall viability of the RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Adopted in May 2009, Kansas' RPS (<a href="http://www.kslegislature.org/li/b2013_14/statute/066_000_0000_chapter/066_012_0000_article/066_012_0056_section/066_012_0056_k/">K.S.A. Ch. 66 Art. 12 §56-62</a>) requires that total renewable generation capacity be 20% of peak demand by 2020. This RPS is one of the only policies in the country which require a minimum capacity as opposed to a minimum percentage of sales. The Kansas Corporation Commission administers this program.</p>
+  <p>Adopted in May 2009, Kansas’ RPS
+    (<a href="http://www.kslegislature.org/li/b2013_14/statute/066_000_0000_chapter/066_012_0000_article/066_012_0056_section/066_012_0056_k/"
+        target="_blank">K.S.A. Ch. 66 Art. 12 &sect;56–62</a>) requires that
+    total renewable generation capacity be 20% of peak demand by 2020.
+    This RPS is one of the only policies in the country which require a
+    minimum capacity as opposed to a minimum percentage of sales. The
+    <a href="http://www.kcc.state.ks.us/" target="_blank">Kansas Corporation Commission</a>
+    administers this program.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Wind, Solar thermal, Photovoltaics, Dedicated crops grown for energy production, Cellulosic agricultural residues, Plant residues, Methane fro landfills or wastewater treatment, Clean and untreated wood products (such as pallets), Existing hydropower, New hydropower, Fuel cells using hydrogen produced from renewable sources, Energy storage that is connected to a renewable source
+  Wind, Solar thermal, Photovoltaics, Dedicated crops grown for energy
+  production, Cellulosic agricultural residues, Plant residues, Methane
+  from landfills or wastewater treatment, Clean and untreated wood products
+  (such as pallets), Existing hydropower, New hydropower, Fuel cells using
+  hydrogen produced from renewable sources, Energy storage that is
+  connected to a renewable source
 {% endblock %}
 {% block state_geo_eligible %}
-  Out of state generation is not prohibited by the KCC as long as it meets the REC requirements outlined in the regulations.
+  Out of state generation is not prohibited by the KCC as long as it meets
+  the REC requirements outlined in the regulations.
 {% endblock %}
 {% block state_total_load %}
   81.5%
@@ -32,13 +63,18 @@
   Investor-owned utilities, Cooperative utilities
 {% endblock %}
 {% block state_penalty %}
-  No penalties for 2011 or 2012. The 'standard minimum penalty' after this period is 'equal to two times the market value during the calendar year of sufficient RECs to have met the portfolio requirement'. (<a href="http://www.kssos.org/other/Final_2012_KAR_Supplement.pdf">K.A.R. 82-16-3 pg. 646</a>) Penalties can vary if utilities show a 'good faith effort' to comply with the RPS.
-{% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;<i>Datasets available for download in .xlsx format<i></i></i></li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;<i>Advanced search tool for comparing RPS program data<i></i></i></li>
+  No penalties for 2011 or 2012. The ‘standard minimum penalty’ after this
+  period is ‘equal to two times the market value during the calendar year
+  of sufficient RECs to have met the portfolio requirement’.
+  (<a href="http://www.kssos.org/other/Final_2012_KAR_Supplement.pdf"
+      target="_blank">K.A.R. 82-16-3 pg. 646</a>) Penalties can vary if
+  utilities show a ‘good faith effort’ to comply with the RPS.
 {% endblock %}
 {% block state_references %}
-  <li><a href="http://www.kcc.state.ks.us/energy/index.htm">Kansas Corporation Commission Energy Division</a>&nbsp;—&nbsp;Links and descriptions of energy programs in Kansas</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=KS07R"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://www.kcc.state.ks.us/pi/2013_retail_rate_impact_report.pdf"
+         target="_blank">2013 KS Retail Rate Impact Report</a>—Details the
+    benefits and costs of Kansas’s RES</li>
 {% endblock %}

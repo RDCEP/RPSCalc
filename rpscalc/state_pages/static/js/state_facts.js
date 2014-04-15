@@ -305,7 +305,7 @@ var FactsPage = function() {
 
       var trajectory = new RPSGraph()
         .padding(30, 30, 30, 100)
-        .width(760).height(height)
+        .width(830).height(height)
         .select('carveout_graph')
         .x(d3.time.scale())
         .y(d3.scale.linear())
