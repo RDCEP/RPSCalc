@@ -1,0 +1,82 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>Texas’s  <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of this and
+    other renewable resources in the state. The RPS establishes the
+    minimum amount of renewable energy that the state’s electricity
+    providers must sell, in a given year. This legally-established renewable
+    energy procurement goal gradually increases over time to meet the
+    overall target of 10,000 megawatts of installed renewable capacity by
+    2025.</p>
+{% endblock %}
+{% block state_overview %}
+  <li>Utilities must install <b>10,000 MW</b> of renewable capacity
+    by <b>2025</b></li>
+  <li>Carve-out for <b>non-wind</b> resources</li>
+  <li>No legally defined cost cap</li>
+{% endblock %}
+{% block state_carveouts %}
+  Texas’s RPS requires that, starting in 2005, 500 MW of the capacity
+  goal be met through renewable sources other than wind.
+{% endblock %}
+{% block state_progress %}
+<p>It is important to note that Texas surpassed its 10,000 MW installed
+  capacity goal in 2009.</p>
+{% endblock %}
+{% block state_costcap %}
+  <p>Texas does not have an explicit cost cap. However, by allowing
+    <a href="{{ url_for('glossary.glossary') }}#acp">alternative compliance
+    payments (ACPs)</a>, Texas sets an effective cap on the premium a
+    utility will be willing to pay for renewable energy. The RPS sets
+    this cap at $50/MWh for the general RPS requirement. If the renewable
+    energy premium exceeds this cap, the utility would prefer to meet
+    the standard by making the lower cost alternative compliance payments.
+    Although the <a href="http://www.puc.texas.gov/" target="_blank">Public
+    Utilities Commission of Texas</a> has statutory authority to establish
+    similar penalties for the non-wind portion of the RPS requirement,
+    they have not yet done so. This essentially means the non-wind
+    capacity goal is voluntary. Using the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can make adjustments to cost of
+    alternative compliance, determining how this impacts the provision of
+    renewable power and the overall viability of the RPS.</p>
+{% endblock %}
+{% block state_statute %}
+  <p>The <a href="http://www.puc.texas.gov/agency/rulesnlaws/subrules/electric/25.173/25.173.pdf"
+            target="_blank">current RPS</a> was enacted in 2005 by S.B 20,
+    which revised the original RPS mandate for Texas created by the Public
+    Utility Commission of Texas (PUCT) in 1999. In both cases, the purpose
+    was to develop electricity procurement plans for renewable power.
+    The current S.B 20 legislation more specifically: 5,880 MW (roughly
+    5% of Texas’ electricity demand) of renewable power annually by 2015
+    and 10,000 MW by 2025. Since wind power accounts for nearly all of
+    the current renewable energy generation in Texas, S.B 20 created a
+    target of 500 MW of renewable-energy generation from resources other
+    than wind. Renewable energy may be bundled with RECs.</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  Solar Water Heat, Solar Thermal Electric, Photovoltaics, Landfill Gas,
+  Wind, Biomass, Hydroelectric, Geothermal Electric, Geothermal Heat
+  Pumps, Tidal Energy, Wave Energy, Ocean Thermal
+{% endblock %}
+{% block state_geo_eligible %}
+  Texas meets 100% of its requirements through to 2025 with in-state
+  wind power at present.
+{% endblock %}
+{% block state_total_load %}
+  Primary RPS: 75.9%
+{% endblock %}
+{% block state_tech_req %}
+  Non-Wind—500 MW annual Req.
+{% endblock %}
+{% block state_sectors %}
+  Investor-Owned Utilities and Retail Suppliers. Municipal Utilities and
+  Coops May Opt-in.
+{% endblock %}
+{% block state_penalty %}
+  ACP: $50 for general RPS, None for non-wind carve-out
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=TX03R"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+{% endblock %}
