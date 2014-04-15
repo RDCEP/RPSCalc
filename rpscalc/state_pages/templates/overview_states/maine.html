@@ -1,44 +1,91 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Maine's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers, in addition to the existing 30% of capacity in Maine. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Maine.</p>
+  <p>Maine’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of renewable
+    resources in the state by establishing the minimum amount of renewable
+    energy that the state's electricity providers must sell in a given year.
+    This legally-established renewable energy procurement goal gradually
+    increases over time to meet the overall target of 40% renewable power
+    by 2017.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><strong>40%</strong> of the state's energy consumption must be from renewable sources by <strong>2017</strong></li>
-  <li>No technology carve-outs.</li>
-  <li>Cost cap for percent of sales</li>
+  <li><b>40%</b> of the state's retail electric sales from must be from
+    renewable sources by <b>2017</b>, subject to the cost cap</li>
+  <li>Carve-out for <b>new renewable generation</b></li>
+  <li>Implicit ‘cost cap’ defined by compliance payments</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>N/A</p>
+  <p>Maine’s RPS requires that 1% of the state’s retail electric sales
+    in 2007 come from ‘new’ renewable resources, or resources that came
+    online after September 1, 2005,  increasing by 1 percentage point per
+    year to a 2017 goal of 10% of retail sales. In the statute, these
+    resources are termed ‘Class I’. ‘Class II’ resources are old or
+    existing renewable or ‘efficient’ forms of generation. Class II
+    resources comprise a steady 30 percentage points of Maine’s annual
+    renewable obligation. The state had already exceeded compliance with
+    the RPS’s Class II goal when the rules were passed in 1999.</p>
 {% endblock %}
 {% block state_costcap %}
-  <p>Maine does not outline a cost cap on retail electricity.</p>
+  <p>Maine does not have an explicit cost cap. However, by allowing
+    <a href="{{ url_for('glossary.glossary') }}#acp">alternative compliance
+    payments (ACPs)</a>, Maine sets an effective cap on the premium a
+    utility will be willing to pay for renewable energy. The RPS allows
+    the Maine Public Utilities Commission (MPUC) to set this cap. In 2011,
+    this rate was $62.13. If the renewable energy premium exceeds this cap,
+    the utility would prefer to meet the standard by making the lower
+    cost alternative compliance payments. The MPUC can suspend the
+    percentage increase in the Class I carve-out for one year if ACPs
+    account for more than half of the state’s renewable obligation in
+    three consecutive years. Revenue from ACPs is paid into the Renewable
+    Resource Fund, administered by the Efficiency Maine Trust. Using
+    the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can make adjustments to cost of
+    alternative compliance, determining how this impacts the provision
+    of renewable power and the overall viability of the RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Maine's RPS was enacted in 1999 and required 30% of each electricity provider's supply to come from renewable energy. Updates since 1999 have amended the original RPS mandate. At the time of the 1999 mandate, renewable capacity exceeded the 30% requirement. The purpose of the later revisions to the requirement have been to develop electricity procurement plans for renewable power beyond the existing capacity. The current legislation more specifically: an additional 10% of capacity to total 40% of renewable power annually by 2017. Renewable energy may be bundled with GIS certificates, which are similar to RECs, to meet Class I requirements, but not Class II requirements.</p>
+  <p>Maine’s RPS was enacted in 1999 and required 30% of each electricity
+    provider’s supply to come from renewable energy. Updates since 1999 have
+    amended the original RPS mandate. At the time of the 1999 mandate,
+    renewable capacity exceeded the 30% requirement. The purpose of the
+    later revisions to the requirement have been to develop electricity
+    procurement plans for renewable power beyond the existing capacity. The
+    current legislation more specifically: an additional 10% of capacity
+    to total 40% of renewable power annually by 2017. Renewable energy
+    may be bundled with GIS certificates, which are similar to RECs, to
+    meet Class I requirements, but not Class II requirements.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Fuel Cells, Municipal Solid Waste, CHP/Cogeneration, Tidal Energy, Fuel Cells using Renewable Fuels, Other Distributed Generation Technologies
+  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass,
+  Hydroelectric, Geothermal Electric, Fuel Cells, Municipal Solid Waste,
+  CHP/Cogeneration, Tidal Energy, Fuel Cells using Renewable Fuels,
+  Other Distributed Generation Technologies
 {% endblock %}
 {% block state_geo_eligible %}
-  Maine does not outline explicit geographic eligibilities for energy sourcing.
+  RECs (GIS certificates) produced in NEPOOL are acceptable to meet
+  Maine’s renewable obligation. Credit multipliers aim to incentivize
+  ‘community-based renewable energy production’.
 {% endblock %}
 {% block state_total_load %}
-  Primary RPS: 98.3%
+  98.3%
 {% endblock %}
 {% block state_tech_req %}
-  None
+  Class I or ‘new’ sources account for 10 percentage points of the 2017
+  RPS obligation
 {% endblock %}
 {% block state_sectors %}
   Investor-Owned Utility, Retail Supplier
 {% endblock %}
 {% block state_penalty %}
-  Alternative compliance payments (ACPs) for the renewable portion of the legislation were originally set to $57.12/MWh in 2007, and is adjusted annually for inflation. The ACP for 2013 is set at $65.28/MWh.
-{% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
+  Alternative compliance payments (ACPs) for the renewable portion of
+  the legislation were originally set to $57.12/MWh in 2007, and is
+  adjusted annually for inflation. The ACP for 2013 is set at $65.28/MWh.
 {% endblock %}
 {% block state_references %}
-  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=ME01R">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=ME01R"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://www.maine.gov/tools/whatsnew/attach.php?id=349454&an=1"
+         target="_blank">London Economics International Report on Maine
+    RPS</a>—Review of RPS rules and compliance prepared for MPUC</li>
 {% endblock %}
