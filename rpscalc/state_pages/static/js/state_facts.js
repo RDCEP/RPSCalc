@@ -32,12 +32,11 @@ var FactsPage = function() {
         .attr('height', rpsp_height + 50)
         .attr('width', _wd),
       final = trajectory[trajectory.length - 1].y,
-//      current = trajectory.filter(function(d) { return d.x.getFullYear() === 2011; })[0].y,
       current = trajectory.filter(function(d) { return d.x.getFullYear() === +rps_progress.year; })[0].y,
       actual = current * +rps_progress.progress,
       diff = Math.abs(actual - current);
     final = Math.round(final * 100) / 100;
-    current = Math.round(current * 100) / 100;
+    current = state == 'IA' ? final : Math.round(current * 100) / 100;
     if (current > 0) {
       legend_row = rpsp_legend.append('span')
         .attr('class', 'legend-row');
@@ -134,7 +133,7 @@ var FactsPage = function() {
     p.html(p.text() + 'The most current information available is from ' +
       rps_progress.year + '. As of ' + rps_progress.year + ' ' + state +
       ' was <b>' + (rps_progress.progress * 100) + '% compliant</b> with its goal of ' +
-      current + '% capacity in that year, leading to a goal of ' + final + '% capacity in 2030.');
+      current + unit + ' capacity in that year, leading to a goal of ' + final + unit + ' capacity in 2030.');
   }
 
   function grid_mix_bars(_s) {
@@ -306,7 +305,7 @@ var FactsPage = function() {
 
       var trajectory = new RPSGraph()
         .padding(30, 30, 30, 100)
-        .width(760).height(height)
+        .width(830).height(height)
         .select('carveout_graph')
         .x(d3.time.scale())
         .y(d3.scale.linear())
@@ -325,6 +324,8 @@ var FactsPage = function() {
 
     if (_data.abbr == 'TX') {
       rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, _data.name, 'MW');
+    } else if (_data.abbr == 'IA') {
+      rps_progress([{x: new Date(2011, 0, 1), y: 105}], _data.rps_progress, _data.name, 'MW');
     } else {
       if (_data.rps_progress) {
         rps_progress(data.filter(function(d) { return d.type.toUpperCase() === 'RPS' })[0].data, _data.rps_progress, _data.name);

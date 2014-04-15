@@ -1,4 +1,7 @@
 {
+    "start_year": 2007,
+    "machine_name": "pennsylvania",
+    "name": "Pennsylvania",
     "trajectory": [
         0.01,
         0.01,
@@ -25,8 +28,11 @@
         0.08,
         0.08
     ],
-    "start_year": 2007,
-    "machine_name": "pennsylvania",
-    "name": "Pennsylvania",
-    "abbr": "PA"
+    "abbr": "PA",
+    "rps_progress": false,
+    "price_and_policy": {
+        "wind_capacity": 0.33,
+        "solar_capacity": 0.15,
+        "policy_retail": 98
+    }
 }

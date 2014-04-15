@@ -1,33 +1,54 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Iowa's Alternative Energy Law (REL) establishes a minimum amount of renewable energy that must be purchased by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Iowa.</p>
+  <p>Iowa’s Alternative Energy Law (AEL)—also known as a
+    <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio
+    Standard (RPS)</a>—is intended to increase use of renewable resources
+    in the state by establishing the minimum amount of renewable energy
+    that the state’s electricity providers must sell in a given year.
+    This legally-established renewable energy procurement goal is set
+    at an overall target of 105MW of renewable power.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><strong>105 MW</strong> of renewable sources</li>
-  <li><strong>No</strong> Carve-outs</li>
-  <li>No explicit cost cap</li>
-  <li><strong>Two</strong> separate state RPS schedules (primary and secondary)</li>
+  <li><b>150 MW</b> of the state’s retail electric sales from must be
+    from renewable sources</li>
+  <li>No carve-outs</li>
+  <li>No legally defined cost cap</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>N/A</p>
+  Iowa does not require any technology carve-outs.
 {% endblock %}
 {% block state_costcap %}
-  <p>N/A</p>
+  <p>Unlike some states, Iowa does not have an explicit
+    <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost cap’</a>
+    or limit on the potential increase in electricity costs as a result
+    of this policy. Using the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can act as the Public Utilities
+    Commission and define an explicit cost cap, determining what level
+    of costs will lead to a viable RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>The Iowa Renewable Energy Law is a capacity-based standard, which requires its investor-owned utilities to own or contract a total of 105 MW of renewable energy. It is split between MidAmerican Energy (55.2 MW, 52.57% of demand) and Alliant Energy Interstate Power and Light (49.8 MW., 47.43% of demand). There are no mandated increases, and the target has already been achieved.</p>
+  <p>The Iowa Alternative Energy Law
+    (<a href="http://coolice.legis.iowa.gov/Cool-ICE/default.asp?category=billinfo&service=IowaCode&ga=83&input=476.41"
+        target="_blank">§ 476.41</a>) is a capacity-based standard,
+    which requires its investor-owned utilities to own or contract a total
+    of 105 MW of renewable energy. It is split between MidAmerican Energy
+    (55.2 MW, or 52.57% of demand) and Alliant Energy Interstate Power
+    and Light (49.8 MW, or 47.43% of demand). There are no mandated
+    increases, and the target has already been achieved.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Solar, Wind, Waste management, Resource recovery, Refuse-derived fuel, Agricultural crops or residues, Wood-burning facilities, or Small hydropower facilities
+  Solar, Wind, Waste Management, Resource Recovery, Refuse-Derived Fuel,
+  Agricultural Crops or Residues, Woodburning Facilities, or
+  Small Hydropower Facilities
 {% endblock %}
 {% block state_geo_eligible %}
-  In-state
+  Tradable Renewable Certificates (TRCs) cannot be used for compliance
 {% endblock %}
 {% block state_total_load %}
   75.7%
 {% endblock %}
 {% block state_tech_req %}
-  None (voluntary goal of 1,000 MW wind by 2010)
+  None
 {% endblock %}
 {% block state_sectors %}
   Investor-Owned Utilities
@@ -35,11 +56,8 @@
 {% block state_penalty %}
   None
 {% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
-{% endblock %}
 {% block state_references %}
-  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IA01R&amp;re=1&amp;ee=1">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IA01R&re=0&ee=0"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
 {% endblock %}

@@ -1,26 +1,59 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Montana's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Montana.</p>
+  <p>Montana’s Renewable Resource Standard (RRS)—also known as a
+    <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio
+    Standard (RPS)</a>—is intended to increase use of renewable resources
+    in the state by establishing the minimum amount of renewable energy
+    that the state’s electricity providers must sell in a given year. This
+    legally-established renewable energy procurement goal gradually increases
+    over time to meet the overall target of 15% renewable power by 2025.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><strong>15%</strong> of retail sales by 2015</li>
-  <li><strong>No</strong> minimum technology requirements</li>
-  <li>Cost cap at 15% of alternative source price</li>
+  <li><b>15%</b> of the state’s energy consumption must be from renewable
+    sources by <b>2015</b>, subject to the cost cap</li>
+  <li>No carve-outs</li>
+  <li>Explicit cost cap at <b>15%</b> of alternative source price and implicit
+    ‘cost cap’ defined by compliance payments</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>Montana does not have any minimum technology requirements.</p>
+  Montana’s RSS does not have any minimum technology requirements.
 {% endblock %}
 {% block state_costcap %}
-  <p>Utilities do not have to purchase power from renewable sources if the cost exceeds a 15% increase in cost of an alternative source. See <a href="http://leg.mt.gov/bills/mca/69/3/69-3-2007.htm">Title 69 Chapter 3</a></p>
+  <p>Montana has an explicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost
+    cap</a> at a <a href="http://leg.mt.gov/bills/mca/69/3/69-3-2007.htm"
+                    target="_blank">15% premium over alternative sources</a>.
+    Utilities are not obligated to purchase renewable power that exceeds this
+    cost cap. Additionally, by allowing <a href="{{ url_for('glossary.glossary') }}#acp">alternative
+    compliance payments (ACPs)</a>, Montana sets an effective cap on the
+    premium a utility will be willing to pay for renewable energy. If the
+    renewable energy premium exceeds this cap, but is less than the explicit
+    cost cap, the utility would prefer to meet the standard by making the lower
+    cost alternative compliance payments. Using the
+    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS Feasibility
+    Calculator</a> you can make adjustments to the cost cap, determining how
+    this impacts the provision of renewable power and the overall viability
+    of the RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Originally enacted in <a href="http://leg.mt.gov/bills/mca/69/3/69-3-2004.htm">2005</a>, and updated as recently as 2013, Montana's Renewable Resource Standard requirs that 15% of retail electricity sales in the state come from renewable sources by 2015. Although there are no technology requirements, state law does require that utilities purchase a minimum amount of power (50MW escalating to 75MW) from 'community renewable energy projects'. The program is administed by the Montana Public Service Commission.</p>
+  <p>Originally enacted in <a href="http://leg.mt.gov/bills/mca/69/3/69-3-2004.htm"
+                              target="_blank">2005</a>, and updated as
+    recently as 2013, Montana’s Renewable Resource Standard requires that
+    15% of retail electricity sales in the state come from renewable sources
+    by 2015. Although there are no technology requirements, state law does
+    require that utilities purchase a minimum amount of power (50MW escalating
+    to 75MW) from ‘community renewable energy projects’. The program is
+    administered by the <a href="http://psc.mt.gov/" target="_blank">Montana
+    Public Service Commission</a>.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Geothermal Electric, Compressed Air Energy Storage (From Eligible Renewables), Anaerobic Digestion, Fuel Cells using Renewable Fuels
+  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass,
+  Hydroelectric, Geothermal Electric, Compressed Air Energy Storage
+  (From Eligible Renewables), Anaerobic Digestion, Fuel Cells using
+  Renewable Fuels
 {% endblock %}
 {% block state_geo_eligible %}
-  Generation can be located in other states as long as the electricity produced is deliverred into Montana.
+  Generation can be located in other states as long as the electricity
+  produced is delivered into Montana.
 {% endblock %}
 {% block state_total_load %}
   66.6%
@@ -32,13 +65,19 @@
   Investor-Owned Utility, Retail Supplier
 {% endblock %}
 {% block state_penalty %}
-  $10 per MWh of credits that the utility failed to procure.
-{% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;<i>Datasets available for download in .xlsx format<i></i></i></li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;<i>Advanced search tool for comparing RPS program data<i></i></i></li>
+  <a href="{{ url_for('glossary.glossary') }}#acp">ACP</a> of $10/MWh of
+  noncompliance
 {% endblock %}
 {% block state_references %}
-  <li><a href="http://leg.mt.gov/content/Committees/Interim/2013-2014/Energy-and-Telecommunications/Meetings/June-2013/Overview.pdf">An Introduction to the Montana Renewable Portfolio Standard</a>&nbsp;—&nbsp;Overview of RPS prepared for Montana state representatives</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <li><a href="http://dsireusa.org/incentives/incentive.cfm?Incentive_Code=MT11R&re=0&ee=0"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://www.nrdc.org/energy/renewables/montana.asp">Natural
+    Resources Defense Council (NRDC) State Profile</a>—Your state has a NRDC
+    renewable energy resources profile; find state resources and learn about
+    the technologies being used</li>
+  <li><a href="http://apps1.eere.energy.gov/states/state_home.cfm/state=MT">U.S.
+    Department of Energy Office of Energy Efficiency and Renewable Energy
+    (EERE)—State Profile</a>—Access your state’s EERE page, and find
+    information on renewable resources maps, energy statistics, and news</li>
 {% endblock %}

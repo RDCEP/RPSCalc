@@ -3,56 +3,57 @@
   <p>Wisonsin’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
     Portfolio Standard (RPS)</a> is intended to increase use of renewable
     resources in the state by establishing the minimum amount of renewable
-    energy that the state’s electricity providers must sell in a given
-    year. This legally-established renewable energy procurement goal
-    gradually increases over time to meet the overall target of 15%
-    renewable power by 2025.</p>
-  <p>The state profile below explores the design of this policy,
-    highlighting the factors that influence the success of Wisconsin’s
-    RPS goals and the tradeoffs inherent to it. Once you’re comfortable
-    with the information on this page, you can evaluate the policy’s
-    expected viability with the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
-    Feasibility Calculator</a>. You can also use the calculator to
-    change the policy requirements, trajectory, cost cap, and more, to
-    see how altering Wisconsin’s policy design affects its success.</p>
+    energy that the state’s electricity providers must sell in a given year.
+    This legally-established renewable energy procurement goal gradually
+    increases over time to meet the overall target of 10% renewable power by
+    2015.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><b>10%</b> of the state’s retail electric sales from must be
-    from renewable sources by, <b>2015</b>, subject to the
-    <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost&nbsp;cap’</a></li>
+  <li><b>10%</b> of the state's retail electric sales from must be from
+    renewable sources by <b>2015</b></li>
   <li>No carve-outs</li>
-  <li>No legally defined <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost cap’</a></li>
+  <li>No legally defined cost cap</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p><a href="{{ url_for('glossary.glossary') }}#carveout">Carve-outs</a>
-    can create economic opportunities in the state by introducing new or
-    promising technologies into the market. However, these standards
-    limit the utilities’ ability to substitute between renewable
-    energy sources, potentially increasing the cost of the policy.
-    Wisconsin’s RPS does not require specific technologies to meet
-    its annual renewable obligations.</p>
+  Wisconsin’s RPS does not require specific technologies to meet its annual
 {% endblock %}
 {% block state_costcap %}
-  <p></p>
+  <p>Unlike some states, Wisconsin does not have a
+    <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost cap</a>
+    or limit on the potential increase in electricity costs as a result
+    of this policy. Rather, the <a href="https://psc.wi.gov/" target="_blank">Public
+      Service Commission (PSC)</a> allows utilities to all recover costs
+    associated with meeting the RPS (including those incurred by exceeding
+    the RPS requirement). Therefore, the cost of the RPS is only limited
+    by the same system which regulates pre-RPS electricity costs in
+    Wisconsin. Using the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can act as the PSC of Wisconsin,
+    determining what level of costs will lead to a viable RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Wisconsin enacted Act 9 in 1999; the first state to introduce a
-    RPS without having restructured its electric-utility industry.
+  <p>Wisconsin enacted Act 9 in 1999, becoming the first state to introduce
+    a RPS without having restructured its electric-utility industry.
     Originally the RPS required 2.2% of electricity sold to be from
-    renewables by 2012. In 2006, the goal was increased to 10% by 2015.
-    Providers can petition the Public Service Commission to extend the
-    compliance deadline.</p>
+    renewables by 2012. In 2006, the goal was increased to
+    <a href="http://docs.legis.wi.gov/statutes/statutes/196/378" target="_blank">10%
+    by 2015</a>. Providers can petition the Public Service Commission
+    of Wisconsin (PSC) to extend the compliance deadline. Each utility
+    in the state has an <a href="http://psc.wi.gov/renewables/documents/rpsPercentageRequirements.pdf"
+                           target="_blank">individual trajectory</a>
+    determined by the <a href="http://psc.wi.gov/renewables/rpsCompliance.htm"
+                         target="_blank">PSC</a> based on the utilities
+    ‘renewable energy baseline’.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Photovoltaics, Wind, Biomass, Biodiesel, Hydroelectric, Solar Water Heat,
-  Solar Thermal Electric, Solar Thermal Process Heat, Geothermal Electric,
-  Geothermal Heat Pumps, Landfill Gas, Municipal Solid Waste, Biogas,
-  Anaerobic Digestion, Tidal Energy, CHP/Cogeneration, Fuel Cells using
-  Renewable Fuels
+  Photovoltaics, Wind, Biomass, Biodiesel, Hydroelectric, Solar Water
+  Heat, Solar Thermal Electric, Solar Thermal Process Heat, Geothermal
+  Electric, Geothermal Heat Pumps, Landfill Gas, Municipal Solid Waste,
+  Biogas, Anaerobic Digestion, Tidal Energy, CHP/Cogeneration, Fuel
+  Cells using Renewable Fuels
 {% endblock %}
 {% block state_geo_eligible %}
-  Renewable energy generated outside of Wisconsin is eligible, but only if
-  the utility delivers it to customers in-state.
+  Renewable energy generated outside of Wisconsin is eligible, but only
+  if the utility delivers it to customers in-state.
 {% endblock %}
 {% block state_total_load %}
   100%
@@ -66,11 +67,11 @@
 {% block state_penalty %}
   None
 {% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
-{% endblock %}
 {% block state_references %}
-  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=WI05R&amp;re=0&amp;ee=0">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=WI05R"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://psc.wi.gov/utilityInfo/electric/renewableResource.htm"
+         target="_blank">PSC of Wiscosin’s RPS Program Page</a>—Provides
+    links to statute and reports related to Wisconsin’s RPS</li>
 {% endblock %}

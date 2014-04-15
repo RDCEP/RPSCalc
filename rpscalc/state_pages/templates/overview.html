@@ -1,9 +1,17 @@
 {% extends 'base_state.html' %}
-{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block title %} | {{ pretty_state }}{% endblock %}
 {% block content %}
     {{ super() }}
   <section id="summary" class="clearfix">
     {% block state_summary %}{% endblock %}
+    <p>The state profile below explores the design of this policy,
+      highlighting the factors that influence the success of {{ pretty_state }}’s RPS
+      goals and the tradeoffs inherent to it. Once you’re comfortable with
+      the information on this page, you can evaluate the policy’s expected
+      viability with the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+      Feasibility Calculator</a>. You can also use the calculator to change
+      the policy requirements, trajectory, cost cap, and more, to see how
+      altering {{ pretty_state }}’s policy design affects its success.</p>
   </section>
   <section id="snapshot" class="clearfix">
     <h2>RPS Snapshot</h2>
@@ -19,7 +27,13 @@
     </div>
     <div id="carveouts" class="wide module clearfix">
       <h3>Carve-outs</h3>
-      {% block state_carveouts %}{% endblock %}
+      <p><a href="{{ url_for('glossary.glossary') }}#carveout">Carve-outs</a>
+        can create economic opportunities in the state by introducing new or
+        promising technologies into the market. However, these standards limit
+        the utilities’ ability to substitute between renewable energy sources,
+        potentially increasing the cost of the policy.
+        {% block state_carveouts %}{% endblock %}
+      </p>
     </div>
     <div id="rps_progress_wrap" class="wide module clearfix">
       <h3>RPS Progress</h3>

@@ -903,6 +903,7 @@ var RPSGraph = function() {
       .attr('d', function(d) { return d.invert ? _invert_area(d.data) : _chart_f(d.data); })
       .attr('class', 'chart-line')
       .attr('clip-path', 'url(#graph_clip)')
+      .attr('data-type', function(d) { return d.type ? d.type : null; })
       .style('fill', function(d, i) { return (!_lines || d.invert) ? color(i) : null; })
       .style('stroke', function(d, i) { return (_lines && !d.invert) ? color(i) : null; });
     if (_outlines) {

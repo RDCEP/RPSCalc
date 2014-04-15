@@ -2,73 +2,59 @@
 {% block state_summary %}
   <p>Hawai‘i’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
     Portfolio Standard (RPS)</a> is intended to increase use of renewable
-    resources in the state by establishing the minimum amount of
-    renewable energy that the state’s electricity providers must sell
-    in a given year. This legally-established renewable energy
-    procurement goal gradually increases over time to meet the overall
-    target of 40% renewable power by 2030. The state also established
-    separate Energy Efficiency Portfolio Standards (EEPS) requiring
-    4,300 GWh reduction by 2030, but these are not considered for
-    calculations on this and subsequent pages.</p>
-  <p>The state profile below
-    explores the design of this policy, highlighting the factors that
-    influence the success of Hawaii’s RPS goals and the tradeoffs
-    inherent to it. Once you’re comfortable with the information on this
-    page, you can evaluate the policy’s expected viability with the
-    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
-    Feasibility Calculator</a>. You can also use the calculator to
-    change the policy requirements, trajectory, cost cap, and more, to
-    see how altering Hawai‘i’s policy design affects its success.</p>
+    resources in the state by establishing the minimum amount of renewable
+    energy that the state's electricity providers must sell in a given year.
+    This legally-established renewable energy procurement goal gradually
+    increases over time to meet the overall target of 40% renewable power
+    by 2030. The state also established separate Energy Efficiency
+    Portfolio Standards (EEPS) requiring 4,300 GWh reduction by 2030,
+    but these are not considered for calculations on this and subsequent
+    pages.</p>
 {% endblock %}
 {% block state_overview %}
   <li><b>40%</b> of the state’s retail electric sales from must be from
     renewable sources by <b>2030</b></li>
-  <li>No technology carve-outs</li>
-  <li>No legally defined <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost&nbsp;cap’</a></li>
+  <li>No carve-outs</li>
+  <li>No legally defined cost cap</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p><a href="{{ url_for('glossary.glossary') }}#carveout">Carve-outs</a>
-    can create economic opportunities in the state by introducing new or
-    promising technologies into the market. However, these standards
-    limit the utilities’ ability to substitute between renewable energy
-    sources, potentially increasing the cost of the policy. Hawai‘i does
-    not require any technology carve-outs.</p>
+  Hawai‘i does not require any technology carve-outs.
 {% endblock %}
 {% block state_costcap %}
   <p>Unlike some states, Hawai‘i does not have an explicit
     <a href=”http://rps.obstructures.org/glossary#cost_cap”>‘cost cap’</a>
     or limit on the potential increase in electricity costs as a result
-    of this policy. However, the Public Utilities Commission (PUC) may
-    waive compliance with the RPS program for good cause. A 2009
-    <a href="http://www.capitol.hawaii.gov/session2009/bills/HB1464_CD1_.htm">amendment</a>
-    states that starting in 2013, the RPS is to be evaluated every 5 years
-    for achievability. The PUC may revise standards based on best
-    information available at the time. This process also applies to the
-    EEPS. Using the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
-    Feasibility Calculator</a> you can act as the PUC and define an
-    explicit cost cap, determining what level of costs will lead to a
-    viable RPS.</p>
+    of this policy. However, the Public Utilities Commission (PUC)
+    may waive compliance with the RPS program for good cause. A 2009
+    <a href="http://www.capitol.hawaii.gov/session2009/bills/HB1464_CD1_.htm"
+       target="_blank">amendment</a> states that starting in 2013, the
+    RPS is to be evaluated every 5 years for achievability. The PUC may
+    revise standards based on best information available at the time.
+    This process also applies to the EEPS. Using the
+    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can act as the PUC and define an explicit
+    cost cap, determining what level of costs will lead to a viable RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Hawai‘i is the only state to create a complementary ‘energy efficiency
-    RPS’ called the Energy Efficiency Portfolio Standards (EEPS),
-    calling for a 30% decrease in energy consumption (or 4,300 GWh)
-    in addition to the RPS. The general
-    <a href="http://www.capitol.hawaii.gov/hrscurrent/Vol05_Ch0261-0319/HRS0269/HRS_0269-0092.htm">RPS
-    statute</a> calls for 40% of electricity from renewable energy by
-    2030, the highest RPS goal in the country. The Public Utilities
-    Commission (PUC) can designate specific portions of the goal to each
-    utility, and sometimes may specify a renewable technology to meet
-    the goal. Until 2015, energy efficiency measures will count toward
-    the total RPS requirements; after 2015, 100% of the requirements must
-    be met through renewable electricity.</p>
+  <p>Hawai‘i is the only state to create a complementary ‘energy efficiency RPS’
+    called the Energy Efficiency Portfolio Standards (EEPS), calling for a
+    30% decrease in energy consumption (or 4,300 GWh) in addition to the
+    RPS. The general <a href="http://www.capitol.hawaii.gov/hrscurrent/Vol05_Ch0261-0319/HRS0269/HRS_0269-0092.htm"
+                        target="_blank">RPS statute</a> calls for 40%
+    of electricity from renewable energy by 2030, the highest RPS goal
+    in the country. The Public Utilities Commission (PUC) can designate
+    specific portions of the goal to each utility, and sometimes may
+    specify a renewable technology to meet the goal. Until 2015, energy
+    efficiency measures will count toward the total RPS requirements;
+    after 2015, 100% of the requirements must be met through renewable
+    electricity.</p>
 {% endblock %}
 {% block state_eligible_tech %}
   Wind, solar, falling water, biogas (incl. landfill and sewage-based
-  digester gas), geothermal, tidal and ocean thermal energy
-  conversion, biomass (incl. biomass crops, agricultural and animal
-  residues/wastes, and municipal solid waste and other solid waste),
-  biofuels, hydrogen produced from renewable sources
+  digester gas), geothermal, tidal and ocean thermal energy conversion,
+  biomass (incl. biomass crops, agricultural and animal residues/wastes,
+  and municipal solid waste and other solid waste), biofuels, hydrogen
+  produced from renewable sources
 {% endblock %}
 {% block state_geo_eligible %}
   Only In-State renewable energy can be used
@@ -86,11 +72,13 @@
   By statute, state regulators may impose unspecified penalties for
   non-compliance.
 {% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
-{% endblock %}
 {% block state_references %}
-  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=CO24R&amp;re=1&amp;ee=1">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=HI06R&re=1&ee=1"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://apps1.eere.energy.gov/states/state_home.cfm/state=HI"
+         target="_blank">U.S. Department of Energy Office of Energy Efficiency
+    and Renewable Energy (EERE)—State Profile</a>—Access your state’s
+    EERE page, and find information on renewable resources maps, energy
+    statistics, and news</li>
 {% endblock %}
