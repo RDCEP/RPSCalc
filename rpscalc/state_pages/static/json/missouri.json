@@ -1,28 +1,35 @@
 {
-    "trajectory": [
-        0.02,
-        0.02,
-        0.02,
-        0.05,
-        0.05,
-        0.05,
-        0.05,
-        0.1,
-        0.1,
-        0.1,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15,
-        0.15
-    ],
-    "start_year": 2011,
-    "machine_name": "missouri",
-    "name": "Missouri",
-    "abbr": "MO"
+  "start_year": 2011,
+  "machine_name": "missouri",
+  "name": "Missouri",
+  "trajectory": [
+    0.02,
+    0.02,
+    0.02,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.1,
+    0.1,
+    0.1,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15,
+    0.15
+  ],
+  "abbr": "MO",
+  "price_and_policy": {
+    "policy_retail": 81
+  },
+  "rps_progress": {
+    "progress": 1,
+    "year": 2011
+  }
 }

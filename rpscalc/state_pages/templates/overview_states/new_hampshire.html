@@ -1,0 +1,84 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>New Hampshire’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of renewable
+    resources in the state by establishing the minimum amount of renewable
+    energy that the state’s electricity providers must sell in a given
+    year. This legally-established renewable energy procurement goal gradually
+    increases over time to meet the overall target of 24.8% renewable power
+    by 2025.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><b>24.8%</b> of the state’s energy consumption must be from renewable
+    sources by <b>2025</b>, subject to the cost cap</li>
+  <li>Carve-out for <b>solar</b></li>
+  <li>Implicit ‘cost cap’ defined by compliance payments</li>
+{% endblock %}
+{% block state_carveouts %}
+  New Hampshire requires that, beginning in 2010, 0.04% of the annual RPS
+  requirement be met through new solar sources. The carve-out ramps up to
+  0.3% of the annual requirement in 2014 and thereafter.
+{% endblock %}
+{% block state_costcap %}
+  <p>New Hampshire does not have an explicit cost cap. However, by allowing
+    <a href="{{ url_for('glossary.glossary') }}#acp">alternative compliance
+    payments (ACPs)</a>, New Hampshire sets an effective cap on the premium
+    a utility will be willing to pay for renewable energy. The RPS sets
+    this cap at $55/MWh for Class I (see Legislation section for more
+    details). Like some states, New Hampshire adjusts the cost of an ACP
+    over time according to inflation. If the renewable energy premium
+    exceeds this cap, the utility would prefer to meet the standard by
+    making the lower cost alternative compliance payments.</p>
+{% endblock %}
+{% block state_statute %}
+  <p>New Hampshire’s <a href="http://www.gencourt.state.nh.us/rsa/html/XXXIV/362-F/362-F-mrg.htm"
+                        target="_blank">Electric Renewable Portfolio
+    Standard</a> requires that all electricity providers—excluding
+    municipalities—deliver 24.8% renewable energy by 2025. The requirements
+    are broken up into four Classes, each with specific technologies and
+    individual compliance schedules, and alternative compliance payments.
+    Class I comprises the majority of the RPS at 15% of the annual
+    requirement by 2025. Falling within Class I, 2.6% must come from ‘useful
+    thermal energy’ by 2025. The other three Classes are as follows:
+    0.3% of the annual requirement must be from Class II (new solar) by
+    2014; 8% from Class III (exiting biomass) by 2015; and 1.5% from Class
+    IV (existing hydro) by 2015.</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  <p>(Class I) Wind, Hydrogen (derived from biomass or landfill gas),
+    Solar, Solar-Thermal, Tidal and Wave Energy, Geothermal, Biomass,
+    Biodiesel, Fuel Cells, Anaerobic Digestion</p>
+  <p>(Class II) Solar (New; installed after 2006)</p>
+  <p>(Class III) Biomass and Methane (Existing; installed before 2006,
+    up to 25 MW)</p>
+  <p>(Class IV) Hydroelectric (Existing; installed before 2006, up
+    to 5 MW)</p>
+{% endblock %}
+{% block state_geo_eligible %}
+  RECs must be from sources in, or delivered to, the New England control
+  area; within ISO-New England and New England Power Pool (NEPOOL)
+{% endblock %}
+{% block state_total_load %}
+  98.2%
+{% endblock %}
+{% block state_tech_req %}
+  New Solar Electric—0.3% by 2014
+{% endblock %}
+{% block state_sectors %}
+  All sectors, excluding municipal providers
+{% endblock %}
+{% block state_penalty %}
+  The ACP schedule is Class-specific: Class I—$55/MWh; Class II—$55/MWh;
+  Class III—$31.50; Class IV—$26.50. These are adjusted to the Consumer
+  Price Index annually, and deposited into the state Renewable Energy Fund.
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=NH09R&re=0&ee=0"
+              target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://apps1.eere.energy.gov/states/state_home.cfm/state=NH"
+         target="_blank">U.S. Department of Energy Office of Energy Efficiency
+    and Renewable Energy (EERE)—State Profile</a>—Access your state’s
+    EERE page, and find information on renewable resources maps, energy
+    statistics, and news</li>
+{% endblock %}

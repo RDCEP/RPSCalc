@@ -1,0 +1,83 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>Minnesota’s Renewable Energy Standard (RES)—also known as a
+    <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio
+    Standard (RPS)</a>—is intended to increase use of renewable resources
+    in the state by establishing the minimum amount of renewable energy
+    that the state’s electricity providers must sell in a given year.
+    This legally-established renewable energy procurement goal gradually
+    increases over time to meet the overall target of 31.5% renewable power
+    by 2020 for Xcel Energy (the state’s largest public utility). All other
+    public utilities must produce 26.5% of retail electric sales from
+    renewable sources by 2020.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><b>31.5%</b> of the Xcel Energy’s, and <b>26.5</b> of all other public
+    utilities, retail electric sales from must be from renewable sources by
+    <b>2020</b></li>
+  <li>Carve-outs for <b>wind</b> and <b>solar</b></li>
+  <li>No legally defined cost cap</li>
+{% endblock %}
+{% block state_carveouts %}
+  Minnesota’s RES requires that 1.5% of retail electric sales be produced
+  using solar power by 2020 for all public utilities. Ten percent of this
+  requirement must be met with solar systems with capacities less than
+  20 kW. For Xcel Energy, 24 percentage points of the 30% renewable obligation
+  in 2020 must come from wind energy.
+{% endblock %}
+{% block state_costcap %}
+  <p>Unlike some states, Minnesota does not have an explicit
+    <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost cap’</a>
+    or limit on the potential increase in electricity costs as a result
+    of this policy. Rather, the <a href="http://www.puc.state.mn.us/PUC/index.html"
+                                   target="_blank">Minnesota Public Utilities
+      Commission (PUC)</a> is responsible for managing these costs. The PUC
+    has the right to modify or delay obligations under the RES if, among
+    other reasons, the impact on retail rates is too high. Using the
+    <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    Feasibility Calculator</a> you can act as the PUC, determining what
+    level of costs will lead to a viable RPS.</p>
+{% endblock %}
+{% block state_statute %}
+  <p>In 2001, Minnesota adopted the state’s first renewable energy policy,
+    the Renewable Energy Objective. This suggested that utilities make a
+    ‘good faith effort’ to achieve its goal of 10% renewable energy by 2015.
+    This policy was replaced by the current RES in 2007, mandating the
+    aforementioned levels of renewable energy (or renewable attribute)
+    procurement. RECs are tradable within the Midwest Renewable Energy
+    Tracking System (M-RETS) with the exception of attributes produced by
+    Xcel Energy. This utility is not allowed to trade RECs to other
+    Minnesota utilities until 2021. The state’s solar obligation must be
+    met with RECs associated with the generation of solar energy.</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass,
+  Hydroelectric, Municipal Solid Waste, Hydrogen, Co-Firing, Anaerobic
+  Digestion
+{% endblock %}
+{% block state_geo_eligible %}
+  RECs must be generated in Midwest (M-RETS). Some limits to trading within
+  state (see <a href="#legislation">statute</a>)
+{% endblock %}
+{% block state_total_load %}
+  100%
+{% endblock %}
+{% block state_tech_req %}
+  All public utilities must achieve 1.5% solar energy by 2020. Xcel Energy
+  must also achieve 24% wind energy by 2020.
+{% endblock %}
+{% block state_sectors %}
+  Municipal Utility, Investor-Owned Utility, Rural Electric Cooperative
+{% endblock %}
+{% block state_penalty %}
+  If a utility fails to comply with the RPS, the PUC may impose a fine up
+  to the cost of compliance.
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=MN14R"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://mn.gov/commerce/energy/images/2013RESLegReport.pdf"
+         target="_blank">Minnesota Compliance Report 2013</a>—Review of RPS
+    rules and compliance prepared for the Minnesota Legislature</li>
+{% endblock %}

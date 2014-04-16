@@ -30,5 +30,5 @@ def get_all_data():
 
 if __name__ == '__main__':
     # get_all_gridmix()
-    get_state_gridmix('CT')
-    get_state_retail('CT')
+    get_state_gridmix('NM')
+    get_state_retail('NM')

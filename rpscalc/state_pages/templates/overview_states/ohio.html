@@ -1,44 +1,84 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Ohio's Renewable Portfolio Standard (actually called Alternative Energy Portfolio Standard or AEPS) establishes a minimum amount of renewable energy generation capacity that must be acquired by state electric utilities. Ohio's AEPS also establishes a minimum amount of 'alternative energy' required to be used in the state. This analysis will not consider the 'alternative' portion of the statute. Rather, this page will identify and describe only the features of the AEPS that set a standard for renewable energy.</p>
+  <p>Ohio’s Alternative Energy Portfolio Standard (AEPS)—also known as a
+    <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio
+    Standard (RPS)</a> is intended to increase use of renewable resources
+    in the state by establishing the minimum amount of renewable energy that
+    the state’s electricity providers must sell in a given year. This
+    legally-established renewable energy procurement goal gradually increases
+    over time to meet the overall target of 12.5% renewable power by 2025.
+    The state also established a separate
+    <a href="http://dsireusa.org/incentives/incentive.cfm?Incentive_Code=OH16R&re=1&ee=1"
+       target="_blank">Energy Efficiency Portfolio Standard</a> requiring
+    a 22% reduction in retail electricity sales by the end of 2025, but
+    these are not considered for calculations on this and subsequent pages.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><strong>12.5%</strong> of retail sales by 2025</li>
-  <li>Carve-out for solar energy</li>
-  <li>Cost-cap at 3% of projected cost</li>
+  <li><b>12.5%</b> of retail sales by <b>2025</b>, subject to the cost cap</li>
+  <li>Carve-out for <b>solar</b></li>
+  <li>Explicit cost cap at <b>3%</b> of projected cost</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>N/A</p>
+  <p>Ohio has a minimum annual requirement for solar energy that begins in
+    2009, starting at 0.004% and ramping up to 0.5% by 2024.</p>
 {% endblock %}
 {% block state_costcap %}
-  <p>Utilities will not be meet their annual requirement if doing so can be 'reasonably expected' to raise their costs by 3%</p>
+  <p>Ohio has an explicit
+    <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost cap’</a>
+    at 3% of the cost of procuring the electricity from other sources. If
+    the premium paid for renewable energy by a utility exceeds this amount,
+    the utilities obligation under the AEPS will be reduced to the level
+    of this cost cap (see <a href="http://www.legislature.state.oh.us/bills.cfm?ID=128_SB_232"
+                             target="_blank">S.B. 232 Sec. 4928.64. (C)(3)</a>).
+    Using the RPS Feasibility Calculator you can make adjustments to the
+    cost cap, determining how this impacts the provision of renewable
+    power and the overall viability of the RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>Originally enacted in 2008, Ohio's AEPS sets a standard for both renewable energy and alternative energy. Given the broad definition of 'alternative energy' established by the state, this page only considers the renewable portion of the legislation. This half of the statute requires that 15% of the state's retail electric sales come from renewable sources by 2024. Ohio's AEPS is administered by the Public Utilities Commission of Ohio.</p>
+  <p>Originally enacted in 2008, Ohio’s <a href="http://codes.ohio.gov/orc/4928.64"
+                                           target="_blank">AEPS</a>sets
+    a standard for alternative energy, broadly defined by the legislation
+    as both ‘renewable energy resources’ and ‘advanced energy resources’.
+    This page only considers the renewable energy portion of the
+    legislation. This half of the statute requires that 15% of the state’s
+    retail electric sales come from renewable sources by 2024. Ohio’s
+    AEPS is administered by the Public Utilities Commission of Ohio (PUCO)
+    and applies to all retail electricity providers except municipal
+    and cooperatives.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Solar Photovoltaics (PV), Solar Thermal (to produce electricity), Wind, Geothermal, Biomass, Biologically Derived Methane Gas, Landfill Gas, Non-treated Waste Biomass Products, Solid Waste (except combustion),Fuel Cells, Storage Facilities (limited), and Hydroelectric Facilities (limited)
+  Solar Photovoltaics (PV), Solar Thermal (to produce electricity),
+  Wind, Geothermal, Biomass, Biologically Derived Methane Gas, Landfill
+  Gas, Non-treated Waste Biomass Products, Solid Waste (except combustion),
+  Fuel Cells, Storage Facilities (limited), and Hydroelectric Facilities
+  (limited)
 {% endblock %}
 {% block state_geo_eligible %}
-  50% of Ohio's renewable energy standard must be generated in state, while the other 50% must be deliverable into the state
+  50% of Ohio’s renewable energy standard must be generated in state,
+  while the other 50% must be deliverable into the state
 {% endblock %}
 {% block state_total_load %}
   88.6%
 {% endblock %}
 {% block state_tech_req %}
-  A minimum of 0.5% of retail electric sales must come from solar-energy-resources by 2024
+  Solar-Energy Resources—0.5% of retail electric sales by 2024
 {% endblock %}
 {% block state_sectors %}
   Investor-Owned Utility, Retail Supplier
 {% endblock %}
 {% block state_penalty %}
-  Alternative compliance payments (ACPs) for the renewable portion of the legislation were originally set to $45/MWhr (which can be adjusted annually by the Consumer Price Index). ACPs for the solar portion of the requirement were originally set to $450/MWhr, reduced to $400/MWhr for 2010 and 2011, and will be further reduced by $50/MWhr every two years thereafter. A utility cannot recover the cost of ACPs from its customers.
-{% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;<i>Datasets available for download in .xlsx format<i></i></i></li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;<i>Advanced search tool for comparing RPS program data<i></i></i></li>
+  Alternative compliance payments (ACPs) for the renewable portion of the
+  legislation were originally set to $45/MWh (adjusted annually by the PUCO
+  using the Consumer Price Index), which serves as the minimum allowable
+  ACP. ACPs for the solar portion of the requirement were originally set
+  to $450/MWh, reduced to $400/MWh for 2010 and 2011, and will be further
+  reduced by $50/MWh every two years thereafter, until a $50/MWh minimum
+  in 2024. A utility cannot recover the cost of ACPs from its customers.
 {% endblock %}
 {% block state_references %}
-  <li><a href="http://www.puco.ohio.gov/puco/index.cfm/industry-information/industry-topics/ohioe28099s-renewable-and-advanced-energy-portfolio-standard/">PUCO's Renewable and Advanced Energy Portoflio Website</a>&nbsp;—&nbsp;Links and information on Ohio's AEPS</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<i>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</i></li>
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=OH14R&re=0&ee=0"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://codes.ohio.gov/orc/4928.64" target="_blank">Ohio
+    Revised Statutes 4928.64</a>—Ohio’s AEPS Legislation</li>
 {% endblock %}

@@ -2,11 +2,11 @@
 {% block state_summary %}
   <p>Iowa’s Alternative Energy Law (AEL)—also known as a
     <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio
-    Standard (RPS)</a>—is intended to increase use of renewable resources
+      Standard (RPS)</a>—is intended to increase use of renewable resources
     in the state by establishing the minimum amount of renewable energy
-    that the state’s electricity providers must sell in a given year.
-    This legally-established renewable energy procurement goal is set
-    at an overall target of 105MW of renewable power.</p>
+    that the state’s electricity providers must sell in a given year. This
+    legally-established renewable energy procurement goal is capacity-based,
+    set at an overall target of 105MW of renewable power.</p>
 {% endblock %}
 {% block state_overview %}
   <li><b>150 MW</b> of the state’s retail electric sales from must be
@@ -16,6 +16,10 @@
 {% endblock %}
 {% block state_carveouts %}
   Iowa does not require any technology carve-outs.
+{% endblock %}
+{% block state_progress %}
+  It is important to note that Iowa has already surpassed its 150 MW
+  installed capacity goal.
 {% endblock %}
 {% block state_costcap %}
   <p>Unlike some states, Iowa does not have an explicit
@@ -29,17 +33,17 @@
 {% block state_statute %}
   <p>The Iowa Alternative Energy Law
     (<a href="http://coolice.legis.iowa.gov/Cool-ICE/default.asp?category=billinfo&service=IowaCode&ga=83&input=476.41"
-        target="_blank">§ 476.41</a>) is a capacity-based standard,
-    which requires its investor-owned utilities to own or contract a total
-    of 105 MW of renewable energy. It is split between MidAmerican Energy
-    (55.2 MW, or 52.57% of demand) and Alliant Energy Interstate Power
-    and Light (49.8 MW, or 47.43% of demand). There are no mandated
-    increases, and the target has already been achieved.</p>
+        target="_blank">§ 476.41</a>) is a capacity-based standard, which
+    requires its investor-owned utilities to own or contract a total of
+    105 MW of renewable energy. It is split between MidAmerican Energy
+    (55.2 MW, or 52.57% of demand) and Alliant Energy Interstate Power and
+    Light (49.8 MW, or 47.43% of demand). There are no mandated increases,
+    and the target has already been achieved.</p>
 {% endblock %}
 {% block state_eligible_tech %}
   Solar, Wind, Waste Management, Resource Recovery, Refuse-Derived Fuel,
-  Agricultural Crops or Residues, Woodburning Facilities, or
-  Small Hydropower Facilities
+  Agricultural Crops or Residues, Woodburning Facilities, or Small Hydropower
+  Facilities
 {% endblock %}
 {% block state_geo_eligible %}
   Tradable Renewable Certificates (TRCs) cannot be used for compliance
@@ -58,6 +62,6 @@
 {% endblock %}
 {% block state_references %}
   <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IA01R&re=0&ee=0"
-         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
-    information on RPS and complete legislation</li>
+              target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+  information on RPS and complete legislation</li>
 {% endblock %}

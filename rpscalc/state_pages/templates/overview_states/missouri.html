@@ -1,0 +1,79 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>Missouri’s Renewable Electricity Standard (RES)—also known as a
+    <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio
+    Standard (RPS)</a>—is intended to increase use of renewable resources
+    in the state by establishing the minimum amount of renewable energy
+    that the state’s electricity providers must sell in a given year.
+    This legally-established renewable energy procurement goal gradually
+    increases over time to meet the overall target of 15% renewable power
+    by 2021.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><b>15%</b> of the state’s energy consumption must be from renewable
+    sources by <b>2021</b>, subject to the cost cap</li>
+  <li>Carve-out for <b>solar</b></li>
+  <li>Explicit cost cap at <b>1%</b> of retail rate</li>
+{% endblock %}
+{% block state_carveouts %}
+  Missouri requires 2% of the RPS requirement be met through solar electric
+  power each year, leading up to 0.3% of sales in the target year 2021
+{% endblock %}
+{% block state_costcap %}
+  <p>Missouri has an explicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost
+    cap’</a> to protect its customers the potential increase in electricity
+    costs as a result of this policy. Missouri’s
+    <a href="http://www.house.mo.gov/billtracking/bills131/biltxt/truly/HB0142T.htm">Revised
+    Statute &sect; 393.1030 (Sect. 2(1))</a> specifies that the cost of
+    compliance must not result in an increase in electricity rates of more
+    than 1% annually. If the 1% cap is exceeded, utilities may be excused
+    from their obligations and the annual RPS requirement will be adjusted
+    downward until the restriction is satisfied.</p>
+{% endblock %}
+{% block state_statute %}
+  <p>Missouri’s Renewable Energy Standard (RES) replaced the state’s
+    voluntary renewables goal in 2008. The requirement of 15% of retail
+    electricity sales by 2021 applies only to investor-owned utilities,
+    and remains at 15% in 2021 and thereafter. The RES is overseen by the
+    Public Service Commission (PSC). RECs and solar RECS can be used
+    toward compliance.</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  Solar photovoltaics, solar thermal, wind, small hydropower, biogas
+  from agricultural operations, landfills and wastewater treatment plants,
+  some waste materials; various forms of biomass; fuel cells using hydrogen
+  from renewable resources
+{% endblock %}
+{% block state_geo_eligible %}
+  Renewable Energy Credits (RECs) can count towards compliance with
+  a 3-year lifetime; no geographic limitations, and an incentive multiplier
+  of 1.25 for in-state
+{% endblock %}
+{% block state_total_load %}
+  70%
+{% endblock %}
+{% block state_tech_req %}
+  Solar Electric—2% of the annual requirement
+{% endblock %}
+{% block state_sectors %}
+  Investor-owned utilities
+{% endblock %}
+{% block state_penalty %}
+  200% (or more) REC value, unless excused by PSC for reasons beyond their
+  control, or cost cap is reached. These costs cannot be recovered from
+  ratepayers.
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=MO08R&re=0&ee=0" 
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://www.nrdc.org/energy/renewables/missouri.asp" target="_blank">Natural
+    Resources Defense Council (NRDC) State Profile</a>—Your state has a NRDC
+    renewable energy resources profile; find state resources and learn about
+    the technologies being used</li>
+  <li><a href="http://apps1.eere.energy.gov/states/state_home.cfm/state=MO"
+         target="_blank">U.S. Department of Energy Office of Energy
+    Efficiency and Renewable Energy (EERE)—State Profile</a>—Access your
+    state’s EERE page, and find information on renewable resources maps,
+    energy statistics, and news</li>
+{% endblock %}

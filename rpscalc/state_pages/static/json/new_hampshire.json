@@ -1,7 +1,14 @@
 {
-    "trajectory": [],
-    "start_year": 2000,
-    "machine_name": "new_hampshire",
-    "abbr": "NH",
-    "name": "New Hampshire"
+  "start_year": 2000,
+  "machine_name": "new_hampshire",
+  "name": "New Hampshire",
+  "trajectory": [],
+  "abbr": "NH",
+  "price_and_policy": {
+    "policy_retail": 144
+  },
+  "rps_progress": {
+    "progress": 0.41,
+    "year": 2011
+  }
 }
