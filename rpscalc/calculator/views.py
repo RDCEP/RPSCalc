@@ -6,6 +6,7 @@ Calculator views for RPS Calculator.
 
 from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, abort
+from rpscalc.constants import RPS_STATES
 
 
 mod = Blueprint('calculator', __name__, url_prefix='/calculator',
@@ -73,6 +74,7 @@ def pricing(state):
     return render_template(
         'pricing_states/{}.html'.format(state),
         state=session['state'] or state,
+        pretty_state=[s['names'][1] for s in RPS_STATES.values() if s['names'][0] == state][0],
     )
 
 @mod.route('/<state>/cost')
