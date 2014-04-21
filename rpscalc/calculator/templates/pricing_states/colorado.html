@@ -1,6 +1,14 @@
 {% extends 'pricing.html' %}
 {% block state_specific %}
-  Colorado protects its residents by limiting the rate increase to no
-  more than 2% of the customer's bill annually, and the RPS requirements
-  must be adjusted accordingly to reflect that cap.
+  {{ pretty_state }} protects its residents by limiting the rate increase to no
+  more than a specified percentage over of the average customer’s bill.
+  The RPS can be adjusted and/or frozen by the PUC if the cost of the
+  policy exceeds the cap.
+{% endblock %}
+{% block state_policy %}
+  <input type="hidden" id="policy_costcap_type" name="policy_costcap_type" value="retail">
+  <div class="clearfix">
+    <label for="policy_costcap">Cost cap (%)</label>
+    <input type="text" id="policy_costcap" name="policy_costcap" pattern="[0-9]*\.*[0-9]+">
+  </div>
 {% endblock %}
