@@ -1,10 +1,7 @@
 {
-    "start_year": 2000,
-    "machine_name": "alabama",
-    "name": "Alabama",
-    "trajectory": [],
-    "abbr": "AL",
-    "policy_and_price": {
-        "policy_retail": 96
-    }
+  "start_year": 2000,
+  "machine_name": "alabama",
+  "name": "Alabama",
+  "trajectory": [],
+  "abbr": "AL"
 }

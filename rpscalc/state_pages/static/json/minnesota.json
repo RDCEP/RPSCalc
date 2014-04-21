@@ -27,7 +27,8 @@
   ],
   "abbr": "MN",
   "price_and_policy": {
-    "policy_retail": 93
+    "policy_retail": 93,
+    "policy_captype": "none"
   },
   "rps_progress": {
     "progress": 1,

@@ -17,11 +17,11 @@
       Options.data.retail_price = _data.price_and_policy.policy_retail;
       d3.selectAll('input')
         .property('value', function() {
-          var input = d3.select(this),
-            name = input.attr('name'),
-            type = input.attr('type');
+          var t = d3.select(this),
+            name = t.attr('name'),
+            type = t.attr('type');
           if (type === 'checkbox') {
-            input.property('checked', function() {
+            t.property('checked', function() {
               var val = session_pp[name] ? session_pp[name] : state_pp[name] ? state_pp[name] : default_pp[name];
               Options.data.price_and_policy[name] = val;
               return val;
@@ -30,13 +30,8 @@
           } else {
             var val = (session_pp[name]) ? session_pp[name] : (state_pp[name]) ? state_pp[name] : default_pp[name];
             Options.data.price_and_policy[name] = val;
-            if (name == 'cost_cap') {
-              //TODO: set unit (% or $)
-
-            }
             return val;
           }
-
         })
         .on('change', function() {
           var input = d3.select(this),

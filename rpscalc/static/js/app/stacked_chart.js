@@ -619,6 +619,7 @@ var RPSGraph = function() {
       return this;
     }
     tool_tip = d3.select('.chart-wrap').append('div').attr('class', 'tool_tip');
+    console.log(graph_data.data);
     segment_width = _x(graph_data.data[0].data[1].x) - _x(graph_data.data[0].data[0].x);
     handles = handle_layer.selectAll('.segment')
       .data(graph_data.nested)

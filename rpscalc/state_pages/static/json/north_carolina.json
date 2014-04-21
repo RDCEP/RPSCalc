@@ -85,6 +85,7 @@
     "year": 2011
   },
   "price_and_policy": {
-    "policy_retail": 92
+    "policy_retail": 92,
+    "policy_captype": "none"
   }
 }

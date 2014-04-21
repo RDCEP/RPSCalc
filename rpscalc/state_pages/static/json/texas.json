@@ -36,10 +36,9 @@
     "progress": 1,
     "year": 2010
   },
-  "policy_and_price": {
-    "policy_retail": 87
-  },
   "price_and_policy": {
-    "policy_retail": 87
+    "policy_retail": 87,
+    "policy_captype": "single-acp",
+    "policy_acp": 50
   }
 }

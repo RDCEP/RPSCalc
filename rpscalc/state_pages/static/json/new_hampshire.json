@@ -5,7 +5,8 @@
   "trajectory": [],
   "abbr": "NH",
   "price_and_policy": {
-    "policy_retail": 144
+    "policy_retail": 144,
+    "policy_captype": "none"
   },
   "rps_progress": {
     "progress": 0.41,

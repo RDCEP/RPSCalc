@@ -16,7 +16,6 @@
     pp = Options.data.price_and_policy,
     pp_data = [
       {name: 'Policy', inputs: [
-        {name: 'Cost cap', 'data-type': 'policy_costcap', unit: '%'},
         {name: 'PTC', 'data-type': 'policy_ptc'}
       ]},
       {name: 'Financing', inputs: [
@@ -87,6 +86,18 @@
       ) / (8765 * pp.solar_capacity) * decrease - pp.pricing_wholesale;
     },
 
+    get_cap = function(captype, year, i) {
+      if (captype == 'retail') {
+        return (pp.policy_costcap * Math.pow(
+          (100 + +pp.pricing_annualgrowth) / 100, year - 2013)
+          ) / Options.data.trajectory.data[i].y * Options.data.retail_price;
+      } else if (captype == 'single-acp') {
+        return pp.policy_acp;
+      } else {
+        return false;
+      }
+    },
+
     get_cap_and_rec = function() {
       var _rec = {type: 'REC', data: []},
         _cap = {type: 'Cost Cap', data: [], invert: true},
@@ -100,20 +111,42 @@
           other_rec = (100 - Options.data.solar.data[i].y - d.y) / 100 * wind * .65,
           year = d.x.getFullYear(),
           total_rec = wind_rec + solar_rec + other_rec,
-          cost_cap = (pp.policy_costcap * Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013)) / Options.data.trajectory.data[i].y * Options.data.retail_price;
+//          cost_cap = (pp.policy_costcap * Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013)) / Options.data.trajectory.data[i].y * Options.data.retail_price;
+          cost_cap = get_cap(pp.policy_captype, year, i);
         _max_y = year >= 2013 ? Math.max(_max_y, total_rec, cost_cap) : _max_y;
-        _cap.data[i] = {
-          x: new Date(d.x),
-          y0: 0,
-          y: year >= 2013 ? cost_cap : 0};
+        if (cost_cap) {
+          _cap.data[i] = {
+            x: new Date(d.x),
+            y0: 0,
+            y: year >= 2013 ? cost_cap : 0};
+        }
         _rec.data[i] = {
           x: new Date(d.x),
           y0: 0,
           y: total_rec };
       });
-      return [_cap, _rec];
+      return _cap.data.length > 0 ? [_cap, _rec] : [_rec];
     };
 
+  if (pp.policy_captype == "retail") {
+    pp_data[0].inputs.push({
+      name: "Cost cap",
+      "data-type": "policy_costcap",
+      unit: "%"
+    });
+  } else if (pp.policy_captype == "single-acp") {
+    pp_data[0].inputs.push({
+      name: "ACP",
+      "data-type": "policy_acp",
+      unit: "$"
+    });
+  } else if (pp.policy_captype == "retail-dollar") {
+    pp_data[0].inputs.push({
+      name: "Cost cap",
+      "data-type": "policy_costcapdollar",
+      unit: "$"
+    });
+  }
   var cost_graph = new RPSGraph(),
     cap_rec = get_cap_and_rec();
 
@@ -224,14 +257,20 @@
     .y(d3.scale.linear())
     .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, Math.ceil(_max_y * 1.25)])
     .format_x(function(x) { return x.getFullYear(); })
-    .format_y(function(y) { return '$'+d3.format('.2f')(y); })
-    .data(cap_rec)
-    .stacked(false)
+    .format_y(function(y) { return '$'+d3.format('.2f')(y); });
+
+  if (cap_rec.length > 1) {
+    cost_graph.data(cap_rec)
+      .colors([d3.rgb(213,94,0), d3.rgb(86,180,233)])
+      .intersect(cap_rec[0], cap_rec[1], d3.rgb(213,94,0));
+  } else {
+    cost_graph.data(cap_rec)
+      .colors([d3.rgb(86,180,233)]);
+  }
+  cost_graph.stacked(false)
     .hoverable(true)
-    .colors([d3.rgb(213,94,0), d3.rgb(86,180,233)])
     .h_grid(true)
     .legend(true)
     .outlines(false)
-    .intersect(cap_rec[0], cap_rec[1], d3.rgb(213,94,0))
     .draw();
 })();

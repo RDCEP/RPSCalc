@@ -26,7 +26,11 @@
   ],
   "abbr": "MO",
   "price_and_policy": {
-    "policy_retail": 81
+    "wind_capacity": 0.4,
+    "solar_capacity": 0.15,
+    "policy_retail": 81,
+    "policy_captype": "retail",
+    "policy_costcap": 1
   },
   "rps_progress": {
     "progress": 1,

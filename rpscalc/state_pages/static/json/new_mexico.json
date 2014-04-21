@@ -1,40 +1,41 @@
 {
-    "start_year": 2006,
-    "machine_name": "new_mexico",
-    "name": "New Mexico",
-    "trajectory": [
-        0.05,
-        0.06,
-        0.06,
-        0.06,
-        0.06,
-        0.05,
-        0.05,
-        0.05,
-        0.05,
-        0.07,
-        0.07,
-        0.07,
-        0.07,
-        0.07,
-        0.09,
-        0.09,
-        0.09,
-        0.09,
-        0.09,
-        0.09,
-        0.09,
-        0.09,
-        0.09,
-        0.09,
-        0.09
-    ],
-    "abbr": "NM",
-    "rps_progress": {
-        "progress": 0.84,
-        "year": 2011
-    },
-    "price_and_policy": {
-        "policy_retail": 89
-    }
+  "start_year": 2006,
+  "machine_name": "new_mexico",
+  "name": "New Mexico",
+  "trajectory": [
+    0.05,
+    0.06,
+    0.06,
+    0.06,
+    0.06,
+    0.05,
+    0.05,
+    0.05,
+    0.05,
+    0.07,
+    0.07,
+    0.07,
+    0.07,
+    0.07,
+    0.09,
+    0.09,
+    0.09,
+    0.09,
+    0.09,
+    0.09,
+    0.09,
+    0.09,
+    0.09,
+    0.09,
+    0.09
+  ],
+  "abbr": "NM",
+  "rps_progress": {
+    "progress": 0.84,
+    "year": 2011
+  },
+  "price_and_policy": {
+    "policy_retail": 89,
+    "policy_captype": "none"
+  }
 }

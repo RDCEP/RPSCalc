@@ -37,6 +37,8 @@
   "price_and_policy": {
     "wind_capacity": 0.4,
     "solar_capacity": 0.15,
-    "policy_retail": 151
+    "policy_retail": 151,
+    "policy_captype": "single-acp",
+    "policy_acp": 63.80
   }
 }
