@@ -3,14 +3,20 @@
   { "id": "acp",
     "term": "Alternative compliance payment",
     "def": [
-      "RPS policies can incentivize compliance (alternative compliance payments—ACP) or penalize for noncompliance through fines; ACP requires suppliers to pay a predetermined amount per kWh if they fall short in meeting RPS, however, this system allows load-serving entities to still claim they are in compliance rather than be penalized for noncompliance; ACP funds typically are used to support new renewable energy development."
+      "RPS policies can incentivize compliance (alternative compliance payments--ACP) or penalize for noncompliance through fines; ACP requires suppliers to pay a predetermined amount per kWh if they fall short in meeting RPS, however, this system allows load-serving entities to still claim they are in compliance rather than be penalized for noncompliance; ACP funds typically are used to support new renewable energy development"
     ]
   },
   { "id": "amortization",
     "term": "Amortization rate",
     "def": [
-      "Amortization is the process of repaying a debt over time in regular installments.",
-      "The amortization factor accounts for the cost of financing upfront expenses and is set by the interest rate and loan period. The amortization rate used here is the percentage of the loan amount (install cost) that must be paid annually.  We assume here that capital expenditures on wind installations are financed by a twenty-year loan at an annual interest rate of ~6%, making the amortization rate 9%. (For details see Appendix A of RPS Study)."
+      "Amortization is the process of repaying a debt over time in regular installments. The amortization factor accounts for the cost of financing upfront expenses and is set by the interest rate and loan period.",
+      "The amortization rate used here is the percentage of the loan amount (install cost) that must be paid annually. We assume here that capital expenditures on wind installations are financed by a twenty-year loan at an annual interest rate of ~6%, making the amortization rate 9%. (for details see Appendix A of RPS Study)."
+    ]
+  },
+  { "id": "annual_growth",
+    "term": "Annual growth",
+    "def": [
+      "The annual growth percentage is an assumption of future retail sale trends; the default value is a 1% growth rate per year, consistent with EIA's expectations. (Annual Energy Outlook 2011 with Projections to 2035, U.S. Energy Information Administration (http://www.eia.gov/forecasts/aeo/) (2011))"
     ]
   },
   { "id": "capacity_factor",
