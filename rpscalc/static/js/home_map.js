@@ -30,13 +30,17 @@ var pop_ups = d3.select('#map')
   .attr({id: 'state-options'});
 
 d3.json('/static/js/maps/topojson/us-named.json', function(error, us) {
-  svg.insert("path", ".graticule")
+
+  svg.insert('path', '.graticule')
       .datum(topojson.feature(us, us.objects.land))
-      .attr("class", "land")
-      .attr("d", path);
+      .attr('class', 'land')
+      .attr('d', path);
 
   var us_states = svg.selectAll('path', '.state-boundary')
-    .data(topojson.feature(us, us.objects.states).features)
+    .data(topojson.feature(us, us.objects.states).features
+      .sort(function(d) {
+        return states_w_rps.indexOf(d.properties.name) > -1 ? 1 : -1;
+      }))
     .enter()
     .append('a')
     .attr('xlink:href', function(d) {
