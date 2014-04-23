@@ -3,6 +3,56 @@
 {% block headcss %}
   {{ super() }}
   <link rel=stylesheet href={{ url_for('static', filename='css/pinwheel.css') }} media=all>
+  <style>
+  #trajectories_wrap {
+    width:450px;
+    height:470px;
+    float:left;
+    position:relative;
+  }
+  #map_wrap {
+    width:470px;
+    height:470px;
+    float:left;
+    margin-right:14px;
+    padding: 10px 0 30px;
+  }
+  #map {
+    width:468px;
+    height:428px;
+    float:left;
+    margin-right:14px;
+    border:1px solid #ccc;
+    background-color:white;
+  }
+  .chart-line {
+    fill: none;
+    stroke: rgb(86,180,233)!important;
+    stroke-width: 3;
+    stroke-linecap: round;
+  }
+  .chart-line.active {
+    stroke: rgb(213,94,0)!important;
+    stroke-width: 5;
+  }
+  .chart-line.persist1 {
+    stroke: rgb(213,94,0)!important;
+    stroke-width: 5;
+  }
+  .chart-line.persist2 {
+    stroke: rgb(230,159,0)!important;
+    stroke-width: 5;
+  }
+  .state-boundary.persist1 {
+    fill: rgb(213,94,0)!important;
+  }
+  .state-boundary.persist2 {
+    fill: rgb(230,159,0)!important;
+  }
+  .state-boundary.persist1,.state-boundary.persist2 {
+    stroke-width: 2;
+  }
+  </style>
 {% endblock %}
 {% block left_nav %}
   {% if state %}
@@ -37,7 +87,7 @@
       a state to its neighbors through the colors in the chart and the
       descriptions.</p>
   </section>
-  <article id=graph-wrap>
+  <article id=graph-wrap class=clearfix>
     <div id=graph>
     </div>
     <div id=legend>
@@ -54,8 +104,41 @@
       </ul>
     </div>
   </article>
+
+  <div style="position:absolute">
+    <section style="margin-top:5em;border:none">
+      <h2>Compare State Trajectories</h2>
+      <p>RPS policies often differ in their trajectories, or in how quickly
+        they ‘ramp-up’ alternative energy usage toward the final goal.
+        Click your state on the map to highlight its trajectory, then choose
+        up to [#] other states to visually compare on the graph.</p>
+    </section>
+    <div class=clearfix style="margin-top:3em;">
+      <div id="map_wrap">
+        <div id=map></div>
+      </div>
+      <div id=trajectories_wrap>
+        <div id=trajectories style="position:absolute;left:30px;"></div>
+      </div>
+    </div>
+    <section style="clear: both;border:none;">
+      <p>(Once you have familiarized yourself with RPS, visit our RPS
+        Feasibility Calculator web tool and try creating a successful policy of
+        your own.) Depends on how we want to highlight the calculator on this
+        page. You can directly access both the RPS Feasibility Calculator and
+        comparison tools from the left sidebar at any time. Please send all
+        questions and comments to
+        <a href="mailto:info-RDCEP@ci.uchicago.edu">info-RDCEP@ci.uchicago.edu</a>,
+        your feedback is welcome!</p>
+    </section>
+  </div>
+
 {% endblock %}
 {% block bodyjs %}
 {{ super() }}
 <script src={{ url_for('state_comparison.static', filename='js/pinwheel.js') }}></script>
+
+  <script src="{{ url_for('static', filename='js/vendor/d3.geo.projection.v0.min.js') }}?2"></script>
+<script src="{{ url_for('static', filename='js/vendor/topojson.v1.min.js') }}?2"></script>
+<script src={{ url_for('state_comparison.static', filename='js/trajectory_comparison.js') }}></script>
 {% endblock %}
