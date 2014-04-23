@@ -2,7 +2,7 @@
 
   //FIXME: This crap is in 2 different JS files. Either bundle it or do it with python
   var states_w_rps = ['Arizona', 'California', 'Hawaii', 'Illinois',
-    'Iowa', 'Kansas', 'Maryland', 'Michigan', 'Maine', 'Montana',
+    'Kansas', 'Maryland', 'Michigan', 'Maine', 'Montana',
     'Nevada', 'New Jersey', 'North Carolina', 'Ohio', 'Oregon',
     'Rhode Island', 'Washington', 'Wisconsin'];
 
