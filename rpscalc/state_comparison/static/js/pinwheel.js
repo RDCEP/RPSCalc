@@ -128,21 +128,44 @@ function Pinwheel() {
 
   function draw_default_legend() {
     var
+      slice = d3.select('.state-slice[data-state='+Options.state_abbr+']'),
       legend_items = d3.selectAll('.legend li');
-    d3.select('h2.state').html('Legend');
+    d3.select('h2.state').html(slice.attr('data-longname'));
+    d3.selectAll('.legend-text').remove();
     legend_items.each(function(d, i) {
       var legend_item = d3.select(this);
       legend_item.append('p')
         .html(function() {
-          var segment = legend_item.attr('data-segment');
-          legend_item.select('.dot').style('background-color', get_color(i,1,1));
-          return '<b>'+default_legend[i]['name']+':</b> '+(default_legend[i]['values']);
+          var segment = slice.select('[data-segment='+legend_item.attr('data-segment')+']'),
+            _i = segment.attr('data-index'),
+            _n = segment.attr('data-segment'),
+            _v = segment.attr('data-value'),
+            _l = segment.attr('data-legend')
+          ;
+          legend_item.select('.dot').style('background-color', segment.attr('fill'));
+          return '<b>'+legend[_n]['name']+':</b> '+(_l || (legend[_n]['values'][_v] || 'N/A'));
         })
         .attr('class', 'legend-text')
       ;
       d3.select('#legend').style('display', 'block');
     });
-//    d3.selectAll('.state[data-state='+slice.attr('data-state')+']').classed('active', true);
+
+//    var
+//      legend_items = d3.selectAll('.legend li');
+//    d3.select('h2.state').html('Legend');
+//    legend_items.each(function(d, i) {
+//      var legend_item = d3.select(this);
+//      legend_item.append('p')
+//        .html(function() {
+//          var segment = legend_item.attr('data-segment');
+//          legend_item.select('.dot').style('background-color', get_color(i,1,1));
+//          return '<b>'+default_legend[i]['name']+':</b> '+(default_legend[i]['values']);
+//        })
+//        .attr('class', 'legend-text')
+//      ;
+//      d3.select('#legend').style('display', 'block');
+//    });
+
   }
   /*
    End variables

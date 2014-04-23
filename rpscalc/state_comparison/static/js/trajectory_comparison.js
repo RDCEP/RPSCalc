@@ -1,5 +1,6 @@
 (function() {
 
+  //FIXME: This crap is in 2 different JS files. Either bundle it or do it with python
   var states_w_rps = ['Arizona', 'California', 'Hawaii', 'Illinois',
     'Iowa', 'Kansas', 'Maryland', 'Michigan', 'Maine', 'Montana',
     'Nevada', 'New Jersey', 'North Carolina', 'Ohio', 'Oregon',
@@ -45,8 +46,14 @@
         .attr('class', 'land')
         .attr('d', path);
 
+      console.log(1, topojson.feature(us, us.objects.states).features);
+
       var us_states = state_map.selectAll('path', '.state-boundary')
-        .data(topojson.feature(us, us.objects.states).features)
+        .data(topojson.feature(us, us.objects.states).features
+          .sort(function(d) {
+            return states_w_rps.indexOf(d.properties.name) > -1 ? 1 : -1;
+          })
+        )
         .enter()
         .append('a')
         .attr('xlink:href', function(d) {
@@ -78,14 +85,16 @@
             .classed('active', false);
         })
         .on('click', function(d) {
-          var t = d3.select(this),
-            cl = d3.select('.chart-line[data-type="'+d.properties.code+'"]'),
-            p1 = d3.selectAll('.state-boundary.persist1')[0].length,
-            p2 = d3.selectAll('.state-boundary.persist2')[0].length;
-          t.classed('persist2', !t.classed('persist1') && !!p1 && !p2);
-          cl.classed('persist2', !t.classed('persist1') && !!p1 && !p2);
-          t.classed('persist1', !p2 && !p1);
-          cl.classed('persist1', !p2 && !p1);
+          if (states_w_rps.indexOf(d.properties.name) > -1) {
+            var t = d3.select(this),
+              cl = d3.select('.chart-line[data-type="'+d.properties.code+'"]'),
+              p1 = d3.selectAll('.state-boundary.persist1')[0].length,
+              p2 = d3.selectAll('.state-boundary.persist2')[0].length;
+            t.classed('persist2', !t.classed('persist1') && !!p1 && !p2);
+            cl.classed('persist2', !t.classed('persist1') && !!p1 && !p2);
+            t.classed('persist1', !p2 && !p1);
+            cl.classed('persist1', !p2 && !p1);
+          }
         })
         .classed('rps', function(d) {
           return states_w_rps.indexOf(d.properties.name) > -1;
