@@ -93,9 +93,18 @@
           ) / Options.data.trajectory.data[i].y * Options.data.retail_price;
       } else if (captype == 'single-acp') {
         return pp.policy_acp;
-      } else {
-        return false;
+      } else if (captype == 'retail-dollar') {
+        var volume;
+        if (Options.data.state == 'north_carolina') {
+          volume = 1.077 * 12;
+        } else if (Options.data.state == 'michigan') {
+          volume = .676;
+        }
+        return (pp.policy_costcap / volume * Math.pow(
+          (100 + +pp.pricing_annualgrowth) / 100, year - 2013)
+          ) / (Options.data.trajectory.data[i].y / 100);
       }
+      return false
     },
 
     get_cap_and_rec = function() {
@@ -143,7 +152,7 @@
   } else if (pp.policy_captype == "retail-dollar") {
     pp_data[0].inputs.push({
       name: "Cost cap",
-      "data-type": "policy_costcapdollar",
+      "data-type": "policy_costcap",
       unit: "$"
     });
   }

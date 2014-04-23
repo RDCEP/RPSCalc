@@ -2,5 +2,9 @@
 {% block state_specific %}
 {% endblock %}
 {% block state_policy %}
-  <input type="hidden" id="policy_captype" name="policy_captype" value="none">
+  <input type="hidden" id="policy_captype" name="policy_captype" value="retail-dollar">
+  <div class="clearfix">
+    <label for="policy_costcap">Cost cap ($ / monthly bill)</label>
+    <input type="text" id="policy_costcap" name="policy_costcap" pattern="[0-9]+\.*[0-9]\*">
+  </div>
 {% endblock %}

@@ -86,6 +86,7 @@
   },
   "price_and_policy": {
     "policy_retail": 92,
-    "policy_captype": "none"
+    "policy_captype": "retail-dollar",
+    "policy_costcap": 12
   }
 }
