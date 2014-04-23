@@ -1,5 +1,9 @@
 {% extends 'pricing.html' %}
 {% block state_specific %}
+  Michigan has an explicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost cap</a>,
+  which seeks to protect its residents from electricity rate increases by
+  limiting the cost of the policy to a specified dollar value over the
+  average customer's bill.
 {% endblock %}
 {% block state_policy %}
   <input type="hidden" id="policy_captype" name="policy_captype" value="retail-dollar">

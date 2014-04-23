@@ -1,5 +1,19 @@
 {% extends 'pricing.html' %}
 {% block state_specific %}
+  New Jersey allows recoverable <a href="{{ url_for('glossary.glossary') }}#acp">alternative
+  compliance payments (ACPs)</a>, which sets an effective ceiling on
+  the premium a utility will be willing to pay for renewable energy.
+  If the renewable energy premium exceeds this ceiling, the utility would
+  prefer to meet the standard by making the lower cost alternative
+  compliance payments.</p><p>The state also includes a special ACP that
+  applies only to state’s solar carve-out. If the cost of meeting this
+  carve-out is higher than the cost of a solar ACP, we assume utilities
+  will choose the cost-minimizing option and pay the ACP, thus freezing
+  the RPS carve out in that period, but not the general RPS. Similarly,
+  if the cost of meeting the general RPS, but not the carve-out specifically,
+  exceeds the ACP, we assume utilities will pay the ACP for all non-carve
+  out technologies, but continue to comply with the carve out as long as
+  it remains below the carve out ACP.
 {% endblock %}
 {% block state_policy %}
   <input type="hidden" id="policy_captype" name="policy_captype" value="none">

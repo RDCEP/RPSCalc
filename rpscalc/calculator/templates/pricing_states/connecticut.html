@@ -1,11 +1,13 @@
 {% extends 'pricing.html' %}
 {% block state_specific %}
-  {{ pretty_state }} does not have an explicit <a href="{{ 'glossary.glossary' }}#cost_cap">cost
-  cap</a>. However, by allowing a recoverable <a href="{{ 'glossary.glossary' }}#acp">alternative
-  compliance payments (ACPs)</a>, {{ pretty_state }} sets an effective cap
-  on the premium a utility will be willing to pay for renewable energy. If
-  the renewable energy premium exceeds this cap, the utility would prefer to
-  meet the standard by making the lower cost alternative compliance payments.
+  Connecticut does not have an explicit
+  <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost cap</a>.
+  However, by allowing a recoverable
+  <a href="{{ url_for('glossary.glossary') }}#acp">alternative compliance
+  payments (ACPs)</a>, Connecticut sets an effective cap on the premium a
+  utility will be willing to pay for renewable energy. If the renewable
+  energy premium exceeds this cap, the utility would prefer to meet the
+  standard by making the lower cost alternative compliance payments.
 {% endblock %}
 {% block state_policy %}
   <input type="hidden" id="policy_captype" name="policy_captype" value="single-acp">

@@ -1,9 +1,10 @@
 {% extends 'pricing.html' %}
 {% block state_specific %}
-  {{ pretty_state }} protects its residents by limiting the rate increase to no
-  more than a specified percentage over of the average customer’s bill.
-  The RPS can be adjusted and/or frozen by the PUC if the cost of the
-  policy exceeds the cap.
+  Missouri has an explicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost cap</a>,
+  which seeks to protect its residents from electricity rate increases
+  by limiting the cost of the policy to a specified percentage over of
+  the average customer’s bill. The RPS can be adjusted and/or frozen by
+  the PUC if the cost of the policy exceeds the cap.
 {% endblock %}
 {% block state_policy %}
   <input type="hidden" id="policy_captype" name="policy_captype" value="retail">

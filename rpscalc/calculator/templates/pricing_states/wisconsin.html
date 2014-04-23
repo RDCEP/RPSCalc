@@ -1,5 +1,6 @@
 {% extends 'pricing.html' %}
 {% block state_specific %}
+  Wisconsin does not have an explicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost cap</a>.
 {% endblock %}
 {% block state_policy %}
   <input type="hidden" id="policy_captype" name="policy_captype" value="none">

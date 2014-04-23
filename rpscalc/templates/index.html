@@ -43,15 +43,15 @@
 {% endblock %}
   <section>
     <h2>RPS overview &amp; calculator</h2>
-    <p>Welcome to RDCEP’s renewable portfolio standard (RPS) portal!
-      Twenty-nine states plus Washington D.C. have enacted an RPS into
-      law, as represented by the map below. Using the information and
-      tools presented on this site, you can learn what an RPS is and how
-      it is implemented in your state. Each policy is a little bit different:
-      click on a state on the map to learn more about its particular policy.
-      Once you are familiar with your state’s policy, visit the RPS
-      Feasibility Calculator to see how the specifics of your state’s policy
-      can affect its success.</p>
+    <p>Welcome to RDCEP’s <a href="{{ url_for('glossary.glossary') }}#rps">renewable
+      portfolio standard (RPS)</a> portal! Twenty-nine states plus Washington
+      D.C. have enacted an RPS into law, as represented by the map below.
+      Using the information and tools presented on this site, you can learn
+      what an RPS is and how it is implemented in your state. Each policy is
+      a little bit different: click on a state on the map to learn more about
+      its particular policy. Once you are familiar with your state’s policy,
+      visit the RPS Feasibility Calculator to see how the specifics of your
+      state’s policy can affect its success.</p>
   </section>
   <div id="map"></div>
 {% endblock %}
