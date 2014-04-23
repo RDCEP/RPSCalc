@@ -223,6 +223,8 @@ input
       color: #cccccc
     &[href*=calculator]
       font-weight: normal
+  .active [href*=calculator]
+    font-weight: bold
 #menu_state_abbr
   position: absolute
   right: 0
@@ -267,10 +269,10 @@ input
   position: relative
   left: -25px
   margin-top: 1em!important
-  font-weight: bold
+
   a
     color: $sky-blue!important
-    font-weight: bold
+    font-weight: bold!important
     &:hover
       color: $blue!important
 //CONTENT
