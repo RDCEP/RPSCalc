@@ -16,14 +16,20 @@
   { "id": "annual_growth",
     "term": "Annual growth",
     "def": [
-      "The annual growth percentage is an assumption of future retail sale trends; the default value is a 1% growth rate per year, consistent with EIA's expectations. (Annual Energy Outlook 2011 with Projections to 2035, U.S. Energy Information Administration (http://www.eia.gov/forecasts/aeo/) (2011))"
+      "The annual growth percentage is an assumption of future retail sale trends; the default value is a 1% growth rate per year, consistent with EIA's expectations. (<a href=\"http://www.eia.gov/forecasts/aeo/\">Annual Energy Outlook 2011 with Projections to 2035, U.S. Energy Information Administration (2011)</a>)"
+    ]
+  },
+  { "id": "biomass",
+    "term": "Biomass",
+    "def": [
+      "Biomass is biological material most often derived from wood, plant-based materials, or even solid waste, which is burned as an energy source. Biomass can either be used directly via combustion to produce heat, or indirectly after converting it to various forms of biofuel. At present, wood is the most common biomass energy source."
     ]
   },
   { "id": "capacity_factor",
     "term": "Capacity factor",
     "def": [
       "The capacity factor is the actual electricity output of a generator over a period of time divided by the output if the generator were always operating at full capacity. Capacity factors of existing facilities in the United States range from 20% to nearly 50%. The installed generation capacity costs are independent of site quality. To determine the cost per actual electricity produced, they must be multiplied by a capacity factor.",
-      "For context, the capacity factors for existing wind power facilities in the United States range from nearly 20% to nearly 50%. Excellent sites for wind power, like many locations in Iowa, have capacity factors of around 40%. A ‘good’ wind site, like one found in Illinois, may have a capacity factor of 33%. Solar power capacity factors in the United States range from 14% in Seattle to 24% in Phoenix (for fixed-tilt panels). Typically average capacity factor for the United States is 18–19%."
+      "For context, the capacity factors for existing wind power facilities in the United States range from nearly 20% to nearly 50%. Excellent sites for wind power, like many locations in Iowa, have capacity factors of around 40%. A ‘good’ wind site, like one found in Illinois, may have a capacity factor of 33%. Solar power capacity factors in the United States range from 14% in Seattle to 24% in Phoenix (for fixed-tilt panels). Typically average capacity factor for the United States is 18-19%."
     ]
   },
   { "id": "carbon_intensity",
@@ -33,15 +39,21 @@
     ]
   },
   { "id": "carveout",
-    "term": "Carveout",
+    "term": "Carve-out",
     "def": [
-      "TKTK"
+      "Carve-outs are technology requirements defining a certain percentage of the annual RPS that must be met through specific renewable technologies. The most common carve-out technologies are wind and solar power, but there are also states that define requirements for other sources, such as distributed generation. These carve-outs can be a flat percentage that remains unchanged over the span of the RPS trajectory, such as 15% of the annual RPS requirement; or they can be defined for individual years, with a specified carve-out trajectory schedule."
     ]
   },
   { "id": "cost_cap",
-    "term": "Cost cap",
+    "term": "Cost cap percentage",
     "def": [
-      "The cap percentage is the size of the subsidy for renewable generation allowed by the state, expressed as a percentage of retail electricity sales. For example, if the cap was 2% of retail sales (on a 25% RPS requirement), the price support available to each unit of renewable energy is no more than 2% ÷ 25% = 8% of the retail price with a 1% annual growth rate. Therefore if the retail price of electricity is $100/MWh, the subsidy would be equal to $7 per megawatt-hours of renewable electricity."
+      "The cap percentage is the size of the subsidy for renewable generation allowed by the state, expressed as a percentage of retail electricity sales. For example, if the cap was 2% of retail sales (on a 25% RPS requirement), the price support available to each unit of renewable energy is no more than 2%/25% = 8% of the retail price with a 1% annual growth rate. Therefore if the retail price of electricity is $100/MWh, the subsidy would be equal to $7 per megawatt-hours of renewable electricity."
+    ]
+  },
+  { "id": "dist_fuel_oil",
+    "term": "Distillate Fuel Oil",
+    "def": [
+      "A general classification for one of the petroleum products created in the crude oil refining process. It includes diesel fuels and fuel oils. Specifically distillate fuel oils classified as No. 1, No. 2, and No. 4 fuel oils are used primarily for space heating and electric power generation."
     ]
   },
   { "id": "distributed_generation",
@@ -68,9 +80,23 @@
     "term": "Integration cost",
     "def": [
       "Integration cost is the cost associated with integrating variable wind power into a power grid, such as the costs of forecasting, back-up power capacity ready, etc. It may be considered as the ‘wind uncertainty cost’.",
-      "This cost is a provision of backup generation capacity. Cost estimates include a contribution from integration costs, but neglect transmission costs, as these may not be borne by the renewables generators.  The (hr/yr) factor translates an annual cost in $/MW per year into $/MWh: 365 days/yr × 24 hrs/day = 8760 hrs/yr"
+      "This cost is a provision of backup generation capacity. Cost estimates include a contribution from integration costs, but neglect transmission costs, as these may not be borne by the renewables generators.  The (hr/yr) factor translates an annual cost in $/MW per year into $/MWh:",
+      "365 days/yr × 24 hrs/day = 8760 hrs/yr."
     ]
   },
+  { "id": "kerosene",
+    "term": "Keorsene",
+    "def": [
+      "A light petroleum distillate, which has properties similar to those of No. 1 fuel oil, that is used in space heaters, cook stoves, and water heaters and is suitable for use as a light source when burned in wick-fed lamps. Kerosene's classification is bound by its maximum distillation temperature of 400 degrees Fahrenheit at the 10-percent recovery point, a final boiling point of 572 degrees Fahrenheit, and a minimum flash point of 100 degrees Fahrenheit. No. 1-K and No. 2-K are the two grades recognized by ASTM Specification D 3699, but there are also other grades of kerosene called range or stove oil."
+    ]
+  },
+  { "id": "lpg",
+    "term": "Liquified Petroleum Gas",
+    "def": [
+      "Also known as Liquified Petroleum Gas, LPGs are group of hydrocarbon gases made both from the crude oil refining process and the processing of natural gas that must occur before gas can be shipped on a pipeline. LPGs incorporate several different types of gas, primarily propane, normal butane, and isobutane, derived from crude oil refining or natural gas processing. These gases may be marketed individually or mixed, and are often used especially in the case of propane for home heating. They can be liquefied through pressurization for convenience of transportation or storage."
+    ]
+  },
+
   { "id": "net_metering",
     "term": "Net metering",
     "def": [
@@ -101,9 +127,9 @@
     ]
   },
   { "id": "ptc",
-    "term": "Production tax credit",
+    "term": "Production tax credit (PTC)",
     "def": [
-      "The PTC and ITC (‘PTC’ in the paper) are federal-level subsidies that effectively reduce the cost of renewables generation by reimbursing qualifying renewable projects for up to 30% of the initial construction cost."
+      "The PTC and ITC (”PTC“ in the paper) are federal-level subsidies that effectively reduce the cost of renewables generation by reimbursing qualifying renewable projects for up to 30% of the initial construction cost."
     ]
   },
   { "id": "rec",
@@ -118,7 +144,7 @@
       "These rules determine which renewable producers can connect to the grid and how they do so. Different states mandate electric providers connect to renewable sources at different capacity thresholds."
     ]
   },
-  { "term": "Renewable portfolio standard",
+  { "term": "Renewable portfolio standard (RPS)",
     "id": "rps",
     "def": [
       "Renewable portfolio standards (RPSs) are requirements, often per state, that mandate renewable energy generation from sources such as wind and solar.",
@@ -132,7 +158,7 @@
     ]
   },
   { "id": "residential_rebate",
-    "term": "Residential rebates (RE)",
+    "term": "Residential rebates",
     "def": [
       "State residential rebate programs assist home-owners in financing the up-front cost of installing renewable energy systems."
     ]
@@ -162,7 +188,7 @@
   { "id": "technology_requirement",
     "term": "Technology requirements",
     "def": [
-      "See <a href=\"#carveout\">Carveout</a>"
+      "See <a href=\"#carveout\">Carve-out</a>"
     ]
   },
   { "id": "wholesale",
