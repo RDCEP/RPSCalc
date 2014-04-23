@@ -4,7 +4,7 @@
 Glossary views for RPS Calculator.
 """
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 
 
 mod = Blueprint('glossary', __name__, url_prefix='/glossary',
@@ -16,4 +16,5 @@ def glossary(definition=None):
     return render_template(
         'glossary.html',
         title='Glossary',
+        state=session['state'],
     )
