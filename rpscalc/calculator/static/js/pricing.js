@@ -9,7 +9,7 @@
     default_pp,
     session_pp = Options.data.price_and_policy;
   Options.data.price_and_policy = session_pp || {};
-  d3.json('/state/static/json/' + Options.state + '.json', function(_data) {
+  d3.json('/state/static/json/' + Options.state + '.json?2', function(_data) {
     state_pp = _data.price_and_policy || false;
     region = state_pp.region || 'default';
     d3.json('/calculator/static/json/pricing.json', function(_defaults) {
@@ -38,7 +38,6 @@
             name = input.attr('name'),
             type = input.attr('type');
           if (type === 'checkbox') {
-            console.log(input.property('checked'));
             Options.data.price_and_policy[name] = input.property('checked');
           } else {
             Options.data.price_and_policy[name] =  parseFloat(input.property('value'));
