@@ -81,7 +81,10 @@ var FactsPage = function() {
         return 'translate(' + offset + ',' + rpsp_margin + ')';
       });
     var rps_hashes = rpsp.selectAll('.rps-hash')
-      .data([actual, current, final])
+      .data(function() {
+        //FIXME: This is a temporary kludge for Iowa, since they've already met their goal
+        return current == final ? [actual, current, null] : [actual, current, final];
+      })
       .enter()
       .append('line')
       .attr('x1', function(d, i) {
@@ -260,7 +263,8 @@ var FactsPage = function() {
 
   d3.json('/state/static/json/' + Options.state + '.json', function(_data) {
 
-    if (_data.abbr != 'IA') {
+//    if (_data.abbr != 'IA') {
+    if (_data.abbr) {
 
       var def_line = [{data: []}],
         data = [{type: 'RPS', data: []}],
@@ -275,13 +279,13 @@ var FactsPage = function() {
       if (_data.trajectory.length > 0) {
         // Parse trajectory data
         _data.trajectory.forEach(function(d, i) {
-          _data.abbr == 'TX'
+          _data.abbr == 'TX' || _data.abbr == 'IA'
             ? data[0].data[i] = {y: d, x: parse_date(String(i + _data.start_year)), y0: 0}
             : data[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
         });
         // Parse default trajectory
         _data.trajectory.forEach(function(d, i) {
-          _data.abbr == 'TX'
+          _data.abbr == 'TX' || _data.abbr == 'IA'
             ? def_line[0].data[i] = {y: d, x: parse_date(String(i + _data.start_year)), y0: 0}
             : def_line[0].data[i] = {y: d * 100, x: parse_date(String(i + _data.start_year)), y0: 0};
         });
@@ -317,8 +321,14 @@ var FactsPage = function() {
         .title('Policy Trajectory')
         .h_grid(true)
         .legend(true)
-        .outlines(true)
-        .draw();
+        .outlines(true);
+
+      if (_data.abbr == 'IA') {
+        trajectory.domain([new Date(2013, 0, 1), new Date(2030, 0, 1)],
+          [0, 500])
+      }
+
+      trajectory.draw();
 
     }
 
