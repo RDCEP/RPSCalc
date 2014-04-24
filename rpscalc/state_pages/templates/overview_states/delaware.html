@@ -1,0 +1,85 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>Delaware’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of renewable
+    resources in the state by establishing the minimum amount of renewable
+    energy that the state's electricity providers must sell in a given year.
+    This legally-established renewable energy procurement goal gradually
+    increases over time to meet the overall target of 25% renewable power
+    by 2026.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><b>25%</b> of the state's retail electric sales from must be from
+    renewable sources by <b>2026</b>, subject to the cost cap</li>
+  <li>Carve-out for <b>solar</b></li>
+  <li>Explicit cost cap at <b>3%</b> of retail rate</li>
+{% endblock %}
+{% block state_carveouts %}
+  Delaware’s RPS requires utilities to meet 3.5% of the total renewable energy
+  goal in each year with power from solar photovoltaics.
+{% endblock %}
+{% block state_costcap %}
+  <p>Delaware has an explicit <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost
+    cap</a> at 3% of total retail electricity costs during the same year.
+    (<a href="http://delcode.delaware.gov/title26/c001/sc03a/index.shtml#P11_150"
+        target="_blank">26 Del. C. § 363(f)</a>) For PV the cost threshold
+    is 1% of total retail electricity costs during the same year. Compliance
+    schedules can be frozen at the discretion of the State Energy Coordinator
+    and PSC if these caps are exceeded. Similarly, municipal and rural
+    electric cooperatives have a defined percentage of 4% change in the
+    average customer’s monthly bill. </p>
+{% endblock %}
+{% block state_statute %}
+  <p>The state’s first RPS was established in 2005, requiring 10% of
+    electricity to be from renewables by 2020. The statute would be amended
+    twice in 2007 and 2010 to its current form of 25% renewable electricity
+    by 2026, 3.5% of which must be from solar. These same 2010 amendments
+    provided for Municipal Utilities and Rural Electric Cooperatives to have
+    the option to opt out of the RPS requirements provided they establish
+    a comparable self-directed RPS. The RPS is administered by the Delaware
+    Public Service Commission (PSC).</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  Solar electric, wind, ocean tidal, ocean thermal, fuel cells powered
+  by renewable fuels, hydroelectric facilities (max. 30 megawatts (MW)),
+  sustainable biomass, anaerobic digestion, landfill gas
+{% endblock %}
+{% block state_geo_eligible %}
+  Providers may purchase RECs within the PJM region to count toward
+  compliance. The RECs have a 3-year lifetime. There are credit multipliers
+  for several specific technologies located or manufactured in Delaware
+{% endblock %}
+{% block state_total_load %}
+  70%
+{% endblock %}
+{% block state_tech_req %}
+  Solar PV—3.5% by 2026
+{% endblock %}
+{% block state_sectors %}
+  Investor-Owned Utilities, Retail Electric Suppliers, Municipal Utilities,
+  and Rural Electric Cooperatives
+{% endblock %}
+{% block state_penalty %}
+  The ACP schedule increases with each year it is used. For the first year,
+  utilities must pay $25 per MWh of shortfall. This increases to $50/MWh
+  and $80/MWh for the second and third years. The solar ACP is also use-based,
+  set at $400/MWh for the first year, increasing to $450 then $500. State
+  Energy Coordinator has the authority to review and adjust the ACP and
+  solar ACP given certain market conditions. The ACPs are deposited into
+  the Delaware Green Energy Fund. These costs can only be recovered from
+  customers in the instance that the ACP is the least cost measure as
+  compared to purchasing renewable energy for compliance (26 Del. C.
+  § 358(f)(2))
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=DE06R&re=0&ee=0"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://apps1.eere.energy.gov/states/state_home.cfm/state=DE"
+         target="_blank">U.S. Department of Energy Office of Energy
+    Efficiency and Renewable Energy (EERE)—State Profile</a>—Access your
+    state’s EERE page, and find information on renewable resources maps,
+    energy statistics, and news</li>
+  <li><a href="http://delcode.delaware.gov/title26/c001/sc03a/index.shtml#P11_150"
+         target="_blank">26 Del. C.</a>—Delaware’s complete RPS statute</li>
+{% endblock %}
