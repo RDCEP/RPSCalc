@@ -113,15 +113,16 @@
         wind = wind_cost(),
         solar = solar_cost();
 
-      Options.data.wind.data.forEach(function(d, i) {
+      Options.data.trajectory.data.forEach(function(d, i) {
         d.x = new Date(d.x);
-        var wind_rec = d.y / 100 * wind,
+        var wind_rec = Options.data.wind.data[i].y / 100 * wind,
           solar_rec = Options.data.solar.data[i].y / 100 * solar,
-          other_rec = (100 - Options.data.solar.data[i].y - d.y) / 100 * wind * .65,
+          other_rec = (100 - Options.data.solar.data[i].y - Options.data.wind.data[i].y) / 100 * wind * .65,
           year = d.x.getFullYear(),
           total_rec = wind_rec + solar_rec + other_rec,
 //          cost_cap = (pp.policy_costcap * Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013)) / Options.data.trajectory.data[i].y * Options.data.retail_price;
           cost_cap = get_cap(pp.policy_captype, year, i);
+
         _max_y = year >= 2013 ? Math.max(_max_y, total_rec, cost_cap) : _max_y;
         if (cost_cap) {
           _cap.data[i] = {
