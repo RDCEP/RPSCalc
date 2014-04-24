@@ -88,11 +88,19 @@
 
     get_cap = function(captype, year, i) {
       if (captype == 'retail') {
-        return (pp.policy_costcap * Math.pow(
-          (100 + +pp.pricing_annualgrowth) / 100, year - 2013)
-          ) / Options.data.trajectory.data[i].y * Options.data.retail_price;
+        console.log(Options.data.trajectory.data[i].y);
+        return (pp.policy_costcap / 100 * Options.data.retail_price) /
+          (Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013) * Options.data.trajectory.data[i].y / 100);
       } else if (captype == 'single-acp') {
-        return pp.policy_acp;
+        return Options.data.state == 'connecticut'
+          ? pp.policy_acp
+          : Options.data.state == 'maine'
+          ? pp.policy_acp
+          : Options.data.state == 'texas'
+          ? pp.policy_acp * Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013)
+          : Options.data.state == 'rhode_island'
+          ? pp.policy_acp * Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013)
+          : pp.policy_acp;
       } else if (captype == 'retail-dollar') {
         var volume;
         if (Options.data.state == 'north_carolina') {
