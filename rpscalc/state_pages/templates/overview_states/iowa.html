@@ -1,16 +1,16 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Iowa’s Alternative Energy Law (AEL)—also known as a
+  <p>Iowa’s Alternative Energy Law (AEL)--also known as a
     <a href="{{ url_for('glossary.glossary') }}#rps">Renewable Portfolio
-      Standard (RPS)</a>—is intended to increase use of renewable resources
+    Standard (RPS)</a>—is intended to increase use of renewable resources
     in the state by establishing the minimum amount of renewable energy
-    that the state’s electricity providers must sell in a given year. This
-    legally-established renewable energy procurement goal is capacity-based,
-    set at an overall target of 105MW of renewable power.</p>
+    that the state’s electricity providers must sell in a given year.
+    This legally-established renewable energy procurement goal is set at
+    an overall target of 105 MW of renewable capacity.</p>
 {% endblock %}
 {% block state_overview %}
-  <li><b>150 MW</b> of the state’s retail electric sales from must be
-    from renewable sources</li>
+  <li><b>105 MW</b> of the state's retail electric sales from must be from
+    renewable sources</li>
   <li>No carve-outs</li>
   <li>No legally defined cost cap</li>
 {% endblock %}
@@ -18,32 +18,38 @@
   Iowa does not require any technology carve-outs.
 {% endblock %}
 {% block state_progress %}
-  It is important to note that Iowa has already surpassed its 150 MW
-  installed capacity goal.
+  <p>It is important to note that Iowa has already surpassed its 105 MW
+    installed capacity goal, and had already been compliant at the time
+    of legislation being enacted.</p>
 {% endblock %}
 {% block state_costcap %}
   <p>Unlike some states, Iowa does not have an explicit
     <a href="{{ url_for('glossary.glossary') }}#cost_cap">‘cost cap’</a>
-    or limit on the potential increase in electricity costs as a result
-    of this policy. Using the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
+    or limit on the potential increase in electricity costs as a result of
+    this policy. Using the <a href="{{ url_for('calculator.trajectory', state=state) }}">RPS
     Feasibility Calculator</a> you can act as the Public Utilities
     Commission and define an explicit cost cap, determining what level
     of costs will lead to a viable RPS.</p>
 {% endblock %}
 {% block state_statute %}
-  <p>The Iowa Alternative Energy Law
-    (<a href="http://coolice.legis.iowa.gov/Cool-ICE/default.asp?category=billinfo&service=IowaCode&ga=83&input=476.41"
-        target="_blank">§ 476.41</a>) is a capacity-based standard, which
-    requires its investor-owned utilities to own or contract a total of
-    105 MW of renewable energy. It is split between MidAmerican Energy
-    (55.2 MW, or 52.57% of demand) and Alliant Energy Interstate Power and
-    Light (49.8 MW, or 47.43% of demand). There are no mandated increases,
-    and the target has already been achieved.</p>
+  <p>Iowa’s policy was adopted in 1983 as a capacity-based requirement,
+    before energy-based policies became popular. The Iowa Alternative Energy
+    Law (<a href="http://coolice.legis.iowa.gov/Cool-ICE/default.asp?category=billinfo&service=IowaCode&ga=83&input=476.41"
+            target="_blank">&sect; 476.41</a>) requires its investor-owned
+    utilities to own or contract a total of 105 MW of renewable energy.
+    It is split between MidAmerican Energy (55.2 MW, or 52.57% of demand)
+    and Alliant Energy Interstate Power and Light (49.8 MW, or 47.43% of
+    demand). There are no mandated increases, and the target has already
+    been achieved. Although, more ambitious renewable energy targets have
+    been considered by the Iowa Legislature, it may be advantageous to the
+    state (and for her ratepayers) to maintain a low RPS goal. This allows
+    the state’s utilities to profit by selling renewable energy attributes
+    to nearby states with higher RPS obligations. </p>
 {% endblock %}
 {% block state_eligible_tech %}
   Solar, Wind, Waste Management, Resource Recovery, Refuse-Derived Fuel,
-  Agricultural Crops or Residues, Woodburning Facilities, or Small Hydropower
-  Facilities
+  Agricultural Crops or Residues, Woodburning Facilities, or Small
+  Hydropower Facilities
 {% endblock %}
 {% block state_geo_eligible %}
   Tradable Renewable Certificates (TRCs) cannot be used for compliance
