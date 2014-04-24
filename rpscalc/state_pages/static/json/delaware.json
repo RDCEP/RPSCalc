@@ -27,6 +27,7 @@
     0.22,
     0.22
   ],
+  "carveouts": [],
   "abbr": "DE",
   "rps_progress": {
     "progress": 0.99,
@@ -34,6 +35,7 @@
   },
   "price_and_policy": {
     "policy_retail": 111,
-    "policy_captype": "none"
+    "policy_captype": "retail",
+    "policy_costcap": 3
   }
 }
