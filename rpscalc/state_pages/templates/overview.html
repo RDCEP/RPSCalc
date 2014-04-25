@@ -4,6 +4,7 @@
     {{ super() }}
   <section id="summary" class="clearfix">
     {% block state_summary %}{% endblock %}
+    {% if state not in ['new_york'] %}
     <p>The state profile below explores the design of this policy,
       highlighting the factors that influence the success of {{ pretty_state }}’s RPS
       goals and the tradeoffs inherent to it. Once you’re comfortable with
@@ -12,6 +13,7 @@
       Feasibility Calculator</a>. You can also use the calculator to change
       the policy requirements, trajectory, cost cap, and more, to see how
       altering {{ pretty_state }}’s policy design affects its success.</p>
+    {% endif %}
   </section>
   <section id="snapshot" class="clearfix">
     <h2>RPS Snapshot</h2>

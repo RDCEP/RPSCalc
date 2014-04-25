@@ -1,0 +1,72 @@
+{% extends 'overview.html' %}
+{% block state_summary %}
+  <p>New York’s <a href="{{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS)</a> is intended to increase use of renewable
+    resources in the state by creating a RPS fund from which to procure
+    renewable energy. Ratepayers pay a small additional fee on their monthly
+    bill which is used to develop and procure renewable energy. The current
+    regulatory goal aims to provide 29% of the state’s electricity through
+    renewable sources by 2015. The state profile below explores the design
+    of this policy, highlighting the factors that influence the success of
+    New York’s RPS goals and the tradeoffs inherent to it. The RPS
+    feasibility calculator is not currently available for New York, because
+    of nature of the policy.</p>
+{% endblock %}
+{% block state_overview %}
+  <li><b>29%</b> of the state's energy consumption must be from renewable
+    sources by <b>2015</b></li>
+  <li>Carve-out for <b>new sources</b> and <b>distributed generation</b></li>
+  <li>No legally defined cost cap</li>
+{% endblock %}
+{% block state_carveouts %}
+  New York established ‘tiers’ for new generation and customer sited
+  generation. There are not strict rules governing the level of energy
+  that must be procured from each tier.
+{% endblock %}
+{% block state_costcap %}
+  <p>Due to the nature of their policy, New York does not have a
+    traditional <a href="{{ url_for('glossary.glossary') }}#cost_cap">cost
+    cap</a> or limit on the potential increase in electricity costs as a
+    result of this policy. However, the costs associated with New York’s
+    RPS are limited to the approved fee charged to ratepayers. </p>
+{% endblock %}
+{% block state_statute %}
+  <p>New York’s RPS is unique among states in that all renewable power
+    is centrally procured by the New York State Energy Research and
+    Development Authority (NYSERDA). This authority manages the RPS fee
+    charged to eligible consumers, and uses it to procure renewable energy
+    to meet the RPS goal. The State’s RPS was originally adopted in 2004
+    with a goal of 25% renewable power by 2013. This goal was updated in
+    2010 to the current target. New York is expected to meet 20.7% of
+    the current 29% target with existing sources. This policy also expects
+    to procure the equivalent of 1% renewable power through voluntary green
+    energy programs.</p>
+{% endblock %}
+{% block state_eligible_tech %}
+  Solar Water Heat, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric,
+  Fuel Cells, CHP/Cogeneration, Anaerobic Digestion, Tidal Energy, Wave Energy,
+  Ocean Thermal, Ethanol, Methanol, Biodiesel, Fuel Cells using Renewable Fuels
+{% endblock %}
+{% block state_geo_eligible %}
+  New York only
+{% endblock %}
+{% block state_total_load %}
+  N/A
+{% endblock %}
+{% block state_tech_req %}
+  New generation
+{% endblock %}
+{% block state_sectors %}
+  Investor-Owned Utility
+{% endblock %}
+{% block state_penalty %}
+  None
+{% endblock %}
+{% block state_references %}
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=NY03R"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://energy.pace.edu/sites/default/files/publications/RPS%20Report.pdf"
+         target="_blank">Pace Law School NY RPS Review</a>—An overview of
+    the programs history and potential</li>
+{% endblock %}

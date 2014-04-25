@@ -1,45 +1,83 @@
 {% extends 'overview.html' %}
 {% block state_summary %}
-  <p>Illinois's Renewable Portfolio Standard (RPS) establishes a minimum amount of renewable energy that must be sold by the state's electricity providers. This page identifies and describes the features of the RPS and how they work together to define the minimum amount of renewable energy that will be sold in Illinois.</p>
+  <p>Illinois’s <a href={{ url_for('glossary.glossary') }}#rps">Renewable
+    Portfolio Standard (RPS) is intended to increase use of renewable
+    resources in the state by establishing the minimum amount of renewable
+    energy that the state’s electricity providers must sell in a given
+    year. This legally-established renewable energy procurement goal
+    gradually increases over time to meet the overall target of 25%
+    renewable power by 2025. </p>
 {% endblock %}
 {% block state_overview %}
-  <li><strong>25%</strong> of the state's energy consumption must be from renewable sources by <strong>2025</strong></li>
-  <li>Carve-outs for <strong>wind</strong>, <strong>solar</strong> and <strong>distributed generation</strong></li>
-  <li>Explicit cost cap at 2 percent of sales</li>
-  <li><strong>Two</strong> separate state RPS schedules (primary and secondary)</li>
+  <li><b>25%</b> of the state’s retail electric sales from must be from
+    renewable sources by <b>2025</b>, subject to the cost cap</li>
+  <li>Carve-outs for <b>wind</b>, <b>solar</b>, <b>distributed
+    generation</b></li>
+  <li>Explicit cost cap at <b>2%</b> of sales</li>
 {% endblock %}
 {% block state_carveouts %}
-  <p>Illinois' wind technology requirement comprises the majority of its RPS goals. The chart below is a breakdown for the primary RPS for IOUs. It remains consistent at 75% of the standard each year.</p>
+  Illinois’ wind technology requirement comprises the majority of its RPS
+  goals at 75% of the standard each year. Smaller requirements for solar and
+  distributed generation exist at 6% and 1% of the annual requirement,
+  respectively.
 {% endblock %}
 {% block state_costcap %}
-  <p>Renewable energy procurement is limited to cost-effective resources. The cost cap is set at 'the greater of an additional 0.5% of the amount paid per kWh during the year ending in 2010, or 2% of the amount paid per kWh during the year ending May, 2007.' If exceeded, RPS requirements are placed under a 'freeze.' In addition, a second cost-effectiveness test: cost of procurement of renewable energy must not exceed benchmarks based on market prices for renewable energy in the region (determined by the IPA). Estimate how Illinois' cost cap can effect their RPS's efficacy:</p>
+  <p>Illinois has an explicit <a href={{ url_for('glossary.glossary') }}#cost_cap">cost
+    cap</a> at 2% of the customer’s annual bill. Renewable energy procurement
+    is limited to cost-effective resources. The cost cap is set at ‘the
+    greater of an additional 0.5% of the amount paid per kWh during the year
+    ending in 2010, or 2% of the amount paid per kWh during the year ending
+    May, 2007.’ If exceeded, RPS requirements are placed under a ‘freeze’.
+    In addition, a second cost-effectiveness test: cost of procurement of
+    renewable energy must not exceed benchmarks based on market prices for
+    renewable energy in the region (determined by the IPA). Estimate how
+    Illinois’ cost cap can effect their RPS’s efficacy</p>
 {% endblock %}
 {% block state_statute %}
-  <p>The current RPS was enacted in 2007 through creation of Illinois Power Agency (IPA). The IPA's purpose was to develop electricity procurement plans for renewable power. The legislation more specifically: 75% (equal to 18.75% total power sales in 2025) wind power annually for IOUs, and 60% for ARES by 2020; The 6% (equating to 1.5% of total retail sales) annual solar carve out ramps up for IOUs in 2013, and in 2016 for ARES., 1% carve out for distributed generation. Renewable generation limited to “cost-effective” resources. Renewable energy may be bundled with RECs. In 2011, anaerobic digestion was added to eligible resources. A second efficiency portfolio standard exists.</p>
+  <p>The current RPS was enacted in 2007 through creation of Illinois Power
+    Agency (IPA). The IPA’s purpose was to develop electricity procurement
+    plans for renewable power. The legislation has two compliance schedules;
+    a primary and a secondary. The primary states that for investor-owned
+    utilities (IOUs), 75% (equal to 18.75% total power sales in 2025) of the
+    requirement must be from wind, and the secondary requires 60% for
+    alternative retail electric suppliers (ARES) by 2020. The 6% annual solar
+    carveout (equating to 1.5% of total retail sales) ramps up for IOUs in
+    2013, and in 2016 for ARES. A 1% carve out for distributed generation.
+    Renewable generation limited to ‘cost-effective’ resources. Renewable
+    energy may be bundled with RECs. In 2011, anaerobic digestion was added
+    to eligible resources. A second efficiency portfolio standard exists.</p>
 {% endblock %}
 {% block state_eligible_tech %}
-  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass, Hydroelectric, Anaerobic Digestion, Biodiesel
+  Solar Thermal Electric, Photovoltaics, Landfill Gas, Wind, Biomass,
+  Hydroelectric, Anaerobic Digestion, Biodiesel
 {% endblock %}
 {% block state_geo_eligible %}
-  (Only IOUs) Through 2011: in-state (if insufficient cost-effective resources, can procure from adjoining states, or regions). After 2011: equal preference to in- and out-of-state.
+  (Only IOUs) Through 2011: in-state (if insufficient cost-effective resources,
+  can procure from adjoining states, or regions). After 2011: equal
+  preference to in- and out-of-state.
 {% endblock %}
 {% block state_total_load %}
   Primary RPS: 39.9%, Secondary RPS: 49%
 {% endblock %}
 {% block state_tech_req %}
-  Wind (IOUs) - 75% of annual Req., Wind (ARES) - 60% of annual req., PV (all) - 6% of annual req., Dist. gen. (IOUs) - 1% of annual req.
+  Wind (IOUs)—75% of annual req.; Wind (ARES)—60% of annual req.;
+  PV (all)—6% of annual req.; Distributed Generation (IOUs)—1% of annual req.
 {% endblock %}
 {% block state_sectors %}
-  Investor-Owned Utilities, Retail Suppliers. Municipal electric companies and Electric Cooperative exempt from RPS.
+  Investor-Owned Utilities, Retail Suppliers. Municipal electric companies
+  and Electric Cooperative exempt from RPS.
 {% endblock %}
 {% block state_penalty %}
-  For Com-Ed: $0.946/MWh (for hourly customer loads). For Ameren: $0.973/MWh
-{% endblock %}
-{% block state_tools %}
-  <li><a href="http://www.dsireusa.org/rpsdata/index.cfm">Database of State Incentives for Renewables &amp; Efficiency (DSIRE) RPS data page</a>&nbsp;—&nbsp;Datasets available for download in .xlsx format</li>
-  <li><a href="http://mjbeck.emtoolbox.com/?page=Renewable_Portfolio_Standards">MJBeck RPS EDGE</a>&nbsp;—&nbsp;Advanced search tool for comparing RPS program data</li>
+  For Com-Ed: $0.946/MWh (for hourly customer loads).
+  For Ameren: $0.973/MWh - adjusted annually
 {% endblock %}
 {% block state_references %}
-  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IL04R&amp;re=1&amp;ee=0">DSIRE State Page</a>&nbsp;—&nbsp;Visit for more complete information on RPS details and legislation</li>
-  <li><a href="http://www.nrel.gov/analysis/pdfs/41409.pdf">National Renewable Energy Laboratory (NREL) RPS technical report</a>&nbsp;—&nbsp;<e>Renewable Portfolio Standards in the States: Balancing Goals and Implementation Strategies</e></li>
+  <li><a href="http://www.dsireusa.org/incentives/incentive.cfm?Incentive_Code=IL04R&re=1&ee=0"
+         target="_blank">DSIRE State RPS Page</a>—Visit for detailed
+    information on RPS and complete legislation</li>
+  <li><a href="http://apps1.eere.energy.gov/states/state_home.cfm/state=IL"
+         target="_blank">U.S. Department of Energy Office of Energy Efficiency
+    and Renewable Energy (EERE)—State Profile</a>—Access your state’s
+    EERE page, and find information on renewable resources maps, energy
+    statistics, and news</li>
 {% endblock %}

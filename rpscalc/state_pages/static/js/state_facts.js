@@ -264,7 +264,7 @@ var FactsPage = function() {
   d3.json('/state/static/json/' + Options.state + '.json', function(_data) {
 
 //    if (_data.abbr != 'IA') {
-    if (_data.abbr) {
+    if (_data.abbr != 'NY') {
 
       var def_line = [{data: []}],
         data = [{type: 'RPS', data: []}],
