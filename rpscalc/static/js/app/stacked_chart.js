@@ -148,7 +148,7 @@ var RPSGraph = function() {
     },
     update_legend = function(_d) {
       var _h = '';
-      _d.reverse().forEach(function(d) {
+      _d.sort(function(a, b) { return d3.descending(a.y, b.y); }).forEach(function(d) {
         var current_x = _d.length > 1 ? d.type : format_x(d.x);
         _h += current_x + ':&nbsp;' + format_y(d.y) + '<br>';
       });
@@ -795,7 +795,8 @@ var RPSGraph = function() {
     pattern.append('image')
       .attr('width', 16)
       .attr('height', 16)
-      .attr('xlink:href', '/static/images/svg/stripes_red.png');
+//      .attr('xlink:href', '/static/images/svg/stripes_red.png');
+      .attr('xlink:href', '/static/images/svg/stripes_sky-blue.png');
     graph_data.intersection = svg_defs.selectAll('.intersection-path')
       .data([a, b]).enter().append('clipPath')
       .attr('id', function(d, i) { return pre_id('clip_path_' + i); })
@@ -900,12 +901,12 @@ var RPSGraph = function() {
      */
     graph_data.graphs = graph_layer.selectAll('.chart-line')
       .data(graph_data.data).enter().append('path')
-      .attr('d', function(d) { return d.invert ? _invert_area(d.data) : _chart_f(d.data); })
+      .attr('d', function(d) { return d.invert ? _invert_area(d.data) : d.fill ? _area(d.data) : _chart_f(d.data); })
       .attr('class', 'chart-line')
       .attr('clip-path', 'url(#graph_clip)')
       .attr('data-type', function(d) { return d.type ? d.type : null; })
-      .style('fill', function(d, i) { return (!_lines || d.invert) ? color(i) : null; })
-      .style('stroke', function(d, i) { return (_lines && !d.invert) ? color(i) : null; });
+      .style('fill', function(d, i) { return (!_lines || d.invert) ? color(i) : !d.fill ? 'transparent' : null; })
+      .style('stroke', function(d, i) { console.log(d); return (_lines && !d.invert) ? color(i) : !d.line ? 'transparent' : null; });
     if (_outlines) {
       graph_data.outlines = outline_layer.selectAll('.chart-outline')
         .data(function() {
