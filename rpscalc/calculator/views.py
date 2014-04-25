@@ -74,7 +74,6 @@ def pricing(state):
     return render_template(
         'pricing_states/{}.html'.format(state),
         state=session['state'] or state,
-        pretty_state=[s['names'][1] for s in RPS_STATES.values() if s['names'][0] == state][0],
     )
 
 @mod.route('/<state>/cost')

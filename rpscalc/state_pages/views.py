@@ -20,6 +20,5 @@ def overview(state):
     return render_template(
         'overview_states/{}.html'.format(state),
         state=state,
-        pretty_state=[s['names'][1] for s in RPS_STATES.values() if s['names'][0] == state][0],
         session_clear='true',
     )
