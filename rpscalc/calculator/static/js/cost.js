@@ -88,7 +88,6 @@
 
     get_cap = function(captype, year, i) {
       if (captype == 'retail') {
-        console.log(Options.data.trajectory.data[i].y);
         return (pp.policy_costcap / 100 * Options.data.retail_price) /
           (Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013) * Options.data.trajectory.data[i].y / 100);
       } else if (captype == 'single-acp') {
@@ -116,7 +115,7 @@
     },
 
     get_cap_and_rec = function() {
-      var _rec = {type: 'REC', data: []},
+      var _rec = {type: 'REC', data: [], line: true},
         _cap = {type: 'Cost Cap', data: [], invert: true},
         wind = wind_cost(),
         solar = solar_cost();
@@ -128,10 +127,10 @@
           other_rec = (100 - Options.data.solar.data[i].y - Options.data.wind.data[i].y) / 100 * wind * .65,
           year = d.x.getFullYear(),
           total_rec = wind_rec + solar_rec + other_rec,
-//          cost_cap = (pp.policy_costcap * Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013)) / Options.data.trajectory.data[i].y * Options.data.retail_price;
           cost_cap = get_cap(pp.policy_captype, year, i);
 
         _max_y = year >= 2013 ? Math.max(_max_y, total_rec, cost_cap) : _max_y;
+
         if (cost_cap) {
           _cap.data[i] = {
             x: new Date(d.x),
@@ -143,7 +142,7 @@
           y0: 0,
           y: total_rec };
       });
-      return _cap.data.length > 0 ? [_cap, _rec] : [_rec];
+      return _cap.data.length > 0 ? [_rec, _cap] : [_rec];
     };
 
   if (pp.policy_captype == "retail") {
@@ -165,6 +164,7 @@
       unit: "$"
     });
   }
+
   var cost_graph = new RPSGraph(),
     cap_rec = get_cap_and_rec();
 
@@ -261,9 +261,11 @@
       d3.select(this).property('value', +_v);
       cap_rec = get_cap_and_rec();
       cost_graph.data(cap_rec)
-        .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, Math.ceil(_max_y * 1.25)])
-        .manual_update_intersection(cap_rec[0], cap_rec[1])
-        .manual_update_handles()
+        .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, Math.ceil(_max_y * 1.25)]);
+      if (cap_rec.length > 1) {
+        cost_graph.manual_update_intersection(cap_rec[0], cap_rec[1]);
+      }
+      cost_graph.manual_update_handles()
         .redraw();
     });
 
@@ -279,7 +281,7 @@
 
   if (cap_rec.length > 1) {
     cost_graph.data(cap_rec)
-      .colors([d3.rgb(213,94,0), d3.rgb(86,180,233)])
+      .colors([d3.rgb(86,180,233), d3.rgb(213,94,0)])
       .intersect(cap_rec[0], cap_rec[1], d3.rgb(213,94,0));
   } else {
     cost_graph.data(cap_rec)
@@ -290,5 +292,6 @@
     .h_grid(true)
     .legend(true)
     .outlines(false)
+    .lines(true)
     .draw();
 })();
