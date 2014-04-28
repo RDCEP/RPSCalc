@@ -41,9 +41,9 @@ def template_now():
 
 @app.context_processor
 def all_rps_states():
-    s = sorted([(v['names'][0], v['names'][1])
+    s = sorted([(v.names[0], v.names[1])
                 for k, v in RPS_STATES.iteritems()
-                if v['rps']], key=lambda i: i[1])
+                if v.rps], key=lambda i: i[1])
     return dict(all_rps_states=s)
 
 

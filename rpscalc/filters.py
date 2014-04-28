@@ -25,7 +25,7 @@ def deslugify(v):
 
 
 def state_abbr(state):
-    return [k for k, v in RPS_STATES.iteritems() if v['names'][0] == state][0]
+    return [k for k, v in RPS_STATES.iteritems() if v.names[0] == state][0]
 
 def state_typo(state):
-    return [v['names'][1] for v in RPS_STATES.values() if v['names'][0] == state][0]
+    return [v.names[1] for v in RPS_STATES.values() if v.names[0] == state][0]

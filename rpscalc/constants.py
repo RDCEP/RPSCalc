@@ -12,104 +12,97 @@ BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 EIA_API_KEY = 'D82A092DA301308805ECAB18A123BB4A'
 
 
+class RPSState(object):
+    def __init__(self, short_name, long_name, rps=True, calculator=True,
+                 green_energy=list()):
+        self.names = [short_name, long_name]
+        self.rps = rps
+        self.calculator = calculator if rps else False
+        if len(green_energy) < 1:
+            self.green_energy = ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']
+        else:
+            self.green_energy = green_energy
+
+    def remove_ge(self, ge):
+        self.green_energy.pop(self.green_energy.index(ge))
+
+    def add_ge(self, ge):
+        self.green_energy.append(ge)
+
+
 RPS_STATES = {
-    'AK': {'names': ['alaska', 'Alaska'], 'rps': False, },
-    'AL': {'names': ['alabama', 'Alabama'], 'rps': False, },
-    'AR': {'names': ['arkansas', 'Arkansas'], 'rps': False, },
-    'AS': {'names': ['american_samoa', 'American Samoa'], 'rps': False, },
-    'AZ': {'names': ['arizona', 'Arizona', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'SOTCB', 'WYTCB']},
-    'CA': {'names': ['california', 'California', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'CO': {'names': ['colorado', 'Colorado', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'CT': {'names': ['connecticut', 'Connecticut'], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'DC': {'names': ['district_of_columbia', 'District of Columbia'], 'rps': False, },
-    'DE': {'names': ['delaware', 'Delaware'], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'FL': {'names': ['florida', 'Florida'], 'rps': False, },
-    'GA': {'names': ['georgia', 'Georgia'], 'rps': False, },
-    'GU': {'names': ['guam', 'Guam'], 'rps': False, },
-    'HI': {'names': ['hawaii', u'Hawai‘i', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'ID': {'names': ['idaho', 'Idaho', ], 'rps': False, },
-    'IN': {'names': ['indiana', 'Indiana', ], 'rps': False, },
-    'IL': {'names': ['illinois', 'Illinois', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'IA': {'names': ['iowa', 'Iowa', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'KS': {'names': ['kansas', 'Kansas', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'KY': {'names': ['kentucky', 'Kentucky', ], 'rps': False, },
-    'LA': {'names': ['louisiana', 'Louisiana', ], 'rps': False, },
-    'MA': {'names': ['massachusetts', 'Massachusetts', ], 'rps': False, },
-    'MD': {'names': ['maryland', 'Maryland', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'MI': {'names': ['michigan', 'Michigan', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'ME': {'names': ['maine', 'Maine', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'MN': {'names': ['minnesota', 'Minnesota', ], 'rps': True,
-           'green_energy': ['BMTCB', 'HYTCB', 'SOTCB', 'WYTCB', 'WWTCB', ]},
-    'MO': {'names': ['missouri', 'Missouri', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'MP': {'names': ['northern_mariana_islands', 'Northern Mariana Islands', ],
-           'rps': False, },
-    'MS': {'names': ['mississippi', 'Mississippi', ], 'rps': False, },
-    'MT': {'names': ['montana', 'Montana', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'NA': {'names': ['national', 'National', ], 'rps': False, },
-    'ND': {'names': ['north_dakota', 'North Dakota', ], 'rps': False, },
-    'NE': {'names': ['nebraska', 'Nebraska', ], 'rps': False, },
-    'NH': {'names': ['new_hampshire', 'New Hampshire', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'NM': {'names': ['new_mexico', 'New Mexico', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'NV': {'names': ['nevada', 'Nevada', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'NJ': {'names': ['new_jersey', 'New Jersey', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'NC': {'names': ['north_carolina', 'North Carolina', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'NY': {'names': ['new_york', 'New York', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'OH': {'names': ['ohio', 'Ohio', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'OK': {'names': ['oklahoma', 'Oklahoma', ], 'rps': False, },
-    'OR': {'names': ['oregon', 'Oregon', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'PA': {'names': ['pennsylvania', 'Pennsylvania', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'PR': {'names': ['puerto_rico', 'Puerto Rico', ], 'rps': False, },
-    'RI': {'names': ['rhode_island', 'Rhode Island', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'SC': {'names': ['south_carolina', 'South Carolina', ], 'rps': False, },
-    'SD': {'names': ['south_dakota', 'South Dakota', ], 'rps': False, },
-    'TN': {'names': ['tennessee', 'Tennessee', ], 'rps': False, },
-    'TX': {'names': ['texas', 'Texas', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'UT': {'names': ['utah', 'Utah', ], 'rps': False, },
-    'VA': {'names': ['virginia', 'Virginia', ], 'rps': False, },
-    'VI': {'names': ['virgin_islands', 'Virgin Islands', ], 'rps': False, },
-    'VT': {'names': ['vermont', 'Vermont', ], 'rps': False, },
-    'WA': {'names': ['washington', 'Washington', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB']},
-    'WI': {'names': ['wisconsin', 'Wisconsin', ], 'rps': True,
-           'green_energy': ['BMTCB', 'GETCB', 'HYTCB', 'SOTCB', 'WYTCB',
-                            'WWTCB', ]},
-    'WV': {'names': ['west_virginia', 'West Virginia', ], 'rps': False, },
-    'WY': {'names': ['wyoming', 'Wyoming', ], 'rps': False, },
+    'AK': RPSState('alaska', 'Alaska', rps=False),
+    'AL': RPSState('alabama', 'Alabama', rps=False),
+    'AR': RPSState('arkansas', 'Arkansas', rps=False),
+    'AS': RPSState('american_samoa', 'American Samoa', rps=False),
+    'AZ': RPSState('arizona', 'Arizona'),
+    'CA': RPSState('california', 'California'),
+    'CO': RPSState('colorado', 'Colorado'),
+    'CT': RPSState('connecticut', 'Connecticut'),
+    'DC': RPSState('district_of_columbia', 'District of Columbia', rps=False),
+    'DE': RPSState('delaware', 'Delaware'),
+    'FL': RPSState('florida', 'Florida', rps=False),
+    'GA': RPSState('georgia', 'Georgia', rps=False),
+    'GU': RPSState('guam', 'Guam', rps=False),
+    'HI': RPSState('hawaii', u'Hawai‘i'),
+    'ID': RPSState('idaho', 'Idaho', rps=False),
+    'IN': RPSState('indiana', 'Indiana', rps=False),
+    'IL': RPSState('illinois', 'Illinois'),
+    'IA': RPSState('iowa', 'Iowa'),
+    'KS': RPSState('kansas', 'Kansas'),
+    'KY': RPSState('kentucky', 'Kentucky', rps=False),
+    'LA': RPSState('louisiana', 'Louisiana', rps=False),
+    'MA': RPSState('massachusetts', 'Massachusetts', rps=False),
+    'MD': RPSState('maryland', 'Maryland'),
+    'MI': RPSState('michigan', 'Michigan'),
+    'ME': RPSState('maine', 'Maine'),
+    'MN': RPSState('minnesota', 'Minnesota'),
+    'MO': RPSState('missouri', 'Missouri'),
+    'MP': RPSState('northern_mariana_islands', 'Northern Mariana Islands',
+                   rps=False),
+    'MS': RPSState('mississippi', 'Mississippi', rps=False),
+    'MT': RPSState('montana', 'Montana'),
+    'NA': RPSState('national', 'National', rps=False),
+    'ND': RPSState('north_dakota', 'North Dakota', rps=False),
+    'NE': RPSState('nebraska', 'Nebraska', rps=False),
+    'NH': RPSState('new_hampshire', 'New Hampshire'),
+    'NM': RPSState('new_mexico', 'New Mexico'),
+    'NV': RPSState('nevada', 'Nevada'),
+    'NJ': RPSState('new_jersey', 'New Jersey'),
+    'NC': RPSState('north_carolina', 'North Carolina'),
+    'NY': RPSState('new_york', 'New York', calculator=False, ),
+    'OH': RPSState('ohio', 'Ohio'),
+    'OK': RPSState('oklahoma', 'Oklahoma', rps=False),
+    'OR': RPSState('oregon', 'Oregon'),
+    'PA': RPSState('pennsylvania', 'Pennsylvania'),
+    'PR': RPSState('puerto_rico', 'Puerto Rico', rps=False),
+    'RI': RPSState('rhode_island', 'Rhode Island'),
+    'SC': RPSState('south_carolina', 'South Carolina', rps=False),
+    'SD': RPSState('south_dakota', 'South Dakota', rps=False),
+    'TN': RPSState('tennessee', 'Tennessee', rps=False),
+    'TX': RPSState('texas', 'Texas'),
+    'UT': RPSState('utah', 'Utah', rps=False),
+    'VA': RPSState('virginia', 'Virginia', rps=False),
+    'VI': RPSState('virgin_islands', 'Virgin Islands', rps=False),
+    'VT': RPSState('vermont', 'Vermont', rps=False),
+    'WA': RPSState('washington', 'Washington'),
+    'WI': RPSState('wisconsin', 'Wisconsin'),
+    'WV': RPSState('west_virginia', 'West Virginia', rps=False),
+    'WY': RPSState('wyoming', 'Wyoming', rps=False),
 }
+
+
+RPS_STATES['AZ'].remove_ge('HYTCB')
+RPS_STATES['IA'].add_ge('WWTCB')
+RPS_STATES['MD'].add_ge('WWTCB')
+RPS_STATES['MI'].add_ge('WWTCB')
+RPS_STATES['ME'].add_ge('WWTCB')
+RPS_STATES['MO'].add_ge('WWTCB')
+RPS_STATES['NH'].add_ge('WWTCB')
+RPS_STATES['NM'].add_ge('WWTCB')
+RPS_STATES['OH'].add_ge('WWTCB')
+RPS_STATES['OR'].add_ge('WWTCB')
+RPS_STATES['WI'].add_ge('WWTCB')
 
 
 EIA_FUEL_SECTORS = [
