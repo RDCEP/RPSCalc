@@ -272,7 +272,6 @@
   cost_graph.padding(30)
     .width(width).height(height)
     .select(container)
-    .title('Will we break the cap?')
     .x(d3.time.scale())
     .y(d3.scale.linear())
     .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, Math.ceil(_max_y * 1.25)])
@@ -281,10 +280,12 @@
 
   if (cap_rec.length > 1) {
     cost_graph.data(cap_rec)
+      .title('Will we break the cap?')
       .colors([d3.rgb(86,180,233), d3.rgb(213,94,0)])
       .intersect(cap_rec[0], cap_rec[1], d3.rgb(213,94,0));
   } else {
     cost_graph.data(cap_rec)
+      .title('The cost of renewable energy')
       .colors([d3.rgb(86,180,233)]);
   }
   cost_graph.stacked(false)
@@ -294,4 +295,14 @@
     .outlines(false)
     .lines(true)
     .draw();
+
+  if (cap_rec.length > 1) {
+    var break_legend = d3.select('.chart-legend').append('span').attr('class', 'legend-row');
+    break_legend.append('span').attr('class', 'legend-swatch').style({
+      'background-color': d3.rgb(213,94,0),
+      'background-image': 'url(/static/images/svg/stripes_sky-blue.png)'
+    });
+    break_legend.append('span').attr('class', 'legend-text').text('REC price exceeds cost cap')
+  }
+
 })();
