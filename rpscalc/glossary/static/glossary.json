@@ -3,7 +3,7 @@
   { "id": "acp",
     "term": "Alternative compliance payment",
     "def": [
-      "RPS policies can incentivize compliance (alternative compliance payments--ACP) or penalize for noncompliance through fines; ACP requires suppliers to pay a predetermined amount per kWh if they fall short in meeting RPS, however, this system allows load-serving entities to still claim they are in compliance rather than be penalized for noncompliance; ACP funds typically are used to support new renewable energy development"
+      "RPS policies can incentivize compliance (alternative compliance payments—ACP) or penalize for noncompliance through fines; ACP requires suppliers to pay a predetermined amount per kWh if they fall short in meeting RPS, however, this system allows load-serving entities to still claim they are in compliance rather than be penalized for noncompliance; ACP funds typically are used to support new renewable energy development. Most states allow ACPs to be recovered from ratepayers. In this case, ACPs can act as a ‘cost cap’ for the RPS. A minority of states do not allow utilities to recover ACPs from ratepayers. In this case, ACPs act strictly as fines for non-compliance."
     ]
   },
   { "id": "amortization",
@@ -16,7 +16,7 @@
   { "id": "annual_growth",
     "term": "Annual growth",
     "def": [
-      "The annual growth percentage is an assumption of future retail sale trends; the default value is a 1% growth rate per year, consistent with EIA's expectations. (<a href=\"http://www.eia.gov/forecasts/aeo/\">Annual Energy Outlook 2011 with Projections to 2035, U.S. Energy Information Administration (2011)</a>)"
+      "The annual growth percentage is an assumption of future retail sale trends; the default value is a 1% growth rate per year, consistent with EIA’s expectations. (<a href=\"http://www.eia.gov/forecasts/aeo/\">Annual Energy Outlook 2011 with Projections to 2035, U.S. Energy Information Administration (http://www.eia.gov/forecasts/aeo/) (2011)</a>)"
     ]
   },
   { "id": "biomass",
@@ -117,7 +117,7 @@
   { "id": "penalties",
     "term": "Noncompliance penalties",
     "def": [
-      "See <a href=\"#acp\">Alternative compliance payment (ACP)</a>"
+      "RPS policy can stipulate penalties, allowing the state to take action against non-compliant utilities. This can include fines, lawsuits, and non-recoverable ACPs."
     ]
   },
   { "id": "performance_incentive",
@@ -135,7 +135,7 @@
   { "id": "rec",
     "term": "Renewable energy credit (REC)",
     "def": [
-      "TKTK"
+      "Renewable Energy Credits (RECs or Renewable Energy Certificates or Tradable Renewable Certificates (TRCs)) are commodities that represent the environmental attributes associated with the production of one unit (typically 1 MWh) of renewable energy. These credits do not have to be sold as a bundle with the energy itself. Rather, these attributes can be traded to, for examples, utilities required by RPS policies to procure renewable energy. The eligibility of RECs for use towards compliance varies by state and trading system. Technology-specific credits, like Solar RECs (SRECs), can sometimes be used for technology specific requirements, like RPS carve-outs. Ideally, the REC price represents the ‘renewable energy premium’."
     ]
   },
   { "id": "renewable_interconnect",
@@ -154,7 +154,7 @@
   { "id": "rps_trajectory",
     "term": "RPS trajectory",
     "def": [
-      "TKTK"
+      "RPS trajectories represent a schedule of annual requirements leading up to the ultimate RPS goal. Most trajectories are production-based (percent of energy sold), though there are capacity-based goals. Generally, states will maintain the ending goal percentage into the indefinite future; however, some states indicate a trajectory to continue past the end-date, such as Massachusetts’s 1% growth rate for each year thereafter."
     ]
   },
   { "id": "residential_rebate",
@@ -174,14 +174,14 @@
     "term": "Solar carveout",
     "def": [
       "A solar ‘carve out’ refers to a portion of renewable generation that must come from solar energy. Some RPS states, including Illinois, restrict a portion of their requirements to particular generation types. IL, NJ, OH, AZ, and NV all have separate requirements mandating that a fraction of renewable electricity must be obtained from solar power to meet RPS standards.",
-      "Currently solar power prices are much higher than those of wind power (See Price section) so even a small solar carveout could consume a significant amount of the total available subsidy.",
+      "Currently solar power prices are much higher than those of wind power (See Price section) so even a small solar carve-out could consume a significant amount of the total available subsidy.",
       "The cost of solar generation is somewhat uncertain at present, especially after recent declines, but in 2011 was approximately six times the national mean wholesale rate or two times the retail rate. The total cost of the current IL solar requirement would then be estimated as ~3% of retail sales, or, with the PTC providing a ~30% support, 2% of retail sales, equal to the entirety of the Illinois capped subsidy."
     ]
   },
   { "id": "tariffs",
-    "term": "Tariffs",
+    "term": "Feed-in tariffs",
     "def": [
-      "TKTK"
+      "Tariffs place a legal obligation on utilities to purchase electricity from renewable energy generators at a guaranteed rate for a determined length of time. It is a policy mechanism designed to accelerate investment in renewable energy technologies by offering long-term contracts to renewable energy producers, typically based on the cost of generation of each technology. A lower per-kWh price is often awarded for wind technology, while technologies such as solar PV and tidal power are offered a higher price. These policies are widely used in Europe, and have been credited for advancing renewable energy development, particularly in Germany."
     ]
   },
 
