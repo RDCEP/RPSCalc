@@ -7,7 +7,45 @@
     region,
     state_pp,
     default_pp,
-    session_pp = Options.data.price_and_policy;
+    session_pp = Options.data.price_and_policy,
+
+    amortization = function(t, r) {
+      return (r / 100 * Math.pow((1 + r / 100), t)) / (Math.pow((1 + r / 100), t) - 1);
+    },
+
+    wind_cost = function() {
+      var ptc = session_pp.policy_ptc ? 0.7 : 1.0,
+        decrease = 1;
+      return (
+        (
+          session_pp.wind_installation * 1000000 * (
+            amortization(session_pp.finance_contractterm, session_pp.finance_interestrate)
+          ) * ptc
+        ) / (8765 * session_pp.wind_capacity) + session_pp.wind_om + session_pp.wind_integration
+      ) * decrease - session_pp.pricing_wholesale;
+    },
+
+    solar_cost = function() {
+      var ptc = session_pp.policy_ptc ? 0.7 : 1.0,
+        decrease = 1;
+      return (
+        (
+          session_pp.solar_installation * 1000000 * (
+            amortization(session_pp.finance_contractterm, session_pp.finance_interestrate)
+          ) + session_pp.solar_om
+        ) * ptc
+      ) / (8765 * session_pp.solar_capacity) * decrease - session_pp.pricing_wholesale;
+    },
+
+    show_costs = function() {
+      d3.select('#wind_cost').text(function() {
+        return '$'+Math.round(wind_cost() * 100) / 100;
+      });
+      d3.select('#solar_cost').text(function() {
+        return '$'+Math.round(solar_cost() * 100) / 100;
+      });
+    };
+
   Options.data.price_and_policy = session_pp || {};
   d3.json('/state/static/json/' + Options.state + '.json?2', function(_data) {
     state_pp = _data.price_and_policy || false;
@@ -42,7 +80,11 @@
           } else {
             Options.data.price_and_policy[name] =  parseFloat(input.property('value'));
           }
+
         });
     });
   });
+
+  show_costs();
+
 }());
