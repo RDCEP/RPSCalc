@@ -36,7 +36,7 @@ RPS_STATES = {
     'AR': RPSState('arkansas', 'Arkansas', rps=False),
     'AS': RPSState('american_samoa', 'American Samoa', rps=False),
     'AZ': RPSState('arizona', 'Arizona'),
-    'CA': RPSState('california', 'California'),
+    'CA': RPSState('california', 'California', calculator=False),
     'CO': RPSState('colorado', 'Colorado'),
     'CT': RPSState('connecticut', 'Connecticut'),
     'DC': RPSState('district_of_columbia', 'District of Columbia', rps=False),
