@@ -318,7 +318,7 @@ var FactsPage = function() {
         .format_x(function(x) { return x.getFullYear(); })
         .format_y(function(y) { return d3.format('.1f')(y); })
         .data(data)
-        .title('Policy Trajectory')
+        .title('Policy Trajectory (% of total retail sales)')
         .h_grid(true)
         .legend(true)
         .outlines(true);
