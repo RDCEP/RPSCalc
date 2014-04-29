@@ -1,0 +1,18 @@
+{% extends 'base_state.html' %}
+{% import '_macros.html' as macros %}
+{% block title %} | {{ state|capitalize }}{% endblock %}
+{% block left_nav %}
+  {{ macros.calc_left_nav(state, None) }}
+{% endblock %}
+{% block content %}
+  {{ super() }}
+  <section class="clearfix">
+
+    <h2>Calculator unavailable</h2>
+
+    <p>Unfortunately, the RPS calculator for {{ state|state_typo }}
+      isn’t yet finalized. Please try another state, or check back at a
+    later date.</p>
+
+  </section>
+{% endblock %}

@@ -13,6 +13,10 @@ mod = Blueprint('calculator', __name__, url_prefix='/calculator',
                 static_folder='static', template_folder='templates')
 
 
+def state_without_calculator(state):
+    return not [s.calculator for k, s in RPS_STATES.iteritems() if s.names[0] == state][0]
+
+
 def update_calc_state(state):
     print session['state']
     for k in ['trajectory', 'wind', 'solar', 'rps', 'price_and_policy']:
@@ -48,6 +52,11 @@ def update():
 
 @mod.route('/<state>/trajectory')
 def trajectory(state):
+    if state_without_calculator(state):
+        return render_template(
+            'no_calculator.html',
+            state=state,
+        )
     return render_template(
         'trajectory_states/{}.html'.format(state),
         state=state,
@@ -57,6 +66,11 @@ def trajectory(state):
 
 @mod.route('/<state>/carveout')
 def carveouts(state):
+    if state_without_calculator(state):
+        return render_template(
+            'no_calculator.html',
+            state=state,
+        )
     if 'trajectory' not in session.keys():
         return redirect(url_for('calculator.trajectory', state=state))
     return render_template(
@@ -67,6 +81,11 @@ def carveouts(state):
 
 @mod.route('/<state>/pricing')
 def pricing(state):
+    if state_without_calculator(state):
+        return render_template(
+            'no_calculator.html',
+            state=state,
+        )
     if not session['trajectory']:
         return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
@@ -78,6 +97,11 @@ def pricing(state):
 
 @mod.route('/<state>/cost')
 def cost(state):
+    if state_without_calculator(state):
+        return render_template(
+            'no_calculator.html',
+            state=state,
+        )
     if not session['trajectory']:
         return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
@@ -91,6 +115,11 @@ def cost(state):
 
 @mod.route('/<state>/advanced')
 def advanced(state):
+    if state_without_calculator(state):
+        return render_template(
+            'no_calculator.html',
+            state=state,
+        )
     if not session['trajectory']:
         return redirect(url_for('calculator.trajectory', state=state))
     if not session['wind'] or not session['solar']:
