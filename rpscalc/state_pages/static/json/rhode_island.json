@@ -35,7 +35,7 @@
     "year": 2011
   },
   "price_and_policy": {
-    "wind_capacity": 0.4,
+    "wind_capacity": 0.29,
     "solar_capacity": 0.15,
     "policy_retail": 151,
     "policy_captype": "single-acp",

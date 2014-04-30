@@ -36,6 +36,7 @@
     "year": 2009
   },
   "price_and_policy": {
+    "wind_capacity": 0.31,
     "policy_retail": 159,
     "policy_captype": "single-acp",
     "policy_acp": 55

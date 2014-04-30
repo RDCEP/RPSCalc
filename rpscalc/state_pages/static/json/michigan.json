@@ -28,7 +28,7 @@
   "abbr": "MI",
   "rps_progress": false,
   "price_and_policy": {
-    "wind_capacity": 0.4,
+    "wind_capacity": 0.35,
     "solar_capacity": 0.15,
     "policy_retail": 110,
     "policy_captype": "retail-dollar",
