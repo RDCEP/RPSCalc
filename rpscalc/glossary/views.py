@@ -16,5 +16,5 @@ def glossary(definition=None):
     return render_template(
         'glossary.html',
         title='Glossary',
-        state=session['state'],
+        # state=session['state'],
     )
