@@ -27,7 +27,6 @@
       .classed('hidden', false)
       .select('#time_series_wrap'),
 
-  //FIXME: insert this above hardcoded shit below rather than append.
     input_series = chart_inputs.selectAll('.chart-input-series')
       .data(graph_data.data)
       .enter()
@@ -102,7 +101,7 @@
         _cap = {type: 'Cost Cap', data: [], invert: true},
         wind = wind_cost(),
         solar = solar_cost();
-
+      _max_y = 0;
       Options.data.trajectory.data.forEach(function(d, i) {
         d.x = new Date(d.x);
         var wind_rec = Options.data.wind.data[i].y / 100 * wind,
@@ -127,28 +126,6 @@
       });
       return _cap.data.length > 0 ? [_rec, _cap] : [_rec];
     };
-    console.log(pp);
-//  if (pp.policy_captype == "retail") {
-//    pp_data[0].inputs.push({
-//      name: "Cost cap",
-//      "data-type": "policy_costcap",
-//      unit: "%"
-//    });
-//  } else if (pp.policy_captype == "single-acp") {
-//    pp_data[0].inputs.push({
-//      name: "ACP",
-//      "data-type": "policy_acp",
-//      unit: "$"
-//    });
-//  } else if (pp.policy_captype == "retail-dollar") {
-//    pp_data[0].inputs.push({
-//      name: "Cost cap",
-//      "data-type": "policy_costcap",
-//      unit: "$"
-//    });
-//  } else if (pp.policy_captype == 'retail-solar-acp-wind') {
-//
-//  }
 
   var cost_graph = new RPSGraph(),
     cap_rec = get_cap_and_rec();
@@ -180,12 +157,13 @@
       })
       .on('change', function(d) {
         var t = d3.select(this),
-          _v = (typeof(pp[t.attr('name')]) == 'boolean') ? t.property('checked') : t.property('value');
+          _v = (typeof(pp[t.attr('name')]) == 'boolean') ? t.property('checked') : +t.property('value');
         pp[t.attr('name')] = _v;
         t.property('value', function() { return (typeof(_v) == 'boolean') ? null : +_v; });
         t.property('checked', function() { return (typeof(_v) == 'boolean') ? _v : null; });
         cap_rec = get_cap_and_rec();
         cost_graph.data(cap_rec)
+          .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)], [0, Math.ceil(_max_y * 1.25)])
           .manual_update_intersection(cap_rec[0], cap_rec[1])
           .manual_update_handles()
           .redraw();
