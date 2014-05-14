@@ -8,6 +8,10 @@ blueprints, assets.
 from datetime import datetime
 from flask import Flask, render_template, session, g
 from flask.ext.assets import Environment, Bundle
+from sqlalchemy import create_engine
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
+from sqlalchemy.orm import scoped_session, sessionmaker, relationship, backref
+from sqlalchemy.ext.declarative import declarative_base, declared_attr
 from rpscalc.filters import session_json, session_cleared, deslugify, \
     state_abbr, state_typo
 from rpscalc.constants import RPS_STATES
@@ -21,6 +25,25 @@ app.jinja_env.filters['session_cleared'] = session_cleared
 app.jinja_env.filters['deslugify'] = deslugify
 app.jinja_env.filters['state_abbr'] = state_abbr
 app.jinja_env.filters['state_typo'] = state_typo
+
+
+engine = create_engine(
+    app.config['SQLALCHEMY_DATABASE_URI'], convert_unicode=True,
+    pool_size=10)
+db_session = scoped_session(
+    sessionmaker(autocommit=False, autoflush=False, bind=engine))
+
+
+class ObBase(object):
+    id = Column(Integer, primary_key=True)
+
+    @declared_attr
+    def __tablename__(cls):
+        return re.sub(r'(.)([A-Z])', r'\1_\2', cls.__name__).lower()
+
+
+Base = declarative_base(cls=ObBase)
+Base.query = db_session.query_property()
 
 
 @app.errorhandler(404)
@@ -68,6 +91,27 @@ app.register_blueprint(glossary_module)
 app.register_blueprint(rpscalc_module)
 app.register_blueprint(comparison_mod)
 app.register_blueprint(eia_api_mod)
+
+
+@app.before_request
+def before_request():
+    g.db = engine.dispose()
+
+
+@app.teardown_request
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    try:
+        g.db.close()
+        db_session.remove()
+    except:
+        try:
+            db_session.rollback()
+            db_session.close()
+            g.db.close()
+        except:
+            pass
+
 
 # Set up asset bundles
 assets = Environment(app)
