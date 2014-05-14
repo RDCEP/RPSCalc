@@ -28,6 +28,7 @@
     0.08,
     0.08
   ],
+  "carveouts": [],
   "abbr": "PA",
   "rps_progress": false,
   "price_and_policy": {
