@@ -28,3 +28,9 @@ def index():
         'index.html',
         title='Renewable Portfolio Standards'
     )
+
+@mod.route('/documentation')
+def documentation():
+    return render_template(
+        'documentation.html',
+    )
