@@ -244,6 +244,11 @@ th { font-weight: bold; }
 #glossary dt { width: 200px; margin-right: 20px; font-weight: bold; clear: left; }
 #glossary dd { width: 480px; }
 
+.glossary-list-head { cursor: pointer; }
+
+.glossary-list ul { border: none !important; padding: 0 !important; overflow: hidden; }
+.glossary-list + .glossary-list ul { height: 0; }
+
 .ir { background-color: transparent; border: 0; overflow: hidden; /* IE 6/7 fallback */*text-indent: -9999px */ }
 
 .ir:before { content: ""; display: block; width: 0; height: 150%; }

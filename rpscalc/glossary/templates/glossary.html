@@ -10,7 +10,14 @@
   {{ super() }}
   <script>
   d3.json('/glossary/static/glossary.json', function(_data) {
+
     var left_nav = d3.select('#left_nav'),
+      a_m = left_nav.append('li').attr({'id': 'a_m',
+         'class': 'glossary-list'})
+        .append('ul'),
+      n_z = left_nav.append('li').attr({'id': 'n_z',
+         'class': 'glossary-list'})
+        .append('ul'),
       glossary = d3.select('#glossary').append('dl'),
       defs = glossary.selectAll('.definition')
         .data(_data).enter().append('dd')
@@ -23,11 +30,33 @@
             });
             return h;
           });
+    d3.select('#a_m').insert('h4', 'ul').attr({
+      'class': 'glossary-list-head',
+      'id': 'glossary-head-a_m'}).text('A–M');
+    d3.select('#n_z').insert('h4', 'ul').attr({
+      'class': 'glossary-list-head',
+      'id': 'glossary-head-n_z'}).text('N–Z');
+
+    d3.selectAll('.glossary-list-head')
+      .on('click', function() {
+        var t = d3.select(this),
+          p = d3.select(t.node().parentNode),
+          l = p.select('ul'),
+          ht = parseInt(l.style('height').replace('px', '')),
+          h = ht > 20 ? 0 : 'auto';
+{#          l.transition().style('height', h);#}
+          l.style('height', h);
+      });
+
     defs.each(function(d, i) {
+
+      var alpha = d.term[0].toUpperCase() < 'N' ? a_m : n_z;
+
       glossary.insert('dt', '#definition_' + i)
         .attr('id', d.id)
         .text(d.term);
-      left_nav.append('li').style('margin-bottom', '.5em')
+
+      alpha.append('li').style('margin-bottom', '.5em')
         .append('a')
         .attr('href', '#' + d.id).text(d.term.replace(/\(.+\)/, ''))
         .attr('data-name', d.id)
@@ -38,6 +67,7 @@
           var _oy = (window.pageYOffset || document.body.scrollTop) - document.getElementById('left_nav').getBoundingClientRect().top + 1;
           window.scroll(0, _oy);
         });
+
     });
 
     var locate_and_scroll = function(pane) {
