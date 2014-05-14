@@ -16,5 +16,13 @@
   it remains below the carve out ACP.
 {% endblock %}
 {% block state_policy %}
-  <input type="hidden" id="policy_captype" name="policy_captype" value="none">
+  <input type="hidden" id="policy_captype" name="policy_captype" value="retail-solar-acp-wind">
+  <div class="clearfix">
+    <label for="policy_costcap">Solar cost cap (%)</label>
+    <input type="text" id="policy_costcap" name="policy_costcap" pattern="[0-9]*\.*[0-9]+">
+  </div>
+  <div class="clearfix">
+    <label for="policy_acp">ACP ($)</label>
+    <input type="text" id="policy_acp" name="policy_acp" pattern="[0-9]+\.*[0-9]\*">
+  </div>
 {% endblock %}
