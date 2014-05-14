@@ -31,7 +31,8 @@
   "abbr": "NH",
   "price_and_policy": {
     "policy_retail": 144,
-    "policy_captype": "none"
+    "policy_captype": "single-acp",
+    "policy_acp": 50
   },
   "rps_progress": {
     "progress": 0.41,
