@@ -7,7 +7,7 @@ var states_w_rps = ['Arizona', 'California', 'Hawaii', 'Illinois',
   'Nevada', 'New Jersey', 'North Carolina', 'Ohio', 'Oregon',
   'Rhode Island', 'Washington', 'Wisconsin', 'Minnesota', 'Delaware',
   'New Hampshire', 'New Mexico', 'Texas', 'Missouri', 'Pennsylvania',
-  'New York'];
+  'New York', 'Massachusetts'];
 
 var projection = d3.geo.albersUsa()
     .scale(1300)
