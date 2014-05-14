@@ -41,6 +41,7 @@
     "wind_capacity": 0.36,
     "solar_capacity": 0.15,
     "policy_retail": 150,
-    "policy_captype": "none"
+    "policy_captype": "single-acp",
+    "policy_acp": 65.27
   }
 }

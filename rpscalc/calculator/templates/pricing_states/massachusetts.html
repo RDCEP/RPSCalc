@@ -1,0 +1,10 @@
+{% extends 'pricing.html' %}
+{% block state_specific %}
+{% endblock %}
+{% block state_policy %}
+  <input type="hidden" id="policy_captype" name="policy_captype" value="single-acp">
+  <div class="clearfix">
+    <label for="policy_costcap">ACP ($)</label>
+    <input type="text" id="policy_acp" name="policy_acp" pattern="[0-9]+\.*[0-9]*">
+  </div>
+{% endblock %}
