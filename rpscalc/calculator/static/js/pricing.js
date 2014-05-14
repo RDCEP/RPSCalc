@@ -14,36 +14,38 @@
     },
 
     wind_cost = function() {
-      var ptc = session_pp.policy_ptc ? 0.7 : 1.0,
+      var ptc = Options.data.price_and_policy.policy_ptc ? 0.7 : 1.0,
         decrease = 1;
       return (
         (
-          session_pp.wind_installation * 1000000 * (
-            amortization(session_pp.finance_contractterm, session_pp.finance_interestrate)
+          Options.data.price_and_policy.wind_installation * 1000000 * (
+            amortization(Options.data.price_and_policy.finance_contractterm, Options.data.price_and_policy.finance_interestrate)
           ) * ptc
-        ) / (8765 * session_pp.wind_capacity) + session_pp.wind_om + session_pp.wind_integration
-      ) * decrease - session_pp.pricing_wholesale;
+        ) / (8765 * Options.data.price_and_policy.wind_capacity) + Options.data.price_and_policy.wind_om + Options.data.price_and_policy.wind_integration
+      ) * decrease - Options.data.price_and_policy.pricing_wholesale;
     },
 
     solar_cost = function() {
-      var ptc = session_pp.policy_ptc ? 0.7 : 1.0,
+      var ptc = Options.data.price_and_policy.policy_ptc ? 0.7 : 1.0,
         decrease = 1;
       return (
         (
-          session_pp.solar_installation * 1000000 * (
-            amortization(session_pp.finance_contractterm, session_pp.finance_interestrate)
-          ) + session_pp.solar_om
+          Options.data.price_and_policy.solar_installation * 1000000 * (
+            amortization(Options.data.price_and_policy.finance_contractterm, Options.data.price_and_policy.finance_interestrate)
+          ) + Options.data.price_and_policy.solar_om
         ) * ptc
-      ) / (8765 * session_pp.solar_capacity) * decrease - session_pp.pricing_wholesale;
+      ) / (8765 * Options.data.price_and_policy.solar_capacity) * decrease - Options.data.price_and_policy.pricing_wholesale;
     },
 
     show_costs = function() {
+
       d3.select('#wind_cost').text(function() {
-        return '$'+Math.round(wind_cost() * 100) / 100;
+        return '$'+wind_cost().toFixed(2);
       });
       d3.select('#solar_cost').text(function() {
-        return '$'+Math.round(solar_cost() * 100) / 100;
+        return '$'+solar_cost().toFixed(2);
       });
+
     };
 
   Options.data.price_and_policy = session_pp || {};
@@ -81,10 +83,16 @@
             Options.data.price_and_policy[name] =  parseFloat(input.property('value'));
           }
 
+          show_costs();
+
         });
+
+      show_costs();
+
     });
+
   });
 
-  show_costs();
+
 
 }());
