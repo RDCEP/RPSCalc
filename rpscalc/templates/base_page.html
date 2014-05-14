@@ -20,13 +20,13 @@
         <li class="menu-states" id="menu_states_calculator">
           <a href="{{ url_for('calculator.trajectory', state=state) }}">Cost Calculator</a>
           <ul>
-            {% for s in all_rps_states %}
+            {% for s in all_calc_states %}
             <li><a href="{{ url_for('calculator.trajectory', state=s[0]) }}">{{ s[1]|safe }}</a></li>
             {% endfor %}
           </ul>
         </li>
         <li><a href="/glossary">Glossary</a></li>
-        <li><a href>Documentation</a></li>
+        <li><a href="/documentation">Documentation</a></li>
         {% if state %}<li id="menu_state_abbr">{{ state|state_abbr }}</li>{% endif %}
         <li><ul id="left_nav">
           {% block left_nav %}

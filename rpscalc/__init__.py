@@ -47,6 +47,14 @@ def all_rps_states():
     return dict(all_rps_states=s)
 
 
+@app.context_processor
+def all_calc_states():
+    s = sorted([(v.names[0], v.names[1])
+                for k, v in RPS_STATES.iteritems()
+                if v.calculator], key=lambda i: i[1])
+    return dict(all_calc_states=s)
+
+
 # Load and register Blueprints
 from rpscalc.state_pages.views import mod as state_pages_module
 from rpscalc.calculator.views import mod as calculator_module
