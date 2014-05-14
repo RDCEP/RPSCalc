@@ -1,3 +1,11 @@
 {% extends 'cost.html' %}
 {% block state_specific %}
 {% endblock %}
+{% block state_costcap %}
+  <div class="clearfix chart-input-row chart-input-pp">
+    <label>
+      <input class="chart-input" type="text" data-type="Cost cap" name="policy_acp">
+      <div>ACP ($)</div>
+    </label>
+  </div>
+{% endblock %}

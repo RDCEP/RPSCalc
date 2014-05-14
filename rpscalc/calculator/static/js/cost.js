@@ -14,49 +14,26 @@
       Options.data.solar
     ]},
     pp = Options.data.price_and_policy,
-    pp_data = [
-      {name: 'Policy', inputs: [
-        {name: 'PTC', 'data-type': 'policy_ptc'}
-      ]},
-      {name: 'Financing', inputs: [
-        {name: 'Contract term', 'data-type': 'finance_contractterm', unit: 'yr'},
-        {name: 'Interest rate', 'data-type': 'finance_interestrate', unit: '%'}
-      ]},
-      {name: 'Price', inputs: [
-        {name: 'Wholesale price', 'data-type': 'pricing_wholesale', unit: '$'},
-        {name: 'Annual growth', 'data-type': 'pricing_annualgrowth', unit: '%'}
-      ]}
-    ],
     _x = d3.time.scale()
       .domain([new Date(2013, 0, 1), new Date(2030, 0, 1)])
       .range([0, (width - 2 * padding)]),
     segment_width = _x(graph_data.data[0].data[1].x) - _x(graph_data.data[0].data[0].x),
     _max_y = 0,
 
-    chart_inputs = d3.select('#chart_wrap')
-      .append('form')
+    chart_inputs = d3.select('#chart_wrap form')
       .attr({ 'class': 'clearfix',
         'id': 'chart_inputs' })
       .style('padding-left', padding + 'px')
-      .classed('hidden', false),
+      .classed('hidden', false)
+      .select('#time_series_wrap'),
 
+  //FIXME: insert this above hardcoded shit below rather than append.
     input_series = chart_inputs.selectAll('.chart-input-series')
       .data(graph_data.data)
       .enter()
       .append('div')
       .attr({ 'class': 'clearfix chart-input-row chart-input-series',
         'data-type': function(d) { return d.type; } }),
-
-    input_pp = chart_inputs.append('div').attr('class', 'chart-input-row')
-      .selectAll('.chart-input-pp-wrap')
-      .data(pp_data)
-      .enter()
-      .append('div')
-      .attr('class', 'chart-input-pp-wrap')
-      .style({
-        width: (segment_width * 4 + 2) + 'px',
-        float: 'left'
-      }),
 
     amortization = function(t, r) {
       return (r / 100 * Math.pow((1 + r / 100), t)) / (Math.pow((1 + r / 100), t) - 1);
@@ -110,8 +87,14 @@
         return (pp.policy_costcap / volume * Math.pow(
           (100 + +pp.pricing_annualgrowth) / 100, year - 2013)
           ) / (Options.data.trajectory.data[i].y / 100);
+      } else if (captype == 'retail-solar-acp-wind') {
+        var c = (pp.policy_costcap / 100 * Options.data.retail_price) /
+          (Math.pow((100 + +pp.pricing_annualgrowth) / 100, year - 2013));
+        var s = c * Options.data.solar.data[i].y / 100;
+        var w = (pp.policy_acp * (1 - Options.data.solar.data[i].y / 100));
+        return c * s + w;
       }
-      return false
+      return false;
     },
 
     get_cap_and_rec = function() {
@@ -144,26 +127,28 @@
       });
       return _cap.data.length > 0 ? [_rec, _cap] : [_rec];
     };
-
-  if (pp.policy_captype == "retail") {
-    pp_data[0].inputs.push({
-      name: "Cost cap",
-      "data-type": "policy_costcap",
-      unit: "%"
-    });
-  } else if (pp.policy_captype == "single-acp") {
-    pp_data[0].inputs.push({
-      name: "ACP",
-      "data-type": "policy_acp",
-      unit: "$"
-    });
-  } else if (pp.policy_captype == "retail-dollar") {
-    pp_data[0].inputs.push({
-      name: "Cost cap",
-      "data-type": "policy_costcap",
-      unit: "$"
-    });
-  }
+    console.log(pp);
+//  if (pp.policy_captype == "retail") {
+//    pp_data[0].inputs.push({
+//      name: "Cost cap",
+//      "data-type": "policy_costcap",
+//      unit: "%"
+//    });
+//  } else if (pp.policy_captype == "single-acp") {
+//    pp_data[0].inputs.push({
+//      name: "ACP",
+//      "data-type": "policy_acp",
+//      unit: "$"
+//    });
+//  } else if (pp.policy_captype == "retail-dollar") {
+//    pp_data[0].inputs.push({
+//      name: "Cost cap",
+//      "data-type": "policy_costcap",
+//      unit: "$"
+//    });
+//  } else if (pp.policy_captype == 'retail-solar-acp-wind') {
+//
+//  }
 
   var cost_graph = new RPSGraph(),
     cap_rec = get_cap_and_rec();
@@ -178,37 +163,25 @@
     t.append('h6').text(function(d) { return (d.type == 'rps') ? null : d.type; });
   });
 
-  input_pp.each(function(d) {
+  d3.selectAll('.chart-input-pp-wrap')
+    .style({
+      width: (segment_width * 4 + 2) + 'px',
+      float: 'left'
+    });
+
+  d3.selectAll('.chart-input-pp .chart-input').each(function() {
     var t = d3.select(this);
-    t.append('h5')
-      .text(function(d) { return d.name; });
-
-    var divs = t.selectAll('.chart-input-pp')
-      .data(d.inputs)
-      .enter()
-      .append('div')
-      .attr({ 'class': 'clearfix chart-input-row chart-input-pp'});
-
-    divs.each(function() {
-      var t = d3.select(this);
-      var l = t.append('label');
-      l.append('input')
-        .attr({
-          'class': 'chart-input',
-          'type': function(d) { return (typeof(pp[d['data-type']]) == 'boolean') ? 'checkbox' : 'text'; },
-          'data-type': function(d) { return d.name; }
-        })
-        .style({ 'width': (segment_width - 14) + 'px' })
-        .property('value', function(d) {
-          return (typeof(pp[d['data-type']]) == 'boolean')
-            ? null : d3.format('.1f')(pp[d['data-type']]); })
-        .property('checked', function(d) {
-          return (typeof(pp[d['data-type']]) == 'boolean') ? pp[d['data-type']] : null;
-        })
+    t.style({ 'width': (segment_width - 14) + 'px' })
+      .property('value', function(d) {
+        return (typeof(pp[t.attr('name')]) == 'boolean')
+          ? null : d3.format('.1f')(pp[t.attr('name')]); })
+      .property('checked', function(d) {
+        return (typeof(pp[t.attr('name')]) == 'boolean') ? pp[t.attr('name')] : null;
+      })
       .on('change', function(d) {
         var t = d3.select(this),
-          _v = (typeof(pp[d['data-type']]) == 'boolean') ? t.property('checked') : t.property('value');
-        pp[d['data-type']] = _v;
+          _v = (typeof(pp[t.attr('name')]) == 'boolean') ? t.property('checked') : t.property('value');
+        pp[t.attr('name')] = _v;
         t.property('value', function() { return (typeof(_v) == 'boolean') ? null : +_v; });
         t.property('checked', function() { return (typeof(_v) == 'boolean') ? _v : null; });
         cap_rec = get_cap_and_rec();
@@ -216,16 +189,10 @@
           .manual_update_intersection(cap_rec[0], cap_rec[1])
           .manual_update_handles()
           .redraw();
-        });
-        l.append('div')
-          .style({
-            'width': (segment_width * 3 - 10) + 'px',
-            'float': 'left'
-          })
-          .text(function(d) { return (typeof(d.unit) == 'undefined') ? d.name :
-            d.name + ' (' + d.unit + ')'; });
-    });
+      });
   });
+
+
 
   graph_data.inputs = input_series.selectAll('input')
     .data(function(d) { return d.data; })

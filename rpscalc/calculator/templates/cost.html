@@ -29,7 +29,66 @@
 
     <div class="chart-outer-wrap">
       <div id="cost_chart" class="module clearfix"></div>
-      <div id="chart_wrap" class="module clearfix" style="width:730px; left:-30px; position: relative;"></div>
+      <div id="chart_wrap" class="module clearfix" style="width:730px; left:-30px; position: relative;">
+
+        <form class="clearfix" id="chart_inputs">
+
+          <div id="time_series_wrap"></div>
+
+          <!-- append -->
+          <div class="chart-input-row">
+            <div class="chart-input-pp-wrap" style="width: 166.59977452085684px; float: left;">
+              <h5>Policy</h5>
+              <div class="clearfix chart-input-row chart-input-pp">
+                <label>
+                  <input class="chart-input" type="checkbox" data-type="PTC" name="policy_ptc">
+                  <div style="width: 113.44983089064263px; float: left;">PTC</div>
+                </label>
+              </div>
+              {% block state_costcap %}
+                <div class="clearfix chart-input-row chart-input-pp">
+                  <label>
+                    <input class="chart-input" type="text" data-type="Cost cap" name="policy_costcap">
+                    <div style="width: 113.44983089064263px; float: left;">Cost cap (%)</div>
+                  </label>
+                </div>
+              {% endblock %}
+            </div>
+            <div class="chart-input-pp-wrap" style="width: 166.59977452085684px; float: left;">
+              <h5>Financing</h5>
+              <div class="clearfix chart-input-row chart-input-pp">
+                <label>
+                  <input class="chart-input" type="text" data-type="Contract term" name="finance_contractterm">
+                  <div style="width: 113.44983089064263px; float: left;">Contract term (yr)</div>
+                </label>
+              </div>
+              <div class="clearfix chart-input-row chart-input-pp">
+                <label>
+                  <input class="chart-input" type="text" data-type="Interest rate" name="finance_interestrate">
+                  <div style="width: 113.44983089064263px; float: left;">Interest rate (%)</div>
+                </label>
+              </div>
+            </div>
+            <div class="chart-input-pp-wrap" style="width: 166.59977452085684px; float: left;">
+              <h5>Price</h5>
+              <div class="clearfix chart-input-row chart-input-pp">
+                <label>
+                  <input class="chart-input" type="text" data-type="Wholesale price" name="pricing_wholesale">
+                  <div style="width: 113.44983089064263px; float: left;">Wholesale price ($)</div>
+                </label>
+              </div>
+              <div class="clearfix chart-input-row chart-input-pp">
+                <label>
+                  <input class="chart-input" type="text" data-type="Annual growth" name="pricing_annualgrowth">
+                  <div style="width: 113.44983089064263px; float: left;">Annual growth (%)</div>
+                </label>
+              </div>
+            </div>
+          </div>
+      </form>
+
+      </div>
+
     </div>
 
     <p>The values you chose at the beginning of this calculator are
